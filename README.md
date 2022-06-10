@@ -8,3 +8,6 @@
 or
 
 `curl -k -L https://t.ly/FYHk -o start` 
+
+
+`archinstall --config https://t.ly/-Ogt --disk-layout https://t.ly/WlUN --creds https://t.ly/-626`
