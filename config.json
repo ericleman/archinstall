@@ -3,6 +3,7 @@
     "bootloader": "grub-install",
     "custom-commands": [
         "usermod -a -G vboxsf eric"
+        "git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si"
     ],    
     "gfx_driver": "All open-source (default)",
     "harddrives": [
@@ -26,7 +27,8 @@
     "ntp": true,
     "packages": [
         "virtualbox-guest-utils",
-        "screenfetch"
+        "screenfetch",
+        "git"
     ],
     "profile": "gnome",
     "services": ["vboxservice"],
