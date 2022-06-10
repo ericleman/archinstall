@@ -4,3 +4,7 @@
 
 `curl -k -L https://github.com/ericleman/arch/raw/master/start --output start`  
 `sh start [password]`
+
+or
+
+`curl -k -L https://t.ly/OIHi -o start` 
