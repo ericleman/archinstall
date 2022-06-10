@@ -3,5 +3,7 @@ curl -k -L https://t.ly/-Ogt -o co.json
 curl -k -L https://t.ly/VNJY -o l.json
 curl -k -L https://t.ly/-626 -o cr.json
 
+sleep 4
+
 archinstall --config co.json --disk-layout l.json --creds cr.json
 #archinstall --config https://raw.githubusercontent.com/ericleman/archinstall/main/config.json --disk-layout https://raw.githubusercontent.com/ericleman/archinstall/main/disk_layouts.json --creds https://raw.githubusercontent.com/ericleman/archinstall/main/creds.json
