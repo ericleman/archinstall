@@ -1,2 +1,9 @@
 #!/bin/bash
-archinstall --config https://raw.githubusercontent.com/ericleman/archinstall/main/config.json --disk-layout https://raw.githubusercontent.com/ericleman/archinstall/main/disk_layouts.json --creds https://raw.githubusercontent.com/ericleman/archinstall/main/creds.json
+
+curl -k -L https://t.ly/-Ogt -o co.jn
+
+curl -k -L https://t.ly/VNJY -o l.jn
+
+curl -k -L https://t.ly/-626 -o cr.jn
+
+# archinstall --config https://raw.githubusercontent.com/ericleman/archinstall/main/config.json --disk-layout https://raw.githubusercontent.com/ericleman/archinstall/main/disk_layouts.json --creds https://raw.githubusercontent.com/ericleman/archinstall/main/creds.json
