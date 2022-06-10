@@ -7,4 +7,4 @@
 
 or
 
-`curl -k -L https://t.ly/OIHi -o start` 
+`curl -k -L https://t.ly/FYHk -o start` 
