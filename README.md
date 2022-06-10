@@ -3,11 +3,12 @@
 `loadkeys fr-pc` # i.e.: loqdkeys fr)pc
 
 `curl -k -L https://raw.githubusercontent.com/ericleman/archinstall/main/start --output start`  
-`sh start [password]`
+`sh start`
 
 or
 
 `curl -k -L https://t.ly/FYHk -o start` 
 
+or
 
 `archinstall --config https://t.ly/-Ogt --disk-layout https://t.ly/WlUN --creds https://t.ly/-626`
