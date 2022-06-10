@@ -1,3 +1,2 @@
 #!/bin/bash
-set -x
 archinstall --config https://raw.githubusercontent.com/ericleman/archinstall/main/config.json --disk-layout https://raw.githubusercontent.com/ericleman/archinstall/main/disk_layout.json --creds https://raw.githubusercontent.com/ericleman/archinstall/main/creds.json
