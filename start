@@ -6,4 +6,4 @@
 #sleep 4
 
 #archinstall --config co.json --disk-layout l.json --creds cr.json
-archinstall --config https://raw.githubusercontent.com/ericleman/archinstall/main/config.json --disk-layout https://raw.githubusercontent.com/ericleman/archinstall/main/disk_layouts.json --creds https://raw.githubusercontent.com/ericleman/archinstall/main/creds.json
+archinstall --config https://raw.githubusercontent.com/ericleman/archinstall/main/config.json --disk-layout https://raw.githubusercontent.com/ericleman/archinstall/main/disk_layouts.json --creds https://raw.githubusercontent.com/ericleman/archinstall/main/creds.json --silent
