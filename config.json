@@ -2,7 +2,7 @@
     "audio": "pipewire",
     "bootloader": "grub-install",
     "custom-commands": [
-        "usermod -a -G vboxsf eric"
+        "usermod -a -G vboxsf eric",
         "git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si",
         "yay -S gnome-shell-extension-dash-to-dock"
     ],    
