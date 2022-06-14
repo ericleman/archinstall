@@ -32,7 +32,8 @@
         "git",
         "base-devel",
         "go",
-        "hplip"
+        "hplip",
+        "meld"
     ],
     "profile": "gnome",
     "services": ["vboxservice"],
