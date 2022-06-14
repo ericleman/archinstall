@@ -30,7 +30,8 @@
         "virtualbox-guest-utils",
         "screenfetch",
         "git",
-        "base-devel"
+        "base-devel",
+        "go"
     ],
     "profile": "gnome",
     "services": ["vboxservice"],
