@@ -31,7 +31,8 @@
         "screenfetch",
         "git",
         "base-devel",
-        "go"
+        "go",
+        "hplip"
     ],
     "profile": "gnome",
     "services": ["vboxservice"],
