@@ -8,7 +8,7 @@
 or
 
 `curl -k -L https://t.ly/FYHk -o start` 
+`sh start`
 
-or
 
-`archinstall --config https://t.ly/-Ogt --disk-layout https://t.ly/VNJY --creds https://t.ly/-626`
+Then once logged in, run first_time.sh
