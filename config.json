@@ -3,8 +3,7 @@
     "bootloader": "grub-install",
     "custom-commands": [
         "usermod -a -G vboxsf eric",
-        "su - eric -c 'cd /home/eric && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si'",
-        "su - eric -c 'yay -S gnome-shell-extension-dash-to-dock'"
+        "git clone https://github.com/ericleman/archinstall.git"
     ],    
     "gfx_driver": "All open-source (default)",
     "harddrives": [
