@@ -27,12 +27,8 @@
     "ntp": true,
     "packages": [
         "virtualbox-guest-utils",
-        "screenfetch",
         "git",
-        "base-devel",
-        "go",
-        "hplip",
-        "meld"
+        "base-devel"
     ],
     "profile": "gnome",
     "services": ["vboxservice"],
