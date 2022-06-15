@@ -7,7 +7,7 @@
 
 or
 
-`curl -k -L https://t.ly/FYHk -o start` 
+`curl -k -L https://t.ly/FYHk -o start`  
 `sh start`
 
 
