@@ -3,4 +3,5 @@ yay -S pamac-aur
 yay -S google-chrome
 yay -S gnome-shell-extension-dash-to-dock
 
-chown -R eric:eric /personal
+sudo chown -R eric:eric /archinstall/personal
+cp -rv /archinstall/personal/. /home/eric
