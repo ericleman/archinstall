@@ -27,6 +27,8 @@
       use: yay
       name:
         - pamac-aur
+    become: yes
+    become_user: eric
 
   - name: Enable pacman colorised output and verbose package lists
     replace:
