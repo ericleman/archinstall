@@ -22,7 +22,13 @@
     become: yes
     become_user: eric
 
-  - name: Enable pacman colourised output and verbose package lists
+  - name: Install Pamac-aur
+    aur:
+      use: yay
+      name:
+        - pamac-aur
+
+  - name: Enable pacman colorised output and verbose package lists
     replace:
       path: /etc/pacman.conf
       regexp: '{{ item.regexp }}'
