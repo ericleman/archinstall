@@ -14,3 +14,12 @@
       regexp: '#WaylandEnable=false'
       replace: 'WaylandEnable=false'
 
+  - name: install yay
+    aur:
+      name: yay
+      use: makepkg
+      state: present 
+    become: yes
+    become_user: eric
+
+    
