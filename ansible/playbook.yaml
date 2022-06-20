@@ -85,6 +85,11 @@
           line: neofetch
           create: yes
 
+  - name: install HP driver
+    pacman:
+      name: hplip
+      state: present
+
   - name: generic Gnome settings
     block:
       - name: psutils is required for dconf
