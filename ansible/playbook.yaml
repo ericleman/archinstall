@@ -107,6 +107,14 @@
             become-user: eric
           - name: set them as theme
             dconf: key="/org/gnome/desktop/interface/cursor-theme" value="'Bibata-Modern-Amber'"
+      - name: Icons Themes
+        block:
+          - name: install papirus
+            pacman:
+              name: papirus-icon-theme
+              state: present
+          - name: set them as theme
+            dconf: key="/org/gnome/desktop/interface/icon-theme" value="'Papirus'"
       - name: Dash to Dock
         block:
           - name: install extension
