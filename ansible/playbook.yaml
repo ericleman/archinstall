@@ -2,12 +2,6 @@
   become: true
 
   tasks:
-  - name: install Vivaldi and optionals
-    pacman:
-      name: 
-        - vivaldi
-      state: present 
-      
   - name: change Wayland to false
     replace:
       path: /etc/gdm/custom.conf
