@@ -7,6 +7,10 @@
 
 pacman -Sy --noconfirm git
 
+git clone https://github.com/ericleman/archinstall.git
 
-archinstall --config co.json --disk-layout l.json --creds cr.json
+cd archinstall
+
+archinstall --config config.json --disk-layout disk-layouts.json --creds creds.json
+
 #archinstall --config https://raw.githubusercontent.com/ericleman/archinstall/main/config.json --disk-layout https://raw.githubusercontent.com/ericleman/archinstall/main/disk_layouts.json --creds https://raw.githubusercontent.com/ericleman/archinstall/main/creds.json
