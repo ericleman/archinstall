@@ -46,8 +46,8 @@
     aur:
       use: yay
       name: google-chrome
-      become: yes
-      become_user: eric
+    become: yes
+    become_user: eric
 
   - name: Install and configure Pamac-aur
     block:
