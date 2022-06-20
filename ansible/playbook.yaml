@@ -105,6 +105,6 @@
             aur:
               use: yay
               name: bibata-cursor-theme
-              become: yes
-              become-user: eric
+            become: yes
+            become-user: eric
 
