@@ -44,3 +44,17 @@
     with_items:
       - { regexp: '^#Color$', replace: 'Color' }
       - { regexp: '^#VerbosePkgLists$', replace: 'VerbosePkgLists' }
+
+  - name: install Neofetch
+    block:
+      - name: install
+        pacman:
+          name: 
+            - neofetch
+          state: present
+      - name: configure
+        ansible.builtin.lineinfile:
+          path: /etc/bash.bashrc
+          line: neofetch
+          create: yes
+      
