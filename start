@@ -1,10 +1,4 @@
 #!/bin/bash
-#curl -k -L https://t.ly/-Ogt -o co.json
-#curl -k -L https://t.ly/VNJY -o l.json
-#curl -k -L https://t.ly/-626 -o cr.json
-
-#sleep 4
-
 pacman -Sy --noconfirm git
 
 git clone https://github.com/ericleman/archinstall.git
@@ -13,6 +7,6 @@ cd archinstall
 
 sed -i 's%DUMMYPASSWORD%$1%g' creds.json
 
-archinstall --config config.json --disk-layout disk_layouts.json --creds creds.json
+archinstall --config config.json --disk-layout layout.json --creds creds.json
 
 #archinstall --config https://raw.githubusercontent.com/ericleman/archinstall/main/config.json --disk-layout https://raw.githubusercontent.com/ericleman/archinstall/main/disk_layouts.json --creds https://raw.githubusercontent.com/ericleman/archinstall/main/creds.json
