@@ -18,7 +18,14 @@
         line: "{{ item }}"
       with_items:
       - 'AutomaticLogin=eric'
-      - 'AutomaticLoginEnable=True'      
+      - 'AutomaticLoginEnable=True'
+
+  - name: sudo without password
+    community.general.sudoers:
+      name: no-passwd-eric
+      user: eric
+      commands: ALL
+      nopassword: yes
 
   - name YAY
     block:
