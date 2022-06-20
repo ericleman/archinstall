@@ -77,4 +77,14 @@
           path: /etc/bash.bashrc
           line: neofetch
           create: yes
+
+  - name: generic Gnome settings
+    block:
+      - name: font size
+        dconf: key="/org/gnome/desktop/interface/text-scaling-factor" value="1.5"
+      - name: maximize and minimize buttons
+        dconf: key="/org/gnome/desktop/wm/preferences/button-layout" value="appmenu:minimize,maximize,close"
+      - name: Show seconds on clock
+        dconf: key="/org.gnome.desktop.interface/clock-show-seconds" value="true"
+        
       
