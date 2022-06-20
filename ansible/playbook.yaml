@@ -97,8 +97,6 @@
         dconf: key="/org/gnome/desktop/wm/preferences/button-layout" value="'appmenu:minimize,maximize,close'"
       - name: Show seconds on clock
         dconf: key="/org/gnome/desktop/interface/clock-show-seconds" value="true"
-      - name: Gnome Extension (this include Pamac indicator)
-        dconf: key="/org/gnome/shell/enabled-extensions" value="['user-theme@gnome-shell-extensions.gcampax.github.com', 'pamac-updates@manjaro.org']"
       - name: Cursor Themes
         block:
           - name: install cursor
@@ -109,4 +107,16 @@
             become-user: eric
           - name: set them as theme
             dconf: key="/org/gnome/desktop/interface/cursor-theme" value="'Bibata-Modern-Amber'"
+      - name: Dash to Dock
+        block:
+          - name: install extension
+            aur:
+              use: yay
+              name: gnome-shell-extension-dash-to-dock
+            become: yes
+            become-user: eric
+      - name: Gnome Extension (this include Pamac indicator)
+        dconf: key="/org/gnome/shell/enabled-extensions" value="['user-theme@gnome-shell-extensions.gcampax.github.com', 'pamac-updates@manjaro.org', 'dash-to-dock@micxgx.gmail.com']"
+      - name: Favorite on Dock
+        dconf: key="/org/gnome/shell/favorite-apps" value="['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.manjaro.pamac.manager.desktop', 'gnome-system-monitor.desktop']"
 
