@@ -2,11 +2,21 @@
   become: true
 
   tasks:
-  - name: change Wayland to false
-    replace:
-      path: /etc/gdm/custom.conf
-      regexp: '#WaylandEnable=false'
-      replace: 'WaylandEnable=false'
+  - name: configure gdm
+    block:
+    - name: change Wayland to false
+      replace:
+        path: /etc/gdm/custom.conf
+        regexp: '#WaylandEnable=false'
+        replace: 'WaylandEnable=false'
+    - name: auto login
+      blockinfile:
+        path: /etc/gdm/custom.conf
+        insertafter: '[daemon]'
+        block: |
+          AutomaticLogin=eric
+          AutomaticLoginEnable=True
+        
 
   - name YAY
     block:
