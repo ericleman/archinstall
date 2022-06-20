@@ -22,4 +22,11 @@
     become: yes
     become_user: eric
 
-    
+  - name: Enable pacman colourised output and verbose package lists
+    replace:
+      path: /etc/pacman.conf
+      regexp: '{{ item.regexp }}'
+      replace: '{{ item.replace }}'
+    with_items:
+      - { regexp: '^#Color$', replace: 'Color' }
+      - { regexp: '^#VerbosePkgLists$', replace: 'VerbosePkgLists' }
