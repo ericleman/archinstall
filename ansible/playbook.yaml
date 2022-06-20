@@ -80,6 +80,10 @@
 
   - name: generic Gnome settings
     block:
+      - name: psutils is required for dconf
+        pacman:
+          name: python-psutil
+          state: present
       - name: font size
         dconf: key="/org/gnome/desktop/interface/text-scaling-factor" value="1.5"
       - name: maximize and minimize buttons
