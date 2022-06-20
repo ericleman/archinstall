@@ -3,7 +3,7 @@
     "bootloader": "grub-install",
     "custom-commands": [
         "usermod -a -G vboxsf eric",
-        "git clone https://github.com/ericleman/archinstall.git"
+        "mkdir /mnt/archlinux/ansible && cp -R ansible/* /mnt/archlinux/ansible"
     ],    
     "gfx_driver": "All open-source (default)",
     "harddrives": [
