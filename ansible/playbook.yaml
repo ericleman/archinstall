@@ -42,6 +42,13 @@
         become: yes
         become_user: eric
 
+  - name: Install Chrome
+    aur:
+      use: yay
+      name: google-chrome
+      become: yes
+      become_user: eric
+
   - name: Install and configure Pamac-aur
     block:
       - name: install pamac
