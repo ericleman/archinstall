@@ -49,6 +49,13 @@
     become: yes
     become_user: eric
 
+  - name: Install wifi dongle driver
+    aur:
+      use: yay
+      name: rtl88xxau-aircrack-dkms-git
+    become: yes
+    become_user: eric
+
   - name: Install and configure Pamac-aur
     block:
       - name: install pamac
