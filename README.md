@@ -17,5 +17,5 @@ This install my Arch config in two part:
 
 I use those two parts as Archinstall and Ansible are both standard and maintained packages delivered by Arch linux. So if tomorrow Archway changes (new way to partition disk, new way to install packages, etc.), then Archlinux and Ansible should be adapted. I just have to put my config in json files (for Archintall) and yaml files (for Ansible).
 
-The scrip `start` will first install Arch with Archinstall, and then it will execute the Ansible playbook.
+The scrip `start` will install git (to get all this repository), then install Arch with Archinstall, and then it will execute the Ansible playbook.
 
