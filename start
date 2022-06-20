@@ -11,6 +11,8 @@ git clone https://github.com/ericleman/archinstall.git
 
 cd archinstall
 
+sed -i 's%DUMMYPASSWORD%#$1%g' creds.json
+
 archinstall --config config.json --disk-layout disk-layouts.json --creds creds.json
 
 #archinstall --config https://raw.githubusercontent.com/ericleman/archinstall/main/config.json --disk-layout https://raw.githubusercontent.com/ericleman/archinstall/main/disk_layouts.json --creds https://raw.githubusercontent.com/ericleman/archinstall/main/creds.json
