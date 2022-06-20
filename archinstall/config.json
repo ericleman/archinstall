@@ -3,7 +3,7 @@
     "bootloader": "grub-install",
     "custom-commands": [
         "usermod -a -G vboxsf eric",
-        "mkdir /mnt/archlinux/ansible && cp -R ansible/* /mnt/archlinux/ansible"
+        "cp -R ansible/ /mnt/archinstall/"
     ],    
     "gfx_driver": "All open-source (default)",
     "harddrives": [
