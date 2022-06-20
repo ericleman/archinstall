@@ -27,7 +27,7 @@
       commands: ALL
       nopassword: yes
 
-  - name YAY
+  - name: YAY
     block:
       - name: install GO as it seems to be prerequisite (otherwise crashes)
         pacman:
@@ -96,6 +96,15 @@
       - name: maximize and minimize buttons
         dconf: key="/org/gnome/desktop/wm/preferences/button-layout" value="appmenu:minimize,maximize,close"
       - name: Show seconds on clock
-        dconf: key="/org.gnome.desktop.interface/clock-show-seconds" value="true"
-        
-      
+        dconf: key="/org/gnome/desktop/interface/clock-show-seconds" value="true"
+      - name: Gnome Extension (this include Pamac indicator)
+        dconf: key="/org/gnome/shell/enabled-extensions" value="['user-theme@gnome-shell-extensions.gcampax.github.com', 'pamac-updates@manjaro.org']"
+      - name: Cursor Themes
+        block:
+          - name: install cursor
+            aur:
+              use: yay
+              name: bibata-cursor-theme
+              become: yes
+              become-user: eric
+
