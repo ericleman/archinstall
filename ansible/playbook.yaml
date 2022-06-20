@@ -115,6 +115,16 @@
               state: present
           - name: set them as theme
             dconf: key="/org/gnome/desktop/interface/icon-theme" value="'Papirus'"
+      - name: Gnome Themes
+        block:
+          - name: install Arc
+            pacman:
+              name: arc-gtk-theme
+              state: present
+          - name: set them as GTK theme
+            dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'Arc-Dark'"
+          - name: set them as Shell theme
+            dconf: key="/org/gnome/shell/extensions/user-theme/name" value="'Arc-Dark'"
       - name: Dash to Dock
         block:
           - name: install extension
