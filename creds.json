@@ -2,7 +2,7 @@
 	"!users": [
 		{
 			"username": "eric",
-			"!password": "fnVfKv",
+			"!password": "DUMMYPASSWORD",
 			"sudo": true
 		}
 	]
