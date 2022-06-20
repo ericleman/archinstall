@@ -10,13 +10,15 @@
         regexp: '#WaylandEnable=false'
         replace: 'WaylandEnable=false'
     - name: auto login
-      blockinfile:
+      lineinfile:
         path: /etc/gdm/custom.conf
-        insertafter: '[daemon]'
-        block: |
-          AutomaticLogin=eric
-          AutomaticLoginEnable=True
-        
+        regexp: '\[daemon\] '
+        insertafter: '\[daemon\]'
+        state: present
+        line: "{{ item }}"
+      with_items:
+      - 'AutomaticLogin=eric'
+      - 'AutomaticLoginEnable=True'      
 
   - name YAY
     block:
