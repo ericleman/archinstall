@@ -10,6 +10,8 @@ or
 `curl -k -L https://t.ly/FYHk -o start`  
 `sh start [PASSWORD]`
 
+Note: for whatever reason, first time I execute `start`, I get an error; this is because /usr/bin/blkid does not exists. But if I reexecute `start`, it works.
+
 # Explanation
 This install my Arch config in two part:
 1. Archinstall will install Arch with a vanilla Gnome desktop and a user (password is entered at the with command: `sh start [PASSWORD]`). 
