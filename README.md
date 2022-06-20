@@ -3,12 +3,12 @@
 `loadkeys fr-pc` # i.e.: loqdkeys fr)pc
 
 `curl -k -L https://raw.githubusercontent.com/ericleman/archinstall/main/start --output start`  
-`sh start`
+`sh start [PASSWORD]`
 
 or
 
 `curl -k -L https://t.ly/FYHk -o start`  
-`sh start`
+`sh start [PASSWORD]`
 
 
-Then once logged in, run first_time.sh
+
