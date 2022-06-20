@@ -3,9 +3,10 @@
     "bootloader": "grub-install",
     "custom-commands": [
         "usermod -a -G vboxsf eric",
-        "git clone https://github.com/ericleman/archinstall.git",
         "mkdir /root/.ansible/plugins/modules",
-        "curl -o /root/.ansible/plugins/modules/aur.py https://raw.githubusercontent.com/kewlfft/ansible-aur/master/plugins/modules/aur.py"
+        "curl -o /root/.ansible/plugins/modules/aur.py https://raw.githubusercontent.com/kewlfft/ansible-aur/master/plugins/modules/aur.py",
+        "git clone https://github.com/ericleman/archinstall.git",
+        "cd /archinstall/ansible && ansible-playbook playbook.yaml"
     ],    
     "gfx_driver": "All open-source (default)",
     "harddrives": [
