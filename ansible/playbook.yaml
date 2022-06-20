@@ -32,6 +32,9 @@
         become: yes
         become_user: eric
       - name: copy config
+        copy:
+          src: /archinstall/ansible/config/pamac.conf 
+          dest: /etc/pamac.conf          
 
   - name: Enable pacman colorised output and verbose package lists
     replace:
