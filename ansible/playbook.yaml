@@ -129,38 +129,38 @@
       - name: Show seconds on clock
         become_user: eric
         dconf: key="/org/gnome/desktop/interface/clock-show-seconds" value="true"
-      - name: Cursor Themes
-        block:
-          - name: install cursor
-            aur:
-              use: yay
-              name: bibata-cursor-theme
-            become: yes
-            become_user: eric
-          - name: set them as theme
-            become_user: eric
-            dconf: key="/org/gnome/desktop/interface/cursor-theme" value="'Bibata-Modern-Amber'"
-      - name: Icons Themes
-        block:
-          - name: install papirus
-            pacman:
-              name: papirus-icon-theme
-              state: present
-          - name: set them as theme
-            become_user: eric
-            dconf: key="/org/gnome/desktop/interface/icon-theme" value="'Papirus'"
-      - name: Gnome Themes
-        block:
-          - name: install Arc
-            pacman:
-              name: arc-gtk-theme
-              state: present
-          - name: set them as GTK theme
-            become_user: eric
-            dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'Arc-Dark'"
-          - name: set them as Shell theme
-            become_user: eric
-            dconf: key="/org/gnome/shell/extensions/user-theme/name" value="'Arc-Dark'"
+#      - name: Cursor Themes
+#        block:
+#          - name: install cursor
+#            aur:
+#              use: yay
+#              name: bibata-cursor-theme
+#            become: yes
+#            become_user: eric
+#          - name: set them as theme
+#            become_user: eric
+#            dconf: key="/org/gnome/desktop/interface/cursor-theme" value="'Bibata-Modern-Amber'"
+#      - name: Icons Themes
+#        block:
+#          - name: install papirus
+#            pacman:
+#              name: papirus-icon-theme
+#              state: present
+#          - name: set them as theme
+#            become_user: eric
+#            dconf: key="/org/gnome/desktop/interface/icon-theme" value="'Papirus'"
+#      - name: Gnome Themes
+#        block:
+#          - name: install Arc
+#            pacman:
+#              name: arc-gtk-theme
+#              state: present
+#          - name: set them as GTK theme
+#            become_user: eric
+#            dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'Arc-Dark'"
+#          - name: set them as Shell theme
+#            become_user: eric
+#            dconf: key="/org/gnome/shell/extensions/user-theme/name" value="'Arc-Dark'"
       - name: Wallpaper
         block:
           - name: light wallpaper
