@@ -68,7 +68,7 @@
       - name: copy config
         copy:
           src: /archinstall/ansible/config/pamac.conf 
-          dest: /etc/pamac.conf          
+          dest: /etc/pamac2.conf          
 
   - name: Enable pacman colorised output and verbose package lists
     replace:
@@ -83,8 +83,7 @@
     block:
       - name: install
         pacman:
-          name: 
-            - neofetch
+          name: neofetch
           state: present
       - name: configure
         ansible.builtin.lineinfile:
@@ -92,10 +91,22 @@
           line: neofetch
           create: yes
 
-  - name: install HP driver
-    pacman:
-      name: hplip
-      state: present
+  - name: install HP Printer [USER STILL HAS TO FIND PRINTER ONCE CONNECTED ON THE DESKTOP)
+    block:
+      - name: install printer packages (drivers, python-qt5 for GUI...)
+        pacman:
+          name: 
+            - hplip
+            - cups
+            - python-reportlab
+            - rpcbind
+            - python-pyqt5
+            - wget
+          state: present
+      - name: enable cups service
+        ansible.builtin.systemd:
+          name: cups
+          enabled: yes
 
   - name: generic Gnome settings
     block:
