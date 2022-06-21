@@ -104,10 +104,13 @@
           name: python-psutil
           state: present
       - name: font size
+        become_user: eric
         dconf: key="/org/gnome/desktop/interface/text-scaling-factor" value="1.5"
       - name: maximize and minimize buttons
+        become_user: eric
         dconf: key="/org/gnome/desktop/wm/preferences/button-layout" value="'appmenu:minimize,maximize,close'"
       - name: Show seconds on clock
+        become_user: eric
         dconf: key="/org/gnome/desktop/interface/clock-show-seconds" value="true"
       - name: Cursor Themes
         block:
@@ -118,6 +121,7 @@
             become: yes
             become-user: eric
           - name: set them as theme
+            become_user: eric
             dconf: key="/org/gnome/desktop/interface/cursor-theme" value="'Bibata-Modern-Amber'"
       - name: Icons Themes
         block:
@@ -126,6 +130,7 @@
               name: papirus-icon-theme
               state: present
           - name: set them as theme
+            become_user: eric
             dconf: key="/org/gnome/desktop/interface/icon-theme" value="'Papirus'"
       - name: Gnome Themes
         block:
@@ -134,16 +139,21 @@
               name: arc-gtk-theme
               state: present
           - name: set them as GTK theme
+            become_user: eric
             dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'Arc-Dark'"
           - name: set them as Shell theme
+            become_user: eric
             dconf: key="/org/gnome/shell/extensions/user-theme/name" value="'Arc-Dark'"
       - name: Wallpaper
         block:
           - name: light wallpaper
+            become_user: eric
             dconf: key="/org/gnome/desktop/background/picture-uri" value="'file:///usr/share/backgrounds/gnome/libadwaita-l.jpg'"
           - name: dark wallpaper
+            become_user: eric
             dconf: key="/org/gnome/desktop/background/picture-uri-dark" value="'file:///usr/share/backgrounds/gnome/libadwaita-d.jpg'"
           - name: screensaver wallpaper
+            become_user: eric
             dconf: key="/org/gnome/desktop/screensaver/picture-uri" value="'file:///usr/share/backgrounds/gnome/libadwaita-l.jpg'"
       - name: Dash to Dock
         block:
@@ -154,7 +164,9 @@
             become: yes
             become-user: eric
       - name: Gnome Extension (this include Pamac indicator)
+        become_user: eric
         dconf: key="/org/gnome/shell/enabled-extensions" value="['user-theme@gnome-shell-extensions.gcampax.github.com', 'pamac-updates@manjaro.org', 'dash-to-dock@micxgx.gmail.com']"
       - name: Favorite on Dock
+        become_user: eric
         dconf: key="/org/gnome/shell/favorite-apps" value="['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.manjaro.pamac.manager.desktop', 'gnome-system-monitor.desktop']"
 
