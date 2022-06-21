@@ -65,10 +65,16 @@
             - pamac-aur
         become: yes
         become_user: eric
-      - name: copy config
-        copy:
-          src: /archinstall/ansible/config/pamac.conf 
-          dest: /etc/pamac2.conf          
+      - name: enable AUR
+        replace:
+          path: /etc/pamac.conf
+          regexp: '#EnableAUR'
+          replace: 'EnableAUR'
+      - name: Check AUR Updates
+        replace:
+          path: /etc/pamac.conf
+          regexp: '#CheckAURUpdates'
+          replace: 'CheckAURUpdates'
 
   - name: Enable pacman colorised output and verbose package lists
     replace:
