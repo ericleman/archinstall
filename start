@@ -7,6 +7,6 @@ cd archinstall
 
 sed -i "s%DUMMYPASSWORD%$1%g" archinstall/creds.json
 
-archinstall --config archinstall/config.json --disk-layout archinstall/layout.json --creds archinstall/creds.json
+archinstall --silent --debug --config archinstall/config.json --disk-layout archinstall/layout.json --creds archinstall/creds.json
 
 #archinstall --config https://raw.githubusercontent.com/ericleman/archinstall/main/config.json --disk-layout https://raw.githubusercontent.com/ericleman/archinstall/main/disk_layouts.json --creds https://raw.githubusercontent.com/ericleman/archinstall/main/creds.json
