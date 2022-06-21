@@ -1,4 +1,5 @@
 {
+    "additional-repositories": "multilib",
     "audio": "pipewire",
     "bootloader": "grub-install",
     "custom-commands": [
