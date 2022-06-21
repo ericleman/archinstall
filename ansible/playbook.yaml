@@ -177,6 +177,9 @@
           - name: configure
             become_user: eric
             dconf: key="/org/gnome/shell/extensions/dash-to-dock/show-trash" value="false"
+      - name: Show Hidden files
+        become_user: eric
+        dconf: key="/org/gtk/settings/file-chooser/show-hidden" value="true"
       - name: Gnome Extension (this include Pamac indicator)
         become_user: eric
         dconf: key="/org/gnome/shell/enabled-extensions" value="['user-theme@gnome-shell-extensions.gcampax.github.com', 'pamac-updates@manjaro.org', 'dash-to-dock@micxgx.gmail.com']"
