@@ -119,7 +119,7 @@
               use: yay
               name: bibata-cursor-theme
             become: yes
-            become-user: eric
+            become_user: eric
           - name: set them as theme
             become_user: eric
             dconf: key="/org/gnome/desktop/interface/cursor-theme" value="'Bibata-Modern-Amber'"
@@ -162,7 +162,7 @@
               use: yay
               name: gnome-shell-extension-dash-to-dock
             become: yes
-            become-user: eric
+            become_user: eric
       - name: Gnome Extension (this include Pamac indicator)
         become_user: eric
         dconf: key="/org/gnome/shell/enabled-extensions" value="['user-theme@gnome-shell-extensions.gcampax.github.com', 'pamac-updates@manjaro.org', 'dash-to-dock@micxgx.gmail.com']"
