@@ -40,6 +40,6 @@
     "script": "guided",
     "swap": true,
     "sys-encoding": "UTF-8",
-    "sys-language": "en_DK.UTF-8",
+    "sys-language": "en_DK",
     "timezone": "Europe/Paris"
 }
