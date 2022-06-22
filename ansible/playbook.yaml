@@ -2,7 +2,7 @@
   become: true
 
   tasks:
-  - name: configure gdm
+  - name: ***** CONFIGURE GDM *****
     block:
     - name: change Wayland to false
       replace:
@@ -20,14 +20,14 @@
       - 'AutomaticLogin=eric'
       - 'AutomaticLoginEnable=True'
 
-  - name: sudo without password
+  - name: ***** sudo without password *****
     community.general.sudoers:
       name: no-passwd-eric
       user: eric
       commands: ALL
       nopassword: yes
 
-  - name: YAY
+  - name: ***** YAY *****
     block:
       - name: install GO as it seems to be prerequisite (otherwise crashes)
         pacman:
@@ -42,21 +42,21 @@
         become: yes
         become_user: eric
 
-  - name: Install Chrome
+  - name: ***** Install Chrome *****
     aur:
       use: yay
       name: google-chrome
     become: yes
     become_user: eric
 
-  - name: Install wifi dongle driver
+  - name: ***** Install wifi dongle driver ***** 
     aur:
       use: yay
       name: rtl88xxau-aircrack-dkms-git
     become: yes
     become_user: eric
 
-  - name: Install and configure Pamac-aur
+  - name: ***** Install and configure Pamac-aur ***** 
     block:
       - name: install pamac
         aur:
@@ -76,7 +76,7 @@
           regexp: '#CheckAURUpdates'
           replace: 'CheckAURUpdates'
 
-  - name: Enable pacman colorised output and verbose package lists
+  - name: ***** Enable pacman colorised output and verbose package lists ***** 
     replace:
       path: /etc/pacman.conf
       regexp: '{{ item.regexp }}'
@@ -85,7 +85,7 @@
       - { regexp: '^#Color$', replace: 'Color' }
       - { regexp: '^#VerbosePkgLists$', replace: 'VerbosePkgLists' }
 
-  - name: install Neofetch
+  - name: ***** install Neofetch ***** 
     block:
       - name: install
         pacman:
@@ -97,7 +97,7 @@
           line: neofetch
           create: yes
 
-  - name: install HP Printer [USER STILL HAS TO FIND PRINTER ONCE CONNECTED ON THE DESKTOP)
+  - name: ***** install HP Printer [USER STILL HAS TO FIND PRINTER ONCE CONNECTED ON THE DESKTOP) ***** 
     block:
       - name: install printer packages (drivers, python-qt5 for GUI...)
         pacman:
@@ -114,41 +114,32 @@
           name: cups
           enabled: yes
 
-  - name: generic Gnome settings
+  - name: ***** GNOME CONFIGURATION *****
     block:
       - name: psutils is required for dconf
         pacman:
           name: python-psutil
           state: present
-      - name: font size
-        become_user: eric
-        dconf: key="/org/gnome/desktop/interface/text-scaling-factor" value="1.5"
-      - name: maximize and minimize buttons
-        become_user: eric
-        dconf: key="/org/gnome/desktop/wm/preferences/button-layout" value="'appmenu:minimize,maximize,close'"
-      - name: Show seconds on clock
-        become_user: eric
-        dconf: key="/org/gnome/desktop/interface/clock-show-seconds" value="true"
-#      - name: Cursor Themes
-#        block:
-#          - name: install cursor
-#            aur:
-#              use: yay
-#              name: bibata-cursor-theme
-#            become: yes
-#            become_user: eric
-#          - name: set them as theme
-#            become_user: eric
-#            dconf: key="/org/gnome/desktop/interface/cursor-theme" value="'Bibata-Modern-Amber'"
-#      - name: Icons Themes
-#        block:
-#          - name: install papirus
-#            pacman:
-#              name: papirus-icon-theme
-#              state: present
-#          - name: set them as theme
-#            become_user: eric
-#            dconf: key="/org/gnome/desktop/interface/icon-theme" value="'Papirus'"
+      - name: Cursor Themes
+        block:
+          - name: install cursor
+            aur:
+              use: yay
+              name: bibata-cursor-theme
+            become: yes
+            become_user: eric
+          - name: set them as theme
+            become_user: eric
+            dconf: key="/org/gnome/desktop/interface/cursor-theme" value="'Bibata-Modern-Amber'"
+      - name: Icons Themes
+        block:
+          - name: install papirus
+            pacman:
+              name: papirus-icon-theme
+              state: present
+          - name: set them as theme
+            become_user: eric
+            dconf: key="/org/gnome/desktop/interface/icon-theme" value="'Papirus'"
 #      - name: Gnome Themes
 #        block:
 #          - name: install Arc
@@ -180,15 +171,75 @@
               name: gnome-shell-extension-dash-to-dock
             become: yes
             become_user: eric
-          - name: configure
+          - name: configure trash
             become_user: eric
             dconf: key="/org/gnome/shell/extensions/dash-to-dock/show-trash" value="false"
+          - name: configure opacity
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-dock/background-opacity" value="0.6"
+          - name: configure theme
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-dock/apply-custom-theme" value="false"
+      - name: Blur my Shell
+        block:
+          - name: install extension
+            aur:
+              use: yay
+              name: gnome-shell-extension-blur-my-shell
+            become: yes
+            become_user: eric
+          - name: blur except dash
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/blur-my-shell/dash-to-dock/blur" value="false"
+      - name: Arc Menu: I sue it only to get Arch icon in Activities top left button
+        block:
+          - name: install extension
+            aur:
+              use: yay
+              name: gnome-shell-extension-arc-menu
+            become: yes
+            become_user: eric
+          - name: configure overview
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/arcmenu/menu-layout" value="'GnomeOverview'"
+          - name: configure icon
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/arcmenu/distro-icon" value="6"
+#      - name: Just Perfection: (I do not use it for now)
+#        block:
+#          - name: install extension
+#            aur:
+#              use: yay
+#              name: gnome-shell-extension-just-perfection-desktop
+#            become: yes
+#            become_user: eric
+#          - name: configure
+#            become_user: eric
+#            dconf: key="" value=""
+      - name: Gnome Extension (this include Pamac indicator)
+        become_user: eric
+        dconf: key="/org/gnome/shell/enabled-extensions" value="['user-theme@gnome-shell-extensions.gcampax.github.com', 'pamac-updates@manjaro.org', 'dash-to-dock@micxgx.gmail.com', 'arcmenu@arcmenu.com', 'blur-my-shell@aunetx']"
       - name: Show Hidden files
         become_user: eric
         dconf: key="/org/gtk/settings/file-chooser/show-hidden" value="true"
-      - name: Gnome Extension (this include Pamac indicator)
+      - name: Delay laptop going to sleep
         become_user: eric
-        dconf: key="/org/gnome/shell/enabled-extensions" value="['user-theme@gnome-shell-extensions.gcampax.github.com', 'pamac-updates@manjaro.org', 'dash-to-dock@micxgx.gmail.com']"
+        dconf: key="/org/gnome/desktop/session/idle-delay" value="uint32 0"
+      - name: Delay laptop going to suspend on AC
+        become_user: eric
+        dconf: key="/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-timeout" value="7200"
+      - name: Delay laptop going to suspend on Battery
+        become_user: eric
+        dconf: key="/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-timeout" value="1800"
+      - name: font size
+        become_user: eric
+        dconf: key="/org/gnome/desktop/interface/text-scaling-factor" value="1.5"
+      - name: maximize and minimize buttons
+        become_user: eric
+        dconf: key="/org/gnome/desktop/wm/preferences/button-layout" value="'appmenu:minimize,maximize,close'"
+      - name: Show seconds on clock
+        become_user: eric
+        dconf: key="/org/gnome/desktop/interface/clock-show-seconds" value="true"
       - name: Favorite on Dock
         become_user: eric
         dconf: key="/org/gnome/shell/favorite-apps" value="['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.manjaro.pamac.manager.desktop', 'gnome-system-monitor.desktop']"
