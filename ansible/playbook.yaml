@@ -174,7 +174,10 @@
           - name: configure trash
             become_user: eric
             dconf: key="/org/gnome/shell/extensions/dash-to-dock/show-trash" value="false"
-          - name: configure opacity
+          - name: use fixed opacity
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-dock/transparency-mode" value="'FIXED'"
+          - name: configure opacity value
             become_user: eric
             dconf: key="/org/gnome/shell/extensions/dash-to-dock/background-opacity" value="0.6"
           - name: configure theme
