@@ -202,7 +202,10 @@
           - name: configure overview
             become_user: eric
             dconf: key="/org/gnome/shell/extensions/arcmenu/menu-layout" value="'GnomeOverview'"
-          - name: configure icon
+          - name: configure distro icon
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/arcmenu/menu-button-icon" value="'Distro_Icon'"
+          - name: put arch icon
             become_user: eric
             dconf: key="/org/gnome/shell/extensions/arcmenu/distro-icon" value="6"
 #      - name: Just Perfection (I do not use it for now)
