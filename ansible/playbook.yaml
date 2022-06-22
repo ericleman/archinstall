@@ -2,7 +2,7 @@
   become: true
 
   tasks:
-  - name: ***** CONFIGURE GDM *****
+  - name: CONFIGURE GDM
     block:
     - name: change Wayland to false
       replace:
@@ -20,14 +20,14 @@
       - 'AutomaticLogin=eric'
       - 'AutomaticLoginEnable=True'
 
-  - name: ***** sudo without password *****
+  - name: sudo without password
     community.general.sudoers:
       name: no-passwd-eric
       user: eric
       commands: ALL
       nopassword: yes
 
-  - name: ***** YAY *****
+  - name: YAY
     block:
       - name: install GO as it seems to be prerequisite (otherwise crashes)
         pacman:
@@ -42,21 +42,21 @@
         become: yes
         become_user: eric
 
-  - name: ***** Install Chrome *****
+  - name: Install Chrome
     aur:
       use: yay
       name: google-chrome
     become: yes
     become_user: eric
 
-  - name: ***** Install wifi dongle driver ***** 
+  - name: Install wifi dongle driver 
     aur:
       use: yay
       name: rtl88xxau-aircrack-dkms-git
     become: yes
     become_user: eric
 
-  - name: ***** Install and configure Pamac-aur ***** 
+  - name: Install and configure Pamac-aur 
     block:
       - name: install pamac
         aur:
@@ -76,7 +76,7 @@
           regexp: '#CheckAURUpdates'
           replace: 'CheckAURUpdates'
 
-  - name: ***** Enable pacman colorised output and verbose package lists ***** 
+  - name: Enable pacman colorised output and verbose package lists 
     replace:
       path: /etc/pacman.conf
       regexp: '{{ item.regexp }}'
@@ -85,7 +85,7 @@
       - { regexp: '^#Color$', replace: 'Color' }
       - { regexp: '^#VerbosePkgLists$', replace: 'VerbosePkgLists' }
 
-  - name: ***** install Neofetch ***** 
+  - name: install Neofetch 
     block:
       - name: install
         pacman:
@@ -97,7 +97,7 @@
           line: neofetch
           create: yes
 
-  - name: ***** install HP Printer [USER STILL HAS TO FIND PRINTER ONCE CONNECTED ON THE DESKTOP) ***** 
+  - name: install HP Printer [USER STILL HAS TO FIND PRINTER ONCE CONNECTED ON THE DESKTOP) 
     block:
       - name: install printer packages (drivers, python-qt5 for GUI...)
         pacman:
@@ -114,7 +114,7 @@
           name: cups
           enabled: yes
 
-  - name: ***** GNOME CONFIGURATION *****
+  - name: GNOME CONFIGURATION
     block:
       - name: psutils is required for dconf
         pacman:
@@ -191,7 +191,7 @@
           - name: blur except dash
             become_user: eric
             dconf: key="/org/gnome/shell/extensions/blur-my-shell/dash-to-dock/blur" value="false"
-      - name: Arc Menu: I sue it only to get Arch icon in Activities top left button
+      - name: Arc Menu I sue it only to get Arch icon in Activities top left button
         block:
           - name: install extension
             aur:
@@ -205,7 +205,7 @@
           - name: configure icon
             become_user: eric
             dconf: key="/org/gnome/shell/extensions/arcmenu/distro-icon" value="6"
-#      - name: Just Perfection: (I do not use it for now)
+#      - name: Just Perfection (I do not use it for now)
 #        block:
 #          - name: install extension
 #            aur:
