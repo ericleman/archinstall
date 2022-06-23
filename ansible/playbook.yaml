@@ -199,7 +199,9 @@
             become_user: eric
           - name: animate-appicon-hover-animation-extent
             become_user: eric
-            dconf: key="/org/gnome/shell/extensions/dash-to-panel/animate-appicon-hover-animation-extent" value="{'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}"
+            dconf: 
+              key: "/org/gnome/shell/extensions/dash-to-panel/animate-appicon-hover-animation-extent" 
+              value: "{'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}"
           - name: appicon-margin
             become_user: eric
             dconf: key="/org/gnome/shell/extensions/dash-to-panel/appicon-margin" value="8"
