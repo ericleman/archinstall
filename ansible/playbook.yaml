@@ -414,6 +414,12 @@
       - name: DEACTIVATE GNOME SOFTWARE NOTIFICATIONS
         become_user: eric
         dconf: key="/org/gnome/software/download-updates-notify" value="false"
+      - name: Gnome terminal default column size
+        become_user: eric
+        dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-columns" value="120"
+      - name: Gnome terminal default line size
+        become_user: eric
+        dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-rows" value="40"
       - name: Favorite on Dock
         become_user: eric
         dconf: key="/org/gnome/shell/favorite-apps" value="['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.manjaro.pamac.manager.desktop', 'gnome-system-monitor.desktop']"
