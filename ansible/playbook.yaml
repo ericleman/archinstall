@@ -246,6 +246,12 @@
       - name: Show seconds on clock
         become_user: eric
         dconf: key="/org/gnome/desktop/interface/clock-show-seconds" value="true"
+      - name: DEACTIVATE GNOME SOFTWARE UPDATES
+        become_user: eric
+        dconf: key="/org/gnome/software/download-updates" value="false"
+      - name: DEACTIVATE GNOME SOFTWARE NOTIFICATIONS
+        become_user: eric
+        dconf: key="/org/gnome/software/download-updates-notify" value="false"
       - name: Favorite on Dock
         become_user: eric
         dconf: key="/org/gnome/shell/favorite-apps" value="['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.manjaro.pamac.manager.desktop', 'gnome-system-monitor.desktop']"
