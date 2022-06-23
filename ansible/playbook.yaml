@@ -97,6 +97,12 @@
           line: neofetch
           create: yes
 
+  - name: install some useful software
+    pacman:
+      name:
+        - meld
+      state: present
+
   - name: install HP Printer [USER STILL HAS TO FIND PRINTER ONCE CONNECTED ON THE DESKTOP) 
     block:
       - name: install printer packages (drivers, python-qt5 for GUI...)
@@ -194,6 +200,14 @@
           - name: blur except dash
             become_user: eric
             dconf: key="/org/gnome/shell/extensions/blur-my-shell/dash-to-dock/blur" value="false"
+      - name: APP INDICATOR
+        block:
+          - name: install extension
+            aur:
+              use: yay
+              name: gnome-shell-extension-appindicator
+            become: yes
+            become_user: eric
       - name: Arc Menu I sue it only to get Arch icon in Activities top left button
         block:
           - name: install extension
@@ -224,7 +238,7 @@
 #            dconf: key="" value=""
       - name: Gnome Extension (this include Pamac indicator)
         become_user: eric
-        dconf: key="/org/gnome/shell/enabled-extensions" value="['user-theme@gnome-shell-extensions.gcampax.github.com', 'pamac-updates@manjaro.org', 'dash-to-dock@micxgx.gmail.com', 'arcmenu@arcmenu.com', 'blur-my-shell@aunetx']"
+        dconf: key="/org/gnome/shell/enabled-extensions" value="['user-theme@gnome-shell-extensions.gcampax.github.com', 'pamac-updates@manjaro.org', 'dash-to-dock@micxgx.gmail.com', 'arcmenu@arcmenu.com', 'blur-my-shell@aunetx', 'appindicatorsupport@rgcjonas.gmail.com']"
       - name: Show Hidden files
         become_user: eric
         dconf: key="/org/gtk/settings/file-chooser/show-hidden" value="true"
