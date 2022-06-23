@@ -102,6 +102,7 @@
       name:
         - meld
         - python-psutil
+        - noto-fonts
       state: present
 
   - name: install HP Printer [USER STILL HAS TO FIND PRINTER ONCE CONNECTED ON THE DESKTOP) 
