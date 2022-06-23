@@ -365,6 +365,12 @@
       - name: Show seconds on clock
         become_user: eric
         dconf: key="/org/gnome/desktop/interface/clock-show-seconds" value="true"
+      - name: Weather location
+        become_user: eric
+        dconf: key="/org/gnome/Weather/locations" value="[<(uint32 2, <('Paris', 'LFPB', true, [(0.85462956287765413, 0.042760566673861078)], [(0.8528842336256599, 0.040724343395436846)])>)>]"
+      - name: Worldclock
+        become_user: eric
+        dconf: key="/org/gnome/clocks/world-clocks" value="[{'location': <(uint32 2, <('New York', 'KNYC', true, [(0.71180344078725644, -1.2909618758762367)], [(0.71059804659265924, -1.2916478949920254)])>)>}]"
       - name: DEACTIVATE GNOME SOFTWARE UPDATES
         become_user: eric
         dconf: key="/org/gnome/software/download-updates" value="false"
