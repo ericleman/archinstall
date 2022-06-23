@@ -169,26 +169,73 @@
           - name: screensaver wallpaper
             become_user: eric
             dconf: key="/org/gnome/desktop/screensaver/picture-uri" value="'file:///usr/share/backgrounds/gnome/libadwaita-l.jpg'"
-      - name: Dash to Dock
+#      - name: Dash to Dock
+#        block:
+#          - name: install extension
+#            aur:
+#              use: yay
+#              name: gnome-shell-extension-dash-to-dock
+#            become: yes
+#            become_user: eric
+#          - name: configure trash
+#            become_user: eric
+#            dconf: key="/org/gnome/shell/extensions/dash-to-dock/show-trash" value="false"
+#          - name: use fixed opacity
+#            become_user: eric
+#            dconf: key="/org/gnome/shell/extensions/dash-to-dock/transparency-mode" value="'FIXED'"
+#          - name: configure opacity value
+#            become_user: eric
+#            dconf: key="/org/gnome/shell/extensions/dash-to-dock/background-opacity" value="0.6"
+#          - name: configure theme
+#            become_user: eric
+#            dconf: key="/org/gnome/shell/extensions/dash-to-dock/apply-custom-theme" value="false"
+      - name: Dash to Panel
         block:
           - name: install extension
             aur:
               use: yay
-              name: gnome-shell-extension-dash-to-dock
+              name: gnome-shell-extension-dash-to-panel
             become: yes
             become_user: eric
-          - name: configure trash
+          - name: animate-appicon-hover-animation-extent
             become_user: eric
-            dconf: key="/org/gnome/shell/extensions/dash-to-dock/show-trash" value="false"
-          - name: use fixed opacity
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/animate-appicon-hover-animation-extent" value="{'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}"
+          - name: appicon-margin
             become_user: eric
-            dconf: key="/org/gnome/shell/extensions/dash-to-dock/transparency-mode" value="'FIXED'"
-          - name: configure opacity value
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/appicon-margin" value="8"
+          - name: appicon-padding
             become_user: eric
-            dconf: key="/org/gnome/shell/extensions/dash-to-dock/background-opacity" value="0.6"
-          - name: configure theme
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/appicon-padding" value="4"
+          - name: hotkeys-overlay-combo
             become_user: eric
-            dconf: key="/org/gnome/shell/extensions/dash-to-dock/apply-custom-theme" value="false"
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/hotkeys-overlay-combo" value="'TEMPORARILY'"
+          - name: leftbox-padding
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/leftbox-padding" value="-1"
+          - name: panel-anchors
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/panel-anchors" value="'{"0":"MIDDLE"}'"
+          - name: panel-element-positions
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/panel-element-positions" value="'{"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"centerMonitor"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'"
+          - name: panel-lengths
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/panel-lengths" value="'{"0":100}'"
+          - name: panel-positions
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/panel-positions" value="'{"0":"TOP"}'"
+          - name: panel-sizes
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/panel-sizes" value="'{"0":48}'"
+          - name: status-icon-padding
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/status-icon-padding" value="-1"
+          - name: tray-padding
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/tray-padding" value="-1"
+          - name: window-preview-title-position
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/window-preview-title-position" value="'TOP'"
       - name: Blur my Shell
         block:
           - name: install extension
