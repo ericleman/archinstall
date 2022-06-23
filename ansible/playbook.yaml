@@ -161,6 +161,11 @@
         copy:
           src: personal/.p10k.zsh
           dest: /root/.p10k.zsh
+      - name: remove neofetch for root
+        replace:
+          path: /root/.zshrc
+          regexp: 'neofetch'
+          replace: '#neofetch'
 
   - name: GNOME CONFIGURATION
     block:
