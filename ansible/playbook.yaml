@@ -207,6 +207,13 @@
               owner: "eric"
               group: "eric"
               mode: u+rw,g+r,o--          
+          - name: create gtk4 folder
+            file:
+              path: /home/eric/.config/gtk-4.0
+              state: directory
+              owner: "eric"
+              group: "eric"
+              mode: u+rw,g+r,o--          
           - name: Copy gtk4
             copy:
               src: /home/eric/temp/themes/Gnome42/gtk-Catppuccin-Macchiato-BL.css
