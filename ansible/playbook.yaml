@@ -368,6 +368,9 @@
       - name: DEACTIVATE GNOME SOFTWARE UPDATES
         become_user: eric
         dconf: key="/org/gnome/software/download-updates" value="false"
+      - name: DEACTIVATE TERMINAL ASKING TO CONFIRM TO CLOSE
+        become_user: eric
+        dconf: key="/org/gnome/terminal/legacy/confirm-close" value="false"
       - name: DEACTIVATE GNOME SOFTWARE NOTIFICATIONS
         become_user: eric
         dconf: key="/org/gnome/software/download-updates-notify" value="false"
