@@ -119,6 +119,26 @@
         ansible.builtin.systemd:
           name: cups
           enabled: yes
+          
+  - name: INSTALL AND CONFIGURE ZSH
+    block:
+      - name: install packages
+        pacman:
+          name:
+            - zsh
+            - zsh-autosuggestions
+            - zsh-completions
+            - zsh-syntax-highlighting
+            - zsh-theme-powerlevel10k
+          state: present
+      - name: set zsh as eric shell
+        ansible.builtin.user:
+          name: eric
+          shell: /usr/bin/zsh
+      - name: set zsh as root shell
+        ansible.builtin.user:
+          name: root
+          shell: /bin/zsh
 
   - name: GNOME CONFIGURATION
     block:
