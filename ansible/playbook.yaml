@@ -225,6 +225,9 @@
           - name: put arch icon
             become_user: eric
             dconf: key="/org/gnome/shell/extensions/arcmenu/distro-icon" value="6"
+          - name: icon size
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/arcmenu/custom-menu-button-icon-size" value="32"
 #      - name: Just Perfection (I do not use it for now)
 #        block:
 #          - name: install extension
