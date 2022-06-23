@@ -230,6 +230,12 @@
           - name: status-icon-padding
             become_user: eric
             dconf: key="/org/gnome/shell/extensions/dash-to-panel/status-icon-padding" value="-1"
+          - name: trans-panel-opacity
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/trans-panel-opacity" value="0.0"
+          - name: trans-use-custom-opacity
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/trans-use-custom-opacity" value="true"
           - name: tray-padding
             become_user: eric
             dconf: key="/org/gnome/shell/extensions/dash-to-panel/tray-padding" value="-1"
