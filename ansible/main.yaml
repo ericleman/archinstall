@@ -44,11 +44,12 @@
   - name: PAPIRUS ICONS
     include_tasks: papirus.yaml
 
+# Wallpaper defined in CATPPUCCIN
+#  - name: WALLPAPER
+#    include_tasks: wallpaper.yaml
+
   - name: CATPPUCCIN THEME
     include_tasks: catppuccin.yaml
-
-  - name: WALLPAPER
-    include_tasks: wallpaper.yaml
 
   - name: CONKY ALFIRK THEME (adapted from "https://github.com/closebox73/Chepeus")
     include_tasks: conky-alfirk.yaml
