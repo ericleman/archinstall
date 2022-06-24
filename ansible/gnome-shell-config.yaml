@@ -1,0 +1,131 @@
+#      - name: Dash to Dock
+#        block:
+#          - name: install extension
+#            aur:
+#              use: yay
+#              name: gnome-shell-extension-dash-to-dock
+#            become: yes
+#            become_user: eric
+#          - name: configure trash
+#            become_user: eric
+#            dconf: key="/org/gnome/shell/extensions/dash-to-dock/show-trash" value="false"
+#          - name: use fixed opacity
+#            become_user: eric
+#            dconf: key="/org/gnome/shell/extensions/dash-to-dock/transparency-mode" value="'FIXED'"
+#          - name: configure opacity value
+#            become_user: eric
+#            dconf: key="/org/gnome/shell/extensions/dash-to-dock/background-opacity" value="0.6"
+#          - name: configure theme
+#            become_user: eric
+#            dconf: key="/org/gnome/shell/extensions/dash-to-dock/apply-custom-theme" value="false"
+
+- name: Dash to Panel
+  block:
+    - name: install extension
+      aur:
+        use: yay
+        name: gnome-shell-extension-dash-to-panel
+      become: yes
+      become_user: eric
+    - name: animate-appicon-hover-animation-extent
+      become_user: eric
+      dconf: 
+        key: "/org/gnome/shell/extensions/dash-to-panel/animate-appicon-hover-animation-extent" 
+        value: "{'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}"
+    - name: appicon-margin
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/dash-to-panel/appicon-margin" value="8"
+    - name: appicon-padding
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/dash-to-panel/appicon-padding" value="4"
+    - name: hotkeys-overlay-combo
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/dash-to-panel/hotkeys-overlay-combo" value="'TEMPORARILY'"
+    - name: leftbox-padding
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/dash-to-panel/leftbox-padding" value="-1"
+    - name: panel-anchors
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/dash-to-panel/panel-anchors" value="'{"0":"MIDDLE"}'"
+    - name: panel-element-positions
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/dash-to-panel/panel-element-positions" value="'{"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"centerMonitor"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'"
+    - name: panel-lengths
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/dash-to-panel/panel-lengths" value="'{"0":100}'"
+    - name: panel-positions
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/dash-to-panel/panel-positions" value="'{"0":"TOP"}'"
+    - name: panel-sizes
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/dash-to-panel/panel-sizes" value="'{"0":48}'"
+    - name: status-icon-padding
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/dash-to-panel/status-icon-padding" value="-1"
+    - name: trans-panel-opacity
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/dash-to-panel/trans-panel-opacity" value="0.0"
+    - name: trans-use-custom-opacity
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/dash-to-panel/trans-use-custom-opacity" value="true"
+    - name: tray-padding
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/dash-to-panel/tray-padding" value="-1"
+    - name: window-preview-title-position
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/dash-to-panel/window-preview-title-position" value="'TOP'"
+
+- name: Blur my Shell
+  block:
+    - name: install extension
+      aur:
+        use: yay
+        name: gnome-shell-extension-blur-my-shell
+      become: yes
+      become_user: eric
+    - name: blur except dash
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/blur-my-shell/dash-to-dock/blur" value="false"
+
+- name: APP INDICATOR
+  block:
+    - name: install extension
+      aur:
+        use: yay
+        name: gnome-shell-extension-appindicator
+      become: yes
+      become_user: eric
+
+- name: Arc Menu I sue it only to get Arch icon in Activities top left button
+  block:
+    - name: install extension
+      aur:
+        use: yay
+        name: gnome-shell-extension-arc-menu
+      become: yes
+      become_user: eric
+    - name: configure overview
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/arcmenu/menu-layout" value="'GnomeOverview'"
+    - name: configure distro icon
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/arcmenu/menu-button-icon" value="'Distro_Icon'"
+    - name: put arch icon
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/arcmenu/distro-icon" value="6"
+    - name: icon size
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/arcmenu/custom-menu-button-icon-size" value="32.0"
+
+#      - name: Just Perfection (I do not use it for now)
+#        block:
+#          - name: install extension
+#            aur:
+#              use: yay
+#              name: gnome-shell-extension-just-perfection-desktop
+#            become: yes
+#            become_user: eric
+#          - name: configure
+#            become_user: eric
+#            dconf: key="" value=""
+

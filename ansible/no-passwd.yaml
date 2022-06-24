@@ -1,0 +1,7 @@
+- name: sudo without password
+  community.general.sudoers:
+    name: no-passwd-eric
+    user: eric
+    commands: ALL
+    nopassword: yes
+

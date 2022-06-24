@@ -1,0 +1,15 @@
+- name: install printer packages (drivers, python-qt5 for GUI...)
+  pacman:
+    name: 
+      - hplip
+      - cups
+      - python-reportlab
+      - rpcbind
+      - python-pyqt5
+      - wget
+    state: present
+- name: enable cups service
+  ansible.builtin.systemd:
+    name: cups
+    enabled: yes
+    

@@ -1,0 +1,31 @@
+- name: Clone Catppuccin-GTK-Theme
+  git:
+    repo: "https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme.git"
+    dest: "/home/eric/temp"
+- name: Copy theme
+  copy:
+    src: /home/eric/temp/themes/Catppuccin-Macchiato-Dark-BL
+    dest: /home/eric/.themes/
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--          
+- name: create gtk4 folder
+  file:
+    path: /home/eric/.config/gtk-4.0
+    state: directory
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--          
+- name: Copy gtk4
+  copy:
+    src: /home/eric/temp/themes/Gnome42/gtk-Catppuccin-Macchiato-BL.css
+    dest: /home/eric/.config/gtk-4.0/gtk.css
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--          
+- name: Tweaks shell theme
+  become_user: eric
+  dconf: key="/org/gnome/shell/extensions/user-theme/name" value="'Catppuccin-Macchiato-Dark-BL'"
+- name: Tweaks windows
+  become_user: eric
+  dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'Catppuccin-Macchiato-Dark-BL'"

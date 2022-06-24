@@ -1,0 +1,48 @@
+- name: Show Hidden files
+  become_user: eric
+  dconf: key="/org/gtk/settings/file-chooser/show-hidden" value="true"
+- name: Delay laptop going to sleep
+  become_user: eric
+  dconf: key="/org/gnome/desktop/session/idle-delay" value="uint32 0"
+- name: Delay laptop going to suspend on AC
+  become_user: eric
+  dconf: key="/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-timeout" value="7200"
+- name: Delay laptop going to suspend on Battery
+  become_user: eric
+  dconf: key="/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-timeout" value="1800"
+- name: font size
+  become_user: eric
+  dconf: key="/org/gnome/desktop/interface/text-scaling-factor" value="1.5"
+- name: maximize and minimize buttons
+  become_user: eric
+  dconf: key="/org/gnome/desktop/wm/preferences/button-layout" value="'appmenu:minimize,maximize,close'"
+- name: Show seconds on clock
+  become_user: eric
+  dconf: key="/org/gnome/desktop/interface/clock-show-seconds" value="true"
+- name: Weather location
+  become_user: eric
+  dconf: key="/org/gnome/Weather/locations" value="[<(uint32 2, <('Paris', 'LFPB', true, [(0.85462956287765413, 0.042760566673861078)], [(0.8528842336256599, 0.040724343395436846)])>)>]"
+- name: Worldclock
+  become_user: eric
+  dconf: 
+    key: "/org/gnome/clocks/world-clocks" 
+    value: "[{'location': <(uint32 2, <('New York', 'KNYC', true, [(0.71180344078725644, -1.2909618758762367)], [(0.71059804659265924, -1.2916478949920254)])>)>}]"
+- name: DEACTIVATE GNOME SOFTWARE UPDATES
+  become_user: eric
+  dconf: key="/org/gnome/software/download-updates" value="false"
+- name: DEACTIVATE TERMINAL ASKING TO CONFIRM TO CLOSE
+  become_user: eric
+  dconf: key="/org/gnome/terminal/legacy/confirm-close" value="false"
+- name: DEACTIVATE GNOME SOFTWARE NOTIFICATIONS
+  become_user: eric
+  dconf: key="/org/gnome/software/download-updates-notify" value="false"
+- name: Gnome terminal default column size
+  become_user: eric
+  dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-columns" value="120"
+- name: Gnome terminal default line size
+  become_user: eric
+  dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-rows" value="40"
+- name: Favorite on Dock
+  become_user: eric
+  dconf: key="/org/gnome/shell/favorite-apps" value="['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.manjaro.pamac.manager.desktop', 'gnome-system-monitor.desktop']"
+

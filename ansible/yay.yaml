@@ -1,0 +1,12 @@
+- name: install GO as it seems to be prerequisite (otherwise crashes)
+  pacman:
+    name: 
+      - go
+    state: present        
+- name: install yay
+  aur:
+    name: yay
+    use: makepkg
+    state: present 
+  become: yes
+  become_user: eric
