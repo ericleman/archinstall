@@ -50,5 +50,8 @@
   - name: WALLPAPER
     include_tasks: wallpaper.yaml
 
+  - name: CONKY ALFIRK THEME (adapted from "https://github.com/closebox73/Chepeus")
+    include_tasks: conky-alfirk.yaml
+
   - name: ACTIVATE GNOME EXTENSIONS 
     include_tasks: activate-gnome-extensions.yaml
