@@ -1,3 +1,6 @@
+- name: Nautilus window size
+  become_user: eric
+  dconf: key="/org/gnome/nautilus/window-state/initial-size" value="(1300, 850)"
 - name: Show Hidden files
   become_user: eric
   dconf: key="/org/gtk/settings/file-chooser/show-hidden" value="true"
