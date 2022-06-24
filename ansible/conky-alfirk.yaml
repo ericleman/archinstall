@@ -10,20 +10,20 @@
     dest: /home/eric/.local/share/fonts
     owner: "eric"
     group: "eric"
-    mode: u+rw,g+r,o--    
+    mode: '0777'      
 - name: copy conky config ans scripts
   copy:
     src: personal/conky/Alfirk/Alfirk/
     dest: /home/eric/.config/conky/Alfirk
     owner: "eric"
     group: "eric"
-    mode: u+rw,g+r,o--          
+    mode: '0777'             
 - name: copy autostart file
   copy:
     src: personal/conky/Alfirk/conky.desktop
     dest: /home/eric/.config/autostart/conky.desktop
     owner: "eric"
     group: "eric"
-    mode: u+rw,g+r,o--          
+    mode: '0777'            
 
 
