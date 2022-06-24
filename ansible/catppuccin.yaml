@@ -29,3 +29,33 @@
 - name: Tweaks windows
   become_user: eric
   dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'Catppuccin-Macchiato-Dark-BL'"
+
+- name: Gnome terminal Catppuccin palette
+  block:
+  - name: background-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color" value="'#1E1E2E'"
+  - name: bold-color-same-as-fg
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/bold-color-same-as-fg" value="true"
+  - name: cursor-background-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/cursor-background-color" value="'#F5E0DC'"
+  - name: cursor-colors-set
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/cursor-colors-set" value="true"
+  - name: cursor-foreground-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/cursor-foreground-color" value="'#1E1E2E'"
+  - name: foreground-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/foreground-color" value="'#D7DAE0'"
+  - name: highlight-colors-set
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/highlight-colors-set" value="false"
+  - name: palette
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/palette" value="['#6E6C7C', '#F28FAD', '#ABE9B3', '#FAE3B0', '#96CDFB', '#DDB6F2', '#F5C2E7', '#D9E0EE', '#988BA2', '#F28FAD', '#ABE9B3', '#FAE3B0', '#96CDFB', '#DDB6F2', '#F5C2E7', '#D9E0EE']"
+  - name: use-theme-colors
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-theme-colors" value="false"
