@@ -1,8 +1,8 @@
-#    - name: change Wayland to false
-#      replace:
-#        path: /etc/gdm/custom.conf
-#        regexp: '#WaylandEnable=false'
-#        replace: 'WaylandEnable=false'
+- name: change Wayland to false
+  replace:
+    path: /etc/gdm/custom.conf
+    regexp: '#WaylandEnable=false'
+    replace: 'WaylandEnable=false'
 - name: auto login
   lineinfile:
     path: /etc/gdm/custom.conf
