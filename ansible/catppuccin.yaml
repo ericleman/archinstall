@@ -30,6 +30,25 @@
   become_user: eric
   dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'Catppuccin-Macchiato-Dark-BL'"
 
+- name: Wallpaper
+  block:
+  - name: download wallpaper package
+    aur:
+      use: yay
+      name: catppuccin-wallpapers-git
+    become: yes
+    become_user: eric  
+  - name: light wallpaper
+    become_user: eric
+    dconf: key="/org/gnome/desktop/background/picture-uri" value="'file:///usr/share/backgrounds/catppuccin-wallpapers/landscapes/tropic_island_night.jpg'"
+  - name: dark wallpaper
+    become_user: eric
+    dconf: key="/org/gnome/desktop/background/picture-uri-dark" value="'file:///usr/share/backgrounds/catppuccin-wallpapers/landscapes/tropic_island_night.jpg'"
+  - name: screensaver wallpaper
+    become_user: eric
+    dconf: key="/org/gnome/desktop/screensaver/picture-uri" value="'file:///usr/share/backgrounds/catppuccin-wallpapers/landscapes/tropic_island_evening.jpg'"
+
+
 - name: Gnome terminal Catppuccin palette
   block:
   - name: background-color
