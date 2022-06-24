@@ -2,6 +2,9 @@
   become: true
 
   tasks:
+  - name: SUDO ERIC (needs to be before YAY installation)
+    include_tasks: no-passwd.yaml
+
   - name: INSTALL CORE SOFTWARE AND FONTS
     include_tasks: core-packages.yaml
 
@@ -16,9 +19,6 @@
 
   - name: PAMAC (need to be after YAY)
     include_tasks: pamac.yaml
-
-  - name: SUDO ERIC
-    include_tasks: no-passwd.yaml
 
   - name: CHROME
     include_tasks: chrome.yaml
