@@ -49,16 +49,26 @@
 #    include_tasks: wallpaper.yaml
 
 #  - name: CATPPUCCIN THEME
-#    include_tasks: theme_catppuccin.yaml
-#    tags: theme_catppuccin
+#    include_tasks: 
+#      file: theme-catppuccin.yaml
+#      apply:
+#        tags: theme-catppuccin
+#    tags: theme-catppuccin
 
 #  - name: GRUVBOX THEME
-#    include_tasks: theme_gruvbox.yaml
-#    tags: theme_gruvbox
+#    include_tasks: 
+#      file: theme-gruvbox.yaml
+#      apply:
+#        tags: theme-gruvbox
+#    tags: theme-gruvbox
 
   - name: NORD THEME
-    include_tasks: theme_nord.yaml
-    tags: theme_nord
+    include_tasks: 
+      file: theme-nord.yaml
+      apply:
+        tags: theme-nord
+    tags: theme-nord
+
 
   - name: CONKY ALFIRK THEME (adapted from "https://github.com/closebox73/Chepeus")
     include_tasks: conky-alfirk.yaml
