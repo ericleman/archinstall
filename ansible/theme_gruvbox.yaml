@@ -100,10 +100,17 @@
 
 - name: Gedit theme
   block:
+  - name: create gedit styles folder
+    file:
+      path: /home/eric/.local/share/gedit/styles
+      state: directory
+      owner: "eric"
+      group: "eric"
+      mode: u+rw,g+r,o--   
   - name: Copy XML
     copy:
       src: /home/eric/temp/Gruvbox-GTK-Theme/gedit/gruvbox_mid_dark.xml
-      dest: /usr/share/gtksourceview-3.0/styles/gruvbox_mid_dark.xml
+      dest: /home/eric/.local/share/gedit/styles/gruvbox_mid_dark.xml
       owner: "eric"
       group: "eric"
       mode: u+rw,g+r,o--          
