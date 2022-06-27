@@ -56,7 +56,7 @@
       dest: "/home/eric/temp/nord-gnome-terminal"
     become_user: eric
   - name: apply theme to gnome terminal profile "Eric"
-    ansible.builtin.shell: /home/eric/temp/nord-gnome-terminal/src/nord.sh "Eric"
+    ansible.builtin.shell: /home/eric/temp/nord-gnome-terminal/src/nord.sh -p "Eric"
 
 - name: Gedit theme
   block:
