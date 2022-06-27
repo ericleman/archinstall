@@ -128,7 +128,7 @@
     become: yes
     become_user: eric
   - name: apply paleorange color to folders
-    ansible.builtin.shell: papirus-folders -C paleorange -t Papirus
+    ansible.builtin.shell: papirus-folders -C brown -t Papirus
     become: yes
     become_user: eric
 
