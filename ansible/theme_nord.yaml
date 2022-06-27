@@ -1,4 +1,4 @@
-- name: Clone Catppuccin-GTK-Theme
+- name: Clone Nordic GTK theme
   git:
     repo: "https://github.com/EliverLara/Nordic.git"
     dest: "/home/eric/temp"
@@ -106,7 +106,7 @@
       mode: '0777'
 - name: set them as theme
   become_user: eric
-  dconf: key="/org/gnome/desktop/interface/cursor-theme" value="'Bibata-Modern-Amber'"
+  dconf: key="/org/gnome/desktop/interface/cursor-theme" value="'Capitaine Cursors (Nord)'"
 
   
 
