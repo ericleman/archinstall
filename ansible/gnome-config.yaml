@@ -1,3 +1,6 @@
+- name: Increase mouse cursor size
+  become_user: eric
+  dconf: key="/org/gnome/desktop/interface/cursor-size" value="32"
 - name: Nautilus window size
   become_user: eric
   dconf: key="/org/gnome/nautilus/window-state/initial-size" value="(1300, 850)"
