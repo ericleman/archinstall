@@ -61,6 +61,13 @@
 
 - name: Gedit theme
   block:
+  - name: create gedit styles folder
+    file:
+      path: /home/eric/.local/share/gedit/styles
+      state: directory
+      owner: "eric"
+      group: "eric"
+      mode: u+rw,g+r,o--   
   - name: get theme on git
     git:
       repo: "https://github.com/arcticicestudio/nord-gedit.git"
@@ -69,7 +76,7 @@
   - name: Copy XML config
     copy:
       src: /home/eric/temp/nord-gedit/src/xml/nord.xml
-      dest: /usr/share/gtksourceview-3.0/styles/nord.xml
+      dest: /home/eric/.local/share/gedit/styles/nord.xml
       owner: "eric"
       group: "eric"
       mode: u+rw,g+r,o--
