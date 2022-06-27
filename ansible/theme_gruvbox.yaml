@@ -39,22 +39,20 @@
 
 - name: Wallpaper
   block:
-  - name: Copy wallpaper
-    copy:
-      src: /home/eric/temp/Gruvbox-GTK-Theme/wallpapers/gruvbox11.png
-      dest: /usr/share/backgrounds/gruvbox11.png
-      owner: "eric"
-      group: "eric"
-      mode: u+rw,g+r,o--          
+  - name: download wallpaper
+    ansible.builtin.get_url:
+      url: https://images.pexels.com/photos/3784221/pexels-photo-3784221.jpeg
+      dest: /usr/share/backgrounds/pexels-photo-3784221.jpeg
+      mode: '0777'
   - name: light wallpaper
     become_user: eric
-    dconf: key="/org/gnome/desktop/background/picture-uri" value="'file:///usr/share/backgrounds/gruvbox11.png'"
+    dconf: key="/org/gnome/desktop/background/picture-uri" value="'file:///usr/share/backgrounds/pexels-photo-3784221.jpeg'"
   - name: dark wallpaper
     become_user: eric
-    dconf: key="/org/gnome/desktop/background/picture-uri-dark" value="'file:///usr/share/backgrounds/gruvbox11.png'"
+    dconf: key="/org/gnome/desktop/background/picture-uri-dark" value="'file:///usr/share/backgrounds/pexels-photo-3784221.jpeg'"
   - name: screensaver wallpaper
     become_user: eric
-    dconf: key="/org/gnome/desktop/screensaver/picture-uri" value="'file:///usr/share/backgrounds/gruvbox11.png'"
+    dconf: key="/org/gnome/desktop/screensaver/picture-uri" value="'file:///usr/share/backgrounds/pexels-photo-3784221.jpeg'"
 
 - name: Gnome terminal Gruvbox palette
   block:
