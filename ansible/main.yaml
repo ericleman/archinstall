@@ -49,7 +49,8 @@
 #    include_tasks: wallpaper.yaml
 
   - name: CATPPUCCIN THEME
-    include_tasks: catppuccin.yaml
+    include_tasks: theme_catppuccin.yaml
+    tags: theme_catppuccin
 
   - name: CONKY ALFIRK THEME (adapted from "https://github.com/closebox73/Chepeus")
     include_tasks: conky-alfirk.yaml
