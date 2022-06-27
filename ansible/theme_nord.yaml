@@ -4,7 +4,7 @@
     dest: "/home/eric/temp"
 - name: Copy theme
   copy:
-    src: /home/eric/temp/themes/Nordic
+    src: /home/eric/temp/Nordic
     dest: /home/eric/.themes/
     owner: "eric"
     group: "eric"
