@@ -1,7 +1,14 @@
+- name: create temp folder
+  file:
+    path: /home/eric/temp
+    state: directory
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--   
 - name: Clone Catppuccin-GTK-Theme
   git:
     repo: "https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme.git"
-    dest: "/home/eric/temp"
+    dest: "/home/eric/temp/Catppuccin-GTK-Theme"
 - name: Copy theme
   copy:
     src: /home/eric/temp/Catppuccin-GTK-Theme/themes/Catppuccin-Macchiato-Dark-BL
