@@ -5,21 +5,22 @@
     owner: "eric"
     group: "eric"
     mode: u+rw,g+r,o--   
+
 - name: Clone Nordic GTK theme
   git:
     repo: "https://github.com/EliverLara/Nordic.git"
-    dest: "/home/eric/temp/Nordic"
+    dest: "/home/eric/.themes/Nordic"
   become_user: eric
-- name: Copy theme
-  copy:
-    src: /home/eric/temp/Nordic
-    dest: /home/eric/.themes/
-    owner: "eric"
-    group: "eric"
-    mode: u+rw,g+r,o--          
+#- name: Copy theme
+#  copy:
+#    src: /home/eric/temp/Nordic
+#    dest: /home/eric/.themes/
+#    owner: "eric"
+#    group: "eric"
+#    mode: u+rw,g+r,o--          
 - name: Copy gtk4
   copy:
-    src: /home/eric/temp/Nordic/gtk-4.0
+    src: /home/eric/.themes/Nordic/gtk-4.0
     dest: /home/eric/.config/
     owner: "eric"
     group: "eric"
