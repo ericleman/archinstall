@@ -1,0 +1,112 @@
+- name: Clone Catppuccin-GTK-Theme
+  git:
+    repo: "https://github.com/EliverLara/Nordic.git"
+    dest: "/home/eric/temp"
+- name: Copy theme
+  copy:
+    src: /home/eric/temp/themes/Nordic
+    dest: /home/eric/.themes/
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--          
+- name: Copy gtk4
+  copy:
+    src: /home/eric/temp/Nordic/gtk-4.0
+    dest: /home/eric/.config/
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--          
+- name: Tweaks shell theme
+  become_user: eric
+  dconf: key="/org/gnome/shell/extensions/user-theme/name" value="'Nordic'"
+- name: Tweaks windows
+  become_user: eric
+  dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'Nordic'"
+
+- name: Wallpaper
+  block:
+  - name: Copy wallpaper
+    copy:
+      src: /home/eric/temp/Nordic/extras/wallpapers/nordic-wall.jpg
+      dest: /usr/share/backgrounds/nordic-wall.jpg
+      owner: "eric"
+      group: "eric"
+      mode: u+rw,g+r,o--          
+  - name: light wallpaper
+    become_user: eric
+    dconf: key="/org/gnome/desktop/background/picture-uri" value="'file:///usr/share/backgrounds/nordic-wall.jpg'"
+  - name: dark wallpaper
+    become_user: eric
+    dconf: key="/org/gnome/desktop/background/picture-uri-dark" value="'file:///usr/share/backgrounds/nordic-wall.jpg'"
+  - name: screensaver wallpaper
+    become_user: eric
+    dconf: key="/org/gnome/desktop/screensaver/picture-uri" value="'file:///usr/share/backgrounds/nordic-wall.jpg'"
+
+- name: Gnome terminal palette
+  block:
+  - name: get theme on git
+    git:
+      repo: "https://github.com/arcticicestudio/nord-gnome-terminal.git"
+      dest: "/home/eric/temp"
+    become_user: eric
+  - name: apply theme to gnome terminal profile "Eric"
+    ansible.builtin.shell: /home/eric/temp/nord-gnome-terminal/src/nord.sh "Eric"
+
+- name: Gedit theme
+  block:
+  - name: get theme on git
+    git:
+      repo: "https://github.com/arcticicestudio/nord-gedit.git"
+      dest: "/home/eric/temp"
+    become_user: eric
+  - name: Copy XML config
+    copy:
+      src: /home/eric/temp/nord-gedit/src/xml/nord.xml
+      dest: /usr/share/gtksourceview-3.0/styles/nord.xml
+      owner: "eric"
+      group: "eric"
+      mode: u+rw,g+r,o--
+  - name: apply dconf
+    become_user: eric
+    dconf: key="/org/gnome/gedit/preferences/editor/scheme" value="'nord-gedit'"
+
+- name: Icon theme
+  block:
+  - name: install papirus-folders
+    aur:
+      use: yay
+      name:
+        - papirus-folders
+    become: yes
+    become_user: eric
+  - name: apply nordic color to folders
+    ansible.builtin.shell: papirus-folders -C nordic -t Papirus
+    become: yes
+    become_user: eric
+
+- name: Cursor theme
+  block:
+  - name: create capitaine-cursor folder
+    file:
+      path: /home/eric/temp/capitaine-cursor
+      state: directory
+      owner: "eric"
+      group: "eric"
+      mode: u+rw,g+r,o--   
+  - name: download theme
+    ansible.builtin.get_url:
+      url: https://github.com/sainnhe/capitaine-cursors/releases/download/r5/Linux.zip
+      dest: /home/eric/temp/Linux.zip
+      mode: '0777'
+  - name: Unarchive file
+    ansible.builtin.unarchive:
+      src: /home/eric/temp/Linux.zip
+      dest: /usr/share/icons
+      remote_src: yes
+      mode: '0777'
+- name: set them as theme
+  become_user: eric
+  dconf: key="/org/gnome/desktop/interface/cursor-theme" value="'Bibata-Modern-Amber'"
+
+  
+
