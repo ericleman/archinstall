@@ -4,7 +4,7 @@
     dest: "/home/eric/temp"
 - name: Copy theme
   copy:
-    src: /home/eric/temp/themes/Catppuccin-Macchiato-Dark-BL
+    src: /home/eric/temp/Catppuccin-GTK-Theme/themes/Catppuccin-Macchiato-Dark-BL
     dest: /home/eric/.themes/
     owner: "eric"
     group: "eric"
