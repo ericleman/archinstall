@@ -1,7 +1,14 @@
+- name: create temp folder
+  file:
+    path: /home/eric/temp
+    state: directory
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--   
 - name: Clone Gruvbox-GTK-Theme
   git:
     repo: "https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme.git"
-    dest: "/home/eric/temp"
+    dest: "/home/eric/temp/Gruvbox-GTK-Theme"
 - name: Copy theme
   copy:
     src: /home/eric/temp/Gruvbox-GTK-Theme/themes/Gruvbox-Dark-BL
