@@ -18,7 +18,7 @@
     mode: u+rw,g+r,o--          
 - name: Copy gtk4
   copy:
-    src: /home/eric/temp/themes/Gnome42/gtk-Catppuccin-Macchiato-BL.css
+    src: /home/eric/temp/Catppuccin-GTK-Theme/themes/Gnome42/gtk-Catppuccin-Macchiato-BL.css
     dest: /home/eric/.config/gtk-4.0/gtk.css
     owner: "eric"
     group: "eric"
