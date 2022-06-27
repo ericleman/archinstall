@@ -33,22 +33,20 @@
 
 - name: Wallpaper
   block:
-  - name: Copy wallpaper
-    copy:
-      src: /home/eric/temp/Nordic/extras/wallpapers/nordic-wall.jpg
-      dest: /usr/share/backgrounds/nordic-wall.jpg
-      owner: "eric"
-      group: "eric"
-      mode: u+rw,g+r,o--          
+  - name: download wallpaper
+    ansible.builtin.get_url:
+      url: https://vsthemes.org/uploads/posts/2020-04/1586853771_daniel-leone-v7datklzzaw-unsplash-modded.jpg
+      dest: /usr/share/backgrounds/1586853771_daniel-leone-v7datklzzaw-unsplash-modded.jpg
+      mode: '0777'
   - name: light wallpaper
     become_user: eric
-    dconf: key="/org/gnome/desktop/background/picture-uri" value="'file:///usr/share/backgrounds/nordic-wall.jpg'"
+    dconf: key="/org/gnome/desktop/background/picture-uri" value="'file:///usr/share/backgrounds/1586853771_daniel-leone-v7datklzzaw-unsplash-modded.jpg'"
   - name: dark wallpaper
     become_user: eric
-    dconf: key="/org/gnome/desktop/background/picture-uri-dark" value="'file:///usr/share/backgrounds/nordic-wall.jpg'"
+    dconf: key="/org/gnome/desktop/background/picture-uri-dark" value="'file:///usr/share/backgrounds/1586853771_daniel-leone-v7datklzzaw-unsplash-modded.jpg'"
   - name: screensaver wallpaper
     become_user: eric
-    dconf: key="/org/gnome/desktop/screensaver/picture-uri" value="'file:///usr/share/backgrounds/nordic-wall.jpg'"
+    dconf: key="/org/gnome/desktop/screensaver/picture-uri" value="'file:///usr/share/backgrounds/1586853771_daniel-leone-v7datklzzaw-unsplash-modded.jpg'"
 
 - name: Gnome terminal palette
   block:
