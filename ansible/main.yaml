@@ -48,9 +48,17 @@
 #  - name: WALLPAPER
 #    include_tasks: wallpaper.yaml
 
-  - name: CATPPUCCIN THEME
-    include_tasks: theme_catppuccin.yaml
-    tags: theme_catppuccin
+#  - name: CATPPUCCIN THEME
+#    include_tasks: theme_catppuccin.yaml
+#    tags: theme_catppuccin
+
+  - name: GRUVBOX THEME
+    include_tasks: theme_gruvbox.yaml
+    tags: theme_gruvbox
+
+#  - name: NORD THEME
+#    include_tasks: theme_nord.yaml
+#    tags: theme_nord
 
   - name: CONKY ALFIRK THEME (adapted from "https://github.com/closebox73/Chepeus")
     include_tasks: conky-alfirk.yaml
