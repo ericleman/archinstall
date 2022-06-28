@@ -52,7 +52,7 @@
 #    owner: "eric"
 #    group: "eric"
 #    state: link
-- name: install adw-gtk3
+- name: install adw-gtk-theme
   aur:
     use: yay
     name:
