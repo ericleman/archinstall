@@ -14,7 +14,23 @@
     group: "eric"
     mode: u+rw,g+r,o--   
 
-- name: install Nordic theme
+- name: create gtk3 folder
+  file:
+    path: /home/eric/.config/gtk-3.0
+    state: directory
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--   
+
+- name: create gtk4 folder
+  file:
+    path: /home/eric/.config/gtk-4.0
+    state: directory
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--   
+
+- name: install Nordic theme for Shell
   aur:
     use: yay
     name:
@@ -25,18 +41,50 @@
 - name: Tweaks shell theme
   become_user: eric
   dconf: key="/org/gnome/shell/extensions/user-theme/name" value="'Nordic'"
+#- name: Tweaks windows
+#  become_user: eric
+#  dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'Nordic'"
+
+#- name: Symlink for gtk4
+#  file:
+#    src: /usr/share/themes/Nordic/gtk-4.0
+#    dest: /home/eric/.config/gtk-4.0
+#    owner: "eric"
+#    group: "eric"
+#    state: link
+- name: install adw-gtk3
+  aur:
+    use: yay
+    name:
+      - adw-gtk3
+  become: yes
+  become_user: eric
+
 - name: Tweaks windows
   become_user: eric
-  dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'Nordic'"
+  dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'adw-gtk3'"
 
-- name: Symlink for gtk4
-  file:
-    src: /usr/share/themes/Nordic/gtk-4.0
-    dest: /home/eric/.config/gtk-4.0
+- name: Clone adw-colors to get gtk.css for gtk 4 and 3
+  git:
+    repo: "https://github.com/lassekongo83/adw-colors.git"
+    dest: "/home/eric/temp/adw-colors"
+  become_user: eric
+
+- name: Copy gtk4
+  copy:
+    src: /home/eric/temp/adw-colors/themes/nord/gtk.css
+    dest: /home/eric/.config/gtk-4.0/gtk.css
     owner: "eric"
     group: "eric"
-    state: link
+    mode: u+rw,g+r,o--          
 
+- name: Copy gtk3
+  copy:
+    src: /home/eric/temp/adw-colors/themes/nord/gtk.css
+    dest: /home/eric/.config/gtk-3.0/gtk.css
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--          
 
 - name: Clone Nordic GTK theme to get cursors and folders icons
   git:
