@@ -85,22 +85,27 @@
 
 - name: Wallpaper
   block:
-  - name: download wallpaper
-    ansible.builtin.get_url:
-      url: https://vsthemes.org/uploads/posts/2020-04/1586853771_daniel-leone-v7datklzzaw-unsplash-modded.jpg
-      dest: /usr/share/backgrounds/1586853771_daniel-leone-v7datklzzaw-unsplash-modded.jpg
-      mode: '0777'
-      validate_certs: no
-      timeout: 60
+  - name: copy Wallpaper
+    copy:
+      src: personal/pexels-joshua-woroniecki-2570208.jpg
+      dest: /usr/share/backgrounds/pexels-joshua-woroniecki-2570208.jpg
+      mode: '0777'          
+#  - name: download wallpaper
+#    ansible.builtin.get_url:
+#      url: https://vsthemes.org/uploads/posts/2020-04/1586853771_daniel-leone-v7datklzzaw-unsplash-modded.jpg
+#      dest: /usr/share/backgrounds/1586853771_daniel-leone-v7datklzzaw-unsplash-modded.jpg
+#      mode: '0777'
+#      validate_certs: no
+#      timeout: 60
   - name: light wallpaper
     become_user: eric
-    dconf: key="/org/gnome/desktop/background/picture-uri" value="'file:///usr/share/backgrounds/1586853771_daniel-leone-v7datklzzaw-unsplash-modded.jpg'"
+    dconf: key="/org/gnome/desktop/background/picture-uri" value="'file:///usr/share/backgrounds/pexels-joshua-woroniecki-2570208.jpg'"
   - name: dark wallpaper
     become_user: eric
-    dconf: key="/org/gnome/desktop/background/picture-uri-dark" value="'file:///usr/share/backgrounds/1586853771_daniel-leone-v7datklzzaw-unsplash-modded.jpg'"
+    dconf: key="/org/gnome/desktop/background/picture-uri-dark" value="'file:///usr/share/backgrounds/pexels-joshua-woroniecki-2570208.jpg'"
   - name: screensaver wallpaper
     become_user: eric
-    dconf: key="/org/gnome/desktop/screensaver/picture-uri" value="'file:///usr/share/backgrounds/1586853771_daniel-leone-v7datklzzaw-unsplash-modded.jpg'"
+    dconf: key="/org/gnome/desktop/screensaver/picture-uri" value="'file:///usr/share/backgrounds/pexels-joshua-woroniecki-2570208.jpg'"
 
 #- name: Gnome terminal palette
 #  block:
