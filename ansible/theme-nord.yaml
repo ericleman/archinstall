@@ -90,6 +90,8 @@
       url: https://vsthemes.org/uploads/posts/2020-04/1586853771_daniel-leone-v7datklzzaw-unsplash-modded.jpg
       dest: /usr/share/backgrounds/1586853771_daniel-leone-v7datklzzaw-unsplash-modded.jpg
       mode: '0777'
+      validate_certs: no
+      timeout: 60
   - name: light wallpaper
     become_user: eric
     dconf: key="/org/gnome/desktop/background/picture-uri" value="'file:///usr/share/backgrounds/1586853771_daniel-leone-v7datklzzaw-unsplash-modded.jpg'"
