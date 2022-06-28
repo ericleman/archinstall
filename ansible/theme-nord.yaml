@@ -56,7 +56,7 @@
   aur:
     use: yay
     name:
-      - adw-gtk3
+      - adw-gtk-theme
   become: yes
   become_user: eric
 
