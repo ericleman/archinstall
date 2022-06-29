@@ -45,21 +45,19 @@
   become_user: eric
   dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'Nordic'"
 
-- name: Symlink for gtk4 (see https://github.com/odziom91/libadwaita-theme-changer)
-  file:
+- name: Copy files for gtk4 (see https://github.com/odziom91/libadwaita-theme-changer)
+  copy:
     src: /usr/share/themes/Nordic/gtk-4.0
-    dest: /home/eric/.config/gtk-4.0
+    dest: /home/eric/.config/
     owner: "eric"
     group: "eric"
-    state: link
 
-- name: Symlink for assets (see https://github.com/odziom91/libadwaita-theme-changer)
-  file:
+- name: Copy assets for gtk4  (see https://github.com/odziom91/libadwaita-theme-changer)
+  copy:
     src: /usr/share/themes/Nordic/assets
-    dest: /home/eric/.config/assets
+    dest: /home/eric/.config/
     owner: "eric"
     group: "eric"
-    state: link
 
 #- name: install adw-gtk-theme
 #  aur:
