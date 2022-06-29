@@ -45,13 +45,21 @@
   become_user: eric
   dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'Nordic'"
 
-#- name: Symlink for gtk4
-#  file:
-#    src: /usr/share/themes/Nordic/gtk-4.0
-#    dest: /home/eric/.config/gtk-4.0
-#    owner: "eric"
-#    group: "eric"
-#    state: link
+- name: Symlink for gtk4 (see https://github.com/odziom91/libadwaita-theme-changer)
+  file:
+    src: /usr/share/themes/Nordic/gtk-4.0
+    dest: /home/eric/.config/gtk-4.0
+    owner: "eric"
+    group: "eric"
+    state: link
+
+- name: Symlink for assets (see https://github.com/odziom91/libadwaita-theme-changer)
+  file:
+    src: /usr/share/themes/Nordic/assets
+    dest: /home/eric/.config/assets
+    owner: "eric"
+    group: "eric"
+    state: link
 
 #- name: install adw-gtk-theme
 #  aur:
@@ -65,19 +73,19 @@
 #  become_user: eric
 #  dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'adw-gtk3'"
 
-- name: Clone adw-colors to get gtk.css for gtk 4
-  git:
-    repo: "https://github.com/lassekongo83/adw-colors.git"
-    dest: "/home/eric/temp/adw-colors"
-  become_user: eric
+#- name: Clone adw-colors to get gtk.css for gtk 4
+#  git:
+#    repo: "https://github.com/lassekongo83/adw-colors.git"
+#    dest: "/home/eric/temp/adw-colors"
+#  become_user: eric
 
-- name: Copy gtk4
-  copy:
-    src: /home/eric/temp/adw-colors/themes/nord/gtk.css
-    dest: /home/eric/.config/gtk-4.0/gtk.css
-    owner: "eric"
-    group: "eric"
-    mode: u+rw,g+r,o--          
+#- name: Copy gtk4
+#  copy:
+#    src: /home/eric/temp/adw-colors/themes/nord/gtk.css
+#    dest: /home/eric/.config/gtk-4.0/gtk.css
+#    owner: "eric"
+#    group: "eric"
+#    mode: u+rw,g+r,o--          
 
 - name: Clone Nordic GTK theme to get cursors and folders icons
   git:
