@@ -74,7 +74,7 @@
 
 - name: Activate Keyboard shortcuts
   become_user: eric
-  dconf: key="org/gnome/settings-daemon/plugins/media-keys/custom-keybindings" value="['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
+  dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings" value="['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
 
 - name: Keyboard shortcut for Terminal binding
   become_user: eric
