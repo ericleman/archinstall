@@ -88,11 +88,11 @@
 
 - name: Keyboard shortcut for Files binding
   become_user: eric
-  dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding" value="'<Shift><Super>Return'"
+  dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding" value="'<Shift><Super>Return'"
 - name: Keyboard shortcut for Files name
   become_user: eric
-  dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name" value="'Files'"
+  dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name" value="'Files'"
 - name: Keyboard shortcut for Files command
   become_user: eric
-  dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command" value="'nautilus'"
+  dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command" value="'nautilus'"
 
