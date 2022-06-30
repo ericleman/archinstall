@@ -3,13 +3,9 @@
 DE=gnome
 
 pacman -Sy --noconfirm git
-
 git clone https://github.com/ericleman/archinstall.git
-
 cd archinstall
 
-sed -i "s%DUMMYPASSWORD%$1%g" archinstall/creds.json
-
-archinstall --config archinstall/config.json --disk-layout archinstall/layout.json --creds archinstall/creds.json
-#archinstall --script guided --silent --config archinstall/config.json --disk-layout archinstall/layout.json --creds archinstall/creds.json
+sed -i "s%DUMMYPASSWORD%$1%g" $DE/archinstall/creds.json
+archinstall --config $DE/archinstall/config.json --disk-layout $DE/archinstall/layout.json --creds $DE/archinstall/creds.json
 
