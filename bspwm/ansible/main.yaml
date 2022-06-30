@@ -1,0 +1,10 @@
+- hosts: localhost
+  become: true
+
+  tasks:
+  - name: SUDO ERIC (needs to be before YAY installation)
+    include_tasks: 010-no-passwd.yaml
+
+  - name: X Windows Install 
+    include_tasks: 020-xorg.yaml
+
