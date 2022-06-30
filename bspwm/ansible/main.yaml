@@ -8,3 +8,6 @@
   - name: X Windows Install 
     include_tasks: 020-xorg.yaml
 
+  - name: LightDM Install 
+    include_tasks: 030-lightdm.yaml
+
