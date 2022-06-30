@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=conky
-Exec=/home/eric/.config/conky/Alfirk/start.sh
-StartupNotify=false
-Terminal=false

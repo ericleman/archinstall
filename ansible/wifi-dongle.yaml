@@ -1,6 +1,0 @@
-- name: Install wifi dongle driver 
-  aur:
-    use: yay
-    name: rtl88xxau-aircrack-dkms-git
-  become: yes
-  become_user: eric

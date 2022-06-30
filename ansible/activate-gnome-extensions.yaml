@@ -1,3 +1,0 @@
-- name: Gnome Extension (this include Pamac indicator)
-  become_user: eric
-  dconf: key="/org/gnome/shell/enabled-extensions" value="['user-theme@gnome-shell-extensions.gcampax.github.com', 'pamac-updates@manjaro.org', 'arcmenu@arcmenu.com', 'blur-my-shell@aunetx', 'appindicatorsupport@rgcjonas.gmail.com', 'dash-to-panel@jderose9.github.com']"
