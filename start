@@ -1,4 +1,7 @@
 #!/bin/bash
+
+DE=gnome
+
 pacman -Sy --noconfirm git
 
 git clone https://github.com/ericleman/archinstall.git
