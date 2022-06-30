@@ -1,0 +1,158 @@
+- name: create temp folder
+  file:
+    path: /home/eric/temp
+    state: directory
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--   
+- name: Clone Gruvbox-GTK-Theme
+  git:
+    repo: "https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme.git"
+    dest: "/home/eric/temp/Gruvbox-GTK-Theme"
+- name: Copy theme
+  copy:
+    src: /home/eric/temp/Gruvbox-GTK-Theme/themes/Gruvbox-Dark-BL
+    dest: /home/eric/.themes/
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--          
+- name: create gtk4 folder
+  file:
+    path: /home/eric/.config/gtk-4.0
+    state: directory
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--   
+- name: Copy gtk4
+  copy:
+    src: /home/eric/temp/Gruvbox-GTK-Theme/themes/Gnome42/gtk-Gruvbox-Dark-BL.css
+    dest: /home/eric/.config/gtk-4.0/gtk.css
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--          
+- name: Tweaks shell theme
+  become_user: eric
+  dconf: key="/org/gnome/shell/extensions/user-theme/name" value="'Gruvbox-Dark-BL'"
+- name: Tweaks windows
+  become_user: eric
+  dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'Gruvbox-Dark-BL'"
+
+- name: Wallpaper
+  block:
+  - name: download wallpaper
+    ansible.builtin.get_url:
+      url: https://images.pexels.com/photos/3784221/pexels-photo-3784221.jpeg
+      dest: /usr/share/backgrounds/pexels-photo-3784221.jpeg
+      mode: '0777'
+  - name: light wallpaper
+    become_user: eric
+    dconf: key="/org/gnome/desktop/background/picture-uri" value="'file:///usr/share/backgrounds/pexels-photo-3784221.jpeg'"
+  - name: dark wallpaper
+    become_user: eric
+    dconf: key="/org/gnome/desktop/background/picture-uri-dark" value="'file:///usr/share/backgrounds/pexels-photo-3784221.jpeg'"
+  - name: screensaver wallpaper
+    become_user: eric
+    dconf: key="/org/gnome/desktop/screensaver/picture-uri" value="'file:///usr/share/backgrounds/pexels-photo-3784221.jpeg'"
+
+- name: Gnome terminal Gruvbox palette
+  block:
+  - name: background-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color" value="'#282828282828'"
+  - name: bold-color-same-as-fg
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/bold-color-same-as-fg" value="true"
+  - name: cursor-background-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/cursor-background-color" value="'#ebebdbdbb2b2'"
+  - name: cursor-colors-set
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/cursor-colors-set" value="true"
+  - name: cursor-foreground-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/cursor-foreground-color" value="'#282828282828'"
+  - name: foreground-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/foreground-color" value="'#ebebdbdbb2b2'"
+  - name: highlight-colors-set
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/highlight-colors-set" value="true"
+  - name: highlight-background-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/highlight-background-color" value="'rgb(136,192,208)'"
+  - name: highlight-foreground-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/highlight-foreground-color" value="'rgb(46,52,64)'"
+  - name: palette
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/palette" value="['#282828282828', '#cccc24241d1d', '#989897971a1a', '#d7d799992121', '#454585858888', '#b1b162628686', '#68689d9d6a6a', '#a8a899998484', '#929283837474', '#fbfb49493434', '#b8b8bbbb2626', '#fafabdbd2f2f', '#8383a5a59898', '#d3d386869b9b', '#8e8ec0c07c7c', '#ebebdbdbb2b2']"
+  - name: use-theme-colors
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-theme-colors" value="false"
+  - name: bold-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/bold-color" value="'#ebebdbdbb2b2'"
+  - name: allow-bold
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/allow-bold" value="true"
+
+- name: Gedit theme
+  block:
+  - name: create gedit styles folder
+    file:
+      path: /home/eric/.local/share/gedit/styles
+      state: directory
+      owner: "eric"
+      group: "eric"
+      mode: u+rw,g+r,o--   
+  - name: Copy XML
+    copy:
+      src: /home/eric/temp/Gruvbox-GTK-Theme/gedit/gruvbox_mid_dark.xml
+      dest: /home/eric/.local/share/gedit/styles/gruvbox_mid_dark.xml
+      owner: "eric"
+      group: "eric"
+      mode: u+rw,g+r,o--          
+  - name: apply dconf
+    become_user: eric
+    dconf: key="/org/gnome/gedit/preferences/editor/scheme" value="'gruvbox_mid_dark'"
+
+- name: Icon theme
+  block:
+  - name: install papirus-folders
+    aur:
+      use: yay
+      name:
+        - papirus-folders
+    become: yes
+    become_user: eric
+  - name: apply paleorange color to folders
+    ansible.builtin.shell: papirus-folders -C brown -t Papirus
+    become: yes
+    become_user: eric
+
+- name: Cursor theme
+  block:
+  - name: create capitaine-cursor folder
+    file:
+      path: /home/eric/temp/capitaine-cursor
+      state: directory
+      owner: "eric"
+      group: "eric"
+      mode: u+rw,g+r,o--   
+  - name: download theme
+    ansible.builtin.get_url:
+      url: https://github.com/sainnhe/capitaine-cursors/releases/download/r5/Linux.zip
+      dest: /home/eric/temp/Linux.zip
+      mode: '0777'
+  - name: Unarchive file
+    ansible.builtin.unarchive:
+      src: /home/eric/temp/Linux.zip
+      dest: /usr/share/icons
+      remote_src: yes
+      mode: '0777'
+- name: set them as theme
+  become_user: eric
+  dconf: key="/org/gnome/desktop/interface/cursor-theme" value="'Capitaine Cursors (Gruvbox)'"
+
+  
+

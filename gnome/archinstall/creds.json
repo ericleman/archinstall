@@ -1,0 +1,9 @@
+{
+	"!users": [
+		{
+			"username": "eric",
+			"!password": "DUMMYPASSWORD",
+			"sudo": true
+		}
+	]
+}

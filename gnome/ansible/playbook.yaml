@@ -1,0 +1,427 @@
+- hosts: localhost
+  become: true
+
+  tasks:
+  - name: CONFIGURE GDM
+    block:
+#    - name: change Wayland to false
+#      replace:
+#        path: /etc/gdm/custom.conf
+#        regexp: '#WaylandEnable=false'
+#        replace: 'WaylandEnable=false'
+    - name: auto login
+      lineinfile:
+        path: /etc/gdm/custom.conf
+        regexp: '\[daemon\] '
+        insertafter: '\[daemon\]'
+        state: present
+        line: "{{ item }}"
+      with_items:
+      - 'AutomaticLogin=eric'
+      - 'AutomaticLoginEnable=True'
+
+  - name: sudo without password
+    community.general.sudoers:
+      name: no-passwd-eric
+      user: eric
+      commands: ALL
+      nopassword: yes
+
+  - name: YAY
+    block:
+      - name: install GO as it seems to be prerequisite (otherwise crashes)
+        pacman:
+          name: 
+            - go
+          state: present        
+      - name: install yay
+        aur:
+          name: yay
+          use: makepkg
+          state: present 
+        become: yes
+        become_user: eric
+
+  - name: Install Chrome
+    aur:
+      use: yay
+      name: google-chrome
+    become: yes
+    become_user: eric
+
+  - name: Install wifi dongle driver 
+    aur:
+      use: yay
+      name: rtl88xxau-aircrack-dkms-git
+    become: yes
+    become_user: eric
+
+  - name: Install and configure Pamac-aur 
+    block:
+      - name: install pamac
+        aur:
+          use: yay
+          name:
+            - pamac-aur
+        become: yes
+        become_user: eric
+      - name: enable AUR
+        replace:
+          path: /etc/pamac.conf
+          regexp: '#EnableAUR'
+          replace: 'EnableAUR'
+      - name: Check AUR Updates
+        replace:
+          path: /etc/pamac.conf
+          regexp: '#CheckAURUpdates'
+          replace: 'CheckAURUpdates'
+
+  - name: Enable pacman colorised output and verbose package lists 
+    replace:
+      path: /etc/pacman.conf
+      regexp: '{{ item.regexp }}'
+      replace: '{{ item.replace }}'
+    with_items:
+      - { regexp: '^#Color$', replace: 'Color' }
+      - { regexp: '^#VerbosePkgLists$', replace: 'VerbosePkgLists' }
+
+  - name: install Neofetch 
+    block:
+      - name: install
+        pacman:
+          name: neofetch
+          state: present
+      - name: configure
+        ansible.builtin.lineinfile:
+          path: /etc/bash.bashrc
+          line: neofetch
+          create: yes
+
+  - name: install some useful software (python-psutil)
+    pacman:
+      name:
+        - meld
+        - python-psutil
+        - noto-fonts
+      state: present
+
+  - name: install HP Printer [USER STILL HAS TO FIND PRINTER ONCE CONNECTED ON THE DESKTOP) 
+    block:
+      - name: install printer packages (drivers, python-qt5 for GUI...)
+        pacman:
+          name: 
+            - hplip
+            - cups
+            - python-reportlab
+            - rpcbind
+            - python-pyqt5
+            - wget
+          state: present
+      - name: enable cups service
+        ansible.builtin.systemd:
+          name: cups
+          enabled: yes
+          
+  - name: INSTALL AND CONFIGURE ZSH
+    block:
+      - name: install packages
+        pacman:
+          name:
+            - zsh
+            - zsh-autosuggestions
+            - zsh-completions
+            - zsh-syntax-highlighting
+            - zsh-theme-powerlevel10k
+          state: present
+      - name: set zsh as eric shell
+        ansible.builtin.user:
+          name: eric
+          shell: /usr/bin/zsh
+      - name: set zsh as root shell
+        ansible.builtin.user:
+          name: root
+          shell: /bin/zsh
+      - name: copy zsh dotfile
+        copy:
+          src: personal/.zshrc
+          dest: /home/eric/.zshrc
+          owner: "eric"
+          group: "eric"
+          mode: u+rw,g+r,o--          
+      - name: copy p10k dotfile
+        copy:
+          src: personal/.p10k.zsh
+          dest: /home/eric/.p10k.zsh
+          owner: "eric"
+          group: "eric"
+          mode: u+rw,g+r,o--          
+      - name: copy zsh dotfile for root
+        copy:
+          src: personal/.zshrc
+          dest: /root/.zshrc
+      - name: copy p10k dotfile for root
+        copy:
+          src: personal/.p10k.zsh
+          dest: /root/.p10k.zsh
+      - name: remove neofetch for root
+        replace:
+          path: /root/.zshrc
+          regexp: 'neofetch'
+          replace: '#neofetch'
+
+  - name: GNOME CONFIGURATION
+    block:
+      - name: psutils is required for dconf
+        pacman:
+          name: python-psutil
+          state: present
+      - name: Cursor Themes
+        block:
+          - name: install cursor
+            aur:
+              use: yay
+              name: bibata-cursor-theme
+            become: yes
+            become_user: eric
+          - name: set them as theme
+            become_user: eric
+            dconf: key="/org/gnome/desktop/interface/cursor-theme" value="'Bibata-Modern-Amber'"
+      - name: Icons Themes
+        block:
+          - name: install papirus
+            pacman:
+              name: papirus-icon-theme
+              state: present
+          - name: set them as theme
+            become_user: eric
+            dconf: key="/org/gnome/desktop/interface/icon-theme" value="'Papirus'"
+      - name: Gnome Themes
+        block:
+          - name: Clone Catppuccin-GTK-Theme
+            git:
+              repo: "https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme.git"
+              dest: "/home/eric/temp"
+          - name: Copy theme
+            copy:
+              src: /home/eric/temp/themes/Catppuccin-Macchiato-Dark-BL
+              dest: /home/eric/.themes/
+              owner: "eric"
+              group: "eric"
+              mode: u+rw,g+r,o--          
+          - name: create gtk4 folder
+            file:
+              path: /home/eric/.config/gtk-4.0
+              state: directory
+              owner: "eric"
+              group: "eric"
+              mode: u+rw,g+r,o--          
+          - name: Copy gtk4
+            copy:
+              src: /home/eric/temp/themes/Gnome42/gtk-Catppuccin-Macchiato-BL.css
+              dest: /home/eric/.config/gtk-4.0/gtk.css
+              owner: "eric"
+              group: "eric"
+              mode: u+rw,g+r,o--          
+          - name: Tweaks shell theme
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/user-theme/name" value="'Catppuccin-Macchiato-Dark-BL'"
+          - name: Tweaks windows
+            become_user: eric
+            dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'Catppuccin-Macchiato-Dark-BL'"
+#          - name: install Arc
+#            pacman:
+#              name: arc-gtk-theme
+#              state: present
+#          - name: set them as GTK theme
+#            become_user: eric
+#            dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'Arc-Dark'"
+#          - name: set them as Shell theme
+#            become_user: eric
+#            dconf: key="/org/gnome/shell/extensions/user-theme/name" value="'Arc-Dark'"
+      - name: Wallpaper
+        block:
+          - name: light wallpaper
+            become_user: eric
+            dconf: key="/org/gnome/desktop/background/picture-uri" value="'file:///usr/share/backgrounds/gnome/libadwaita-l.jpg'"
+          - name: dark wallpaper
+            become_user: eric
+            dconf: key="/org/gnome/desktop/background/picture-uri-dark" value="'file:///usr/share/backgrounds/gnome/libadwaita-d.jpg'"
+          - name: screensaver wallpaper
+            become_user: eric
+            dconf: key="/org/gnome/desktop/screensaver/picture-uri" value="'file:///usr/share/backgrounds/gnome/libadwaita-l.jpg'"
+#      - name: Dash to Dock
+#        block:
+#          - name: install extension
+#            aur:
+#              use: yay
+#              name: gnome-shell-extension-dash-to-dock
+#            become: yes
+#            become_user: eric
+#          - name: configure trash
+#            become_user: eric
+#            dconf: key="/org/gnome/shell/extensions/dash-to-dock/show-trash" value="false"
+#          - name: use fixed opacity
+#            become_user: eric
+#            dconf: key="/org/gnome/shell/extensions/dash-to-dock/transparency-mode" value="'FIXED'"
+#          - name: configure opacity value
+#            become_user: eric
+#            dconf: key="/org/gnome/shell/extensions/dash-to-dock/background-opacity" value="0.6"
+#          - name: configure theme
+#            become_user: eric
+#            dconf: key="/org/gnome/shell/extensions/dash-to-dock/apply-custom-theme" value="false"
+      - name: Dash to Panel
+        block:
+          - name: install extension
+            aur:
+              use: yay
+              name: gnome-shell-extension-dash-to-panel
+            become: yes
+            become_user: eric
+          - name: animate-appicon-hover-animation-extent
+            become_user: eric
+            dconf: 
+              key: "/org/gnome/shell/extensions/dash-to-panel/animate-appicon-hover-animation-extent" 
+              value: "{'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}"
+          - name: appicon-margin
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/appicon-margin" value="8"
+          - name: appicon-padding
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/appicon-padding" value="4"
+          - name: hotkeys-overlay-combo
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/hotkeys-overlay-combo" value="'TEMPORARILY'"
+          - name: leftbox-padding
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/leftbox-padding" value="-1"
+          - name: panel-anchors
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/panel-anchors" value="'{"0":"MIDDLE"}'"
+          - name: panel-element-positions
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/panel-element-positions" value="'{"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"centerMonitor"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'"
+          - name: panel-lengths
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/panel-lengths" value="'{"0":100}'"
+          - name: panel-positions
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/panel-positions" value="'{"0":"TOP"}'"
+          - name: panel-sizes
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/panel-sizes" value="'{"0":48}'"
+          - name: status-icon-padding
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/status-icon-padding" value="-1"
+          - name: trans-panel-opacity
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/trans-panel-opacity" value="0.0"
+          - name: trans-use-custom-opacity
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/trans-use-custom-opacity" value="true"
+          - name: tray-padding
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/tray-padding" value="-1"
+          - name: window-preview-title-position
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/dash-to-panel/window-preview-title-position" value="'TOP'"
+      - name: Blur my Shell
+        block:
+          - name: install extension
+            aur:
+              use: yay
+              name: gnome-shell-extension-blur-my-shell
+            become: yes
+            become_user: eric
+          - name: blur except dash
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/blur-my-shell/dash-to-dock/blur" value="false"
+      - name: APP INDICATOR
+        block:
+          - name: install extension
+            aur:
+              use: yay
+              name: gnome-shell-extension-appindicator
+            become: yes
+            become_user: eric
+      - name: Arc Menu I sue it only to get Arch icon in Activities top left button
+        block:
+          - name: install extension
+            aur:
+              use: yay
+              name: gnome-shell-extension-arc-menu
+            become: yes
+            become_user: eric
+          - name: configure overview
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/arcmenu/menu-layout" value="'GnomeOverview'"
+          - name: configure distro icon
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/arcmenu/menu-button-icon" value="'Distro_Icon'"
+          - name: put arch icon
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/arcmenu/distro-icon" value="6"
+          - name: icon size
+            become_user: eric
+            dconf: key="/org/gnome/shell/extensions/arcmenu/custom-menu-button-icon-size" value="32.0"
+#      - name: Just Perfection (I do not use it for now)
+#        block:
+#          - name: install extension
+#            aur:
+#              use: yay
+#              name: gnome-shell-extension-just-perfection-desktop
+#            become: yes
+#            become_user: eric
+#          - name: configure
+#            become_user: eric
+#            dconf: key="" value=""
+      - name: Gnome Extension (this include Pamac indicator)
+        become_user: eric
+        dconf: key="/org/gnome/shell/enabled-extensions" value="['user-theme@gnome-shell-extensions.gcampax.github.com', 'pamac-updates@manjaro.org', 'arcmenu@arcmenu.com', 'blur-my-shell@aunetx', 'appindicatorsupport@rgcjonas.gmail.com', 'dash-to-panel@jderose9.github.com']"
+      - name: Show Hidden files
+        become_user: eric
+        dconf: key="/org/gtk/settings/file-chooser/show-hidden" value="true"
+      - name: Delay laptop going to sleep
+        become_user: eric
+        dconf: key="/org/gnome/desktop/session/idle-delay" value="uint32 0"
+      - name: Delay laptop going to suspend on AC
+        become_user: eric
+        dconf: key="/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-timeout" value="7200"
+      - name: Delay laptop going to suspend on Battery
+        become_user: eric
+        dconf: key="/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-timeout" value="1800"
+      - name: font size
+        become_user: eric
+        dconf: key="/org/gnome/desktop/interface/text-scaling-factor" value="1.5"
+      - name: maximize and minimize buttons
+        become_user: eric
+        dconf: key="/org/gnome/desktop/wm/preferences/button-layout" value="'appmenu:minimize,maximize,close'"
+      - name: Show seconds on clock
+        become_user: eric
+        dconf: key="/org/gnome/desktop/interface/clock-show-seconds" value="true"
+      - name: Weather location
+        become_user: eric
+        dconf: key="/org/gnome/Weather/locations" value="[<(uint32 2, <('Paris', 'LFPB', true, [(0.85462956287765413, 0.042760566673861078)], [(0.8528842336256599, 0.040724343395436846)])>)>]"
+      - name: Worldclock
+        become_user: eric
+        dconf: 
+          key: "/org/gnome/clocks/world-clocks" 
+          value: "[{'location': <(uint32 2, <('New York', 'KNYC', true, [(0.71180344078725644, -1.2909618758762367)], [(0.71059804659265924, -1.2916478949920254)])>)>}]"
+      - name: DEACTIVATE GNOME SOFTWARE UPDATES
+        become_user: eric
+        dconf: key="/org/gnome/software/download-updates" value="false"
+      - name: DEACTIVATE TERMINAL ASKING TO CONFIRM TO CLOSE
+        become_user: eric
+        dconf: key="/org/gnome/terminal/legacy/confirm-close" value="false"
+      - name: DEACTIVATE GNOME SOFTWARE NOTIFICATIONS
+        become_user: eric
+        dconf: key="/org/gnome/software/download-updates-notify" value="false"
+      - name: Gnome terminal default column size
+        become_user: eric
+        dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-columns" value="120"
+      - name: Gnome terminal default line size
+        become_user: eric
+        dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-rows" value="40"
+      - name: Favorite on Dock
+        become_user: eric
+        dconf: key="/org/gnome/shell/favorite-apps" value="['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.manjaro.pamac.manager.desktop', 'gnome-system-monitor.desktop']"
+
