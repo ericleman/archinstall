@@ -2,6 +2,7 @@
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 VBoxClient-all &
+picom --config $HOME/.config/picom/picom.conf &
 feh --bg-fill /usr/share/backgrounds/pexels-joshua-woroniecki-2570208.jpg &
 
 #BSPWM configuration
