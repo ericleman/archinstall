@@ -1,5 +1,8 @@
 #!/bin/sh
 
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+
 #BSPWM configuration
 #bspc config border_radius       8
 bspc config border_width         2
