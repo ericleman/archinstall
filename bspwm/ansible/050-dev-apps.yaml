@@ -1,8 +1,7 @@
 - name: install core applications packages
   pacman:
     name:
-      - thunar 
-      - kitty
+      - neofetch
       - meld
       - vim
       - nano

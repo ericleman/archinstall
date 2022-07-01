@@ -10,3 +10,17 @@ super + shift + Return
 super + Return
 	kitty
 
+
+#Reload bspwm
+super + shift + r
+	~/.config/bspwm/bspwmrc
+
+#kill
+super + shift + q
+	bspc node -c
+
+
+## super & mouse scroll
+# Focused desktop window gap
+super + button{4,5}
+  bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 2 ))

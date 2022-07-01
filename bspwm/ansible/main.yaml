@@ -14,6 +14,29 @@
   - name: BSPWM Install 
     include_tasks: 040-bspwm.yaml
 
-  - name: Core Apps Install 
-    include_tasks: 040-applications.yaml
+  - name: Developper Apps Install 
+    include_tasks: 050-dev-apps.yaml
 
+  - name: Rofi Install ## TO DO
+    include_tasks: 060-rofi.yaml
+
+  - name: Conky Apps Install ## TO DO
+    include_tasks: 070-conky.yaml
+
+  - name: Picom Install ## TO DO
+    include_tasks: 080-picom.yaml
+
+  - name: Kitty Apps Install 
+    include_tasks: 090-kitty.yaml
+
+  - name: Thunar Apps Install 
+    include_tasks: 100-thunar.yaml
+
+  - name: Polybar Apps Install ## TO DO
+    include_tasks: 110-polybar.yaml
+
+  - name: Zsh Apps Install ## DONE
+    include_tasks: 120-zsh.yaml
+
+  - name: Feh Install ## DONE
+    include_tasks: 130-feh.yaml

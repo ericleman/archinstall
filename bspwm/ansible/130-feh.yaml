@@ -1,0 +1,12 @@
+- name: install packages
+  pacman:
+    name:
+      - feh
+    state: present
+
+- name: copy Wallpaper
+  copy:
+    src: personal/pexels-joshua-woroniecki-2570208.jpg
+    dest: /usr/share/backgrounds/pexels-joshua-woroniecki-2570208.jpg
+    mode: '0777'          
+
