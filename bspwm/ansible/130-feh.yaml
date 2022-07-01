@@ -4,6 +4,12 @@
       - feh
     state: present
 
+- name: create backgrounds folder
+  file:
+    path: /usr/share/backgrounds
+    state: directory
+    mode: u+rwx,g+rx,o+rx   
+
 - name: copy Wallpaper
   copy:
     src: personal/pexels-joshua-woroniecki-2570208.jpg
