@@ -1,3 +1,5 @@
-- name: dummy
-  ansible.builtin.pause:
-    seconds: 1
+- name: install rofi applications packages
+  pacman:
+    name:
+      - rofi
+    state: present

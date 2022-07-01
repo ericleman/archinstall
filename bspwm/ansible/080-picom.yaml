@@ -7,7 +7,7 @@
 
 - name: copy picom dotfile
   copy:
-    src: personal/.config/bspwm
+    src: personal/.config/picom
     dest: /home/eric/.config/
     owner: "eric"
     group: "eric"

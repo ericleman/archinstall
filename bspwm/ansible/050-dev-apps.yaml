@@ -6,6 +6,7 @@
       - vim
       - nano
       - gedit
+      - htop
     state: present
 
 - name: install GO as it seems to be prerequisite (otherwise crashes)
