@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DE=gnome
+DE=bspwm
 
 pacman -Sy --noconfirm git
 git clone https://github.com/ericleman/archinstall.git
