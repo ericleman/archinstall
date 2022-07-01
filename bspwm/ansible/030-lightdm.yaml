@@ -1,0 +1,12 @@
+- name: install lightDM related packages
+  pacman:
+    name:
+      - lightdm 
+      - lightdm-gtk-greeter
+    state: present
+
+- name: enable LightDM service
+  ansible.builtin.systemd:
+    name: lightdm
+    enabled: yes
+    

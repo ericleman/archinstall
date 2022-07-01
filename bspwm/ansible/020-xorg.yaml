@@ -5,5 +5,4 @@
       - xorg-xinit
       - xterm
       - xf86-video-vmware #should be installed already by virtualbox-guest-utils
-      - zsh-theme-powerlevel10k
     state: present

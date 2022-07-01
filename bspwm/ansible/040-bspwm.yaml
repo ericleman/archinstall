@@ -1,0 +1,7 @@
+- name: install BSPWM related packages
+  pacman:
+    name:
+      - bspwm 
+      - sxhkd
+    state: present
+
