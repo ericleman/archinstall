@@ -1,0 +1,10 @@
+- name: install core applications packages
+  pacman:
+    name:
+      - thunar 
+      - kitty
+      - meld
+      - vim
+      - nano
+      - gedit
+    state: present

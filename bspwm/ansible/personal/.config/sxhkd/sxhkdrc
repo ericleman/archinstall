@@ -1,0 +1,12 @@
+#################################################################
+# KEYBOARD BINDINGS FOR ANY TWM
+#################################################################
+
+#File-Manager
+super + shift + Return
+	thunar
+
+#Terminal
+super + Return
+	kitty
+

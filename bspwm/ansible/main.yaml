@@ -14,3 +14,6 @@
   - name: BSPWM Install 
     include_tasks: 040-bspwm.yaml
 
+  - name: Core Apps Install 
+    include_tasks: 040-applications.yaml
+
