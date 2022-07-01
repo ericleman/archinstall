@@ -5,3 +5,19 @@
       - sxhkd
     state: present
 
+- name: copy bspwm dotfile
+  copy:
+    src: personal/.config/bspwm
+    dest: /home/eric/.config/
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--          
+
+- name: copy sxhkd dotfile
+  copy:
+    src: personal/.config/sxhkd
+    dest: /home/eric/.config/
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--          
+
