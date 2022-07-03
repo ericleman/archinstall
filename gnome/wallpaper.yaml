@@ -1,0 +1,10 @@
+- name: light wallpaper
+  become_user: eric
+  dconf: key="/org/gnome/desktop/background/picture-uri" value="'file:///usr/share/backgrounds/gnome/libadwaita-l.jpg'"
+- name: dark wallpaper
+  become_user: eric
+  dconf: key="/org/gnome/desktop/background/picture-uri-dark" value="'file:///usr/share/backgrounds/gnome/libadwaita-d.jpg'"
+- name: screensaver wallpaper
+  become_user: eric
+  dconf: key="/org/gnome/desktop/screensaver/picture-uri" value="'file:///usr/share/backgrounds/gnome/libadwaita-l.jpg'"
+

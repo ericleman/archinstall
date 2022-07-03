@@ -1,11 +1,30 @@
 #!/bin/bash
 
-DE=bspwm
+PASSWD=$1
+DE=$2
+
+if [ -z "$1" ]
+  then
+    echo "Please provide password"
+    read PASSWD
+fi
+
+if [ -z "$2" ]
+  then
+    echo "Default DE = gnome"
+    DE=gnome
+fi
+
+
+
 
 pacman -Sy --noconfirm git
 git clone https://github.com/ericleman/archinstall.git
 cd archinstall
 
-sed -i "s%DUMMYPASSWORD%$1%g" $DE/archinstall/creds.json
-archinstall --config $DE/archinstall/config.json --disk-layout $DE/archinstall/layout.json --creds $DE/archinstall/creds.json
+sed -i "s%DUMMYPASSWORD%$PASSWD%g" archinstall/creds.json
+sed -i "s%DUMMY_DESKTOP%$DE%g" archinstall/config.json
+
+
+archinstall --config archinstall/config.json --disk-layout archinstall/layout.json --creds archinstall/creds.json
 

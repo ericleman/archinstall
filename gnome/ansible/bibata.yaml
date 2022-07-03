@@ -1,9 +1,0 @@
-- name: install cursor theme
-  aur:
-    use: yay
-    name: bibata-cursor-theme
-  become: yes
-  become_user: eric
-- name: set them as theme
-  become_user: eric
-  dconf: key="/org/gnome/desktop/interface/cursor-theme" value="'Bibata-Modern-Amber'"

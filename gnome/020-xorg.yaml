@@ -1,0 +1,8 @@
+- name: install xorg related packages
+  pacman:
+    name:
+      - xorg 
+      - xorg-xinit
+      - xterm
+      - xf86-video-vmware #should be installed already by virtualbox-guest-utils
+    state: present

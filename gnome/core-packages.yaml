@@ -1,0 +1,9 @@
+- name: install some useful software (python-psutil)
+  pacman:
+    name:
+      - meld
+      - python-psutil
+      - noto-fonts
+      - neofetch
+    state: present
+
