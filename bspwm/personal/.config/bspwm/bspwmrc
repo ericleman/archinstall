@@ -3,7 +3,7 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 #VBoxClient-all &
 vmware-user & #required to enable copy paste on VMWare
-picom --config $HOME/.config/picom/picom.conf &
+picom --config $HOME/.config/picom/picom.conf --experimental-backends &
 feh --bg-fill /usr/share/backgrounds/pexels-joshua-woroniecki-2570208.jpg &
 
 #BSPWM configuration
