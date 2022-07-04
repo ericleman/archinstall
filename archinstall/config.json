@@ -6,6 +6,7 @@
         "mkdir -p /root/.ansible/plugins/modules",
         "curl -o /root/.ansible/plugins/modules/aur.py https://raw.githubusercontent.com/kewlfft/ansible-aur/master/plugins/modules/aur.py",
         "git clone https://github.com/ericleman/archinstall.git",
+        "cp -a /archinstall/DUMMY_VIRTUAL_MACHINE/. /archinstall/DUMMY_DESKTOP/",
         "cd /archinstall/DUMMY_DESKTOP; ansible-playbook -vvv main.yaml"
     ],    
     "gfx_driver": "All open-source (default)",
