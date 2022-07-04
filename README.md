@@ -20,12 +20,12 @@ This install my Arch config in two part:
 2. Ansible install the desktop environment and packages I want to use, my config (dotfile) and some system config as well.
 
 # Explanation
-the script `start` will takes 3 parameters: the password for the user, the desktop/wm to install (gnome, bspwm) and the hardware (vbox, vmware)
-it downloads the repository (git clone) on the live Arch to get the archinstall json configs.
-it updates creds.json with the user password 
-it updates config.json to start ansible playbook for the chosen desktop environment
-it updates config.json to start get ansible files for the chosen virtual hardware
-then it starts archinstall with the chosen configuration. This one installs a minimal arch, installs ansible (with aur helper), clones the repository on new system and as a last command starts the ansible playbook.
+The script `start` will takes 3 parameters: the password for the user, the desktop/wm to install (gnome, bspwm) and the hardware (vbox, vmware)
+- it downloads the repository (git clone) on the live Arch to get the archinstall json configs.
+- it updates creds.json with the user password 
+- it updates config.json to start ansible playbook for the chosen desktop environment
+- it updates config.json to start get ansible files for the chosen virtual hardware
+- then it starts archinstall with the chosen configuration. This one installs a minimal arch, installs ansible (with aur helper), clones the repository on new system and as a last command starts the ansible playbook.
 
 
 # Why
