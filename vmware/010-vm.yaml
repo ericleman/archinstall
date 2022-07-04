@@ -1,0 +1,36 @@
+- name: install vmware related packages
+  pacman:
+    name:
+      - open-vm-tools
+    state: present
+
+- name: create Laptop folder
+  file:
+    path: /home/eric/Laptop
+    state: directory
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--   
+
+- name: Copy share-vmware-folder.service file
+  copy:
+    src: share-vmware-folder.service
+    dest: /etc/systemd/system/share-vmware-folder.service
+
+- name: enable vmtoolsd.service service
+  ansible.builtin.systemd:
+    name: vmtoolsd.service
+    enabled: yes
+
+- name: enable vmware-vmblock-fuse.service service
+  ansible.builtin.systemd:
+    name: vmware-vmblock-fuse.service
+    enabled: yes
+
+- name: enable share-vmware-folder.service service
+  ansible.builtin.systemd:
+    name: share-vmware-folder.service
+    enabled: yes
+
+
+

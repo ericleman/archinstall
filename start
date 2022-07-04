@@ -2,6 +2,7 @@
 
 PASSWD=$1
 DE=$2
+VM=$3
 
 if [ -z "$1" ]
   then
@@ -15,7 +16,11 @@ if [ -z "$2" ]
     DE=gnome
 fi
 
-
+if [ -z "$3" ]
+  then
+    echo "Default VM = vbox"
+    VM=vbox
+fi
 
 
 pacman -Sy --noconfirm git
@@ -24,7 +29,7 @@ cd archinstall
 
 sed -i "s%DUMMYPASSWORD%$PASSWD%g" archinstall/creds.json
 sed -i "s%DUMMY_DESKTOP%$DE%g" archinstall/config.json
-
+cp -a $DE/. $VM/
 
 archinstall --config archinstall/config.json --disk-layout archinstall/layout.json --creds archinstall/creds.json
 

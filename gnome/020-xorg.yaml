@@ -4,5 +4,5 @@
       - xorg 
       - xorg-xinit
       - xterm
-      - xf86-video-vmware #should be installed already by virtualbox-guest-utils
+      - xf86-video-vmware #should be installed already by virtualbox-guest-utils if we use virtualbox
     state: present
