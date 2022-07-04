@@ -2,6 +2,7 @@
   pacman:
     name:
       - open-vm-tools
+      - gtkmm3 #required to copy paste
     state: present
 
 - name: create Laptop folder
