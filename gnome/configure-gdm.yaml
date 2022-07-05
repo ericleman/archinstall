@@ -1,8 +1,10 @@
-- name: change Wayland to false
+- name: change Wayland to false if on virtualbox
   replace:
     path: /etc/gdm/custom.conf
     regexp: '#WaylandEnable=false'
     replace: 'WaylandEnable=false'
+  when: vm == "vbox"
+
 - name: auto login
   lineinfile:
     path: /etc/gdm/custom.conf
