@@ -32,3 +32,7 @@ The script `start` will takes 3 parameters: the password for the user, the deskt
 I use those two parts as Archinstall and Ansible are both standard and maintained packages delivered by Arch linux. So if tomorrow Archway changes (new way to partition disk, new way to install packages, etc.), then Archlinux and Ansible should be adapted. I just have to put my config in json files (for Archintall) and yaml files (for Ansible).
 Everything could be done in SH scripts, but it would require more maintenance anytime something change with Arch.
 
+
+# Some Notes
+When 3D acceleration is activated on VMWare, then deactivate it on Google Chrome (or it does not work: https://communities.vmware.com/t5/VMware-Workstation-Pro/Guest-Display-Broken-With-Accelerate-3D-Graphics-Enabled/td-p/2898816)
+![image](https://user-images.githubusercontent.com/26767717/177496730-38f3be75-ae3c-4329-a49e-0002abfc595a.png)
