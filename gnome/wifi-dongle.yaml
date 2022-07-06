@@ -1,3 +1,9 @@
+- name: install linux-headers to compile the dongle driver
+  pacman:
+    name:
+      - linux-headers
+    state: present
+
 - name: Install wifi dongle driver 
   aur:
     use: yay

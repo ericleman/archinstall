@@ -7,14 +7,17 @@
       - zsh-syntax-highlighting
       - zsh-theme-powerlevel10k
     state: present
+
 - name: set zsh as eric shell
   ansible.builtin.user:
     name: eric
     shell: /usr/bin/zsh
+
 - name: set zsh as root shell
   ansible.builtin.user:
     name: root
     shell: /bin/zsh
+
 - name: copy zsh dotfile
   copy:
     src: personal/zsh/.zshrc
@@ -22,6 +25,7 @@
     owner: "eric"
     group: "eric"
     mode: u+rw,g+r,o--          
+
 - name: copy p10k dotfile
   copy:
     src: personal/zsh/.p10k.zsh
@@ -29,14 +33,17 @@
     owner: "eric"
     group: "eric"
     mode: u+rw,g+r,o--          
+
 - name: copy zsh dotfile for root
   copy:
     src: personal/zsh/.zshrc
     dest: /root/.zshrc
+
 - name: copy p10k dotfile for root
   copy:
     src: personal/zsh/.p10k.zsh
     dest: /root/.p10k.zsh
+
 - name: remove neofetch for root
   replace:
     path: /root/.zshrc
