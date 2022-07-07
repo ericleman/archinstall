@@ -21,3 +21,10 @@
     state: present 
   become: yes
   become_user: eric
+
+- name: Install ksuperkey 
+  aur:
+    use: yay
+    name: ksuperkey
+  become: yes
+  become_user: eric
