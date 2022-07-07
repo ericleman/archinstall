@@ -134,8 +134,8 @@
   block:
   - name: copy Wallpaper
     copy:
-      src: personal/pexels-joshua-woroniecki-2570208.jpg
-      dest: /usr/share/backgrounds/pexels-joshua-woroniecki-2570208.jpg
+      src: personal/nord.jpg
+      dest: /usr/share/backgrounds/nord.jpg
       mode: '0777'          
 #  - name: download wallpaper
 #    ansible.builtin.get_url:
@@ -146,13 +146,13 @@
 #      timeout: 60
   - name: light wallpaper
     become_user: eric
-    dconf: key="/org/gnome/desktop/background/picture-uri" value="'file:///usr/share/backgrounds/pexels-joshua-woroniecki-2570208.jpg'"
+    dconf: key="/org/gnome/desktop/background/picture-uri" value="'file:///usr/share/backgrounds/nord.jpg'"
   - name: dark wallpaper
     become_user: eric
-    dconf: key="/org/gnome/desktop/background/picture-uri-dark" value="'file:///usr/share/backgrounds/pexels-joshua-woroniecki-2570208.jpg'"
+    dconf: key="/org/gnome/desktop/background/picture-uri-dark" value="'file:///usr/share/backgrounds/nord.jpg'"
   - name: screensaver wallpaper
     become_user: eric
-    dconf: key="/org/gnome/desktop/screensaver/picture-uri" value="'file:///usr/share/backgrounds/pexels-joshua-woroniecki-2570208.jpg'"
+    dconf: key="/org/gnome/desktop/screensaver/picture-uri" value="'file:///usr/share/backgrounds/nord.jpg'"
 
 #- name: Gnome terminal palette
 #  block:
