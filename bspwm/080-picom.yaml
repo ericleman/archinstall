@@ -7,7 +7,7 @@
 
 - name: copy picom dotfile
   copy:
-    src: personal/.config/picom
+    src: personal/home/.config/picom
     dest: /home/eric/.config/
     owner: "eric"
     group: "eric"

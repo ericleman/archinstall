@@ -12,7 +12,7 @@
 
 - name: copy Wallpaper
   copy:
-    src: personal/pexels-joshua-woroniecki-2570208.jpg
+    src: personal/usr/share/backgrounds/pexels-joshua-woroniecki-2570208.jpg
     dest: /usr/share/backgrounds/pexels-joshua-woroniecki-2570208.jpg
     mode: '0777'          
 

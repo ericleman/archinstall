@@ -7,3 +7,12 @@
       - xf86-input-vmmouse
       - xf86-video-vmware #should be installed already by virtualbox-guest-utils
     state: present
+
+- name: copy .Xresources dotfile
+  copy:
+    src: personal/home/.Xresources
+    dest: /home/eric/.Xresources
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--          
+

@@ -7,7 +7,7 @@
 
 - name: copy bspwm dotfile
   copy:
-    src: personal/.config/bspwm
+    src: personal/home/.config/bspwm
     dest: /home/eric/.config/
     owner: "eric"
     group: "eric"
@@ -15,7 +15,7 @@
 
 - name: copy sxhkd dotfile
   copy:
-    src: personal/.config/sxhkd
+    src: personal/home/.config/sxhkd
     dest: /home/eric/.config/
     owner: "eric"
     group: "eric"

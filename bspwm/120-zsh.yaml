@@ -20,7 +20,7 @@
 
 - name: copy zsh dotfile
   copy:
-    src: personal/.zshrc
+    src: personal/home/.zshrc
     dest: /home/eric/.zshrc
     owner: "eric"
     group: "eric"
@@ -28,7 +28,7 @@
 
 - name: copy p10k dotfile
   copy:
-    src: personal/.p10k.zsh
+    src: personal/home/.p10k.zsh
     dest: /home/eric/.p10k.zsh
     owner: "eric"
     group: "eric"
@@ -36,12 +36,12 @@
 
 - name: copy zsh dotfile for root
   copy:
-    src: personal/.zshrc
+    src: personal/home/.zshrc
     dest: /root/.zshrc
 
 - name: copy p10k dotfile for root
   copy:
-    src: personal/.p10k.zsh
+    src: personal/home/.p10k.zsh
     dest: /root/.p10k.zsh
 
 - name: remove neofetch for root
