@@ -4,5 +4,6 @@
       - xorg 
       - xorg-xinit
       - xterm
+      - xf86-input-vmmouse
       - xf86-video-vmware #should be installed already by virtualbox-guest-utils
     state: present
