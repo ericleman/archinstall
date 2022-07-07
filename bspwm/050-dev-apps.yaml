@@ -7,6 +7,7 @@
       - nano
       - gedit
       - htop
+      - noto-fonts
     state: present
 
 - name: install GO as it seems to be prerequisite (otherwise crashes)

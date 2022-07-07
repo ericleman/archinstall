@@ -1,10 +1,14 @@
 #!/bin/sh
 
 killall sxhkd; sxhkd &
+#killall VBoxClient-all
 #VBoxClient-all & #required to enable copy paste on Virtualbox
+killall vmware-user
 vmware-user & #required to enable copy paste on VMWare
+killall picom
 picom --config $HOME/.config/picom/picom.conf &
 #picom --config $HOME/.config/picom/picom.conf --experimental-backends &
+killall feh
 feh --bg-fill /usr/share/backgrounds/pexels-joshua-woroniecki-2570208.jpg &
 
 ## Super Key
@@ -12,16 +16,16 @@ killall -9 ksuperkey &
 ksuperkey -e 'Super_L=Alt_L|F1' &
 ksuperkey -e 'Super_R=Alt_L|F1' &
 
-
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 #BSPWM configuration
 #bspc config border_radius       8
 bspc config border_width         2
-bspc config window_gap           10
+bspc config window_gap           5
 bspc config top_padding          30
-bspc config bottom_padding       10
-bspc config left_padding         10
-bspc config right_padding        10
+bspc config bottom_padding       5
+bspc config left_padding         5
+bspc config right_padding        5
 bspc config single_monocle       false
 #bspc config click_to_focus       true
 bspc config split_ratio          0.50
@@ -64,6 +68,7 @@ bspc rule -a Vlc state=fullscreen
 #Floating applications
 #bspc rule -a rofi state=floating sticky=on
 bspc rule -a Xfce4-terminal state=floating
+bspc rule -a com-itfinance-core-Starter state=floating
 
 #Tiled applications
 bspc rule -a Gnome-disks state=tiled
