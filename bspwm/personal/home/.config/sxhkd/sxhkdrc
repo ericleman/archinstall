@@ -11,6 +11,15 @@ super + Return
 	kitty
 
 
+# Rofi App Launcher
+alt + F1
+	sh ~/.config/rofi/bin/launcher
+	
+# Rofi Menus/Applets
+super + {r,p,a,s,i}
+	sh $HOME/.config/rofi/bin/{runner,powermenu,apps_as_root,screenshot,network}
+
+
 #Reload bspwm
 super + shift + r
 	~/.config/bspwm/bspwmrc

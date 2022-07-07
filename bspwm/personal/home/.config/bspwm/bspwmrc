@@ -1,10 +1,18 @@
 #!/bin/sh
 
-pgrep -x sxhkd > /dev/null || sxhkd &
-#VBoxClient-all &
+killall sxhkd; sxhkd &
+#VBoxClient-all & #required to enable copy paste on Virtualbox
 vmware-user & #required to enable copy paste on VMWare
-picom --config $HOME/.config/picom/picom.conf --experimental-backends &
+picom --config $HOME/.config/picom/picom.conf &
+#picom --config $HOME/.config/picom/picom.conf --experimental-backends &
 feh --bg-fill /usr/share/backgrounds/pexels-joshua-woroniecki-2570208.jpg &
+
+## Super Key
+killall -9 ksuperkey &
+ksuperkey -e 'Super_L=Alt_L|F1' &
+ksuperkey -e 'Super_R=Alt_L|F1' &
+
+
 
 #BSPWM configuration
 #bspc config border_radius       8
