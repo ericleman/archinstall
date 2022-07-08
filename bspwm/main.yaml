@@ -18,10 +18,13 @@
     include_tasks: 040-bspwm.yaml
 
   - name: Developper Apps Install 
-    include_tasks: 050-dev-apps.yaml
+    include_tasks: 050-core-apps.yaml
 
-  - name: Rofi Install ## TO DO
+  - name: Rofi Install 
     include_tasks: 060-rofi.yaml
+
+  - name: Network Manager Dmenu Install (used with Rofi)
+    include_tasks: 061-networkmanager-dmenu.yaml
 
   - name: Conky Apps Install ## TO DO
     include_tasks: 070-conky.yaml
@@ -43,3 +46,6 @@
 
   - name: Feh Install ## DONE
     include_tasks: 130-feh.yaml
+
+  - name: Dunst Install ## DONE
+    include_tasks: 140-dunst.yaml

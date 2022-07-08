@@ -1,20 +1,6 @@
 #!/bin/sh
-
-killall -q sxhkd; sxhkd &
-#killall -q VBoxClient-all
-#VBoxClient-all & #required to enable copy paste on Virtualbox
-killall -q vmware-user
-vmware-user & #required to enable copy paste on VMWare
-#killall -q picom
-picom --config $HOME/.config/picom/picom.conf &
-#picom --config $HOME/.config/picom/picom.conf --experimental-backends &
-killall -q feh
-feh --bg-fill /usr/share/backgrounds/pexels-joshua-woroniecki-2570208.jpg &
-
-## Super Key
-killall -q ksuperkey
-ksuperkey -e 'Super_L=Alt_L|F1' &
-
+## Java Applications
+wmname LG3D
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 #BSPWM configuration
@@ -106,3 +92,30 @@ bspc rule -a Xfce4-settings-manager state=tiled
 #bspc config external_rules_command ~/.config/bspwm/scripts/pseudo_automatic_mode
 ##Adjust new window: splits biggest windows to keep windows about the same size
 #bspc config external_rules_command ~/.config/bspwm/scripts/adjust-new-window
+
+## Autostart -------------------------------------------------#
+
+killall -q sxhkd; sxhkd &
+
+#killall -q VBoxClient-all
+#VBoxClient-all & #required to enable copy paste on Virtualbox
+
+killall -q vmware-user
+vmware-user & #required to enable copy paste on VMWare
+
+## PICOM
+# Terminate if picom is already running
+killall -q picom
+# Wait until the processes have been shut down
+while pgrep -u $UID -x picom >/dev/null; do sleep 1; done
+# Launch picom
+picom --config ~/.config/picom/picom.conf &
+
+killall -q feh
+feh --bg-fill /usr/share/backgrounds/nord.jpg &
+
+## Super Key
+killall -q ksuperkey
+ksuperkey -e 'Super_L=Alt_L|F1' &
+
+

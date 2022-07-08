@@ -1,0 +1,48 @@
+- name: install core applications packages
+  pacman:
+    name:
+      - neofetch
+      - meld
+      - vim
+      - nano
+      - gedit
+      - htop
+      - noto-fonts
+      - maim # screenshots
+      - wmname # used for Java applications
+    state: present
+
+- name: install GO as it seems to be prerequisite (otherwise crashes)
+  pacman:
+    name: 
+      - go
+    state: present        
+- name: install yay
+  aur:
+    name: yay
+    use: makepkg
+    state: present 
+  become: yes
+  become_user: eric
+
+- name: Install ksuperkey 
+  aur:
+    use: yay
+    name: ksuperkey
+  become: yes
+  become_user: eric
+
+- name: Install nerd-fonts-space-mono # required for some rofi menu
+  aur:
+    use: yay
+    name: nerd-fonts-space-mono
+  become: yes
+  become_user: eric
+
+- name: Install betterlockscreen # required by rofi powermenu
+  aur:
+    use: yay
+    name: betterlockscreen
+  become: yes
+  become_user: eric
+

@@ -14,10 +14,15 @@ super + Return
 # Rofi App Launcher
 alt + F1
 	sh ~/.config/rofi/bin/launcher
-	
+
+# Rofi Network Menu
+super + n
+	networkmanager_dmenu
+
 # Rofi Menus/Applets
-super + {r,p,a,s,i}
-	sh $HOME/.config/rofi/bin/{runner,powermenu,apps_as_root,screenshot,network}
+super + {w,x,r,s}
+	sh ~/.config/rofi/bin/{windows,powermenu,asroot,screenshot}
+
 
 
 #Reload bspwm
