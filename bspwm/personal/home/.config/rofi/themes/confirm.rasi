@@ -6,11 +6,11 @@
 * {
     background-color:       @background;
     text-color:             @foreground;
-	font:				 	"Iosevka 16";
+	font:				 	"Iosevka 14";
 }
 
 window {
-    width:      			200px;
+    width:      			250px;
     padding:    			20px;
     border:					1px;
     border-radius:          0px;

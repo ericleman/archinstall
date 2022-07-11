@@ -55,3 +55,9 @@
 
   - name: Gedit 
     include_tasks: 160-gedit.yaml
+
+  - name: Polkit
+    include_tasks: 170-polkit.yaml
+
+  - name: Pamac
+    include_tasks: 180-pamac.yaml

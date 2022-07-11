@@ -4,7 +4,7 @@
 configuration {
     location: 						0;
     fixed-num-lines: 				true;
-    show-icons: 					false;
+    show-icons: 					true;
     sidebar-mode: 					true;
     scroll-method: 					1;
     window-format: 					"[{w}] ··· {c} ···   {t}";
@@ -21,7 +21,7 @@ configuration {
 @import "colors.rasi"
 
 * {
-    font:                           "Iosevka 16";
+    font:                           "Iosevka 14";
     background-color:             	@background;
 }
 
@@ -29,7 +29,7 @@ window {
     border: 						1px;
     border-color: 					@selected;
     border-radius: 					0px;
-    width: 							500px;
+    width: 							600px;
     height: 						0px;
 }
 

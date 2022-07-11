@@ -1,0 +1,13 @@
+- name: install polkit
+  pacman:
+    name:
+      - polkit
+    state: present
+
+- name: Install xfce-polkit 
+  aur:
+    use: yay
+    name: xfce-polkit
+  become: yes
+  become_user: eric
+
