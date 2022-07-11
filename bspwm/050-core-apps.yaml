@@ -10,6 +10,7 @@
       - noto-fonts
       - maim # screenshots
       - wmname # used for Java applications
+      - gvfs # to get a Trash
     state: present
 
 - name: install GO as it seems to be prerequisite (otherwise crashes)

@@ -1,0 +1,47 @@
+- name: install papirus
+  pacman:
+    name: papirus-icon-theme
+    state: present
+
+- name: Clone Nordic GTK theme to get cursors and folders icons
+  git:
+    repo: "https://github.com/EliverLara/Nordic.git"
+    dest: "/home/eric/Download/Nordic"
+  become_user: eric
+
+- name: Copy icons
+  copy:
+    src: /home/eric/Download/Nordic/kde/folders/Nordic-darker
+    dest: /usr/share/icons/
+    mode: u+rw,g+r,o+r          
+
+- name: Copy cursors
+  copy:
+    src: /home/eric/Download/Nordic/kde/cursors/Nordic-cursors
+    dest: /usr/share/icons/
+    mode: u+rw,g+r,o+r          
+
+- name: Copy theme
+  copy:
+    src: /home/eric/Download/Nordic
+    dest: /usr/share/themes/
+    mode: u+rw,g+r,o+r          
+
+- name: set as gtk2 theme
+  copy:
+    src: personal/home/.gtkrc-2.0
+    dest: /home/eric/
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o--          
+
+- name: set as gtk3 theme
+  copy:
+    src: personal/home/.config/gtk-3.0
+    dest: /home/eric/.config
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o--          
+
+
+
