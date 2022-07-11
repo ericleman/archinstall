@@ -8,7 +8,7 @@
       - gedit
       - htop
       - noto-fonts
-      - ttf-fonts-awesome
+      - ttf-font-awesome
       - maim # screenshots
       - wmname # used for Java applications
       - gvfs # to get a Trash
