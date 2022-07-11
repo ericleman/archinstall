@@ -15,7 +15,7 @@
 - name: get theme on git
   git:
     repo: "https://github.com/arcticicestudio/nord-gedit.git"
-    dest: "/home/eric/Download/nord-gedit"
+    dest: "/home/eric/Downloads/nord-gedit"
   become_user: eric
 
 - name: Copy XML config
