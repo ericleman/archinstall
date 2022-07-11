@@ -2,7 +2,7 @@
 /* Everyone is permitted to copy and distribute copies of this file under GNU-GPL3 */
 
 configuration {
-    font:                           "Iosevka 10";
+    font:                           "Iosevka 16";
     show-icons:                     false;
     display-drun: 					"";
     drun-display-format:            "{icon} {name}";
@@ -44,7 +44,7 @@ textbox-prompt-colon {
     background-color:               @selected;
     text-color:                     @background;
     padding:    					6px 10px 6px 10px;
-	font:							"Iosevka Nerd Font 10";
+	font:							"Iosevka Nerd Font 16";
 }
 
 entry {

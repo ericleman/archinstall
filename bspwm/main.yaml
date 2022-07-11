@@ -52,3 +52,6 @@
 
   - name: Global Theme ## DONE
     include_tasks: 150-theme.yaml
+
+  - name: Gedit 
+    include_tasks: 160-gedit.yaml

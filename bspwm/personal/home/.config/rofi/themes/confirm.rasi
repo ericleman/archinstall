@@ -6,7 +6,7 @@
 * {
     background-color:       @background;
     text-color:             @foreground;
-	font:				 	"Iosevka 10";
+	font:				 	"Iosevka 16";
 }
 
 window {

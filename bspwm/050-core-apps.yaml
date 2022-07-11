@@ -8,6 +8,7 @@
       - gedit
       - htop
       - noto-fonts
+      - ttf-fonts-awesome
       - maim # screenshots
       - wmname # used for Java applications
       - gvfs # to get a Trash
@@ -33,12 +34,12 @@
   become: yes
   become_user: eric
 
-- name: Install nerd-fonts-space-mono # required for some rofi menu
-  aur:
-    use: yay
-    name: nerd-fonts-space-mono
-  become: yes
-  become_user: eric
+#- name: Install nerd-fonts-space-mono # required for some rofi menu
+##  aur:
+#    use: yay
+##    name: nerd-fonts-space-mono
+#  become: yes
+#  become_user: eric
 
 - name: Install betterlockscreen # required by rofi powermenu
   aur:

@@ -1,0 +1,32 @@
+- name: install gedit
+  pacman:
+    name:
+      - gedit
+    state: present
+
+- name: create gedit styles folder
+  file:
+    path: /home/eric/.local/share/gedit/styles
+    state: directory
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--   
+
+- name: get theme on git
+  git:
+    repo: "https://github.com/arcticicestudio/nord-gedit.git"
+    dest: "/home/eric/Download/nord-gedit"
+  become_user: eric
+
+- name: Copy XML config
+  copy:
+    src: /home/eric/Downloads/nord-gedit/src/xml/nord.xml
+    dest: /home/eric/.local/share/gedit/styles/nord.xml
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--
+
+- name: apply dconf
+  become_user: eric
+  dconf: key="/org/gnome/gedit/preferences/editor/scheme" value="'nord-gedit'"
+

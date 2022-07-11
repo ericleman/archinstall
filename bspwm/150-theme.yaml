@@ -6,24 +6,24 @@
 - name: Clone Nordic GTK theme to get cursors and folders icons
   git:
     repo: "https://github.com/EliverLara/Nordic.git"
-    dest: "/home/eric/Download/Nordic"
+    dest: "/home/eric/Downloads/Nordic"
   become_user: eric
 
 - name: Copy icons
   copy:
-    src: /home/eric/Download/Nordic/kde/folders/Nordic-darker
+    src: /home/eric/Downloads/Nordic/kde/folders/Nordic-darker
     dest: /usr/share/icons/
     mode: u+rw,g+r,o+r          
 
 - name: Copy cursors
   copy:
-    src: /home/eric/Download/Nordic/kde/cursors/Nordic-cursors
+    src: /home/eric/Downloads/Nordic/kde/cursors/Nordic-cursors
     dest: /usr/share/icons/
     mode: u+rw,g+r,o+r          
 
 - name: Copy theme
   copy:
-    src: /home/eric/Download/Nordic
+    src: /home/eric/Downloads/Nordic
     dest: /usr/share/themes/
     mode: u+rw,g+r,o+r          
 
