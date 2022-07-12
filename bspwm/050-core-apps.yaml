@@ -8,7 +8,6 @@
       - gedit
       - htop
       - noto-fonts
-      - ttf-font-awesome
       - gucharmap
       - rsync # used for ansible synchronize
       - python-psutil # used for ansible dconf
@@ -37,12 +36,12 @@
   become: yes
   become_user: eric
 
-#- name: Install nerd-fonts-space-mono # required for some rofi menu
-##  aur:
-#    use: yay
-##    name: nerd-fonts-space-mono
-#  become: yes
-#  become_user: eric
+- name: Install ttf-material-design-icons-webfont # required for some rofi menu and polybar icons
+  aur:
+    use: yay
+    name: ttf-material-design-icons-webfont
+  become: yes
+  become_user: eric
 
 - name: Install betterlockscreen # required by rofi powermenu
   aur:

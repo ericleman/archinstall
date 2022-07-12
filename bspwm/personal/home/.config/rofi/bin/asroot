@@ -8,9 +8,9 @@ DIR="$HOME/.config"
 rofi_command="rofi -theme $DIR/rofi/themes/asroot.rasi"
 
 # Apps
-terminal=" Kitty"
-files=" Thunar"
-editor=" Gedit"
+terminal="󰨊 Kitty"
+files="󱂵 Thunar"
+editor="󱞎 Gedit"
 
 # Variable passed to rofi
 options="$terminal\n$files\n$editor"
