@@ -38,3 +38,46 @@ super + shift + q
 # Focused desktop window gap
 super + button{4,5}
   bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 2 ))
+  
+# Split horizontal, vertical or cancel
+super + {h,v,q}
+	bspc node -p {east,south,cancel}
+
+# Fullscreen or Monocle
+super + f
+#	bspc desktop -l next
+    bspc node -t "~"fullscreen
+
+# Toggle beetwen floating & tiled
+super + space
+    bspc node -t "~"{floating,tiled}
+
+# Send the window to another edge of the screen or Swap windows
+super + {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
+
+# Change focus to next window, including floating window
+alt + {_,shift + }Tab
+	bspc node -f {next.local,prev.local}
+
+# Switch workspace
+super + alt + {Left,Right}
+	bspc desktop -f {prev.local,next.local}
+
+# Send focused window to another workspace
+super + ctrl + {Left,Right}
+	bspc node -d {prev.local,next.local}
+
+# Switch to last opened workspace
+super + Tab
+	bspc desktop -f last
+
+# Expanding windows
+super + control + {h,j,k,l}
+	bspc node -z {left -20 0,top 0 -20,bottom 0 20,right 20 0}
+	
+## Shrinking windows
+super + alt + {h,j,k,l}
+	bspc node -z {left 20 0,top 0 20,bottom 0 -20,right -20 0}
+	
+
