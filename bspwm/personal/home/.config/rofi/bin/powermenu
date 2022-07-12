@@ -43,17 +43,7 @@ case $chosen in
         fi
         ;;
     $lock)
-        betterlockscreen --lock
-        ;;
-    $suspend)
-		ans=$($HOME/.config/rofi/bin/confirm)
-		if [[ $ans == "yes" ]] || [[ $ans == "YES" ]] || [[ $ans == "y" ]]; then
-			betterlockscreen --suspend
-		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
-			exit
-        else
-			rofi -theme ~/.config/rofi/themes/askpass.rasi -e "$_msg"
-        fi
+        ~/.config/i3lock/lock.sh
         ;;
     $logout)
 		ans=$($HOME/.config/rofi/bin/confirm)

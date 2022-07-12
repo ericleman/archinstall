@@ -43,10 +43,3 @@
   become: yes
   become_user: eric
 
-- name: Install betterlockscreen # required by rofi powermenu
-  aur:
-    use: yay
-    name: betterlockscreen
-  become: yes
-  become_user: eric
-

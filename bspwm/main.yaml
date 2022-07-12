@@ -61,3 +61,6 @@
 
   - name: Pamac
     include_tasks: 180-pamac.yaml
+
+  - name: Better lock screen
+    include_tasks: 190-i3lock.yaml
