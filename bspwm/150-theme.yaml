@@ -9,23 +9,39 @@
     dest: "/home/eric/Downloads/Nordic"
   become_user: eric
 
+#- name: Copy icons
+#  copy:
+#    src: /home/eric/Downloads/Nordic/kde/folders/Nordic-darker
+#    dest: /usr/share/icons/
+#    mode: u+rw,g+r,o+r          
+
+#- name: Copy cursors
+#  copy:
+#    src: /home/eric/Downloads/Nordic/kde/cursors/Nordic-cursors
+#    dest: /usr/share/icons/
+#    mode: u+rw,g+r,o+r          
+
+#- name: Copy theme
+#  copy:
+#    src: /home/eric/Downloads/Nordic
+#    dest: /usr/share/themes/
+#    mode: u+rw,g+r,o+r          
+
 - name: Copy icons
-  copy:
+  synchronize:
     src: /home/eric/Downloads/Nordic/kde/folders/Nordic-darker
     dest: /usr/share/icons/
-    mode: u+rw,g+r,o+r          
 
 - name: Copy cursors
-  copy:
+  synchronize:
     src: /home/eric/Downloads/Nordic/kde/cursors/Nordic-cursors
     dest: /usr/share/icons/
-    mode: u+rw,g+r,o+r          
 
 - name: Copy theme
-  copy:
+  synchronize:
     src: /home/eric/Downloads/Nordic
     dest: /usr/share/themes/
-    mode: u+rw,g+r,o+r          
+
 
 - name: set as gtk2 theme
   copy:

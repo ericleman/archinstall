@@ -9,6 +9,9 @@
       - htop
       - noto-fonts
       - ttf-font-awesome
+      - gucharmap
+      - rsync # used for ansible synchronize
+      - psutils # used for ansible dconf
       - maim # screenshots
       - wmname # used for Java applications
       - gvfs # to get a Trash
