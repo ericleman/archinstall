@@ -1,6 +1,6 @@
 {
     "additional-repositories": "multilib",
-    "audio": "pipewire",
+    "audio": "pulseaudio",
     "bootloader": "grub-install",
     "custom-commands": [
         "mkdir -p /root/.ansible/plugins/modules",
