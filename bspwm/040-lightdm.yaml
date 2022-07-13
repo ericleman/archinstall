@@ -4,6 +4,7 @@
       - lightdm 
       - lightdm-gtk-greeter
       - lightdm-webkit2-greeter
+      - lightdm-webkit-theme-litarvan
     state: present
 
 - name: enable LightDM service
@@ -33,6 +34,25 @@
     path: /etc/lightdm/lightdm.conf
     regexp: '#greeter-session=example-gtk-gnome'
     replace: 'greeter-session=lightdm-webkit2-greeter'
+
+
+- name: define litarvan as theme
+  replace:
+    path: /etc/lightdm//etc/lightdm/
+    regexp: 'webkit_theme        = antergos'
+    replace: 'webkit_theme        = litarvan'
+
+
+- name: copy avatar files
+  copy:
+    src: personal/var/lib/AccountsService/icons/eric.png
+    dest: /var/lib/AccountsService/icons/eric.png
+
+- name: copy avatar files 2
+  copy:
+    src: personal/var/lib/AccountsService/users/eric
+    dest: /var/lib/AccountsService/users/eric
+
 
 
 #- name: Install theme lightdm-webkit-theme-aether 
