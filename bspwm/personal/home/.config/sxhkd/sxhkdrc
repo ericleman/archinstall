@@ -23,11 +23,6 @@ super + n
 super + {w,x,r,s}
 	sh ~/.config/rofi/bin/{windows,powermenu,asroot,screenshot}
 
-# Rofi Lock
-super + l
-	dm-tool lock
-
-
 
 #Reload bspwm
 super + shift + r
