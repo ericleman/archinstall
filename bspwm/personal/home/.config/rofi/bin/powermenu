@@ -43,7 +43,7 @@ case $chosen in
         fi
         ;;
     $lock)
-        ~/.config/i3lock/lock.sh
+        dm-tool lock
         ;;
     $logout)
 		ans=$($HOME/.config/rofi/bin/confirm)

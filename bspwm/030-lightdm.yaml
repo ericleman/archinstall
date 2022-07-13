@@ -3,6 +3,7 @@
     name:
       - lightdm 
       - lightdm-gtk-greeter
+      - lightdm-webkit2-greeter
     state: present
 
 - name: enable LightDM service
@@ -26,3 +27,19 @@
     name: eric
     groups: autologin
     append: yes
+
+- name: greeter session
+  replace:
+    path: /etc/lightdm/lightdm.conf
+    regexp: '#greeter-session=example-gtk-gnome'
+    replace: 'greeter-session=lightdm-webkit2-greeter'
+
+
+- name: Install theme lightdm-webkit-theme-aether 
+  aur:
+    use: yay
+    name: lightdm-webkit-theme-aether
+  become: yes
+  become_user: eric
+
+
