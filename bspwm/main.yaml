@@ -9,7 +9,7 @@
     include_tasks: 010-vm.yaml
 
   - name: Developper Apps Install 
-    include_tasks: 030-core-apps.yaml
+    include_tasks: 020-core-apps.yaml
 
   - name: X Windows Install 
     include_tasks: 030-xorg.yaml
