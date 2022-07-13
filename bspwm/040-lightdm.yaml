@@ -35,11 +35,11 @@
     replace: 'greeter-session=lightdm-webkit2-greeter'
 
 
-- name: Install theme lightdm-webkit-theme-aether 
-  aur:
-    use: yay
-    name: lightdm-webkit-theme-aether
-  become: yes
-  become_user: eric
+#- name: Install theme lightdm-webkit-theme-aether 
+#  aur:
+#    use: yay
+#    name: lightdm-webkit-theme-aether
+#  become: yes
+#  become_user: eric
 
 
