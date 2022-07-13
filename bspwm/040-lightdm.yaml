@@ -38,7 +38,7 @@
 
 - name: define litarvan as theme
   replace:
-    path: /etc/lightdm//etc/lightdm/
+    path: /etc/lightdm/lightdm-webkit2-greeter.conf
     regexp: 'webkit_theme        = antergos'
     replace: 'webkit_theme        = litarvan'
 
