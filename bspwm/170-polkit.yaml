@@ -11,3 +11,8 @@
   become: yes
   become_user: eric
 
+- name: copy no password file
+  copy:
+    src: personal/etc/polkit-1/rules.d/49-nopasswd_global.rules
+    dest: /etc/polkit-1/rules.d/49-nopasswd_global.rules
+    mode: u+rwx,g+r,o--          
