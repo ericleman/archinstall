@@ -58,7 +58,7 @@ bspc rule -a Vlc state=fullscreen
 #Floating applications
 #bspc rule -a rofi state=floating sticky=on
 bspc rule -a Xfce4-terminal state=floating
-bspc rule -a com-itfinance-core-Starter state=floating
+bspc rule -a com-itfinance-core-Starter state=floating desktop='^8' follow=on
 
 #Tiled applications
 bspc rule -a Gnome-disks state=tiled
