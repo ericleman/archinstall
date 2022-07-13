@@ -114,6 +114,9 @@ xsetroot -cursor_name left_ptr
 # polybar	
 $HOME/.config/polybar/launch.sh
 
+killall -q pamac-tray
+pamac-tray & #required to enable copy paste on VMWare
+
 
 ## PICOM
 # Terminate if picom is already running
