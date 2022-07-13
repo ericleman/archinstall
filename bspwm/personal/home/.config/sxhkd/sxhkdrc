@@ -44,13 +44,18 @@ super + {h,v,q}
 	bspc node -p {east,south,cancel}
 
 # Fullscreen or Monocle
-super + f
+super + shift + space
 #	bspc desktop -l next
     bspc node -t "~"fullscreen
 
 # Toggle beetwen floating & tiled
 super + space
     bspc node -t "~"{floating,tiled}
+
+# Swap with biggest window
+super + ctrl + space
+    bspc node -s biggest.window
+
 
 # Send the window to another edge of the screen or Swap windows
 super + {_,shift + }{Left,Down,Up,Right}
@@ -71,6 +76,10 @@ super + ctrl + {Left,Right}
 # Switch to last opened workspace
 super + Tab
 	bspc desktop -f last
+
+# Switch to another workspace
+super + {_,shift + }{F1,F2,F3,F4,F5,F6,F7,F8}
+	bspc {desktop -f,node -d} '^{1-8}'
 
 # Expanding windows
 super + control + {h,j,k,l}
