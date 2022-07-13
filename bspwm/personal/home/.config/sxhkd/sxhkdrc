@@ -10,6 +10,11 @@ super + shift + Return
 super + Return
 	kitty
 
+#Chrome
+super + ctrl + Return
+	google-chrome-stable
+
+
 
 # Rofi App Launcher
 alt + F1
