@@ -9,6 +9,7 @@
       - htop
       - noto-fonts
       - gucharmap
+      - baobab
       - rsync # used for ansible synchronize
       - python-psutil # used for ansible dconf
       - maim # screenshots
