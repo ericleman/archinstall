@@ -11,9 +11,9 @@ DIR="$HOME/.config"
 
 rofi \
 	-show drun \
-	-modi run,drun,ssh \
+	-modi run,drun,window \
 	-no-lazy-grab \
-	-scroll-method 0 \
+	-scroll-method 1 \
 	-drun-match-fields all \
 	-drun-display-format "{name}" \
 	-no-drun-show-actions \
