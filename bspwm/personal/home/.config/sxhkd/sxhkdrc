@@ -39,8 +39,16 @@ super + shift + q
 
 
 ## super & mouse scroll
-# Focused desktop window gap
+# Switch workspace
 super + button{4,5}
+  bspc desktop -f {prev.local,next.local}
+  
+# Send focused window to another workspace
+super + shift + button{4,5}
+  bspc node -d {prev.local,next.local} --follow
+  
+# Focused desktop window gap
+super + ctrl + button{4,5}
   bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 2 ))
   
 # Split horizontal, vertical or cancel
@@ -61,7 +69,7 @@ super + ctrl + space
 
 
 # Send the window to another edge of the screen or Swap windows
-super + {_,shift + }{Left,Down,Up,Right}
+super + {_,ctrl + }{Left,Down,Up,Right}
 	bspc node -{f,s} {west,south,north,east}
 
 # Change focus to next window, including floating window
@@ -73,8 +81,8 @@ super + alt + {Left,Right}
 	bspc desktop -f {prev.local,next.local}
 
 # Send focused window to another workspace
-super + ctrl + {Left,Right}
-	bspc node -d {prev.local,next.local}
+super + shift + {Left,Right}
+	bspc node -d {prev.local,next.local} --follow
 
 # Switch to last opened workspace
 super + Tab
