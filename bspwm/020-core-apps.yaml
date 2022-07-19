@@ -8,6 +8,7 @@
       - gedit
       - htop
       - noto-fonts
+      - ttf-iosevka-nerd
       - gucharmap
       - baobab
       - rsync # used for ansible synchronize
@@ -38,10 +39,10 @@
   become: yes
   become_user: eric
 
-- name: Install ttf-material-design-icons-webfont # required for some rofi menu and polybar icons
-  aur:
-    use: yay
-    name: ttf-material-design-icons-webfont
-  become: yes
-  become_user: eric
+#- name: Install ttf-material-design-icons-webfont # required for some rofi menu and polybar icons
+#  aur:
+#    use: yay
+#    name: ttf-material-design-icons-webfont
+#  become: yes
+#  become_user: eric
 
