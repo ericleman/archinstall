@@ -33,8 +33,19 @@ super + shift + r
 
 #kill
 super + shift + q
-	bspc node -c
+  ~/.config/bspwm/close_window.sh
+#	bspc node -c
 
+
+## super & mouse middle button
+# Create dedicated desktop for window
+super + button2
+  ~/.config/bspwm/dedicated_desktop.sh
+ 
+# close current desktop
+super + ctrl + button2
+  bspc desktop -r
+ 
 
 ## super & mouse scroll
 # Switch workspace

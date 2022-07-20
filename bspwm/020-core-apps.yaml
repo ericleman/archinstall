@@ -11,6 +11,7 @@
       - ttf-iosevka-nerd
       - gucharmap
       - baobab
+      - jq # so in Bash I can read json
       - rsync # used for ansible synchronize
       - python-psutil # used for ansible dconf
       - maim # screenshots
