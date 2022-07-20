@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+terminal=" Kitty"
+files=" Thunar"
+editor=" Gedit"
+
+
+if [ x"$@" = x"$terminal" ]
+then
+	coproc ( sudo -A kitty  > /dev/null  2>&1 )
+	exit 0
+fi
+if [ x"$@" = x"$files" ]
+then
+	coproc ( sudo -A dbus-run-session thunar  > /dev/null  2>&1 )
+	exit 0
+fi
+if [ x"$@" = x"$editor" ]
+then
+	coproc ( sudo -A gedit  > /dev/null  2>&1 )
+	exit 0
+fi
+
+
+
+echo $terminal
+echo $files
+echo $editor

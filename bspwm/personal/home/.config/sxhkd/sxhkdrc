@@ -24,10 +24,8 @@ alt + F1
 super + n
 	networkmanager_dmenu
 
-# Rofi Menus/Applets
-super + {w,x,r,s}
-	sh ~/.config/rofi/bin/{windows,powermenu,asroot,screenshot}
-
+Print 
+	sh ~/.config/rofi/bin/screenshot
 
 #Reload bspwm
 super + shift + r

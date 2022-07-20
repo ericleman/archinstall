@@ -6,7 +6,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 #BSPWM configuration
 #bspc config border_radius       8
 bspc config border_width         0
-bspc config window_gap           5
+bspc config window_gap           20
 bspc config top_padding          30
 bspc config bottom_padding       5
 bspc config left_padding         5

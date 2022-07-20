@@ -13,7 +13,7 @@ separator_height = 4
 line_height = 4
 padding = 15
 horizontal_padding = 15
-frame_width = 1
+frame_width = 0
 sort = no
 idle_threshold = 120
 font = Iosevka Custom 9
@@ -37,18 +37,18 @@ class = Dunst
 
 [urgency_low]
 timeout = 2
-background = "#2E3440"
+background = "#2E344022"
 foreground = "#D8DEE9"
 frame_color = "#81A1C1"
 
 [urgency_normal]
 timeout = 5
-background = "#2E3440"
+background = "#2E344022"
 foreground = "#D8DEE9"
 frame_color = "#81A1C1"
 
 [urgency_critical]
 timeout = 0
-background = "#2E3440"
+background = "#2E344022"
 foreground = "#D8DEE9"
 frame_color = "#BF616A"

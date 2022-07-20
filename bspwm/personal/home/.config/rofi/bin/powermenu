@@ -5,15 +5,15 @@
 
 DIR="$HOME/.config"
 
-rofi_command="rofi -theme $DIR/rofi/themes/powermenu.rasi"
+rofi_command="rofi -theme $DIR/rofi/themes/launcher.rasi"
 
 uptime=$(uptime -p | sed -e 's/up //g')
 
 # Options
-shutdown="襤"
-reboot="菱"
-lock=""
-logout=""
+shutdown="襤 shutdown"
+reboot="菱 reboot"
+lock=" lock"
+logout=" logout"
 
 # Variable passed to rofi
 options="$shutdown\n$reboot\n$lock\n$logout"
@@ -28,7 +28,7 @@ case $chosen in
 		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
 			exit
         else
-			rofi -theme ~/.config/rofi/themes/askpass.rasi -e "$_msg"
+			rofi -theme ~/.config/rofi/themes/launcher.rasi -e "$_msg"
         fi
         ;;
     $reboot)
@@ -38,7 +38,7 @@ case $chosen in
 		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
 			exit
         else
-			rofi -theme ~/.config/rofi/themes/askpass.rasi -e "$_msg"
+			rofi -theme ~/.config/rofi/themes/launcher.rasi -e "$_msg"
         fi
         ;;
     $lock)
@@ -51,7 +51,7 @@ case $chosen in
 		elif [[ $ans == "no" ]] || [[ $ans == "NO" ]] || [[ $ans == "n" ]]; then
 			exit
         else
-			rofi -theme ~/.config/rofi/themes/askpass.rasi -e "$_msg"
+			rofi -theme ~/.config/rofi/themes/launcher.rasi -e "$_msg"
         fi
         ;;
 esac

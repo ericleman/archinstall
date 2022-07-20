@@ -7,29 +7,25 @@ configuration {
     show-icons: 					true;
     sidebar-mode: 					true;
     scroll-method: 					1;
-    window-format: 					"[{w}] ··· {c} ···   {t}";
+    window-format: 					"[{w}] · {c} ·   {t}";
     click-to-exit: 					true;
-    combi-hide-mode-prefix: 		false;
     display-window: 				"缾";
-    display-windowcd: 				"󰀻";
     display-run: 					"";
-    display-ssh: 					"󰨊";
     display-drun: 					"";
-    display-combi: 					"󰩮";
 }
 
 @import "colors.rasi"
 
 * {
-    font:                           "Iosevka 14";
+    font:                           "Iosevka 20";
     background-color:             	@background;
 }
 
 window {
-    border: 						1px;
+    border: 						0px;
     border-color: 					@selected;
     border-radius: 					0px;
-    width: 							600px;
+    width: 							800px;
     height: 						0px;
 }
 
@@ -37,7 +33,7 @@ prompt {
     spacing: 						0;
     border: 						0;
     background-color:             	@highlight;
-    text-color: 					@background;
+    text-color: 					@black;
     padding:    					6px 10px 6px 10px;
 }
 
@@ -116,7 +112,7 @@ element normal.active {
 }
 element selected.normal {
     background-color: 				@selected;
-    text-color:       				@background;
+    text-color:       				@foreground;
     border: 						0px;
     border-color: 					@selected;
 }

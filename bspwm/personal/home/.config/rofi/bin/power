@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+uptime=$(uptime -p | sed -e 's/up //g')
+powermenu="襤 Uptime: $uptime"
+
+
+if [ x"$@" = x"$powermenu" ]
+then
+	coproc ( ~/.config/rofi/bin/powermenu  > /dev/null  2>&1 )
+	exit 0
+fi
+
+
+
+echo $powermenu
+
