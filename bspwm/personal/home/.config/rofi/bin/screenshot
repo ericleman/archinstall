@@ -4,7 +4,7 @@
 ## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
 
 DIR="$HOME/.config"
-rofi_command="rofi -theme $DIR/rofi/themes/launcher.rasi"
+rofi_command="rofi -theme $DIR/rofi/themes/launcher.rasi -kb-cancel Escape,Alt-F1"
 
 time=`date +%Y-%m-%d-%H-%M-%S`
 geometry=`xrandr | head -n1 | cut -d',' -f2 | tr -d '[:blank:],current'`

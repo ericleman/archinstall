@@ -5,15 +5,15 @@
 
 DIR="$HOME/.config"
 
-rofi_command="rofi -theme $DIR/rofi/themes/launcher.rasi"
+rofi_command="rofi -theme $DIR/rofi/themes/launcher.rasi -kb-cancel Escape,Alt-F1"
 
 uptime=$(uptime -p | sed -e 's/up //g')
 
 # Options
-shutdown="襤 shutdown"
-reboot="菱 reboot"
-lock=" lock"
-logout=" logout"
+shutdown="襤 Shutdown"
+reboot="菱 Reboot"
+lock=" Lock"
+logout=" Logout"
 
 # Variable passed to rofi
 options="$shutdown\n$reboot\n$lock\n$logout"

@@ -46,6 +46,10 @@ super + button2
 super + ctrl + button2
   bspc desktop -r
  
+# close empty desktop
+super + Escape
+  ~/.config/bspwm/close_empty_desk.sh
+ 
 
 ## super & mouse scroll
 # Switch workspace

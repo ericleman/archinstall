@@ -18,14 +18,15 @@ case $class_fw in
 		desktop_icon=''
         ;;
     *)
-		desktop_icon='缾'
+		desktop_icon=''
         ;;
 esac
 
-number_desktop=$(bspc query -D | wc -l)
-
-new_desktop="$(( $number_desktop + 1 ))-$desktop_icon"
+#number_desktop=$(bspc query -D | wc -l)
+#new_desktop="$(( $number_desktop + 1 ))-$desktop_icon"
+new_desktop=$desktop_icon
 
 bspc monitor -a "$new_desktop"
-
-bspc node -d "$new_desktop" --follow
+number_desktop=$(bspc query -D | wc -l)
+bspc node -d "^$number_desktop" --follow
+#bspc node -d "$new_desktop" --follow

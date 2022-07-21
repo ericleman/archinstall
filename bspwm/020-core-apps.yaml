@@ -48,3 +48,9 @@
 #  become: yes
 #  become_user: eric
 
+#- name: Install nerd-fonts-complete # required for some rofi menu and polybar icons
+#  aur:
+#    use: yay
+#    name: nerd-fonts-complete
+#  become: yes
+#  become_user: eric

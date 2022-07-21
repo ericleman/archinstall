@@ -11,7 +11,8 @@ exist_desktop () {
 	new_desktop="0"
 	for d in $(bspc query -D --names); do
 		echo "STEP 10: $new_desktop and $d" >> "$logfile"
-		if test "${d: -1}" = "$1"
+#		if test "${d: -1}" = "$1"
+		if test "$d" = "$1"
 		then
 			new_desktop="$d"
 		fi
@@ -21,7 +22,8 @@ exist_desktop () {
 	then
 		number_desktop=$(bspc query -D | wc -l)
 		echo "STEP 25: $number_desktop" >> "$logfile"
-		new_desktop="$(( $number_desktop + 1 ))-$1"
+#		new_desktop="$(( $number_desktop + 1 ))-$1"
+		new_desktop=$1
 		bspc monitor -a "$new_desktop"
 	fi
 	echo "STEP 30: $new_desktop" >> "$logfile"

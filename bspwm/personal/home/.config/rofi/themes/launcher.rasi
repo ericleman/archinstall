@@ -17,7 +17,7 @@ configuration {
 @import "colors.rasi"
 
 * {
-    font:                           "Iosevka 20";
+    font:                           "Noto Sans Mono 20";
     background-color:             	@background;
 }
 
@@ -121,8 +121,8 @@ element selected.urgent {
     text-color:       				@off;
 }
 element selected.active {
-    background-color: 				@background;
-    text-color:       				@selected;
+    background-color: 				@selected;
+    text-color:       				@on;
 }
 element alternate.normal {
     background-color: 				@background;
@@ -156,7 +156,7 @@ button {
 
 button selected {
     background-color:             	@selected;
-    text-color: 					@background;
+    text-color: 					@foreground;
     border: 						0px;
     border-radius: 					0px;
     border-color: 					@selected;
