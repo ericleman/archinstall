@@ -64,6 +64,12 @@ super + shift + button{4,5}
 super + ctrl + button{4,5}
   bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 2 ))
   
+super + less
+  bspc config -d focused window_gap 20
+
+super + greater
+  bspc config -d focused window_gap 70
+
 # Split horizontal, vertical or cancel
 super + {h,v,q}
 	bspc node -p {east,south,cancel}
