@@ -24,6 +24,7 @@ alt + F1
 super + n
 	networkmanager_dmenu
 
+# Screenshot
 Print 
 	sh ~/.config/rofi/bin/screenshot
 
@@ -31,7 +32,7 @@ Print
 super + shift + r
 	~/.config/bspwm/bspwmrc
 
-#kill
+#Close window
 super + shift + q
   ~/.config/bspwm/close_window.sh
 #	bspc node -c
@@ -42,11 +43,11 @@ super + shift + q
 super + button2
   ~/.config/bspwm/dedicated_desktop.sh
  
-# close current desktop
+# Close current desktop
 super + ctrl + button2
   bspc desktop -r
  
-# close empty desktop
+# Close empty desktop
 super + Escape
   ~/.config/bspwm/close_empty_desk.sh
  
@@ -60,13 +61,15 @@ super + button{4,5}
 super + shift + button{4,5}
   bspc node -d {prev.local,next.local} --follow
   
-# Focused desktop window gap
+# Change window gap
 super + ctrl + button{4,5}
   bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 2 ))
   
+# Set window gap to 20
 super + less
   bspc config -d focused window_gap 20
 
+# Set window gap to 70
 super + greater
   bspc config -d focused window_gap 70
 

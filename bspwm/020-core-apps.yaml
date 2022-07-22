@@ -6,11 +6,13 @@
       - vim
       - nano
       - gedit
-      - htop
       - noto-fonts
       - ttf-iosevka-nerd
       - gucharmap
       - baobab
+      - ncdu # disk usage like baobab
+      - clipmenu # clip board management
+      - nnn #file manager
       - jq # so in Bash I can read json
       - rsync # used for ansible synchronize
       - python-psutil # used for ansible dconf

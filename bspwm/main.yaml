@@ -62,6 +62,9 @@
   - name: Pamac
     include_tasks: 180-pamac.yaml
 
+  - name: btop
+    include_tasks: 190-btop.yaml
+
   - name: Chrome
     include_tasks: 300-chrome.yaml
 

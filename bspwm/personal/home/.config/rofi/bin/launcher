@@ -11,7 +11,7 @@ DIR="$HOME/.config"
 
 rofi \
 	-show drun \
-	-modi run,drun,window,:~/.config/rofi/bin/root,襤:~/.config/rofi/bin/power \
+	-modi run,drun,window,:~/.config/rofi/bin/root,:~/.config/rofi/bin/power \
 	-no-lazy-grab \
 	-scroll-method 1 \
 	-drun-match-fields all \
