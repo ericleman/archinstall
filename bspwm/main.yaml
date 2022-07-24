@@ -32,8 +32,11 @@
   - name: Picom Install ## TO DO
     include_tasks: 080-picom.yaml
 
-  - name: Kitty Apps Install 
-    include_tasks: 090-kitty.yaml
+#  - name: Kitty Apps Install 
+#    include_tasks: 090-kitty.yaml
+
+  - name: Alacritty Apps Install 
+    include_tasks: 090-alacritty.yaml
 
   - name: Thunar Apps Install 
     include_tasks: 100-thunar.yaml

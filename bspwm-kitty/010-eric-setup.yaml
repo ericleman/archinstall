@@ -1,0 +1,17 @@
+- name: sudo without password
+  community.general.sudoers:
+    name: no-passwd-eric
+    user: eric
+    commands: ALL
+    nopassword: yes
+
+- name: install xdg-user-dirs.
+  pacman:
+    name:
+      - xdg-user-dirs
+    state: present
+
+- name: Create home folders
+  ansible.builtin.command: xdg-user-dirs-update
+  become: yes
+  become_user: eric

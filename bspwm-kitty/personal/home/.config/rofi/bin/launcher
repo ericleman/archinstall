@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com>
+## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
+
+# make sure we are in AZERTY as if this script is called by
+# ksuperkey, it messes keyboard layout
+setxkbmap -model pc104 -layout fr
+
+DIR="$HOME/.config"
+
+rofi \
+	-show drun \
+	-modi run,drun,window,:~/.config/rofi/bin/root,:~/.config/rofi/bin/power \
+	-no-lazy-grab \
+	-scroll-method 1 \
+	-drun-match-fields all \
+	-drun-display-format "{name}" \
+	-no-drun-show-actions \
+	-terminal kitty \
+	-kb-cancel Escape,Alt-F1 \
+	-theme "$DIR"/rofi/themes/launcher.rasi

@@ -1,0 +1,23 @@
+- name: install BSPWM related packages
+  pacman:
+    name:
+      - bspwm 
+      - sxhkd
+    state: present
+
+- name: copy bspwm dotfile
+  copy:
+    src: personal/home/.config/bspwm
+    dest: /home/eric/.config/
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o--          
+
+- name: copy sxhkd dotfile
+  copy:
+    src: personal/home/.config/sxhkd
+    dest: /home/eric/.config/
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o--          
+

@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+uptime=$(uptime -p | sed -e 's/up //g')
+powermenu="襤 Uptime: $uptime"
+helpmenu=" Help"
+clipmenu=" Clipboard"
+
+
+if [ x"$@" = x"$powermenu" ]
+then
+	coproc ( ~/.config/rofi/bin/powermenu  > /dev/null  2>&1 )
+	exit 0
+fi
+
+if [ x"$@" = x"$helpmenu" ]
+then
+	coproc ( ~/.config/rofi/bin/sxhkd-help  > /dev/null  2>&1 )
+	exit 0
+fi
+
+if [ x"$@" = x"$clipmenu" ]
+then
+	coproc ( ~/.config/rofi/bin/clip  > /dev/null  2>&1 )
+	exit 0
+fi
+
+
+
+echo $powermenu
+echo $helpmenu
+echo $clipmenu
+

@@ -5,7 +5,7 @@ json_fw=$(bspc query -T -n $focused_window)
 class_fw=$(echo $json_fw | jq -r '.client.className')
 
 case $class_fw in
-    'kitty')
+    'Alacritty')
 		desktop_icon=''
         ;;
     'Google-chrome')

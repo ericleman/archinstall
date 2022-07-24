@@ -1,0 +1,15 @@
+- name: Install picom
+  aur:
+    use: yay
+    name: picom-ibhagwan-git
+  become: yes
+  become_user: eric
+
+- name: copy picom dotfile
+  copy:
+    src: personal/home/.config/picom
+    dest: /home/eric/.config/
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o--          
+

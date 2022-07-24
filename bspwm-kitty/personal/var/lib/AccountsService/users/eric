@@ -1,0 +1,5 @@
+[User]
+Session=
+XSession=bspwm
+Icon=/var/lib/AccountsService/icons/eric.png
+SystemAccount=false

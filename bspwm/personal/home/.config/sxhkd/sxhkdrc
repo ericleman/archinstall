@@ -8,7 +8,7 @@ super + shift + Return
 
 #Terminal
 super + Return
-	kitty
+	alacritty
 
 #Chrome
 super + ctrl + Return
