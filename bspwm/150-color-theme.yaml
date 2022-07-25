@@ -7,7 +7,7 @@
   aur:
     use: yay
     name:
-      - wpgtk
+      - wpgtk-git
       - xcursor-breeze
   become: yes
   become_user: eric
@@ -56,6 +56,8 @@
   ansible.builtin.command: wpg-install.sh -ig
   become: yes
   become_user: eric
+  args:
+    chdir: /home/eric/
 
 - name: get polybar color template
   copy:
