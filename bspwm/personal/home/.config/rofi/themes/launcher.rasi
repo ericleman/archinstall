@@ -94,10 +94,15 @@ element-text, element-icon {
     text-color:       inherit;
 }
 
+element-icon {
+    size:                           35px;
+}
+
 element {
     border: 						0px;
     padding: 						7px;
 }
+
 element normal.normal {
     background-color: 				@background;
     text-color:       				@foreground;
