@@ -1,0 +1,76 @@
+- name: install papirus
+  pacman:
+    name: papirus-icon-theme
+    state: present
+
+- name: install wpgtk and icons
+  aur:
+    use: yay
+    name:
+      - wpgtk
+      - xcursor-breeze
+  become: yes
+  become_user: eric
+
+- name: set as gtk2 theme
+  copy:
+    src: personal/home/.gtkrc-2.0
+    dest: /home/eric/
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o--          
+
+- name: set as gtk3 theme
+  copy:
+    src: personal/home/.config/gtk-3.0
+    dest: /home/eric/.config
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o--          
+
+- name: set as gtk2 theme for root
+  copy:
+    src: personal/home/.gtkrc-2.0
+    dest: /root/
+    mode: u+rwx,g+r,o--          
+
+- name: set as gtk3 theme for root
+  copy:
+    src: personal/home/.config/gtk-3.0
+    dest: /root/.config
+    mode: u+rwx,g+r,o--          
+
+- name: create backgrounds folder
+  file:
+    path: /usr/share/backgrounds
+    state: directory
+    mode: u+rwx,g+rx,o+rx   
+
+- name: copy Wallpaper
+  copy:
+    src: personal/usr/share/backgrounds/nord.jpg
+    dest: /usr/share/backgrounds/nord.jpg
+    mode: '0777'          
+
+- name: Initiate wpgtk icons and themes
+  ansible.builtin.command: wpg-install.sh -ig
+  become: yes
+  become_user: eric
+
+- name: get polybar color template
+  copy:
+    src: personal/home/.config/wal/templates
+    dest: /home/eric/.config/wal
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o--          
+
+- name: generate first colortheme
+  ansible.builtin.command: wpg -a /usr/share/backgrounds/nord.jpg && wpg -s /usr/share/backgrounds/nord.jpg
+  become: yes
+  become_user: eric
+
+
+
+
+

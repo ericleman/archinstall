@@ -47,14 +47,17 @@
   - name: Zsh Apps Install ## DONE
     include_tasks: 120-zsh.yaml
 
-  - name: Feh Install ## DONE
-    include_tasks: 130-feh.yaml
+#  - name: Feh Install ## DONE
+#    include_tasks: 130-feh.yaml
 
   - name: Dunst Install ## DONE
     include_tasks: 140-dunst.yaml
 
+#  - name: Global Theme ## DONE
+#    include_tasks: 150-theme.yaml
+
   - name: Global Theme ## DONE
-    include_tasks: 150-theme.yaml
+    include_tasks: 150-color-theme.yaml
 
   - name: Gedit 
     include_tasks: 160-gedit.yaml
