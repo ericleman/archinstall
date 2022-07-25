@@ -47,8 +47,8 @@
   - name: Zsh Apps Install ## DONE
     include_tasks: 120-zsh.yaml
 
-#  - name: Feh Install ## DONE
-#    include_tasks: 130-feh.yaml
+  - name: Feh Install ## DONE
+    include_tasks: 130-feh.yaml
 
   - name: Dunst Install ## DONE
     include_tasks: 140-dunst.yaml

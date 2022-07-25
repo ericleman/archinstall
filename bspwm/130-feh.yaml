@@ -4,15 +4,15 @@
       - feh
     state: present
 
-- name: create backgrounds folder
-  file:
-    path: /usr/share/backgrounds
-    state: directory
-    mode: u+rwx,g+rx,o+rx   
+#- name: create backgrounds folder
+#  file:
+#    path: /usr/share/backgrounds
+#    state: directory
+#    mode: u+rwx,g+rx,o+rx   
 
-- name: copy Wallpaper
-  copy:
-    src: personal/usr/share/backgrounds/nord.jpg
-    dest: /usr/share/backgrounds/nord.jpg
-    mode: '0777'          
+#- name: copy Wallpaper
+#  copy:
+#    src: personal/usr/share/backgrounds/nord.jpg
+#    dest: /usr/share/backgrounds/nord.jpg
+#    mode: '0777'          
 
