@@ -1,0 +1,23 @@
+## Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com>
+## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
+
+[color]
+
+FOREGROUND = {foreground}
+BACKGROUND = {background}
+BLACK = {color0}
+RED = {color1}
+GREEN = {color2}
+YELLOW = {color3}
+BLUE = {color4}
+MAGENTA = {color5}
+CYAN = {color6}
+WHITE = {color7}
+ALTBLACK = {color8}
+ALTRED = {color9}
+ALTGREEN = {color10}
+ALTYELLOW = {color11}
+ALTBLUE = {color12}
+ALTMAGENTA = {color13}
+ALTCYAN = {color14}
+ALTWHITE = {color15}
