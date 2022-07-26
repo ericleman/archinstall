@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 terminal=" Alacritty"
-files=" Thunar"
+files=" Ranger"
 
 
 if [ x"$@" = x"$terminal" ]
@@ -11,7 +11,7 @@ then
 fi
 if [ x"$@" = x"$files" ]
 then
-	coproc ( sudo -A dbus-run-session thunar  > /dev/null  2>&1 )
+	coproc ( sudo -A alacritty -e ranger  > /dev/null  2>&1 )
 	exit 0
 fi
 

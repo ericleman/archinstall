@@ -4,7 +4,7 @@
 
 # File-Manager
 super + shift + Return
-	thunar
+	alacritty -e ranger
 
 # Terminal
 super + Return

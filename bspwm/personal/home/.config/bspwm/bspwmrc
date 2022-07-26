@@ -3,6 +3,9 @@
 wmname LG3D
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+# use VS Code as default Editor
+export EDITOR=code
+
 #BSPWM configuration
 #bspc config border_radius       8
 bspc config border_width         0

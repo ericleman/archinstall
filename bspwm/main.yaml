@@ -38,8 +38,11 @@
   - name: Alacritty Apps Install 
     include_tasks: 090-alacritty.yaml
 
-  - name: Thunar Apps Install 
-    include_tasks: 100-thunar.yaml
+#  - name: Thunar Apps Install 
+#    include_tasks: 100-thunar.yaml
+
+  - name: Ranger Install 
+    include_tasks: 100-ranger.yaml
 
   - name: Polybar Apps Install ## TO DO
     include_tasks: 110-polybar.yaml
