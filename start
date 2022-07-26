@@ -12,14 +12,14 @@ fi
 
 if [ -z "$2" ]
   then
-    echo "Default DE = gnome"
-    DE=gnome
+    echo "Default DE = bspwm"
+    DE=bspwm
 fi
 
 if [ -z "$3" ]
   then
-    echo "Default VM = vbox"
-    VM=vbox
+    echo "Default VM = vmware"
+    VM=vmware
 fi
 
 
