@@ -59,7 +59,14 @@
   args:
     chdir: /home/eric/
 
-- name: get polybar color template
+- name: copy wpg.conf
+  copy:
+    src: personal/home/.config/wpg/wpg.conf
+    dest: /home/eric/.config/wpg/wpg.conf
+    mode: '0777'          
+
+
+- name: get my custom color templates
   copy:
     src: personal/home/.config/wal/templates
     dest: /home/eric/.config/wal
