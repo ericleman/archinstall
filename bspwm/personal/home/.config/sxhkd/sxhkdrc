@@ -2,15 +2,15 @@
 # KEYBOARD BINDINGS FOR ANY TWM
 #################################################################
 
-#File-Manager
+# File-Manager
 super + shift + Return
 	thunar
 
-#Terminal
+# Terminal
 super + Return
 	alacritty
 
-#Chrome
+# Chrome
 super + ctrl + Return
 	google-chrome-stable
 
@@ -28,11 +28,11 @@ super + n
 Print 
 	sh ~/.config/rofi/bin/screenshot
 
-#Reload bspwm
+# Reload bspwm
 super + shift + r
 	~/.config/bspwm/bspwmrc
 
-#Close window
+# Close window
 super + shift + q
   ~/.config/bspwm/close_window.sh
 #	bspc node -c
@@ -118,7 +118,7 @@ super + {_,shift + }{F1,F2,F3,F4,F5,F6,F7,F8}
 super + control + {h,j,k,l}
 	bspc node -z {left -20 0,top 0 -20,bottom 0 20,right 20 0}
 	
-## Shrinking windows
+# Shrinking windows
 super + alt + {h,j,k,l}
 	bspc node -z {left 20 0,top 0 20,bottom 0 -20,right -20 0}
 	

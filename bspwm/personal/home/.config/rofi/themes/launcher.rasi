@@ -14,7 +14,7 @@ configuration {
     display-drun: 					"";
 }
 
-@import "colors.rasi"
+@import "/home/eric/.cache/wal/colors-rofi.rasi"
 
 * {
     font:                           "Noto Sans Mono 20";

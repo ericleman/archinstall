@@ -1,6 +1,26 @@
-- name: install packages
-  pacman:
+- name: install pamac
+  aur:
+    use: yay
     name:
-      - code
-    state: present
+      - visual-studio-code-bin
+  become: yes
+  become_user: eric
+
+- name: Install VS Code dlasagno.wal-theme
+  ansible.builtin.command: code --install-extension dlasagno.wal-theme
+  become: yes
+  become_user: eric
+
+- name: Install VS Code naumovs.color-highlight
+  ansible.builtin.command: code --install-extension naumovs.color-highlight
+  become: yes
+  become_user: eric
+
+- name: copy settings
+  copy:
+    src: personal/home/.config/Code/User/settings.json
+    dest: /home/eric/.config/Code/User/
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o--          
 

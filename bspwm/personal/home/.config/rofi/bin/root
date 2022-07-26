@@ -2,7 +2,6 @@
 
 terminal=" Alacritty"
 files=" Thunar"
-editor=" Code"
 
 
 if [ x"$@" = x"$terminal" ]
@@ -15,14 +14,7 @@ then
 	coproc ( sudo -A dbus-run-session thunar  > /dev/null  2>&1 )
 	exit 0
 fi
-if [ x"$@" = x"$editor" ]
-then
-	coproc ( sudo -A code  > /dev/null  2>&1 )
-	exit 0
-fi
-
 
 
 echo $terminal
 echo $files
-echo $editor
