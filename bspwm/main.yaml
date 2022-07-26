@@ -59,8 +59,11 @@
   - name: Global Theme ## DONE
     include_tasks: 150-color-theme.yaml
 
-  - name: Gedit 
-    include_tasks: 160-gedit.yaml
+#  - name: Gedit 
+#    include_tasks: 160-gedit.yaml
+
+  - name: VS Code
+    include_tasks: 160-code.yaml
 
   - name: Polkit
     include_tasks: 170-polkit.yaml
@@ -70,9 +73,6 @@
 
   - name: btop
     include_tasks: 190-btop.yaml
-
-  - name: VS Code
-    include_tasks: 200-code.yaml
 
   - name: Chrome
     include_tasks: 300-chrome.yaml

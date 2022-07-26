@@ -2,7 +2,7 @@
 
 terminal=" Alacritty"
 files=" Thunar"
-editor=" Gedit"
+editor=" Code"
 
 
 if [ x"$@" = x"$terminal" ]
@@ -17,7 +17,7 @@ then
 fi
 if [ x"$@" = x"$editor" ]
 then
-	coproc ( sudo -A gedit  > /dev/null  2>&1 )
+	coproc ( sudo -A code  > /dev/null  2>&1 )
 	exit 0
 fi
 

@@ -14,7 +14,7 @@ case $class_fw in
     'Thunar')
 		desktop_icon=''
         ;;
-    'Gedit')
+    'Code')
 		desktop_icon=''
         ;;
     *)
