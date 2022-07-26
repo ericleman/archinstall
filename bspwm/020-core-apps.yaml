@@ -12,7 +12,7 @@
       - baobab
       - ncdu # disk usage like baobab
       - clipmenu # clip board management
-      - nnn #file manager
+      - ranger #file manager
       - jq # so in Bash I can read json
       - rsync # used for ansible synchronize
       - python-psutil # used for ansible dconf

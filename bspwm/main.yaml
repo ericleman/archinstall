@@ -71,6 +71,9 @@
   - name: btop
     include_tasks: 190-btop.yaml
 
+  - name: VS Code
+    include_tasks: 200-code.yaml
+
   - name: Chrome
     include_tasks: 300-chrome.yaml
 
