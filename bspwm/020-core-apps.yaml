@@ -11,14 +11,13 @@
       - baobab
       - ncdu # disk usage like baobab
       - clipmenu # clip board management
-      - ranger #file manager
       - jq # so in Bash I can read json
       - rsync # used for ansible synchronize
       - python-psutil # used for ansible dconf
       - maim # screenshots
       - xdotool # used by my maim script
       - wmname # used for Java applications
-      - gvfs # to get a Trash
+#      - gvfs # to get a Trash
     state: present
 
 - name: install GO as it seems to be prerequisite (otherwise crashes)
