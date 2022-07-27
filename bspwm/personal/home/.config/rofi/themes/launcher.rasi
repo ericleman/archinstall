@@ -117,7 +117,7 @@ element normal.active {
 }
 element selected.normal {
     background-color: 				@selected;
-    text-color:       				@foreground;
+    text-color:       				@background;
     border: 						0px;
     border-color: 					@selected;
 }
@@ -127,7 +127,7 @@ element selected.urgent {
 }
 element selected.active {
     background-color: 				@selected;
-    text-color:       				@on;
+    text-color:       				@black;
 }
 element alternate.normal {
     background-color: 				@background;
@@ -161,7 +161,7 @@ button {
 
 button selected {
     background-color:             	@selected;
-    text-color: 					@foreground;
+    text-color: 					@background;
     border: 						0px;
     border-radius: 					0px;
     border-color: 					@selected;
