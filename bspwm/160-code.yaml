@@ -1,4 +1,4 @@
-- name: install pamac
+- name: install code
   aur:
     use: yay
     name:
