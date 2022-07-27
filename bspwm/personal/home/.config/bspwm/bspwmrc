@@ -2,8 +2,7 @@
 ## Java Applications
 wmname LG3D
 export _JAVA_AWT_WM_NONREPARENTING=1
-
-# use VS Code as default Editor
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp'
 export EDITOR=code
 
 #BSPWM configuration
