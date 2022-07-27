@@ -120,8 +120,8 @@ xsetroot -cursor_name left_ptr
 # polybar	
 $HOME/.config/polybar/launch.sh
 
-killall -q pamac-tray
-pamac-tray & #required to enable copy paste on VMWare
+#killall -q pamac-tray
+#pamac-tray & 
 
 # Dunst - The lightweight notification daemon
 killall -q dunst; dunst & 

@@ -71,8 +71,8 @@
   - name: Polkit
     include_tasks: 170-polkit.yaml
 
-  - name: Pamac
-    include_tasks: 180-pamac.yaml
+#  - name: Pamac
+#    include_tasks: 180-pamac.yaml
 
   - name: btop
     include_tasks: 190-btop.yaml
