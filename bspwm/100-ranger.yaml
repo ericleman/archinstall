@@ -14,3 +14,8 @@
     group: "eric"
     mode: u+rwx,g+r,o--          
 
+- name: install devicons plugin
+  git:
+    repo: "https://github.com/alexanderjeurissen/ranger_devicons"
+    dest: "/home/eric/.config/ranger/plugins/"
+  become_user: eric
