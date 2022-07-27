@@ -17,7 +17,7 @@ configuration {
 @import "/home/eric/.cache/wal/colors-rofi.rasi"
 
 * {
-    font:                           "Noto Sans Mono 20";
+    font:                           "NotoSans Nerd Font 20";
     background-color:             	@background;
 }
 

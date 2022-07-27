@@ -123,6 +123,8 @@ $HOME/.config/polybar/launch.sh
 killall -q pamac-tray
 pamac-tray & #required to enable copy paste on VMWare
 
+# Dunst - The lightweight notification daemon
+killall -q dunst; dunst & 
 
 ## PICOM
 # Terminate if picom is already running

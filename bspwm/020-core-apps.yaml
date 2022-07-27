@@ -5,8 +5,8 @@
       - meld
       - vim
       - nano
-      - noto-fonts
-      - ttf-iosevka-nerd
+#      - noto-fonts
+#      - ttf-iosevka-nerd
       - gucharmap
       - baobab
       - ncdu # disk usage like baobab
@@ -41,12 +41,12 @@
   become: yes
   become_user: eric
 
-#- name: Install ttf-material-design-icons-webfont # required for some rofi menu and polybar icons
-#  aur:
-#    use: yay
-#    name: ttf-material-design-icons-webfont
-#  become: yes
-#  become_user: eric
+- name: Install nerd-fonts-noto
+  aur:
+    use: yay
+    name: nerd-fonts-noto
+  become: yes
+  become_user: eric
 
 #- name: Install nerd-fonts-complete # required for some rofi menu and polybar icons
 #  aur:
