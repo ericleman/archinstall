@@ -135,7 +135,8 @@ picom --config ~/.config/picom/picom.conf --experimental-backends &
 
 #killall -q feh
 #feh --bg-fill /usr/share/backgrounds/nord.jpg &
-$HOME/.config/wpg/wp_init.sh
+#$HOME/.config/wpg/wp_init.sh
+$HOME/.config/wpg/dynamic_wall.sh 2> /tmp/dynamic_wall.log
 
 ## Super Key
 killall -q ksuperkey
