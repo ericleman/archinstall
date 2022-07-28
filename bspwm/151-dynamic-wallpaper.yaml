@@ -22,12 +22,12 @@
     group: "eric"
     mode: u+rwx,g+r,o--          
 
-- name: Creates cron task at reboot
-  ansible.builtin.cron:
-    name: "Dynamic Wallpaper at reboot"
-    special_time: reboot
-    user: eric
-    job: "env PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl DISPLAY=:0 DESKTOP_SESSION=bspwm DBUS_SESSION_BUS_ADDRESS='unix:path=/run/user/1000/bus' /home/eric/.config/wpg/dynamic_wall.sh 2> /tmp/dynamic_wall.log"
+#- name: Creates cron task at reboot
+#  ansible.builtin.cron:
+#    name: "Dynamic Wallpaper at reboot"
+#    special_time: reboot
+##    user: eric
+#    job: "env PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl DISPLAY=:0 DESKTOP_SESSION=bspwm DBUS_SESSION_BUS_ADDRESS='unix:path=/run/user/1000/bus' /home/eric/.config/wpg/dynamic_wall.sh 2> /tmp/dynamic_wall.log"
 
 - name: Creates cron task every hour
   ansible.builtin.cron:
