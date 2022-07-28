@@ -62,6 +62,9 @@
   - name: Global Theme ## DONE
     include_tasks: 150-color-theme.yaml
 
+  - name: Dynamic Wallpaper ## DONE
+    include_tasks: 151-dynamic-wallpaper.yaml
+
 #  - name: Gedit 
 #    include_tasks: 160-gedit.yaml
 
