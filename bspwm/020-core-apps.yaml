@@ -61,3 +61,11 @@
 #    name: nerd-fonts-complete
 #  become: yes
 #  become_user: eric
+
+- name: Install kalker #Calculator
+  aur:
+    use: yay
+    name: kalker
+  become: yes
+  become_user: eric
+
