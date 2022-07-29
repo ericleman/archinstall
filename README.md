@@ -1,6 +1,6 @@
 # arch
  Boot machine with Arch linux ISO in CDROM Drive (on VMWare: VM > Power > Power on to firmware)  
-`loadkeys fr-pc` # i.e.: loqdkeys fr)pc
+`loadkeys fr-pc` # i.e.: loqdkeys fr)pc as I am on French keyboard
 
 `curl -k -L https://raw.githubusercontent.com/ericleman/archinstall/main/start --output start`  
 `sh start [PASSWORD]`
@@ -8,7 +8,7 @@
 or
 
 `curl -k -L https://t.ly/FYHk -o start`  
-`sh start [PASSWORD]`
+`sh start [PASSWORD] [DESKTOP/VM] [HARDWARE]`
 
 Note: for whatever reason, first time I execute `start`, I get an error; this is because /usr/bin/blkid does not exists. But if I reexecute `start`, it works.
 
