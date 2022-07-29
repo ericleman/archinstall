@@ -88,3 +88,7 @@
 
   - name: Wifi dongle
     include_tasks: 320-wifi-dongle.yaml
+
+  - name: LibreOffice
+    include_tasks: 330-libreoffice.yaml
+
