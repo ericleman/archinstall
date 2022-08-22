@@ -1,10 +1,9 @@
 - name: install Gnome related packages
   pacman:
     name:
-      - gnome-shell
-      - gdm
+      - gnome
       - gnome-tweaks
-      - gnome-control-center
+      - dconf-editor
     state: present
 
 - name: enable GDM service
