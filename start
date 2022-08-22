@@ -12,7 +12,7 @@ fi
 
 if [ -z "$2" ]
   then
-    DE=bspwm
+    DE=gnome
     echo "Default DE=$DE"
 fi
 
