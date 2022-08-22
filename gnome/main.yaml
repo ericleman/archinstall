@@ -2,85 +2,24 @@
   become: true
 
   tasks:
-  - name: SUDO ERIC (needs to be before YAY installation)
-    include_tasks: 010-no-passwd.yaml
+  - name: ERIC (sudo nopasswd, home directories...)
+    include_tasks: 010-eric-setup.yaml
 
   - name: Virtualmachine stuff
     include_tasks: 010-vm.yaml
 
-  - name: X Windows Install 
-    include_tasks: 020-xorg.yaml
+  - name: Developper Apps Install 
+    include_tasks: 020-core-apps.yaml
 
-  - name: Gnome and GDM Install 
+  - name: Gnome Shell and GDM
     include_tasks: 030-gnome.yaml
 
-  - name: INSTALL CORE SOFTWARE AND FONTS
-    include_tasks: core-packages.yaml
+  - name: Alacritty Apps Install 
+    include_tasks: 090-alacritty.yaml
 
-  - name: CONFIGURE GDM
-    include_tasks: configure-gdm.yaml
+  - name: Ranger Install 
+    include_tasks: 100-ranger.yaml
 
-  - name: CONFIGURE PACMAN
-    include_tasks: configure-pacman.yaml
+  - name: Zsh Apps Install ## DONE
+    include_tasks: 120-zsh.yaml
 
-  - name: YAY
-    include_tasks: yay.yaml
-
-  - name: PAMAC (need to be after YAY)
-    include_tasks: pamac.yaml
-
-  - name: CHROME
-    include_tasks: chrome.yaml
-
-  - name: WIFI DONGLE
-    include_tasks: wifi-dongle.yaml
-
-  - name: HP PRINTER [USER STILL HAS TO FIND PRINTER ONCE CONNECTED ON THE DESKTOP]
-    include_tasks: hp-printer.yaml
-
-  - name: ZSH
-    include_tasks: install-zsh.yaml
-
-  - name: GNOME SHELL CONFIG
-    include_tasks: gnome-shell-config.yaml
-
-  - name: GENERIC GNOME CONFIG (sleep delay, terminal size, show seconds in click, favorite apps...)
-    include_tasks: gnome-config.yaml
-
-  - name: BIBATA CURSOR
-    include_tasks: bibata.yaml
-
-  - name: PAPIRUS ICONS
-    include_tasks: papirus.yaml
-
-# Wallpaper defined in CATPPUCCIN
-#  - name: WALLPAPER
-#    include_tasks: wallpaper.yaml
-
-#  - name: CATPPUCCIN THEME
-#    include_tasks: 
-#      file: theme-catppuccin.yaml
-#      apply:
-#        tags: theme-catppuccin
-#    tags: theme-catppuccin
-
-#  - name: GRUVBOX THEME
-#    include_tasks: 
-#      file: theme-gruvbox.yaml
-#      apply:
-#        tags: theme-gruvbox
-#    tags: theme-gruvbox
-
-  - name: NORD THEME
-    include_tasks: 
-      file: theme-nord.yaml
-      apply:
-        tags: theme-nord
-    tags: theme-nord
-
-
-  - name: CONKY ALFIRK THEME (adapted from "https://github.com/closebox73/Chepeus")
-    include_tasks: conky-alfirk.yaml
-
-  - name: ACTIVATE GNOME EXTENSIONS 
-    include_tasks: activate-gnome-extensions.yaml

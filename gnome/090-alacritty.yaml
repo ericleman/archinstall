@@ -1,0 +1,20 @@
+- name: install packages
+  pacman:
+    name:
+      - alacritty
+    state: present
+
+- name: Copy theme
+  copy:
+    src: personal/home/.config/alacritty
+    dest: /home/eric/.config
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o--          
+
+- name: Copy theme to root
+  copy:
+    src: personal/home/.config/alacritty
+    dest: /root/.config
+    mode: u+rwx,g+r,o--          
+

@@ -1,7 +1,7 @@
 - name: install Gnome related packages
   pacman:
     name:
-      - gnome-shell
+      - gnome 
       - gdm
       - gnome-tweaks
     state: present
