@@ -896,6 +896,6 @@ font:
 
   size: 16
 
-import:
-  - /home/eric/.cache/wal/colors-alacritty.yml
+#import:
+#  - /home/eric/.cache/wal/colors-alacritty.yml
 
