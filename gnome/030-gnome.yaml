@@ -4,10 +4,36 @@
       - gnome-shell
       - gdm
       - gnome-tweaks
+      - gnome-control-center
     state: present
 
 - name: enable GDM service
   ansible.builtin.systemd:
     name: gdm
     enabled: yes
-    
+
+- name: change Wayland to false if on virtualbox
+  replace:
+    path: /etc/gdm/custom.conf
+    regexp: '#WaylandEnable=false'
+    replace: 'WaylandEnable=false'
+  when: vm == "vbox"
+
+- name: change Wayland to false if on vmware (finally did it as it seems J2EE apps do not work on wayland)
+  replace:
+    path: /etc/gdm/custom.conf
+    regexp: '#WaylandEnable=false'
+    replace: 'WaylandEnable=false'
+  when: vm == "vmware"
+
+- name: auto login
+  lineinfile:
+    path: /etc/gdm/custom.conf
+    regexp: '\[daemon\] '
+    insertafter: '\[daemon\]'
+    state: present
+    line: "{{ item }}"
+  with_items:
+  - 'AutomaticLogin=eric'
+  - 'AutomaticLoginEnable=True'
+
