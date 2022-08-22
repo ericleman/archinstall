@@ -4,6 +4,8 @@
       - gnome
       - gnome-tweaks
       - dconf-editor
+      - xf86-input-vmmouse # as we might use Xorg as Wayland fallback
+      - xf86-video-vmware # as we might use Xorg as Wayland fallback
     state: present
 
 - name: enable GDM service
@@ -18,12 +20,12 @@
     replace: 'WaylandEnable=false'
   when: vm == "vbox"
 
-- name: change Wayland to false if on vmware (finally did it as it seems J2EE apps do not work on wayland)
-  replace:
-    path: /etc/gdm/custom.conf
-    regexp: '#WaylandEnable=false'
-    replace: 'WaylandEnable=false'
-  when: vm == "vmware"
+#- name: change Wayland to false if on vmware (finally did it as it seems J2EE apps do not work on wayland)
+#  replace:
+#    path: /etc/gdm/custom.conf
+#    regexp: '#WaylandEnable=false'
+#    replace: 'WaylandEnable=false'
+#  when: vm == "vmware"
 
 - name: auto login
   lineinfile:
