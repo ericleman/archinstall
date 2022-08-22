@@ -4,6 +4,20 @@
       - alacritty
     state: present
 
+- name: Remove gnome-terminal
+  pacman:
+    name: 
+      - gnome-terminal
+    state: absent
+
+- name: Create a symbolic link from xterm to alacritty as most CLI app (ranger, vim...) will open gnome-terminal or xterm by default on gnome. # see https://www.reddit.com/r/Alacritty/comments/hecdqv/changing_default_terminal_to_alacritty_in_gnome/
+  ansible.builtin.file:
+    src: /usr/bin/alacritty
+    dest: /usr/bin/xterm
+    state: link
+    mode: '1777'
+
+
 - name: Copy theme
   copy:
     src: personal/home/.config/alacritty
