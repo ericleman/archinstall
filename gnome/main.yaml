@@ -23,3 +23,6 @@
   - name: Zsh Apps Install ## DONE
     include_tasks: 120-zsh.yaml
 
+  - name: My Gnome Extensions
+    include_tasks: 500-my-extensions.yaml
+
