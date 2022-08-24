@@ -1,0 +1,11 @@
+{
+    "name" : "Yay indicator",
+    "description" : "Show in panel if yay has some updates to do",
+    "shell-version" : [
+        "42"
+    ],
+    "url" : "",
+    "uuid" : "yay-indicator@ericleman.com",
+    "version" : 1.0
+}
+

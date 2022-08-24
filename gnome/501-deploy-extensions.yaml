@@ -1,0 +1,13 @@
+- name: Copy extension
+  copy:
+    src: personal/home/.local/share/gnome-shell/extensions/{{ item }}
+    dest: /home/eric/.local/share/gnome-shell/extensions/
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o--          
+
+
+- name: Enable extension
+  ansible.builtin.shell: gnome-extensions enable {{ item }}
+  become: yes
+  become_user: eric

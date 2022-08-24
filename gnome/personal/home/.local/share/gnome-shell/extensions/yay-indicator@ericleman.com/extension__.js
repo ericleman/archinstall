@@ -10,7 +10,7 @@ function init () {
     style_class : "panel-button",
   });
   let panelButtonText = new St.Label({
-    text : "Hello World",
+    text : "$ Hello World",
     y_align: Clutter.ActorAlign.CENTER,
   });
   panelButton.set_child(panelButtonText);
