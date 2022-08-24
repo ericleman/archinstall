@@ -1,0 +1,11 @@
+{
+    "name" : "Undecorate windows",
+    "description" : "Remove borders and title of most windows. Run on X11",
+    "shell-version" : [
+        "42"
+    ],
+    "url" : "",
+    "uuid" : "undecorate-windows@ericleman.com",
+    "version" : 1.0
+}
+
