@@ -1,0 +1,11 @@
+{
+    "name" : "Tiling windows",
+    "description" : "My tiling WM. Run on X11",
+    "shell-version" : [
+        "42"
+    ],
+    "url" : "",
+    "uuid" : "tiling-windows@ericleman.com",
+    "version" : 1.0
+}
+
