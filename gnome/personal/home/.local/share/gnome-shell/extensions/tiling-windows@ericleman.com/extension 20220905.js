@@ -8,32 +8,29 @@
  * Ideas for keybindings
  * SUPER + R: redraw workspace
  * SUPER + F: toggle from tiled -> floating -> fullscreen -> tiled
- * SHIFT + SUPER + F: create new workspace and put focused window there
  * SUPER + O: change orientation of a node and its descendants
+ * SUPER + middlebutton: create new workspace and put focused window there
  * 
  * 
  */
 
-const {Gio, Shell, Meta, GLib} = imports.gi;
+const Meta = imports.gi.Meta;
 const Main = imports.ui.main;
-const Me = imports.misc.extensionUtils.getCurrentExtension();
 
 // User parameters:
 const ORIENTATION = {vertical:0, horizontal: 1};
 const GAP = {inner: 30, outter: 30};
-const MIN_WIN_SIZE = 100;
 const DEBUG = true;
-const EXCEPTIONS = []; // window classes to be excluded from tiling
 
 if (DEBUG) {global.tilingWindowsEricLeman = this;}
 
 function _log(msg) {
-  if (DEBUG) log('TILING-WINDOWS '+Date.now()+' *** ' + msg);
+  if (DEBUG) log('TILING-WINDOWS *** ' + msg);
 }
 
 let WinNode = class WinNode {
   // WinNode is a window within a Layout
-  constructor(area,win,parent,parentSide,orientation=ORIENTATION.horizontal) {
+  constructor(area,win,parent,parentSide,orientation=ORIENTATION.vertical) {
     this.area = area;
     this.win = win;
     this.id = win ? win.get_id() : null;
@@ -94,12 +91,6 @@ let WinTree = class WinTree {
     return undefined;
   }
 
-  sibling(node) {
-    if (node !== this.root) {// root has no sibling
-      return node.parent.children[1-node.parentSide];
-    }
-  }
-
   add(parent,win) {
     // add a win to a parent.
     // if called with parent=root, then recursively put it on last leaf
@@ -118,7 +109,7 @@ let WinTree = class WinTree {
     // split the node (which already has its windows), to add a new node with an new window win
     _log("WinTree.split FUNCTION: " + win.get_id());
     _log("Tree structure before split");this.root.print();
-    let [area0, area1] = this.splitArea(node.area,1-node.orientation);
+    let [area0, area1] = this.splitArea(node.area,node.orientation);
     let node0 = new WinNode(area0,node.win,node,0,1-node.orientation);
     let node1 = new WinNode(area1,win,node,1,1-node.orientation);  
     node.win = null;
@@ -129,18 +120,17 @@ let WinTree = class WinTree {
 
   splitArea(area,orientation,ratio=0.5) {
     // split an area in two half. Used in split and cascadeArea.
-    // ratio is portion of first node on all width (or height) including GAP.
     let area0 = {
       x: area.x,
       y: area.y,
-      width: orientation ? area.width : Math.max(MIN_WIN_SIZE, Math.round(area.width*ratio)),
-      height: orientation ? Math.max(MIN_WIN_SIZE, Math.round(area.height*ratio)) : area.height
+      width: orientation ? area.width : Math.floor(area.width*ratio - GAP.inner/2),
+      height: orientation ? Math.floor(area.height*ratio - GAP.inner/2) : area.height
     };
     let area1 = {
-      x: orientation ? area.x : area0.x + area0.width + GAP.inner,
-      y: orientation ? area0.y + area0.height + GAP.inner : area.y,
-      width: orientation ? area.width : Math.max(MIN_WIN_SIZE, area.width - area0.width - GAP.inner),
-      height: orientation ? Math.max(MIN_WIN_SIZE, area.height - area0.height - GAP.inner) : area.height
+      x: orientation ? area.x : area.x + Math.floor(area.width*ratio + GAP.inner/2),
+      y: orientation ? area.y + Math.floor(area.height*ratio + GAP.inner/2) : area.y,
+      width: orientation ? area.width : Math.floor(area.width*(1-ratio) - GAP.inner/2),
+      height: orientation ? Math.floor(area.height*(1-ratio) - GAP.inner/2) : area.height
     };
     return [area0, area1];
   }
@@ -165,51 +155,33 @@ let WinTree = class WinTree {
       return;
     }
     parent.children[childSide] = null;
-    let survivor = parent.children[1-childSide];
-    parent.win = survivor.win;
-    parent.id = survivor.id;
-    parent.children = survivor.children;
-    let switchOrientation = (survivor.orientation != parent.orientation);
-    // if (survivor.orientation != parent.orientation) {
-    //   this.switchChildrenOrientations(parent);
-    // }
-    this.cascadeArea(parent,switchOrientation);
+    parent.win = parent.children[1-childSide].win;
+    parent.id = parent.children[1-childSide].id;
+    parent.children = parent.children[1-childSide].children;
+    this.cascadeArea(parent);
     _log("Tree structure after removing");this.root.print();
   }
 
-  // switchChildrenOrientations(node) {
-  //   // switch the orientation to all descendant of node. 
-  //   // This is the case when a block has been upgraded to a parent with another orientation, after deletion of a sibling node
-  //   node.children.forEach(child => {
-  //     child.orientation = 1 - child.orientation;
-  //     this.switchChildrenOrientations(child);
-  //   })
-  // }
 
-  cascadeArea(node,switchOrientation=false) {
+  cascadeArea(node) {
     // cascade down the positions (x, y, width, height) to all descendant of node. 
     // This is the case when a block has been upgraded after deletion of a sibling node
-    // This is the case after a resize
-    _log("WinTree.cascadeArea FUNCTION: " + node.id);
     let ratio = this.childrenRatio(node);
-    _log("WinTree.cascadeArea Ratio: " + ratio);
-    if (node.children.length == 2) {
-      let newOrientation = (switchOrientation) ? 1 - node.children[0].orientation : node.children[0].orientation;
-      let areas = this.splitArea(node.area,newOrientation,ratio);
-      node.children.forEach(child => {
-        child.area = areas.shift();
-        child.orientation = newOrientation;
-        this.cascadeArea(child,switchOrientation);
-      });
-   } 
+    let [area0, area1] = this.splitArea(node.area,node.orientation,ratio);
+    if (node.children && node.children[0]) {
+      node.children[0].area = area0;
+      node.children[0].orientation = 1-node.orientation;
+    }
+    if (node.children && node.children[1]) {
+      node.children[1].area = area1;
+      node.children[1].orientation = 1-node.orientation;
+    }
   }
 
   childrenRatio(node) {
     // if a node has 2 children, it returns the ratio between them
     if (node.children.length < 2) return 0.5;
-    //return (node.children[0].orientation) ? node.children[0].area.width / node.area.width : node.children[0].area.height / node.area.height
-    return (node.children[0].orientation) ? node.children[0].area.height / (node.children[0].area.height + node.children[1].area.height + GAP.inner)
-                                          : node.children[0].area.width / (node.children[0].area.width + node.children[1].area.width + GAP.inner);
+    return (node.orientation == 0) ? node.children[0].area.height / node.area.height : node.children[0].area.width / node.area.width
   }
 }
 
@@ -242,69 +214,22 @@ let SignalsManager = class SignalsManager {
   }
 }
 
-let KeybindingsManager = class KeybindingsManager {
-  constructor(schema) {
-    this.mode = Shell.ActionMode.ALL;
-    this.flag = Meta.KeyBindingFlags.NONE;
-    this.schema = schema;
-    this.keys = [];
-    this.settings = this.getSettings();
-  }
-
-  getSettings () {
-    let GioSSS = Gio.SettingsSchemaSource;
-    let schemaSource = GioSSS.new_from_directory(
-      Me.dir.get_child("schemas").get_path(),
-      GioSSS.get_default(),
-      false
-    );
-    let schemaObj = schemaSource.lookup(this.schema,true);
-    if (!schemaObj) {
-      throw new Error('cannot find schemas');
-    }
-    return new Gio.Settings({ settings_schema : schemaObj });
-  }
-  
-  addKeybinding(key,callback) {
-    Main.wm.addKeybinding(key, this.settings, this.flag, this.mode, callback);
-    _log('addKeybinding: '+ key);
-    this.keys.push(key);
-  }
-
-  removeKeybindings() {
-    this.keys.forEach(k => {
-      _log('removeKeybindings: '+ k)
-      Main.wm.removeKeybinding(k);
-    });
-  }
-
-}
 let TilingManager = class TilingManager {
   constructor() {
     this.sm = new SignalsManager();
-    this.km = new KeybindingsManager('org.gnome.shell.extensions.tiling-windows');
     this.lastFocusedWin = null;
     this.focusedWin = null;
-    this.initSignals();
-    this.initKeybindings();
+    this.setupSignals();
     this.initFocus();
     this.initWorkspace();
   }
 
-  initKeybindings() {
-    this.km.addKeybinding('change-orientation', () => this.changeOrientation());
-    this.km.addKeybinding('toggle-floating', () => this.toggleFloating());
-    this.km.addKeybinding('dedicated-workspace', () => this.dedicatedWorkspace());
-    this.km.addKeybinding('redraw-tiling', () => this.redraw());
-  }
-
-  initSignals() {
+  setupSignals() {
     this.sm.connectSignal(global.display,"window-created",(display, win) => this.newWindow(win));
     // this.sm.connectSignal(global.display,"window-left-monitor",(display, number, win) => this.xxx(number, win)); // to use for multi monitor support
     this.sm.connectSignal(global.display, "grab-op-begin", (display, win, op) => this.grabBegin(win, op));
     this.sm.connectSignal(global.display, "grab-op-end", (display, win, op) => this.grabEnd(win, op));
     this.sm.connectSignal(global.workspace_manager, "workspace-added", (manager, workspace) => this.initWorkspace(workspace));
-    this.sm.connectSignal(global.workspace_manager, 'workspace-switched', (object, p0, p1) => this.redraw());
     this.sm.connectSignal(global.display, 'notify::focus-window', (obj) => this.updateFocusedWin(obj));
   }
 
@@ -317,7 +242,6 @@ let TilingManager = class TilingManager {
   updateFocusedWin(obj) {
     this.lastFocusedWin = this.focusedWin;
     this.focusedWin = obj.focus_window;
-    if (this.focusedWin) this.draw(this.focusedWin.get_workspace().winTree.root);
   }
 
   initWorkspace(workspaceIndex) {
@@ -360,26 +284,6 @@ let TilingManager = class TilingManager {
     } else if (windowType === 9) {
       win.make_above();
    }
-  }
-
-  changeOrientation() {
-    _log("changeOrientation FUNCTION")
-    let win = this.focusedWin
-    let workspace = win.get_workspace();
-    _log("Tree structure before changeOrientation");workspace.winTree.root.print();
-    let node = workspace.winTree.find(win.get_id());
-    let [parent,childSide] = workspace.winTree.findParent(node.id);
-    if (!parent) {
-      // this was the root, last window on desktop.
-      this.root = null;
-      return;
-    }
-     //node.orientation = 1 - node.orientation;
-     //parent[1-childSide].orientation = 1 - node.orientation;
-     _log("Tree structure during changeOrientation");workspace.winTree.root.print();
-     workspace.winTree.cascadeArea(parent,true);
-     _log("Tree structure after changeOrientation");workspace.winTree.root.print();
-     this.draw(workspace.winTree.root);
   }
 
   addWindow(win) {
@@ -425,7 +329,6 @@ let TilingManager = class TilingManager {
 
   grabBegin(win,op) {
     _log("grabBegin FUNCTION: " + op);
-    if (!win.get_workspace().winTree.find(win.get_id())) return; // window not in tiling tree
     if (win && win.get_window_type() === 0) { 
       if (win &&
           (op == 36865        // resize (nw)
@@ -442,7 +345,6 @@ let TilingManager = class TilingManager {
   }
 
   grabEnd(win,op) {
-    if (!win.get_workspace().winTree.find(win.get_id())) return; // window not in tiling tree
     if (win && op == 1 /* move */) {
       this.swapWindow(win);
     }
@@ -465,60 +367,36 @@ let TilingManager = class TilingManager {
     let workspace = win.get_workspace();
     let [x, y, z] = global.get_pointer();
     _log("resizeWindow FUNCTION: "+win + ',' + op);
-    _log("Tree structure before resizeWindow");workspace.winTree.root.print();
     let node = workspace.winTree.find(win.get_id());
-    //let curArea = node.area;
-    //_log("resizeWindow FUNCTION: starting x,y,w,h: "+ curArea.x+","+curArea.y+","+curArea.width+","+curArea.height);
-    //let newArea = win.get_frame_rect();
-    //_log("resizeWindow FUNCTION: current  x,y,w,h: "+ newArea.x+","+newArea.y+","+newArea.width+","+newArea.height);
-    if ([36865,20481,4097,8193,24577,40961].includes(op)) { // West/East Direction
-      let direction = [36865,20481,4097].includes(op) ? 'W' : 'E';
-      _log("resizeWindow FUNCTION: " + direction);
-      let ultimate = ultimateResized(node,direction);
-      if (ultimate !== workspace.winTree.root) {// we cannot resize the full working area of root
-        let ultimateSibling = workspace.winTree.sibling(ultimate);
-        let left = (direction == 'W') ? ultimateSibling : ultimate;
-        let right = (direction == 'W') ? ultimate : ultimateSibling;
-        let xMove = x - right.area.x; // xMove is positive when moving to right
-        xMove = Math.min(xMove,right.area.width - MIN_WIN_SIZE - GAP.inner); // move to the right cannot reduce right window to minimum
-        xMove = Math.max(xMove,-left.area.width + MIN_WIN_SIZE + GAP.inner) // move to the left cannot reduce left window to minimum
-        left.area.width += xMove;
-        right.area.x += xMove;
-        right.area.width -= xMove;
-        workspace.winTree.cascadeArea(right);
-        workspace.winTree.cascadeArea(left);
-        _log("Tree structure after resizeWindow");workspace.winTree.root.print();
-      }
-    }
-    if ([32769,36865,40961,16385,24577,20481].includes(op)) { // North/South Direction
-      let direction = [32769,36865,40961].includes(op) ? 'N' : 'S';
-      _log("resizeWindow FUNCTION: " + direction);
-      let ultimate = ultimateResized(node,direction);
-      if (ultimate !== workspace.winTree.root) {// we cannot resize the full working area of root
-        let ultimateSibling = workspace.winTree.sibling(ultimate);
-        let top = (direction == 'N') ? ultimateSibling : ultimate;
-        let bottom = (direction == 'N') ? ultimate : ultimateSibling;
-        let yMove = y - bottom.area.y; // yMove is positive when moving to bottom
-        yMove = Math.min(yMove,bottom.area.height - MIN_WIN_SIZE - GAP.inner); // move to bottom cannot reduce bottom window to minimum
-        yMove = Math.max(yMove,-top.area.height + MIN_WIN_SIZE + GAP.inner) // move to top cannot reduce top window to minimum
-        top.area.height += yMove;
-        bottom.area.y += yMove;
-        bottom.area.height -= yMove;
-        workspace.winTree.cascadeArea(top);
-        workspace.winTree.cascadeArea(bottom);
-        _log("Tree structure after resizeWindow");workspace.winTree.root.print();
-      }
+    let curArea = node.area;
+    _log("resizeWindow FUNCTION: starting x,y,w,h: "+ curArea.x+","+curArea.y+","+curArea.width+","+curArea.height);
+    let newArea = win.get_frame_rect();
+    _log("resizeWindow FUNCTION: current  x,y,w,h: "+ newArea.x+","+newArea.y+","+newArea.width+","+newArea.height);
+    if ([36865,20481,4097].includes(op)) { // West Direction
+      _log("resizeWindow FUNCTION: WEST");
+      let ultimate = ultimateResized(node,'W');
+      if (ultimate === workspace.winTree.root) return; // we cannot resize the full working area
+      let ultimateSibling = ultimate.parent.children[1-ultimate.parentSide];
+      let xMove = x - ultimate.area.x;
+      ultimateSibling.area.width += xMove;
+      ultimate.area.x += xMove;
+      ultimate.area.width -= xMove;
+      workspace.winTree.cascadeArea(ultimate);
+      workspace.winTree.cascadeArea(ultimateSibling);
     }
     this.draw(workspace.winTree.root);
     
     function ultimateResized(node,dir) {
       switch(dir) {
-        case 'W': return (node.orientation == 0 && node.parentSide == 1) ? node : ultimateResized(node.parent,dir);
-        case 'E': return (node.orientation == 0 && node.parentSide == 0) ? node : ultimateResized(node.parent,dir);
-        case 'N': return (node.orientation == 1 && node.parentSide == 1) ? node : ultimateResized(node.parent,dir);
-        case 'S': return (node.orientation == 1 && node.parentSide == 0) ? node : ultimateResized(node.parent,dir);
+        case 'W': return (node.orientation == 1 && node.parentSide == 1) ? node : ultimateResized(node.parent,dir);
+        case 'E': return (node.orientation == 1 && node.parentSide == 0) ? node : ultimateResized(node.parent,dir);
+        case 'N': return (node.orientation == 0 && node.parentSide == 1) ? node : ultimateResized(node.parent,dir);
+        case 'S': return (node.orientation == 0 && node.parentSide == 0) ? node : ultimateResized(node.parent,dir);
       }
     }
+
+
+
   }
 
   swapWindow(win) {
@@ -542,7 +420,7 @@ let TilingManager = class TilingManager {
     // redraw all windows of the tree on the display starting from a node (e.g. this.root)
     if (!node) {return;}
     if (node.win) {
-      // _log("draw FUNCTION: " + node.id);
+      _log("draw FUNCTION: " + node.id);
       node.win.unmaximize(Meta.MaximizeFlags.BOTH);
       node.win.unmake_fullscreen();
       node.win.move_resize_frame(true,node.area.x,node.area.y,node.area.width,node.area.height);
@@ -552,65 +430,6 @@ let TilingManager = class TilingManager {
     }
   }
 
-  redraw() {
-    _log("redraw FUNCTION");
-    let workspace = global.workspace_manager.get_active_workspace()
-    let area = this.getWorkingArea(workspace);
-    workspace.winTree.area = area;
-    workspace.winTree.root.area = area;
-    workspace.winTree.cascadeArea(workspace.winTree.root);
-    this.draw(workspace.winTree.root);
-  }
-
-  toggleFloating() {
-    if (!this.focusedWin) return;
-    let win = this.focusedWin;
-    let workspace = win.get_workspace();
-    let node = workspace.winTree.find(win.get_id());
-    if (!node) { // not in winTree. If maximized, put it in tree, if not, it is floating and maximize it
-      if (win.maximized_vertically && win.maximized_horizontally) { // maximized so going back to tree
-        this.addWindow(win);
-      } else { // maximizing it
-        win.maximize(Meta.MaximizeFlags.BOTH);
-      }
-    } else { // in winTree. We need to remove it from tree and let it float (in the middle of screen?)
-      this.floatWindow(workspace, win);
-    }
-  }
-
-  floatWindow(workspace,win) {
-    this.removeWindow(workspace, win);
-    win.make_above();
-    let winRect = win.get_frame_rect();
-    let workArea = workspace.winTree.area
-    let maxHeight = workArea.height - 4 * GAP.outter;
-    let maxWidth = workArea.width - 4 * GAP.outter;
-    if (winRect.height > maxHeight) {
-      winRect.height = maxHeight;
-    }
-    if (winRect.width > maxWidth) {
-      winRect.width = maxWidth;
-    }
-    winRect.x = workArea.x + (workArea.width / 2) - (winRect.width / 2);
-    winRect.y = workArea.y + (workArea.height / 2) - (winRect.height / 2);
-    win.move_resize_frame(true,
-      winRect.x,
-      winRect.y,
-      winRect.width,
-      winRect.height,
-    );
-  }
-
-  dedicatedWorkspace() {
-    if (!this.focusedWin) return;
-    let win = this.focusedWin;
-    let workspace = win.get_workspace();
-    this.removeWindow(workspace, win);
-    let newWorkspace = global.workspace_manager.append_new_workspace(true, 0);
-    win.change_workspace(newWorkspace);
-    this.addWindow(win);
-    GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, this.redraw.bind(this));
-  }
 }
 
 
@@ -620,11 +439,11 @@ function init () {
 function enable () {
   _log("\n\n***** ENABLE EXTENSION ******");
   this.tm = new TilingManager();
+
 }
 
 function disable () {
   this.tm.sm.disconnectSignals();
-  this.tm.km.removeKeybindings();
   this.tm.removeTrees();
 }
 

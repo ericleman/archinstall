@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+
+  <schema id="org.gnome.shell.extensions.tiling-windows"
+    path="/org/gnome/shell/extensions/tiling-windows/">
+
+    <key type="as" name="change-orientation">
+      <default><![CDATA[['<Super>o']]]></default>
+      <summary>Change orientation of focused window in Tiling Manager</summary>
+      <description>
+        Change orientation of focused window
+      </description>
+    </key>
+
+    <key type="as" name="toggle-floating">
+      <default><![CDATA[['<Super>f']]]></default>
+      <summary>Toggle a window from tiled to floating to maximized</summary>
+      <description>
+        Toggle a window from tiled to floating to maximized
+      </description>
+    </key>
+
+    <key type="as" name="dedicated-workspace">
+      <default><![CDATA[['<Shift><Super>f']]]></default>
+      <summary>Move a window to a brand new workspace</summary>
+      <description>
+        Move a window to a brand new workspace
+      </description>
+    </key>
+
+    <key type="as" name="redraw-tiling">
+      <default><![CDATA[['<Super>r']]]></default>
+      <summary>Redraw the current Tiling Manager</summary>
+      <description>
+        Redraw the current Tiling Manager
+      </description>
+    </key>
+
+  </schema>
+
+</schemalist>
