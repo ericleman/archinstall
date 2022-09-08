@@ -17,6 +17,9 @@
   - name: Alacritty Apps Install 
     include_tasks: 090-alacritty.yaml
 
+  - name: Kitty Apps Install 
+    include_tasks: 090-kitty.yaml
+
   - name: Ranger Install 
     include_tasks: 100-ranger.yaml
 

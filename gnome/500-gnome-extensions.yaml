@@ -16,3 +16,14 @@
     - name: blur except dash
       become_user: eric
       dconf: key="/org/gnome/shell/extensions/blur-my-shell/dash-to-dock/blur" value="false"
+    - name: Enable extension
+      ansible.builtin.shell: gnome-extensions enable blur-my-shell@aunetx
+      become: yes
+      become_user: eric
+    - name: hack level for Blur my Shell
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/blur-my-shell/hacks-level" value="2"
+    - name: Applications to blur
+      become_user: eric
+      dconf: key="/org/gnome/shell/extensions/blur-my-shell/whitelist" value="['Alacritty']"
+    

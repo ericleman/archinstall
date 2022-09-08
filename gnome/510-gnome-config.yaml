@@ -20,7 +20,7 @@
 
 - name: font size
   become_user: eric
-  dconf: key="/org/gnome/desktop/interface/text-scaling-factor" value="1.5"
+  dconf: key="/org/gnome/desktop/interface/text-scaling-factor" value="1.25"
 
 - name: maximize and minimize buttons
   become_user: eric
@@ -52,6 +52,11 @@
   become_user: eric
   dconf: key="/org/gnome/shell/favorite-apps" value="['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'gnome-system-monitor.desktop']"
 
+- name: WM Keyboard shortcuts
+  become_user: eric
+  dconf: key="/org/gnome/desktop/wm/keybindings/close" value="['<Super>q']"
+
+
 - name: Activate Keyboard shortcuts
   become_user: eric
   dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings" value="['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
@@ -74,5 +79,5 @@
   dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name" value="'Ranger'"
 - name: Keyboard shortcut for Files command
   become_user: eric
-  dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command" value="'ranger'"
+  dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command" value="'alacritty -e ranger'"
 
