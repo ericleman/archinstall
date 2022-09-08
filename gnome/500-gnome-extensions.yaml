@@ -1,5 +1,5 @@
 - name: deploy my extensions
-  include_tasks: 501-deploy-extensions.yml
+  include_tasks: 501-deploy-extensions.yaml
   loop: 
     - yay-indicator@ericleman.com
     - undecorate-windows@ericleman.com
