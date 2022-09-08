@@ -41,8 +41,8 @@
   - name: LibreOffice
     include_tasks: 330-libreoffice.yaml
 
-  - name: My Gnome Extensions
-    include_tasks: 500-my-extensions.yaml
+  - name: Gnome Extensions
+    include_tasks: 500-gnome-extensions.yaml
 
   - name: Gnome config with dconf
     include_tasks: 510-gnome-config.yaml

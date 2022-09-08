@@ -1,6 +1,0 @@
-- name: deploy extensions
-  include_tasks: 501-deploy-extensions.yml
-  loop: 
-    - yay-indicator@ericleman.com
-    - undecorate-windows@ericleman.com
-    - tiling-windows@ericleman.com
