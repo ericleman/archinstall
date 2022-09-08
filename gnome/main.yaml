@@ -23,6 +23,27 @@
   - name: Zsh Apps Install ## DONE
     include_tasks: 120-zsh.yaml
 
+  - name: VS Code
+    include_tasks: 160-code.yaml
+
+  - name: btop
+    include_tasks: 190-btop.yaml
+
+  - name: Chrome
+    include_tasks: 300-chrome.yaml
+
+  - name: HP Printer
+    include_tasks: 310-hp-printer.yaml
+
+  - name: Wifi dongle
+    include_tasks: 320-wifi-dongle.yaml
+
+  - name: LibreOffice
+    include_tasks: 330-libreoffice.yaml
+
   - name: My Gnome Extensions
     include_tasks: 500-my-extensions.yaml
+
+  - name: Gnome config with dconf
+    include_tasks: 510-gnome-config.yaml
 
