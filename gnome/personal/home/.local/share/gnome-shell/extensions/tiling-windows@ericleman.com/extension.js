@@ -5,7 +5,7 @@
  *  /  !  \
  *  -------
  * 
- * Ideas for keybindings
+ * Keybindings
  * SUPER + R: redraw workspace
  * SUPER + F: toggle from tiled -> floating -> fullscreen -> tiled
  * SHIFT + SUPER + F: create new workspace and put focused window there
@@ -22,8 +22,10 @@ const Me = imports.misc.extensionUtils.getCurrentExtension();
 const ORIENTATION = {vertical:0, horizontal: 1};
 const GAP = {inner: 30, outter: 30};
 const MIN_WIN_SIZE = 100;
+const INACTIVE_OPACITY = 180;
+const WM_CLASSES_FOR_OPACITY =  ['Alacritty', 'kitty'];
+const EXCEPTIONS = ['com-itfinance-core-Starter']; // window classes to be excluded from tiling
 const DEBUG = true;
-const EXCEPTIONS = []; // window classes to be excluded from tiling
 
 if (DEBUG) {global.tilingWindowsEricLeman = this;}
 
@@ -353,6 +355,7 @@ let TilingManager = class TilingManager {
   }
 
   newWindow(win) {
+    if (EXCEPTIONS.includes(win.get_wm_class())) return;
     let windowType = win.get_window_type();
     if (windowType === 0 || windowType === 4) {
       let actor = win.get_compositor_private();
@@ -412,9 +415,10 @@ let TilingManager = class TilingManager {
         if (otherWorkspace.winTree.find(id)) {
           _log("windowAddedToWorkspace from previous workspace index: "+ i);
           this.sm.disconnectSignals(win, 'unmanaged');
-          this.sm.connectSignal(win,'unmanaged',() => this.removeWindow(workspace, win));
           otherWorkspace.winTree.remove(id);
           this.draw(otherWorkspace.winTree.root);
+
+          this.sm.connectSignal(win,'unmanaged',() => this.removeWindow(workspace, win));
           workspace.winTree.add(workspace.winTree.root, win);
           this.draw(workspace.winTree.root);
           break;
@@ -550,6 +554,21 @@ let TilingManager = class TilingManager {
       this.draw(node.children[0]);
       this.draw(node.children[1]);
     }
+    this.setOpacities();
+  }
+
+  setOpacities() {
+    //_log("setOpacities FUNCTION");
+    global.get_window_actors().forEach(actor => {
+      let win = actor.get_meta_window();
+      if (WM_CLASSES_FOR_OPACITY.includes(win.get_wm_class())) {
+        if (win.appears_focused) {
+          actor.opacity = 255;
+        } else {
+          actor.opacity = INACTIVE_OPACITY;
+        }
+      }
+    });
   }
 
   redraw() {

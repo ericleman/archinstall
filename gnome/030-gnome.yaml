@@ -38,3 +38,9 @@
   - 'AutomaticLogin=eric'
   - 'AutomaticLoginEnable=True'
 
+# - name: Install extension-manager
+#   aur:
+#     use: yay
+#     name: extension-manager
+#   become: yes
+#   become_user: eric

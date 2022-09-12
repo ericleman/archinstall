@@ -1,1 +1,1 @@
-yay -Sy &> /dev/null && (n_up=$(yay -Qu | wc -l);([ "$n_up" -eq 0 ] || echo "$n_up")) || echo "yay N/A"
+yay -Sy &> /dev/null && (n_up=$(yay -Qu | wc -l);(([ "$n_up" -eq 0 ] && echo "") || echo "$n_up")) || echo "yay N/A"

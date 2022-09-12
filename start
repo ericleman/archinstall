@@ -34,3 +34,4 @@ sed -i "s%DUMMY_VIRTUAL_MACHINE%$VM%g" archinstall/config.json
 archinstall --config archinstall/config.json --disk-layout archinstall/layout.json --creds archinstall/creds.json
 #archinstall --silent --config archinstall/config.json --creds archinstall/creds.json --disk_layout=archinstall/layout.json
 
+# ln -s ~/Laptop/archinstall/archinstall/gnome/personal/home/.local/share/gnome-shell/extensions ~/.local/share/gnome-shell/
