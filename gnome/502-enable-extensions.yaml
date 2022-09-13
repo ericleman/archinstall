@@ -8,7 +8,7 @@
 
 - name: create the List
   ansible.builtin.set_fact:
-    extension_list: "{{ extension_list.value }}"
+    extension_list: "{{ extension_list.value  | default('[]', true) }}"
 
 - name: new extension
   ansible.builtin.set_fact:
