@@ -2,6 +2,7 @@
 
 const Me = imports.misc.extensionUtils.getCurrentExtension()
 const WorkspacesBar = Me.imports.workspacesBar;
+const UpdateIndicator = Me.imports.updateIndicator;
 
 
 const DEBUG = true;
@@ -11,8 +12,10 @@ function _log(msg) {
 
 function enable(){
     WorkspacesBar.enable();
+    UpdateIndicator.enable();
 }
 
 function disable(){
     WorkspacesBar.disable();
+    UpdateIndicator.disable();
 }

@@ -1,7 +1,7 @@
 - name: deploy my extensions
   include_tasks: 501-deploy-extensions.yaml
   loop: 
-    - yay-indicator@ericleman.com
+    - custom-panel@ericleman.com
     - undecorate-windows@ericleman.com
     - tiling-windows@ericleman.com
 
@@ -25,5 +25,5 @@
       dconf: key="/org/gnome/shell/extensions/blur-my-shell/hacks-level" value="2"
     - name: Applications to blur
       become_user: eric
-      dconf: key="/org/gnome/shell/extensions/blur-my-shell/whitelist" value="['Alacritty']"
+      dconf: key="/org/gnome/shell/extensions/blur-my-shell/applications/whitelist" value="['Alacritty','kitty']"
     

@@ -36,3 +36,6 @@ Everything could be done in SH scripts, but it would require more maintenance an
 # Some Notes
 When 3D acceleration is activated on VMWare, then deactivate it on Google Chrome (or it does not work: https://communities.vmware.com/t5/VMware-Workstation-Pro/Guest-Display-Broken-With-Accelerate-3D-Graphics-Enabled/td-p/2898816)
 ![image](https://user-images.githubusercontent.com/26767717/177496730-38f3be75-ae3c-4329-a49e-0002abfc595a.png)
+
+# Extension development from host Laptop:
+`ln -s ~/Laptop/archinstall/archinstall/gnome/personal/home/.local/share/gnome-shell/extensions ~/.local/share/gnome-shell/`
