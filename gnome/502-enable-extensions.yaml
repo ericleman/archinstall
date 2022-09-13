@@ -1,0 +1,29 @@
+- name: Read currently available extensions
+  community.general.dconf:
+    key: "/org/gnome/shell/enabled-extensions"
+    state: read
+  become: yes
+  become_user: eric
+  register: extension_list
+
+- name: create the List
+  ansible.builtin.set_fact:
+    extension_list: "{{ extension_list.value }}"
+
+- name: new extension
+  ansible.builtin.set_fact:
+    new_ext: "{{ uuid }}"
+
+- name: add an extension
+  set_fact:
+    extension_list: "{{ extension_list + [new_ext] }}"
+
+- name: unique list
+  set_fact:
+    extension_list: "{{ extension_list | unique }}"
+
+- name: Gnome Extension in dconf 
+  become_user: eric
+  dconf: 
+    key: "/org/gnome/shell/enabled-extensions"
+    value: "{{ extension_list }}"

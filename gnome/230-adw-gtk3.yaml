@@ -1,0 +1,9 @@
+- name: install cursor theme
+  aur:
+    use: yay
+    name: adw-gtk3
+  become: yes
+  become_user: eric
+- name: set them as theme
+  become_user: eric
+  dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'adw-gtk3'"

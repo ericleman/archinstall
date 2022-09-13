@@ -894,7 +894,7 @@ font:
     family: NotoSansMono Nerd Font Mono
     style: Bold Italic
 
-  size: 16
+  size: 14
 
 #import:
 #  - /home/eric/.cache/wal/colors-alacritty.yml

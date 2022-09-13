@@ -66,10 +66,10 @@
   dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding" value="'<Super>Return'"
 - name: Keyboard shortcut for Terminal name
   become_user: eric
-  dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name" value="'Alacritty'"
+  dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name" value="'Kitty'"
 - name: Keyboard shortcut for Terminal command
   become_user: eric
-  dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command" value="'alacritty'"
+  dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command" value="'kitty'"
 
 - name: Keyboard shortcut for Files binding
   become_user: eric
@@ -79,5 +79,5 @@
   dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name" value="'Ranger'"
 - name: Keyboard shortcut for Files command
   become_user: eric
-  dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command" value="'alacritty -e ranger'"
+  dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command" value="'kitty ranger'"
 

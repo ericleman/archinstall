@@ -8,6 +8,6 @@
 
 
 - name: Enable extension
-  ansible.builtin.shell: gnome-extensions enable {{ item }}
-  become: yes
-  become_user: eric
+  include_tasks: 502-enable-extensions.yaml
+  vars:
+    uuid: "{{ item }}"
