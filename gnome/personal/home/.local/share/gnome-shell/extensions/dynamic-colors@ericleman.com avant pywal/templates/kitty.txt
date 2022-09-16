@@ -1,0 +1,39 @@
+
+foreground            {{{"color":"onPrimaryContainer","hex":true}}}
+background            {{{"color":"primaryContainer","hex":true}}}
+selection_foreground  {{{"color":"onTertiaryContainer","hex":true}}}
+selection_background  {{{"color":"tertiaryContainer","hex":true}}}
+url_color             {{{"color":"onSecondaryContainer","hex":true}}}
+cursor                {{{"color":"onPrimary","hex":true}}}
+
+# black
+color0   {{{"color":"background","hex":true}}}
+color8  {{{"color":"background","hex":true}}}
+
+# red
+color1   {{{"color":"primary","hex":true}}}
+color9   {{{"color":"onPrimary","hex":true}}}
+
+# green
+color2   {{{"color":"primaryContainer","hex":true}}}
+color10   {{{"color":"onPrimaryContainer","hex":true}}}
+
+# yellow
+color3   {{{"color":"secondary","hex":true}}}
+color11  {{{"color":"onSecondary","hex":true}}}
+
+# blue
+color4   {{{"color":"secondaryContainer","hex":true}}}
+color12  {{{"color":"onSecondaryContainer","hex":true}}}
+
+# magenta
+color5  {{{"color":"tertiary","hex":true}}}
+color13 {{{"color":"onTertiary","hex":true}}}
+
+# cyan
+color6   {{{"color":"tertiaryContainer","hex":true}}}
+color14  {{{"color":"onTertiaryContainer","hex":true}}}
+
+# white
+color7   {{{"color":"onBackground","hex":true}}}
+color15  {{{"color":"onBackground","hex":true}}}

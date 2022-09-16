@@ -46,3 +46,16 @@
       include_tasks: 502-enable-extensions.yaml
       vars:
         uuid: "user-theme@gnome-shell-extensions.gcampax.github.com"
+
+- name: APP INDICATOR
+  block:
+    - name: install gnome-shell-extension-appindicator
+      aur:
+        use: yay
+        name: gnome-shell-extension-appindicator
+      become: yes
+      become_user: eric
+    - name: Enable extension
+      include_tasks: 502-enable-extensions.yaml
+      vars:
+        uuid: "appindicatorsupport@rgcjonas.gmail.com"

@@ -39,3 +39,4 @@ When 3D acceleration is activated on VMWare, then deactivate it on Google Chrome
 
 # Extension development from host Laptop:
 `ln -s ~/Laptop/archinstall/archinstall/gnome/personal/home/.local/share/gnome-shell/extensions ~/.local/share/gnome-shell/`
+`ln -s ~/Laptop/archinstall/archinstall/gnome/personal/home/.local/share/gnome-shell/extensions/dynamic-colors@ericleman.com ~/.local/share/gnome-shell/extensions/`

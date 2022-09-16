@@ -291,6 +291,7 @@ let TilingManager = class TilingManager {
     this.initKeybindings();
     this.initFocus();
     this.initWorkspace();
+    //GLib.timeout_add_seconds(0, 5, () => {this.redraw();return false;});
   }
 
   initKeybindings() {

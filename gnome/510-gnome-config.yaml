@@ -30,6 +30,10 @@
   become_user: eric
   dconf: key="/org/gnome/desktop/interface/clock-show-seconds" value="true"
 
+- name: Show weekday on clock
+  become_user: eric
+  dconf: key="/org/gnome/desktop/interface/clock-show-weekday" value="true"
+
 - name: Weather location
   become_user: eric
   dconf: key="/org/gnome/Weather/locations" value="[<(uint32 2, <('Paris', 'LFPB', true, [(0.85462956287765413, 0.042760566673861078)], [(0.8528842336256599, 0.040724343395436846)])>)>]"
@@ -56,8 +60,16 @@
   become_user: eric
   dconf: key="/org/gnome/desktop/wm/keybindings/close" value="['<Super>q']"
 
+- name: Default Gnome Fonts
+  become_user: eric
+  dconf: key="/org/gnome/desktop/interface/font-name" value="NotoSans Nerd Font 11"
 
-- name: Activate Keyboard shortcuts
+- name: Default Gnome Fonts Mono
+  become_user: eric
+  dconf: key="/org/gnome/desktop/interface/monospace-font-name" value="NotoSansMono Nerd Font 10"
+
+
+- name: Activate Custom Keyboard shortcuts
   become_user: eric
   dconf: key="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings" value="['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
 
