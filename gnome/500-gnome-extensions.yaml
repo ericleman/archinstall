@@ -28,19 +28,6 @@
       vars:
         uuid: "blur-my-shell@aunetx"
 
-- name: Material you theme
-  block:
-    - name: install extension
-      aur:
-        use: yay
-        name: gnome-shell-extension-material-you-theme-git
-      become: yes
-      become_user: eric
-    - name: Enable extension
-      include_tasks: 502-enable-extensions.yaml
-      vars:
-        uuid: "material-you-theme@asubbiah.com"
-
 - name: User theme
   block:
     - name: Enable extension

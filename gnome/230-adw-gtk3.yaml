@@ -1,4 +1,4 @@
-- name: install cursor theme
+- name: install gtk theme
   aur:
     use: yay
     name: adw-gtk3

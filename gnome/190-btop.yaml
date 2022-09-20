@@ -12,9 +12,12 @@
     group: "eric"
     mode: u+rwx,g+r,o--          
 
+
+
 - name: Create a symbolic link to theme
   ansible.builtin.file:
     src: /home/eric/.cache/wal/colors-btop.theme
     dest: /home/eric/.config/btop/themes/colors-btop.theme
     state: link
     mode: '1777'
+    force: yes

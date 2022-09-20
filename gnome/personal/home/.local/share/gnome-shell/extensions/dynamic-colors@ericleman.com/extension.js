@@ -76,6 +76,7 @@ function applyTheme() {
   applyColorTemplate('/templates/gtk.txt', HOME + '/.config/gtk-4.0', 'gtk.css');
   applyColorTemplate('/templates/shell/42/gnome-shell-sass/_colors.txt', EXTENSIONDIR + '/templates/shell/42/gnome-shell-sass', '_colors.scss');
 
+  create_dir_sync(HOME + "/.local/share/themes");
   create_dir_sync(HOME + "/.local/share/themes/DynamicColors");
   create_dir_sync(HOME + "/.local/share/themes/DynamicColors/gnome-shell");
   compile_sass(

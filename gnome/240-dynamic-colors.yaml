@@ -3,6 +3,7 @@
   pacman:
     name:
       - sassc  # required to compile css for the dynamic colors theme
+      - python-pywal
     state: present
 
 - name: get my custom color templates

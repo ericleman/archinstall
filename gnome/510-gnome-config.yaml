@@ -62,11 +62,11 @@
 
 - name: Default Gnome Fonts
   become_user: eric
-  dconf: key="/org/gnome/desktop/interface/font-name" value="NotoSans Nerd Font 11"
+  dconf: key="/org/gnome/desktop/interface/font-name" value="'NotoSans Nerd Font 11'"
 
 - name: Default Gnome Fonts Mono
   become_user: eric
-  dconf: key="/org/gnome/desktop/interface/monospace-font-name" value="NotoSansMono Nerd Font 10"
+  dconf: key="/org/gnome/desktop/interface/monospace-font-name" value="'NotoSansMono Nerd Font 10'"
 
 
 - name: Activate Custom Keyboard shortcuts
