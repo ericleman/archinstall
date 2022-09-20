@@ -3,14 +3,14 @@
 
 @import '_palette.scss';
 
-$_dark_base_color: darken(desaturate(rgba(0, 0, 0, 1), 2%), 2%);
+$_dark_base_color: darken(desaturate(rgba(192, 57, 101, 1), 2%), 2%);
 
-$base_color: if($variant == 'light', rgba(0, 0, 0, 1), $_dark_base_color);
-$bg_color: if($variant == 'light', rgba(0, 0, 0, 1), lighten($base_color, 5%));
+$base_color: if($variant == 'light', #fff, $_dark_base_color);
+$bg_color: if($variant == 'light', #f6f5f4, lighten($base_color, 5%));
 $fg_color: if($variant == 'light', transparentize(black, .2), white);
 
-$selected_fg_color: rgba(0, 0, 0, 1);
-$selected_bg_color: rgba(0, 0, 0, 1);
+$selected_fg_color: #fff;
+$selected_bg_color: rgba(94, 56, 140, 1);
 $selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
 
 $borders_color: if($variant == 'light', transparentize($fg_color, .5), transparentize($fg_color, .9));

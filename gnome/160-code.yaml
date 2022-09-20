@@ -6,6 +6,11 @@
   become: yes
   become_user: eric
 
+- name: Install VS Code dlasagno.wal-theme
+  ansible.builtin.command: code --install-extension dlasagno.wal-theme
+  become: yes
+  become_user: eric
+
 - name: Install VS Code naumovs.color-highlight
   ansible.builtin.command: code --install-extension naumovs.color-highlight
   become: yes

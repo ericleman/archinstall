@@ -13,12 +13,12 @@
 @define-color error_color #c01c28;
 @define-color error_bg_color #e01b24;
 @define-color error_fg_color #ffffff;
-@define-color window_bg_color {{{"color":"color0"}}};
-@define-color window_fg_color {{{"color":"color8"}}};
-@define-color view_bg_color {{{"color":"color0"}}};
-@define-color view_fg_color {{{"color":"color8"}}};
-@define-color headerbar_bg_color {{[{"color":"color0"},{"color":"color1","opacity":0.1}]}};
-@define-color headerbar_fg_color {{[{"color":"color8"},{"color":"color1","opacity":0.1}]}};
+@define-color window_bg_color {{{"color":{"light":"white","dark":"color0"}}}};
+@define-color window_fg_color {{{"color":{"light":"color0","dark":"color8"}}}};
+@define-color view_bg_color {{{"color":{"light":"white","dark":"color0"}}}};
+@define-color view_fg_color {{{"color":{"light":"color0","dark":"color8"}}}};
+@define-color headerbar_bg_color {{[{"color":{"light":"white","dark":"color0"}},{"color":"color1","opacity":0.1}]}};
+@define-color headerbar_fg_color {{[{"color":{"light":"color0","dark":"color8"}},{"color":"color1","opacity":0.1}]}};
 @define-color headerbar_border_color rgba(0, 0, 0, 0.8);
 @define-color headerbar_backdrop_color @window_bg_color;
 @define-color headerbar_shade_color rgba(0, 0, 0, 0.07);

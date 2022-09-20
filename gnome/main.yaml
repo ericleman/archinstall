@@ -41,6 +41,10 @@
   - name: cursor theme
     include_tasks: 230-adw-gtk3.yaml
 
+  - name: dynamic colors (theming)
+    include_tasks: 240-dynamic-colors.yaml
+
+
   - name: Chrome
     include_tasks: 300-chrome.yaml
 

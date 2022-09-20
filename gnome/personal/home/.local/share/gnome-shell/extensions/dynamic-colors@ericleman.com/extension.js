@@ -18,21 +18,22 @@ const PYWAL_CACHE = HOME + '/.cache/wal/'
 
 const DEBUG = true;
 function _log(msg) {
-  if (DEBUG) log('DYNAMIC COLOR '+Date.now()+' *** ' + msg);
+  let d = new Date();
+  if (DEBUG) log('DYNAMIC COLOR '+d.toISOString()+' *** ' + msg);
 }
 if (DEBUG) {global.dynamicColorsEricLeman = this;}
 
 function enable(){
   this.interfaceSettings = ExtensionUtils.getSettings(INTERFACE_SCHEMA);
   this.interfaceSettings.connect('changed::color-scheme', () => {
-    runPywal();
+    getPalette();
   });
   this.wallpaperSettings = ExtensionUtils.getSettings(WALLPAPER_SCHEMA);
   this.wallpaperSettings.connect('changed::picture-uri', () => {
-    runPywal();
+    getPalette();
   });
 
-  runPywal();
+  getPalette();
 }
 
 function disable(){
@@ -41,39 +42,36 @@ function disable(){
   this.wallpaperSettings = null;
 }
 
-function runPywal() {
+function getPalette() {
   // Checking dark theme preference
   let interface_settings = new Gio.Settings({ schema: INTERFACE_SCHEMA });
   let dark_pref = interface_settings.get_string('color-scheme');
-  let isDark = (dark_pref === "prefer-dark");
+  this.isDark = (dark_pref === "prefer-dark");
 
   // Getting img and its color theme
   let desktop_settings = new Gio.Settings({ schema: WALLPAPER_SCHEMA });
-  let wall_uri_type = isDark ? "-dark" : "";
+  let wall_uri_type = this.isDark ? "-dark" : "";
   let wall_path = desktop_settings.get_string('picture-uri' + wall_uri_type);
   if (wall_path.includes("file://")) {
       wall_path = Gio.File.new_for_uri(wall_path).get_path();
   }
 
   let pywalCommand = ['/usr/bin/wal', '-i', wall_path];
-  if (!isDark) pywalCommand.push('-l');
-  runCommand(pywalCommand,getPalette.bind(this));
-}
-
-function getPalette() {
-  _log('getPalette FUNCTION');
-  read_file_async(PYWAL_CACHE + 'colors.json', (content) => {
-    //_log(content);
-    this.palette = JSON.parse(content);
-    _log('palette: '+this.palette.colors.color1);
-    applyTheme()
+  //if (!this.isDark) pywalCommand.push('-l');
+  runCommand(pywalCommand, () => {
+    read_file_async(PYWAL_CACHE + 'colors.json', (content) => {
+      this.palette = JSON.parse(content);
+      this.palette.colors.white = "#FFFFFF" // add hardcoded white in palette
+      _log('palette: '+this.palette.colors.color1);
+      applyTheme()
+    });  
   });
+
 }
 
 function applyTheme() {
   _log('applyTheme FUNCTION');
-  _log('palette: '+this.palette.colors.color1);
-  
+ 
   applyColorTemplate('/templates/gtk.txt', HOME + '/.config/gtk-3.0', 'gtk.css');
   applyColorTemplate('/templates/gtk.txt', HOME + '/.config/gtk-4.0', 'gtk.css');
   applyColorTemplate('/templates/shell/42/gnome-shell-sass/_colors.txt', EXTENSIONDIR + '/templates/shell/42/gnome-shell-sass', '_colors.scss');
@@ -95,41 +93,56 @@ function applyTheme() {
  */
 function applyColorTemplate(template, destinationPath, destinationFile) {
   _log("applyColorTemplate FUNCTION");
-  _log('palette: '+this.palette.colors.color1);
+  //_log('palette: '+this.palette.colors.color1);
   create_dir_sync(destinationPath);
   let colorTemplate = read_file(EXTENSIONDIR + template);
-  colorTemplate = colorTemplate.replace(/{{.*}}/gm, (match) => {
-    let jsn = match.slice(2,-2); // remove first and last two curly brackets
-    jsn = JSON.parse(jsn);
-    if (!Array.isArray(jsn)) { // not an array, simple dict with color and opacity (default=1)
-      if (!jsn.opacity) {jsn.opacity = 1;}
-      let argb = this.palette.colors[jsn.color];
-      _log('argb: '+argb)
-      if (jsn.hex) return string_utils.hexFromArgb(argb);
-      let r = color_utils.redFromArgb(argb);
-      let g = color_utils.greenFromArgb(argb);
-      let b = color_utils.blueFromArgb(argb);
-      let colorStr = "rgba(" + r + ", " + g + ", " + b + ", " + jsn.opacity + ")"
-      return colorStr;
-    } else { // this is an array so mixing colors
-      if (jsn.length > 0) {
-        let totalColor = this.palette.colors[jsn[0].color]; // Setting base color
-        // Mixing in added colors
-        for (let i = 1; i < jsn.length; i++) {
-            let argb = this.palette.colors[jsn[i].color];
-            let r = color_utils.redFromArgb(argb);
-            let g = color_utils.greenFromArgb(argb);
-            let b = color_utils.blueFromArgb(argb);
-            let a = jsn[i].opacity;
-            let addedColor = color_utils.argbFromRgba(r, g, b, a);
-            totalColor = color_utils.blendArgb(totalColor, addedColor);
-        }
-        let colorStr = string_utils.hexFromArgb(totalColor);
-        return colorStr
-      }
-    }
-  });
+  colorTemplate = colorTemplate.replace(/{{.*}}/gm, (match) => {return colorFromJsn(match)});
   write_str_sync(colorTemplate, destinationPath + '/' + destinationFile);
+}
+
+function colorFromJsn(match) {
+  let jsn = match.slice(2,-2); // remove first and last two curly brackets
+  jsn = JSON.parse(jsn);
+  let color
+  if (!Array.isArray(jsn)) { // not an array, simple dict with color and opacity (default=1)
+    if (!jsn.opacity) {jsn.opacity = 1;}
+    color = lightDarkCondition (jsn.color); // check if there is a condition on light/dark theme
+    color = getArgbFromColor(color, jsn.opacity); // returns argb format
+  } else { // this is an array so mixing colors
+    if (jsn.length > 0) {
+      let totalColor = string_utils.argbFromHex(this.palette.colors[lightDarkCondition(jsn[0].color)]); // Setting base color
+      // Mixing in added colors
+      for (let i = 1; i < jsn.length; i++) {
+          let argb = string_utils.argbFromHex(this.palette.colors[lightDarkCondition(jsn[i].color)]);
+          let r = color_utils.redFromArgb(argb);
+          let g = color_utils.greenFromArgb(argb);
+          let b = color_utils.blueFromArgb(argb);
+          let a = jsn[i].opacity;
+          let addedColor = color_utils.argbFromRgba(r, g, b, a);
+          totalColor = color_utils.blendArgb(totalColor, addedColor);
+      }
+      color = string_utils.hexFromArgb(totalColor);
+    }
+  }
+  return color;
+}
+
+function lightDarkCondition(color) {
+  //_log("lightDarkCondition FUNCTION: " + color);
+  if (typeof color  === "object") { // this is a dict with condition on color light/dark
+    return this.isDark ? color.dark : color.light;
+  } else { // same color for dark and light
+    return color;
+  }
+}
+
+function getArgbFromColor(color,opacity) {
+  let argb = string_utils.argbFromHex(this.palette.colors[color]);
+  //_log('argb: '+argb)
+  let r = color_utils.redFromArgb(argb);
+  let g = color_utils.greenFromArgb(argb);
+  let b = color_utils.blueFromArgb(argb);
+  return "rgba(" + r + ", " + g + ", " + b + ", " + opacity + ")";
 }
 
 /**
@@ -199,7 +212,7 @@ function create_dir_sync(path) {
   try {
       file.make_directory(null);
   } catch(e) {
-      log(e);
+      //log(e);
   }
 }
 
@@ -282,6 +295,7 @@ function compile_sass(scss, output) {
 }
 
 function runCommand(cmd,callback) {
+  _log('runCommand : ' + cmd);
   let proc = Gio.Subprocess.new(cmd, Gio.SubprocessFlags.NONE);
   let cancellable = new Gio.Cancellable();
 
@@ -290,13 +304,48 @@ function runCommand(cmd,callback) {
         proc.wait_finish(result);
         
         if (proc.get_successful()) {
-            _log('runCommand process succeeded');
+            _log('runCommand process succeeded: '+cmd);
             if (callback) callback();
         } else {
-            _log('runCommand process failed');
+            _log('runCommand process failed: '+cmd);
         }
     } catch (e) {
         logError(e);
     }
   });
 }
+
+
+/**
+ * Execute a command asynchronously and check the exit status.
+ *
+ * If given, @cancellable can be used to stop the process before it finishes.
+ *
+ * @param {string[]} argv - a list of string arguments
+ * @returns {Promise<boolean>} - The process success
+ */
+//  function runCommand(argv) {
+//   _log('runCommand : ' + argv);
+//   let cancellable = new Gio.Cancellable();
+//   let proc = new Gio.Subprocess({
+//       argv: argv,
+//       flags: Gio.SubprocessFlags.NONE
+//   });
+
+//   return new Promise((resolve, reject) => {
+//     proc.wait_async(cancellable, (proc, result) => {
+//       try {
+//           proc.wait_finish(result);
+//           if (proc.get_successful()) {
+//               _log('runCommand process succeeded: '+cmd);
+//           } else {
+//               _log('runCommand process failed: '+cmd);
+//           }
+//           resolve();
+//       } catch (e) {
+//         reject(e);
+//       }
+//     });
+
+//   });
+// }
