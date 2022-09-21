@@ -14,8 +14,8 @@
   - name: Gnome Shell and GDM
     include_tasks: 030-gnome.yaml
 
-  - name: Alacritty Apps Install 
-    include_tasks: 090-alacritty.yaml
+  #- name: Alacritty Apps Install 
+  #  include_tasks: 090-alacritty.yaml
 
   - name: Kitty Apps Install 
     include_tasks: 090-kitty.yaml

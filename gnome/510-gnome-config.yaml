@@ -54,7 +54,7 @@
 
 - name: Favorite on Dock
   become_user: eric
-  dconf: key="/org/gnome/shell/favorite-apps" value="['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'gnome-system-monitor.desktop']"
+  dconf: key="/org/gnome/shell/favorite-apps" value="['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'gnome-system-monitor.desktop', 'ranger.desktop', 'kitty.desktop']"
 
 - name: WM Keyboard shortcuts
   become_user: eric
