@@ -52,12 +52,15 @@ class WorkspacesBar extends PanelMenu.Button {
     for (let wsIndex = 0; wsIndex < global.workspace_manager.get_n_workspaces(); ++wsIndex) {
       _log('updateWs wsIndex: '+wsIndex);
       this.wsBox = new St.Bin({visible: true, reactive: true, can_focus: true, track_hover: true});
+      //this.wsBox.reactive = true;
+      this.wsBox.style_class = 'panel-button';
       this.wsBox.label = new St.Label({y_align: Clutter.ActorAlign.CENTER});
       this.wsBox.label.set_text(this.wsText(wsIndex));
+      this.wsBox.label.style_class = 'noto-mono-font';
       if (wsIndex == global.workspace_manager.get_active_workspace_index()) {
-        this.wsBox.label.style_class = 'desktop-label-active mono-font';
+        this.wsBox.add_style_class_name('custom-color2');
       } else {
-        this.wsBox.label.style_class = 'desktop-label-inactive mono-font';
+        this.wsBox.add_style_class_name('custom-color3');
       }
       this.wsBox.set_child(this.wsBox.label);
       this.wsBox.connect('button-release-event', () => this.switchWs(wsIndex) );

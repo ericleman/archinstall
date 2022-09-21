@@ -1,21 +1,4 @@
-.desktop-label-active {
-  margin-left: 4px;
-  margin-right: 4px;
-  background-color: rgba(154, 154, 154, 0.7);
-  border-radius: 2px;
-  padding: 0px;
-}
-
-.desktop-label-inactive {
-  margin-left: 4px;
-  margin-right: 4px;
-  background-color: rgba(96, 96, 96, 0.7);
-  border-radius: 4px;
-  padding: 0px;
-}
-
-.mono-font {
+.noto-mono-font {
   font-family: "NotoSansMono Nerd Font Mono";
-  font-size: 18pt;
+  font-size: 16pt;
 }
-

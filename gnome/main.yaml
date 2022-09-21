@@ -44,7 +44,6 @@
   - name: dynamic colors (theming)
     include_tasks: 240-dynamic-colors.yaml
 
-
   - name: Chrome
     include_tasks: 300-chrome.yaml
 

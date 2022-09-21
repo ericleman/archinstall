@@ -67,3 +67,24 @@ $hover_fg_color: if($variant=='light', darken($fg_color, 5%), lighten($fg_color,
 // derived active colors
 $active_bg_color: if($variant=='light', darken($bg_color, 5%), lighten($bg_color, 12%));
 $active_fg_color: if($variant=='light', darken($fg_color, 5%), lighten($fg_color, 12%));
+
+// my custom colors
+.custom-color1 {
+  background-color: {{{"color":"color1"}}};
+}
+
+.custom-color2 {
+  background-color: {{{"color":"color2"}}};
+}
+
+.custom-color3 {
+  background-color: {{{"color":"color3"}}};
+}
+
+.custom-color4 {
+  background-color: {{{"color":"color4"}}};
+}
+
+.custom-color5 {
+  background-color: {{{"color":"color5"}}};
+}

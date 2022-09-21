@@ -4,7 +4,7 @@ const Me = imports.misc.extensionUtils.getCurrentExtension();
 const Main = imports.ui.main;
 const PanelMenu = imports.ui.panelMenu;
 
-const CHECK_SCRIPT = `yay -Sy &> /dev/null && (n_up=$(yay -Qu | wc -l);(([ "$n_up" -eq 0 ] && echo "  ") || echo "  $n_up ")) || echo " yay N/A "`;
+const CHECK_SCRIPT = `yay -Sy &> /dev/null && (n_up=$(yay -Qu | wc -l);(([ "$n_up" -eq 0 ] && echo "") || echo " $n_up ")) || echo " yay N/A "`;
 
 const COMMAND_CHECK = ['bash', '-c', CHECK_SCRIPT]
 const COMMAND_UPDATE = ['kitty', 'yay']
@@ -21,14 +21,20 @@ class UpdateBar extends PanelMenu.Button {
   constructor() {
     super();
     this.bar = new St.BoxLayout({});
+    this.bar.style_class = 'panel-button';
+    this.bar.add_style_class_name('custom-color3');
+    this.bin0 = new St.Bin({visible: true, reactive: true, can_focus: true, track_hover: true});
+    this.bin0.label = new St.Label({y_align: Clutter.ActorAlign.CENTER});
+    this.bin0.label.style_class = 'noto-mono-font';
+    this.bin0.label.set_text('  ');
+    this.bin0.set_child(this.bin0.label);
+    this.bin0.connect('button-release-event', () => this.runUpdates() );
+    this.bar.add_actor(this.bin0);
+
     this.bin = new St.Bin({visible: true, reactive: true, can_focus: true, track_hover: true});
     this.bin.label = new St.Label({y_align: Clutter.ActorAlign.CENTER});
-    this.bin.style_class = 'panel-button custom-color3';
-    this.bin.label.style_class = 'noto-mono-font';
     this.bin.set_child(this.bin.label);
-    this.bin.connect('button-release-event', () => this.runUpdates() );
     this.bar.add_actor(this.bin);
-
     this.add_child(this.bar);
     // run the command once now
     this.checkUpdates();

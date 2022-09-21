@@ -15,6 +15,26 @@ const INTERFACE_SCHEMA = 'org.gnome.desktop.interface';
 const SHELL_SCHEMA = 'org.gnome.shell.extensions.user-theme';
 const EXTENSIONDIR = Me.dir.get_path();
 const PYWAL_CACHE = HOME + '/.cache/wal/'
+const CUSTOM_PALETTE = {"colors": {
+  "color0": "#3B4252",
+  "color1": "#BF616A",
+  "color2": "#A3BE8C",
+  "color3": "#EBCB8B",
+  "color4": "#81A1C1",
+  "color5": "#B48EAD",
+  "color6": "#88C0D0",
+  "color7": "#E5E9F0",
+  "color8": "#4C566A",
+  "color9": "#BF616A",
+  "color10": "#A3BE8C",
+  "color11": "#EBCB8B",
+  "color12": "#81A1C1",
+  "color13": "#B48EAD",
+  "color14": "#8FBCBB",
+  "color15": "#ECEFF4",
+  "white": "#ffffff"
+}};
+const USE_CUSTOM_PALETTE = false;
 
 const DEBUG = true;
 function _log(msg) {
@@ -56,16 +76,20 @@ function getPalette() {
       wall_path = Gio.File.new_for_uri(wall_path).get_path();
   }
 
-  let pywalCommand = ['/usr/bin/wal', '-i', wall_path];
-  //if (!this.isDark) pywalCommand.push('-l');
-  runCommand(pywalCommand, () => {
-    read_file_async(PYWAL_CACHE + 'colors.json', (content) => {
-      this.palette = JSON.parse(content);
-      this.palette.colors.white = "#FFFFFF" // add hardcoded white in palette
-      _log('palette: '+this.palette.colors.color1);
-      applyTheme()
-    });  
-  });
+  if (USE_CUSTOM_PALETTE) {
+    this.palette = CUSTOM_PALETTE;
+    applyTheme();
+  } else {
+    let pywalCommand = ['/usr/bin/wal', '-i', wall_path];
+    runCommand(pywalCommand, () => {
+      read_file_async(PYWAL_CACHE + 'colors.json', (content) => {
+        this.palette = JSON.parse(content);
+        this.palette.colors.white = "#FFFFFF" // add hardcoded white in palette
+        _log('palette: '+this.palette.colors.color1);
+        applyTheme();
+      });  
+    });
+  }
 
 }
 

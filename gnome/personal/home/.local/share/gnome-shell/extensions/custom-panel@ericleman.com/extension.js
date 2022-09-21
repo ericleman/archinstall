@@ -5,6 +5,11 @@ const WorkspacesBar = Me.imports.workspacesBar;
 const UpdateIndicator = Me.imports.updateIndicator;
 const ActivitiesButton = Me.imports.activitiesButton;
 const AppMenuButton = Me.imports.appMenuButton;
+const AccessibilityButton = Me.imports.accessibilityButton;
+const DateMenuButton = Me.imports.dateMenuButton;
+const AggregateMenuButton = Me.imports.aggregateMenuButton;
+
+
 
 const DEBUG = true;
 function _log(msg) {
@@ -16,6 +21,9 @@ function enable(){
     UpdateIndicator.enable();
     ActivitiesButton.enable();
     AppMenuButton.enable();
+    AccessibilityButton.enable();
+    DateMenuButton.enable();
+    AggregateMenuButton.enable();
 }
 
 function disable(){
@@ -23,4 +31,7 @@ function disable(){
     UpdateIndicator.disable();
     ActivitiesButton.disable();
     AppMenuButton.disable();    
+    AccessibilityButton.disable();    
+    DateMenuButton.disable();    
+    AggregateMenuButton.disable();    
 }
