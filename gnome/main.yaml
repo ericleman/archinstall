@@ -38,7 +38,7 @@
   - name: cursor theme
     include_tasks: 220-bibata.yaml
 
-  - name: cursor theme
+  - name: adw-gtk3 theme 
     include_tasks: 230-adw-gtk3.yaml
 
   - name: dynamic colors (theming)

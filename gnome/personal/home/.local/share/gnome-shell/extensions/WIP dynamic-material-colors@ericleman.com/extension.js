@@ -4,37 +4,21 @@ https://github.com/avanishsubbiah/material-you-theme
 'use strict';
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
-const { Gio, GLib } = imports.gi;
+const { Gio, GLib, GdkPixbuf } = imports.gi;
 const Main = imports.ui.main;
 const string_utils = Me.imports.utils.string_utils;
 const color_utils = Me.imports.utils.color_utils;
+const { sourceColorFromImage } = Me.imports.utils.image_utils;
+const { CorePalette } = Me.imports.palettes.core_palette;
+const { Scheme } = Me.imports.scheme.scheme;
+
+
 
 const HOME = GLib.get_home_dir();
 const WALLPAPER_SCHEMA = 'org.gnome.desktop.background';
 const INTERFACE_SCHEMA = 'org.gnome.desktop.interface';
 const SHELL_SCHEMA = 'org.gnome.shell.extensions.user-theme';
 const EXTENSIONDIR = Me.dir.get_path();
-const PYWAL_CACHE = HOME + '/.cache/wal/'
-const CUSTOM_PALETTE = {"colors": {
-  "color0": "#3B4252",
-  "color1": "#BF616A",
-  "color2": "#A3BE8C",
-  "color3": "#EBCB8B",
-  "color4": "#81A1C1",
-  "color5": "#B48EAD",
-  "color6": "#88C0D0",
-  "color7": "#E5E9F0",
-  "color8": "#4C566A",
-  "color9": "#BF616A",
-  "color10": "#A3BE8C",
-  "color11": "#EBCB8B",
-  "color12": "#81A1C1",
-  "color13": "#B48EAD",
-  "color14": "#8FBCBB",
-  "color15": "#ECEFF4",
-  "white": "#ffffff"
-}};
-const USE_CUSTOM_PALETTE = false;
 
 const DEBUG = true;
 function _log(msg) {
@@ -76,6 +60,29 @@ function getPalette() {
       wall_path = Gio.File.new_for_uri(wall_path).get_path();
   }
 
+  let pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(wall_path, 64, 64);
+  let source = sourceColorFromImage(pixBuf);
+  let palette = CorePalette.of(source);
+  let theme = {
+      source,
+      schemes: {
+          light: Scheme.light(source),
+          dark: Scheme.dark(source),
+      },
+      palettes: {
+          primary: palette.a1,
+          secondary: palette.a2,
+          tertiary: palette.a3,
+          neutral: palette.n1,
+          neutralVariant: palette.n2,
+          error: palette.error,
+      },
+  };
+
+
+
+
+
   if (USE_CUSTOM_PALETTE) {
     this.palette = CUSTOM_PALETTE;
     applyTheme();
@@ -96,8 +103,8 @@ function getPalette() {
 function applyTheme() {
   _log('applyTheme FUNCTION');
  
-  //applyColorTemplate('/templates/gtk.txt', HOME + '/.config/gtk-3.0', 'gtk.css');
-  //applyColorTemplate('/templates/gtk.txt', HOME + '/.config/gtk-4.0', 'gtk.css');
+  applyColorTemplate('/templates/gtk.txt', HOME + '/.config/gtk-3.0', 'gtk.css');
+  applyColorTemplate('/templates/gtk.txt', HOME + '/.config/gtk-4.0', 'gtk.css');
   applyColorTemplate('/templates/shell/42/gnome-shell-sass/_colors.txt', EXTENSIONDIR + '/templates/shell/42/gnome-shell-sass', '_colors.scss');
 
   create_dir_sync(HOME + "/.local/share/themes");
@@ -206,8 +213,8 @@ function get_pixel (pixels, n_channels, rowstride, x, y)
 
 
 function remove_theme() {
-  // delete_file(HOME + "/.config/gtk-4.0/gtk.css");
-  // delete_file(HOME + "/.config/gtk-3.0/gtk.css");
+  delete_file(HOME + "/.config/gtk-4.0/gtk.css");
+  delete_file(HOME + "/.config/gtk-3.0/gtk.css");
 }
 
 async function create_dir(path) {
