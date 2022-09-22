@@ -38,13 +38,13 @@
 
 - name: APP INDICATOR
   block:
-    - name: install gnome-shell-extension-appindicator
+    - name: install gnome-shell-extension-tray-icons-reloaded
       aur:
         use: yay
-        name: gnome-shell-extension-appindicator
+        name: gnome-shell-extension-tray-icons-reloaded
       become: yes
       become_user: eric
     - name: Enable extension
       include_tasks: 502-enable-extensions.yaml
       vars:
-        uuid: "appindicatorsupport@rgcjonas.gmail.com"
+        uuid: "trayIconsReloaded@selfmade.pl"
