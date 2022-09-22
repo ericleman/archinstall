@@ -4,7 +4,7 @@ const Me = imports.misc.extensionUtils.getCurrentExtension();
 const Main = imports.ui.main;
 const PanelMenu = imports.ui.panelMenu;
 
-const CHECK_SCRIPT = `yay -Sy &> /dev/null && (n_up=$(yay -Qu | wc -l);(([ "$n_up" -eq 0 ] && echo "") || echo "$n_up")) || echo "yay N/A"`;
+const CHECK_SCRIPT = `yay -Sy &> /dev/null && (n_up=$(yay -Qu | wc -l);(([ "$n_up" -eq 0 ] && echo "  ") || echo "  $n_up ")) || echo " yay N/A "`;
 
 const COMMAND_CHECK = ['bash', '-c', CHECK_SCRIPT]
 const COMMAND_UPDATE = ['kitty', 'yay']
@@ -49,7 +49,7 @@ class UpdateBar extends PanelMenu.Button {
           let [, stdout, stderr] = proc.communicate_utf8_finish(res);
           if (proc.get_successful()) {
             text  = stdout.split('\n')[0];
-            this.bin.label.clutter_text.set_markup('  <span font_desc="NotoSansMono Nerd Font Mono 14">' + text + '</span> ');
+            this.bin.label.set_text(text);
           } else {
               throw new Error(stderr);
           }

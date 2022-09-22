@@ -10,6 +10,7 @@ const ICONS = {
   'Google-chrome': '',
   'Code': '',
   'Org.gnome.Nautilus': '', 
+  'com-itfinance-core-Starter': ''
 }
 
 const DEBUG = true;
