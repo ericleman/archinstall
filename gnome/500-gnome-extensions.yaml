@@ -5,6 +5,7 @@
     - undecorate-windows@ericleman.com
     - tiling-windows@ericleman.com
     - dynamic-colors@ericleman.com
+    - dynamic-wallpaper@ericleman.com
 
 - name: Blur my Shell
   block:

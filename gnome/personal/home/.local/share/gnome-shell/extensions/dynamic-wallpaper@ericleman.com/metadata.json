@@ -1,0 +1,11 @@
+{
+    "name" : "Dynamic wallpaper",
+    "description" : "Change wallpaper every hour",
+    "shell-version" : [
+        "42"
+    ],
+    "url" : "",
+    "uuid" : "dynamic-wallpaper@ericleman.com",
+    "version" : 1.0
+}
+
