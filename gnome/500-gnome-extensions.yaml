@@ -48,3 +48,16 @@
       include_tasks: 502-enable-extensions.yaml
       vars:
         uuid: "trayIconsReloaded@selfmade.pl"
+
+#- name: Media Control
+#  block:
+#    - name: install gnome-shell-extension-media-controls
+#      aur:
+#        use: yay
+#        name: gnome-shell-extension-media-controls
+#      become: yes
+#      become_user: eric
+#    - name: Enable extension
+#      include_tasks: 502-enable-extensions.yaml
+#      vars:
+#        uuid: "mediacontrols@cliffniff.github.com"
