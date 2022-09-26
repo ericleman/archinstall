@@ -299,6 +299,11 @@ let TilingManager = class TilingManager {
     this.km.addKeybinding('toggle-floating', () => this.toggleFloating());
     this.km.addKeybinding('dedicated-workspace', () => this.dedicatedWorkspace());
     this.km.addKeybinding('redraw-tiling', () => this.redraw());
+    // Key binding below deactivated as Super+L locks the host on VMWare.
+    // this.km.addKeybinding('change-up', () => this.changeFocused({ above: true, below: false, left: false, right: false }));
+    // this.km.addKeybinding('change-left', () => this.changeFocused({ above: false, below: false, left: true, right: false }));
+    // this.km.addKeybinding('change-down', () => this.changeFocused({ above: false, below: true, left: false, right: false }));
+    // this.km.addKeybinding('change-right', () => this.changeFocused({ above: false, below: false, left: false, right: true }));
   }
 
   initSignals() {
@@ -384,6 +389,29 @@ let TilingManager = class TilingManager {
      workspace.winTree.cascadeArea(parent,true);
      _log("Tree structure after changeOrientation");workspace.winTree.root.print();
      this.draw(workspace.winTree.root);
+  }
+
+  changeFocused(direction) {
+    let workspace = global.workspace_manager.get_active_workspace();
+    let rect = this.focusedWin.get_frame_rect();
+    if (direction.above) {
+      rect.y -= (GAP.outter+10);
+    } else if (direction.below) {
+      rect.y += (GAP.outter+10);
+    } else if (direction.left) {
+      rect.x -= (GAP.outter+10);
+    } else if (direction.right) {
+      rect.x += (GAP.outter+10);
+    }
+    workspace.list_windows().forEach(win => {
+      if (win !== this.focusedWin) {
+        let otherRect = win.get_frame_rect();
+        if (rect.overlap(otherRect)) {
+          win.focus(0);
+        }
+      }
+    });
+
   }
 
   addWindow(win) {

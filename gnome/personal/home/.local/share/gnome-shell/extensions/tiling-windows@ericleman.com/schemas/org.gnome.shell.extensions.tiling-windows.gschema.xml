@@ -4,6 +4,38 @@
   <schema id="org.gnome.shell.extensions.tiling-windows"
     path="/org/gnome/shell/extensions/tiling-windows/">
 
+    <key type="as" name="change-left">
+      <default><![CDATA[['<Super>h']]]></default>
+      <summary>Change focused window in Tiling Manager</summary>
+      <description>
+        Change focused window to left
+      </description>
+    </key>
+
+    <key type="as" name="change-down">
+      <default><![CDATA[['<Super>j']]]></default>
+      <summary>Change focused window in Tiling Manager</summary>
+      <description>
+        Change focused window to down
+      </description>
+    </key>
+
+    <key type="as" name="change-up">
+      <default><![CDATA[['<Super>k']]]></default>
+      <summary>Change focused window in Tiling Manager</summary>
+      <description>
+        Change focused window to up
+      </description>
+    </key>
+
+    <key type="as" name="change-right">
+      <default><![CDATA[['<Super>l']]]></default>
+      <summary>Change focused window in Tiling Manager</summary>
+      <description>
+        Change focused window to right
+      </description>
+    </key>
+
     <key type="as" name="change-orientation">
       <default><![CDATA[['<Super>o']]]></default>
       <summary>Change orientation of focused window in Tiling Manager</summary>
