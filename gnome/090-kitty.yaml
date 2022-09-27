@@ -12,8 +12,20 @@
     group: "eric"
     mode: u+rwx,g+r,o--          
 
-- name: Create a symbolic link from xterm to kitty as most CLI app (ranger, vim...) will open gnome-terminal or xterm by default on gnome. # see https://www.reddit.com/r/Alacritty/comments/hecdqv/changing_default_terminal_to_alacritty_in_gnome/
+
+- name: Remove gnome-terminal # see https://www.reddit.com/r/Alacritty/comments/hecdqv/changing_default_terminal_to_alacritty_in_gnome/
+  pacman:
+    name: 
+      - gnome-terminal
+    state: absent
+
+- name: Remove xterm
   ansible.builtin.file:
+    path: /usr/bin/xterm
+    state: absent
+
+- name: Create a symbolic link from xterm to kitty as most CLI app (ranger, vim...) will open gnome-terminal or xterm by default on gnome. # see https://www.reddit.com/r/Alacritty/comments/hecdqv/changing_default_terminal_to_alacritty_in_gnome/
+  ansible.builtin.file: # cd /usr/bin && sudo rm xterm && sudo ln -s kitty xterm
     src: /usr/bin/kitty
     dest: /usr/bin/xterm
     state: link
