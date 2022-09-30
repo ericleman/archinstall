@@ -29,6 +29,9 @@
   - name: VS Code
     include_tasks: 160-code.yaml
 
+  - name: Neovim
+    include_tasks: 170-nvim.yaml
+
   - name: btop
     include_tasks: 190-btop.yaml
 
