@@ -6,6 +6,10 @@
       - xf86-video-vmware # as we might use Xorg as Wayland fallback
     state: present
 
+- name: enable SDDM service
+  ansible.builtin.systemd:
+    name: sddm
+    enabled: yes
 
 - name: auto login
   copy:
