@@ -2,6 +2,7 @@
   pacman:
     name:
       - plasma
+      - kde-system-meta
       - xf86-input-vmmouse # as we might use Xorg as Wayland fallback
       - xf86-video-vmware # as we might use Xorg as Wayland fallback
     state: present
@@ -16,3 +17,20 @@
     src: personal/etc/sddm.conf.d
     dest: /etc/
     mode: u+rwx,g+r,o--
+
+- name: on vmware need this to copy paste
+  copy:
+    src: personal/home/.config/autostart/vmware-user.desktop
+    dest: /home/.config/autostart/vmware-user.desktop
+    mode: u+rwx,g+r,o--
+  when: vm == "vmware"
+
+- name: kitty config 1
+  ansible.builtin.command: kwriteconfig5 --file ~/.config/kdeglobals --group General --key TerminalService kitty.desktop
+  become: yes
+  become_user: eric
+
+- name: kitty config 2
+  ansible.builtin.command: kwriteconfig5 --file ~/.config/kdeglobals --group General --key TerminalApplication kitty 
+  become: yes
+  become_user: eric
