@@ -8,7 +8,7 @@
 or
 
 `curl -k -L https://t.ly/FYHk -o start`  
-`sh start [PASSWORD] [DESKTOP/VM] [HARDWARE]`
+`sh start [PASSWORD] [DESKTOP/WM] [HARDWARE]`
 
 Note: for whatever reason, first time I execute `start`, I get an error; this is because /usr/bin/blkid does not exists. But if I reexecute `start`, it works.
 
