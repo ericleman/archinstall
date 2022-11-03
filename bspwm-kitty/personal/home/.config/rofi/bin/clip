@@ -1,5 +1,0 @@
-#!/bin/bash
-DIR="$HOME/.config"
-
-
-CM_LAUNCHER=rofi clipmenu -theme $DIR/rofi/themes/launcher.rasi -kb-cancel Escape,Alt-F1

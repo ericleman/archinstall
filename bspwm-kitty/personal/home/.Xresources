@@ -1,3 +1,0 @@
-# This file is called by LightDM when /etc/lightdm/Xsession is run 
-
-Xft.dpi: 144 # 150% from 96dpi to adapt to my 4k screen
