@@ -9,6 +9,6 @@
 
 - name: auto login
   copy:
-    src: personal/etc/sddm.conf.d/autologin.conf
-    dest: /etc/sddm.conf.d/autologin.conf
+    src: personal/etc/sddm.conf.d
+    dest: /etc/
     mode: u+rwx,g+r,o--
