@@ -1,0 +1,4 @@
+- name: install libreoffice
+  pacman:
+    name: libreoffice-still
+    state: present

@@ -1,0 +1,13 @@
+- name: install packages
+  pacman:
+    name:
+      - btop
+    state: present
+
+- name: copy btop dotfile
+  copy:
+    src: personal/home/.config/btop
+    dest: /home/eric/.config/
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o--          

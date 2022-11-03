@@ -1,0 +1,27 @@
+- name: install Gnome related packages
+  pacman:
+    name:
+      - plasma
+      - xf86-input-vmmouse # as we might use Xorg as Wayland fallback
+      - xf86-video-vmware # as we might use Xorg as Wayland fallback
+    state: present
+
+- name: auto login
+  lineinfile:
+    path: /etc/gdm/custom.conf
+    regexp: '\[daemon\] '
+    insertafter: '\[daemon\]'
+    state: present
+    line: "{{ item }}"
+  with_items:
+  - 'AutomaticLogin=eric'
+  - 'AutomaticLoginEnable=True'
+
+
+- name: auto login
+  copy:
+    dest: "/etc/sddm.conf.d/autologin.conf"
+    content: |
+      [Autologin]
+      User=eric
+      Session=plasma

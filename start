@@ -12,7 +12,7 @@ fi
 
 if [ -z "$2" ]
   then
-    DE=gnome
+    DE=kde
     echo "Default DE=$DE"
 fi
 
