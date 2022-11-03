@@ -23,6 +23,8 @@ if [ -z "$3" ]
 fi
 
 
+sed -i "s%SigLevel = Required DatabaseOptional%SigLevel = Never%g" /etc/pacman.conf
+
 pacman -Sy --noconfirm git
 git clone https://github.com/ericleman/archinstall.git
 cd archinstall

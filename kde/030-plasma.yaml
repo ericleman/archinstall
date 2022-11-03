@@ -18,10 +18,17 @@
     dest: /etc/
     mode: u+rwx,g+r,o--
 
-- name: on vmware need this to copy paste
+
+- name: on vmware need this to copy paste (1)
+  ansible.builtin.file:
+    path: /home/eric/.config/autostart
+    state: directory
+    mode: '0755'
+
+- name: on vmware need this to copy paste (2)
   copy:
     src: personal/home/.config/autostart/vmware-user.desktop
-    dest: /home/.config/autostart/vmware-user.desktop
+    dest: /home/eric/.config/autostart/vmware-user.desktop
     mode: u+rwx,g+r,o--
   when: vm == "vmware"
 
