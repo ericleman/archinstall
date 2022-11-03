@@ -9,8 +9,6 @@
 
 - name: auto login
   copy:
-    dest: "/etc/sddm.conf.d/autologin.conf"
-    content: |
-      [Autologin]
-      User=eric
-      Session=plasma
+    src: personal/etc/sddm.conf.d/autologin.conf
+    dest: /etc/sddm.conf.d/autologin.conf
+    mode: u+rwx,g+r,o--
