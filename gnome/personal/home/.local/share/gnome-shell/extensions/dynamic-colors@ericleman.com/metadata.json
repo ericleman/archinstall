@@ -2,7 +2,7 @@
     "name" : "Dynamic colors",
     "description" : "Change gnome colors based on wallpaper",
     "shell-version" : [
-        "42"
+        "42","43"
     ],
     "url" : "",
     "uuid" : "dynamic-colors@ericleman.com",

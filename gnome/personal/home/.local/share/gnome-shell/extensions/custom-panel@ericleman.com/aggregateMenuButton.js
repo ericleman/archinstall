@@ -1,4 +1,4 @@
-const AggMenu = imports.ui.main.panel.statusArea.aggregateMenu;
+const AggMenu = imports.ui.main.panel.statusArea.quickSettings;
 
 
 var enable = () => {
