@@ -1,7 +1,0 @@
-[Desktop Entry]
-Exec=/etc/xdg/autostart/vmware-user.desktop
-Icon=dialog-scripts
-Name=vmware-user.desktop
-Path=
-Type=Application
-X-KDE-AutostartScript=true

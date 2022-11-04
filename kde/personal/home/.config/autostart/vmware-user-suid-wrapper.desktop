@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=/usr/bin/vmware-user-suid-wrapper
+Icon=
+Name=vmware-user-suid-wrapper
+Path=
+Terminal=False
+Type=Application
