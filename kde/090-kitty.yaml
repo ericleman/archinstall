@@ -12,21 +12,12 @@
     group: "eric"
     mode: u+rwx,g+r,o--          
 
+- name: kitty config 1
+  ansible.builtin.command: kwriteconfig5 --file ~/.config/kdeglobals --group General --key TerminalService kitty.desktop
+  become: yes
+  become_user: eric
 
-#- name: Remove gnome-terminal # see https://www.reddit.com/r/Alacritty/comments/hecdqv/changing_default_terminal_to_alacritty_in_gnome/
-#  pacman:
-#    name: 
-#      - gnome-terminal
-#    state: absent
-
-# - name: Remove xterm
-#   ansible.builtin.file:
-#     path: /usr/bin/xterm
-#     state: absent
-
-# - name: Create a symbolic link from xterm to kitty as most CLI app (ranger, vim...) will open gnome-terminal or xterm by default on gnome. # see https://www.reddit.com/r/Alacritty/comments/hecdqv/changing_default_terminal_to_alacritty_in_gnome/
-#   ansible.builtin.file: # cd /usr/bin && sudo rm xterm && sudo ln -s kitty xterm
-#     src: /usr/bin/kitty
-#     dest: /usr/bin/xterm
-#     state: link
-#     mode: '1777'
+- name: kitty config 2
+  ansible.builtin.command: kwriteconfig5 --file ~/.config/kdeglobals --group General --key TerminalApplication kitty 
+  become: yes
+  become_user: eric
