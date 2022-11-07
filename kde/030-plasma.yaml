@@ -3,8 +3,10 @@
     name:
       - plasma
       - kde-system-meta
+      - kde-utilities-meta
       - xf86-input-vmmouse # as we might use Xorg as Wayland fallback
       - xf86-video-vmware # as we might use Xorg as Wayland fallback
+      - kvantum-qt5 # theming engine
     state: present
 
 - name: enable SDDM service
@@ -26,28 +28,47 @@
   when: vm == "vmware"
 
 # Configuration
-- name: scaling factor
-  ansible.builtin.command: kwriteconfig5 --file ~/.config/kdeglobals --group KScreen --key ScaleFactor 1.25
-  become: yes
-  become_user: eric
+- name: Copy some files to /etc/myapp/
+  copy:
+    src: personal/home/.config/{{ item }}
+    dest: /home/eric/.config/
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o--
+  with_items:
+    - kdeglobals
+    - kcmfonts
+    - plasmashellrc
+    - kwinrc
+    - khotkeysrc
+    - plasma-org.kde.plasma.desktop-appletsrc
+    - kglobalshortcutsrc
+    - dolphinrc
 
-- name: scaling factor
-  ansible.builtin.command: kwriteconfig5 --file ~/.config/kcmfonts --group General --key forceFontDPI 120
-  become: yes
-  become_user: eric
 
-- name: hidden files
-  ansible.builtin.command: kwriteconfig5 --file ~/.config/kdeglobals --group "KFileDialog Settings" --key "Show hidden files" true
-  become: yes
-  become_user: eric
 
-- name: panel height
-  ansible.builtin.command: kwriteconfig5 --file ~/.config/plasmashellrc --group "PlasmaViews" --group "Panel 2" --group "Defaults" --key "thickness" 48
-  become: yes
-  become_user: eric
+# - name: scaling factor
+#   ansible.builtin.command: kwriteconfig5 --file ~/.config/kdeglobals --group KScreen --key ScaleFactor 1.25
+#   become: yes
+#   become_user: eric
 
-- name: Meta key opens Overview
-  ansible.builtin.command: kwriteconfig5 --file kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.kglobalaccel,/component/kwin,,invokeShortcut,Overview"
-  become: yes
-  become_user: eric
+# - name: scaling factor
+#   ansible.builtin.command: kwriteconfig5 --file ~/.config/kcmfonts --group General --key forceFontDPI 120
+#   become: yes
+#   become_user: eric
+
+# - name: hidden files
+#   ansible.builtin.command: kwriteconfig5 --file ~/.config/kdeglobals --group "KFileDialog Settings" --key "Show hidden files" true
+#   become: yes
+#   become_user: eric
+
+# - name: panel height
+#   ansible.builtin.command: kwriteconfig5 --file ~/.config/plasmashellrc --group "PlasmaViews" --group "Panel 2" --group "Defaults" --key "thickness" 48
+#   become: yes
+#   become_user: eric
+
+# - name: Meta key opens Overview
+#   ansible.builtin.command: kwriteconfig5 --file kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.kglobalaccel,/component/kwin,,invokeShortcut,Overview"
+#   become: yes
+#   become_user: eric
 
