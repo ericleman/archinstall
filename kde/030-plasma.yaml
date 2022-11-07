@@ -18,21 +18,12 @@
     dest: /etc/
     mode: u+rwx,g+r,o--
 
-- name: copy paste functions (1)
-  ansible.builtin.file:
-    path: /home/eric/.config/autostart
-    state: directory
-    mode: '0755'
-  become: yes
-  become_user: eric
-
-- name: copy paste functions (2)
+- name: copy paste functions (bug on KDE on VMWARE https://github.com/vmware/open-vm-tools/issues/568)
   copy:
-    src: personal/home/.config/autostart/vmware-user-suid-wrapper.desktop
-    dest: /home/eric/.config/autostart/vmware-user-suid-wrapper.desktop
+    src: personal/etc/xdg/startkderc
+    dest: /etc/xdg/startkderc
     mode: '0755'
-  become: yes
-  become_user: eric
+  when: vm == "vmware"
 
 # Configuration
 - name: scaling factor
