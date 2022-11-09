@@ -6,7 +6,7 @@
       - kde-utilities-meta
       - xf86-input-vmmouse # as we might use Xorg as Wayland fallback
       - xf86-video-vmware # as we might use Xorg as Wayland fallback
-      - kvantum-qt5 # theming engine
+      - kvantum # theming engine
     state: present
 
 - name: enable SDDM service
@@ -28,7 +28,7 @@
   when: vm == "vmware"
 
 # Configuration
-- name: Copy some files to /etc/myapp/
+- name: Copy some files to .config
   copy:
     src: personal/home/.config/{{ item }}
     dest: /home/eric/.config/
@@ -44,6 +44,31 @@
     - plasma-org.kde.plasma.desktop-appletsrc
     - kglobalshortcutsrc
     - dolphinrc
+
+- name: Copy Kvantum
+  copy:
+    src: personal/home/.config/Kvantum
+    dest: /home/eric/.config/
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o--          
+
+- name: Copy Aurorae
+  copy:
+    src: personal/home/.local/share/aurorae
+    dest: /home/eric/.local/share/
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o--          
+
+- name: Copy Plasma desktop theme
+  copy:
+    src: personal/home/.local/plasma
+    dest: /home/eric/.local/
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o--          
+
 
 
 
