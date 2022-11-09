@@ -3,9 +3,12 @@ update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-
 
 [Desktops]
 Id_1=c324c1f0-445d-4684-8436-0e1ceb268f46
-Id_2=3aea8ee9-89cd-4d9f-8296-c900ab174071
-Number=2
+Number=1
 Rows=1
 
 [ModifierOnlyShortcuts]
 Meta=org.kde.kglobalaccel,/component/kwin,,invokeShortcut,Overview
+
+[org.kde.kdecoration2]
+BorderSize=None
+BorderSizeAuto=false

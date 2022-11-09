@@ -142,7 +142,9 @@ TerminalApplication=kitty
 TerminalService=kitty.desktop
 
 [KDE]
+LookAndFeelPackage=MyTheme
 SingleClick=false
+widgetStyle=kvantum
 
 [KFileDialog Settings]
 Allow Expansion=false

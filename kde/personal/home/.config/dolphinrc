@@ -16,3 +16,7 @@ Virtual1 Width 3840x2269 Virtual1=455
 [MainWindow]
 MenuBar=Disabled
 ToolBarsMovable=Disabled
+
+[Open-with settings]
+CompletionMode=1
+History=code

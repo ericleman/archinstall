@@ -44,6 +44,12 @@
     - plasma-org.kde.plasma.desktop-appletsrc
     - kglobalshortcutsrc
     - dolphinrc
+    - mimeapps.list
+    - filetypesrc
+    - kscreenlockerrc
+    - systemsettingsrc
+    - plasmarc
+    - kmcinputrc
 
 - name: Copy Kvantum
   copy:
