@@ -37,6 +37,27 @@ Everything could be done in SH scripts, but it would require more maintenance an
 When 3D acceleration is activated on VMWare, then deactivate it on Google Chrome (or it does not work: https://communities.vmware.com/t5/VMware-Workstation-Pro/Guest-Display-Broken-With-Accelerate-3D-Graphics-Enabled/td-p/2898816)
 ![image](https://user-images.githubusercontent.com/26767717/177496730-38f3be75-ae3c-4329-a49e-0002abfc595a.png)
 
-# Extension development from host Laptop:
+# Extension development from host Laptop to Gnome:
 `ln -s ~/Laptop/archinstall/archinstall/gnome/personal/home/.local/share/gnome-shell/extensions ~/.local/share/gnome-shell/`
 `ln -s ~/Laptop/archinstall/archinstall/gnome/personal/home/.local/share/gnome-shell/extensions/dynamic-colors@ericleman.com ~/.local/share/gnome-shell/extensions/`
+
+# Prorealtime on KDE
+From KDE guest, go to : https://www.java.com/fr/download/. 
+That creates /home/eric/Downloads/jre-8u351-linux-x64.tar.gz
+
+```
+sudo su
+mkdir /usr/java
+mv jre-8u351-linux-x64.tar.gz /usr/java/
+cd /usr/java
+tar zxvf jre-8u351-linux-x64.tar.gz
+```
+
+Now we have /usr/java/jre1.8.0_351/bin/javaws
+On IG site, launch Prorealtime in java mode, to get /home/eric/Downloads/itcharts.jnlp
+
+`/usr/java/jre1.8.0_351/bin/javaws /home/eric/Downloads/itcharts.jnlp`
+
+Or change KDE Dolphin settings so *.jnlp open with /usr/java/jre1.8.0_351/bin/javaws
+
+
