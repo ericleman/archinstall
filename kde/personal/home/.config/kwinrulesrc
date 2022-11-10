@@ -1,0 +1,14 @@
+[$Version]
+update_info=kwinrules.upd:replace-placement-string-to-enum,kwinrules.upd:use-virtual-desktop-ids
+
+[79c2e6f8-7b75-470e-af28-e377453923f7]
+Description=New window settings
+opacityactive=79
+opacityactiverule=2
+opacityinactive=76
+opacityinactiverule=2
+types=65981
+
+[General]
+count=1
+rules=79c2e6f8-7b75-470e-af28-e377453923f7

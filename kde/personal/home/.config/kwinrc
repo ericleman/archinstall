@@ -6,9 +6,29 @@ Id_1=c324c1f0-445d-4684-8436-0e1ceb268f46
 Number=1
 Rows=1
 
+[Effect-blur]
+BlurStrength=13
+
+[Effect-kwin4_effect_translucency]
+ComboboxPopups=81
+Dialogs=81
+Menus=81
+
 [ModifierOnlyShortcuts]
 Meta=org.kde.kglobalaccel,/component/kwin,,invokeShortcut,Overview
+
+[Plugins]
+blurEnabled=true
+forceblurEnabled=true
+
+[Script-forceblur]
+blurExceptMatching=true
+blurMatching=false
+patterns=urxvt
 
 [org.kde.kdecoration2]
 BorderSize=None
 BorderSizeAuto=false
+ButtonsOnLeft=MLS
+library=org.kde.breezeenhanced
+theme=BreezeEnhanced

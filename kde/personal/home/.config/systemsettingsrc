@@ -1,10 +1,17 @@
 [MainWindow]
 MenuBar=Disabled
-RestorePositionForNextInstance=false
-State=AAAA/wAAAAD9AAAAAAAABosAAARHAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgAAAAAA/////wAAAAAAAAAA
+State=AAAA/wAAAAD9AAAAAAAAB3sAAAUbAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgAAAAAA/////wAAAAAAAAAA
 ToolBarsMovable=Disabled
 Virtual1=Virtual1
-Virtual1 Height 3840x2269 Virtual1=1097
-Virtual1 Width 3840x2269 Virtual1=1679
-Virtual1 XPosition 3840x2269 Virtual1=816
-Virtual1 YPosition 3840x2269 Virtual1=256
+Virtual1 Height 1916x2266 Virtual1=1311
+Virtual1 Height 3840x2269 Virtual1=1307
+Virtual1 Height 800x600 Virtual1=486
+Virtual1 Width 1916x2266 Virtual1=1915
+Virtual1 Width 3840x2269 Virtual1=1915
+Virtual1 Width 800x600 Virtual1=720
+Virtual1 XPosition 1916x2266 Virtual1=0
+Virtual1 XPosition 3840x2269 Virtual1=1723
+Virtual1 XPosition 800x600 Virtual1=0
+Virtual1 YPosition 1916x2266 Virtual1=955
+Virtual1 YPosition 3840x2269 Virtual1=399
+Virtual1 YPosition 800x600 Virtual1=114

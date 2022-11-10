@@ -3,3 +3,6 @@ text/plain=visual-studio-code.desktop;
 
 [Default Applications]
 text/plain=visual-studio-code.desktop;
+x-scheme-handler/http=google-chrome.desktop
+x-scheme-handler/https=google-chrome.desktop
+text/html=google-chrome.desktop

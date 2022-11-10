@@ -1020,11 +1020,14 @@ Type=SHORTCUT
 Uuid={1a85c203-0816-402c-b0e7-d2fddf36217a}
 
 [General]
+AccentColor[$d]
 BrowserApplication[$d]
 ColorScheme[$d]
 ColorSchemeHash[$d]
+LastUsedCustomAccentColor[$d]
 TerminalApplication[$d]
 TerminalService[$d]
+accentColorFromWallpaper[$d]
 
 [Gestures]
 Disabled=true
@@ -1039,6 +1042,7 @@ WindowsCount=0
 Theme[$d]
 
 [KDE]
+LookAndFeelPackage[$d]
 SingleClick[$d]
 widgetStyle[$d]
 
