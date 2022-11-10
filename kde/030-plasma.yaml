@@ -49,7 +49,7 @@
     - kscreenlockerrc
     - systemsettingsrc
     - plasmarc
-    - kmcinputrc
+    - kcminputrc
 
 - name: Copy Kvantum
   copy:
