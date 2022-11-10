@@ -1,4 +1,4 @@
-- name: install Gnome related packages
+- name: install KDE related packages
   pacman:
     name:
       - plasma

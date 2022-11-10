@@ -42,12 +42,12 @@
   become: yes
   become_user: eric
 
-- name: Install ksuperkey 
-  aur:
-    use: yay
-    name: ksuperkey
-  become: yes
-  become_user: eric
+# - name: Install ksuperkey 
+#   aur:
+#     use: yay
+#     name: ksuperkey
+#   become: yes
+#   become_user: eric
 
 #- name: Install nerd-fonts-complete # required for some rofi menu and polybar icons
 #  aur:
