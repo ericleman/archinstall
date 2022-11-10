@@ -30,6 +30,7 @@ The script `start` will takes 3 parameters: the password for the user, the deskt
 
 # Why
 I use those two parts as Archinstall and Ansible are both standard and maintained packages delivered by Arch linux. So if tomorrow Archway changes (new way to partition disk, new way to install packages, etc.), then Archlinux and Ansible should be adapted. I just have to put my config in json files (for Archintall) and yaml files (for Ansible).
+
 Everything could be done in SH scripts, but it would require more maintenance anytime something change with Arch.
 
 
@@ -42,7 +43,8 @@ When 3D acceleration is activated on VMWare, then deactivate it on Google Chrome
 `ln -s ~/Laptop/archinstall/archinstall/gnome/personal/home/.local/share/gnome-shell/extensions/dynamic-colors@ericleman.com ~/.local/share/gnome-shell/extensions/`
 
 # Prorealtime on KDE
-From KDE guest, go to : https://www.java.com/fr/download/. 
+From KDE guest, go to : https://www.java.com/fr/download/.
+
 That creates /home/eric/Downloads/jre-8u351-linux-x64.tar.gz
 
 ```
@@ -54,6 +56,7 @@ tar zxvf jre-8u351-linux-x64.tar.gz
 ```
 
 Now we have /usr/java/jre1.8.0_351/bin/javaws
+
 On IG site, launch Prorealtime in java mode, to get /home/eric/Downloads/itcharts.jnlp
 
 `/usr/java/jre1.8.0_351/bin/javaws /home/eric/Downloads/itcharts.jnlp`
