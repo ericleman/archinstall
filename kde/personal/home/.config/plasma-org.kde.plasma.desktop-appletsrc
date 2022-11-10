@@ -33,7 +33,7 @@ immutability=1
 plugin=org.kde.plasma.appmenu
 
 [Containments][2][Applets][23][Configuration]
-PreloadWeight=2
+PreloadWeight=0
 
 [Containments][2][Applets][23][Configuration][ConfigDialog]
 DialogHeight=720
@@ -44,15 +44,15 @@ immutability=1
 plugin=org.kde.plasma.panelspacer
 
 [Containments][2][Applets][25][Configuration]
-PreloadWeight=10
+PreloadWeight=0
 
 [Containments][2][Applets][3]
 immutability=1
 plugin=org.kde.plasma.kickoff
 
 [Containments][2][Applets][3][Configuration]
-PreloadWeight=89
-popupHeight=528
+PreloadWeight=92
+popupHeight=612
 popupWidth=779
 
 [Containments][2][Applets][3][Configuration][General]
@@ -63,6 +63,20 @@ global=Alt+F1
 
 [Containments][2][Applets][3][Shortcuts]
 global=Alt+F1
+
+[Containments][2][Applets][31]
+immutability=1
+plugin=com.github.zren.commandoutput
+
+[Containments][2][Applets][31][Configuration][ConfigDialog]
+DialogHeight=1492
+DialogWidth=1699
+
+[Containments][2][Applets][31][Configuration][General]
+clickCommand=kitty yay
+command=yay -Sy &> /dev/null && (n_up=$(yay -Qu | wc -l);(([ "$n_up" -eq 0 ] && echo "  ") || echo "  $n_up ")) || echo " yay N/A "
+interval=600000
+waitForCompletion=true
 
 [Containments][2][Applets][4]
 immutability=1
@@ -105,7 +119,7 @@ immutability=1
 plugin=org.kde.plasma.systemtray
 
 [Containments][2][Applets][7][Configuration]
-PreloadWeight=34
+PreloadWeight=31
 SystrayContainmentId=8
 
 [Containments][2][ConfigDialog]
@@ -116,15 +130,13 @@ DialogWidth=3840
 PreloadWeight=0
 
 [Containments][2][General]
-AppletOrder=3;4;5;23;25;6;7;18;19
+AppletOrder=3;4;5;23;25;6;31;7;18;19
 
-[Containments][28]
-ItemGeometries-1916x2266=
+[Containments][29]
 ItemGeometries-3840x2269=
 ItemGeometries-800x600=
 ItemGeometriesHorizontal=
-ItemGeometriesVertical=
-activityId=e33b43db-5c27-425c-9cd3-a83bc0b49772
+activityId=a48cea76-1c53-4fb5-894e-bfe0d8079230
 formfactor=0
 immutability=1
 lastScreen=0
@@ -132,25 +144,21 @@ location=0
 plugin=org.kde.plasma.folder
 wallpaperplugin=org.kde.image
 
-[Containments][28][ConfigDialog]
-DialogHeight=939
-DialogWidth=1073
+[Containments][29][ConfigDialog]
+DialogHeight=720
+DialogWidth=960
 
-[Containments][28][Configuration]
-PreloadWeight=10
+[Containments][29][Configuration]
+PreloadWeight=34
 
-[Containments][28][General]
+[Containments][29][General]
 ToolBoxButtonState=topcenter
-ToolBoxButtonX=1297
+ToolBoxButtonX=1437
 ToolBoxButtonY=48
 
-[Containments][28][Wallpaper][org.kde.image][General]
+[Containments][29][Wallpaper][org.kde.image][General]
 Image=/home/eric/.local/share/wallpapers/sunset-rock-formations-twilight-mountains-clouds-landscape-7087x4724-9041.jpg
-SlidePaths=/usr/share/wallpapers/
-
-[Containments][28][Wallpaper][org.kde.potd][General]
-FillMode=2
-Provider=natgeo
+SlidePaths=/home/eric/.local/share/wallpapers/,/usr/share/wallpapers/
 
 [Containments][8]
 activityId=
@@ -238,7 +246,7 @@ immutability=1
 plugin=org.kde.plasma.printmanager
 
 [Containments][8][Applets][26][Configuration]
-PreloadWeight=10
+PreloadWeight=0
 
 [Containments][8][Applets][31]
 immutability=1

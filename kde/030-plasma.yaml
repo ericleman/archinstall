@@ -53,6 +53,13 @@
     group: "eric"
     mode: u+rwx,g+r,o--          
 
+- name: Copy Plasmoids Command Output to show YAY updates
+  copy:
+    src: personal/home/.local/share/plasma
+    dest: /home/eric/.local/share/
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o-- 
 
 
 # Configuration
