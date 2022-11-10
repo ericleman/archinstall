@@ -1,0 +1,18 @@
+[Style]
+MenuOpacity=71
+
+[Windeco]
+BackgroundOpacity=60
+TitleBarFont=Noto Sans,11,-1,5,50,0,0,0,0,0
+
+[Windeco Exception 0]
+BorderSize=0
+Enabled=true
+ExceptionPattern=.*
+ExceptionType=0
+FlatTitleBar=true
+HideTitleBar=false
+IsDialog=false
+Mask=0
+OpacityOverride=-1
+OpaqueTitleBar=false

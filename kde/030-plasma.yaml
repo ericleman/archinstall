@@ -6,7 +6,7 @@
       - kde-utilities-meta
       - xf86-input-vmmouse # as we might use Xorg as Wayland fallback
       - xf86-video-vmware # as we might use Xorg as Wayland fallback
-      - kvantum # theming engine
+#      - kvantum # theming engine
     state: present
 
 - name: enable SDDM service
@@ -36,48 +36,73 @@
     group: "eric"
     mode: u+rwx,g+r,o--
   with_items:
-    - kdeglobals
-    - kcmfonts
-    - plasmashellrc
-    - kwinrc
-    - khotkeysrc
-    - plasma-org.kde.plasma.desktop-appletsrc
-    - kglobalshortcutsrc
+    - breezerc
     - dolphinrc
-    - mimeapps.list
     - filetypesrc
-    - kscreenlockerrc
-    - systemsettingsrc
-    - plasmarc
+    - kcmfonts
     - kcminputrc
+    - kdeglobals
+    - kglobalshortcutsrc
+    - khotkeysrc
+    - kscreenlockerrc
+    - kwinrc
+    - kwinrulesrc
+    - mimeapps.list
+    - plasma-org.kde.plasma.desktop-appletsrc
+    - plasmarc
+    - plasmashellrc
+    - systemsettingsrc
+    - Trolltech.conf
 
-- name: Copy Kvantum
-  copy:
-    src: personal/home/.config/Kvantum
-    dest: /home/eric/.config/
-    owner: "eric"
-    group: "eric"
-    mode: u+rwx,g+r,o--          
 
-- name: Copy Aurorae
+
+- name: install breeze-enhanced (alternative is https://github.com/paulmcauley/klassy)
+  aur:
+    use: yay
+    name:
+      - breeze-enhanced-git
+  become: yes
+  become_user: eric
+
+- name: Copy Kwin Force Blur script (I inspired from https://userbase.kde.org/Tutorials/Force_Transparency_And_Blur but use force blur instead)
   copy:
-    src: personal/home/.local/share/aurorae
+    src: personal/home/.local/share/kwin
     dest: /home/eric/.local/share/
     owner: "eric"
     group: "eric"
     mode: u+rwx,g+r,o--          
 
-- name: Copy Plasma desktop theme
-  copy:
-    src: personal/home/.local/share/plasma
-    dest: /home/eric/.local/share/
-    owner: "eric"
-    group: "eric"
-    mode: u+rwx,g+r,o--          
 
 
 
+# 3 items below are an attempt to create a custom theme. But I can remove it for now
+# - name: Copy Kvantum
+#   copy:
+#     src: personal/home/.config/Kvantum
+#     dest: /home/eric/.config/
+#     owner: "eric"
+#     group: "eric"
+#     mode: u+rwx,g+r,o--          
 
+# - name: Copy Aurorae
+#   copy:
+#     src: personal/home/.local/share/aurorae
+#     dest: /home/eric/.local/share/
+#     owner: "eric"
+#     group: "eric"
+#     mode: u+rwx,g+r,o--          
+
+# - name: Copy Plasma desktop theme
+#   copy:
+#     src: personal/home/.local/share/plasma
+#     dest: /home/eric/.local/share/
+#     owner: "eric"
+#     group: "eric"
+#     mode: u+rwx,g+r,o--          
+
+
+
+###################################################################################################################################################
 # - name: scaling factor
 #   ansible.builtin.command: kwriteconfig5 --file ~/.config/kdeglobals --group KScreen --key ScaleFactor 1.25
 #   become: yes
