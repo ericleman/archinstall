@@ -1,0 +1,283 @@
+- name: create temp folder
+  file:
+    path: /home/eric/temp
+    state: directory
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--   
+
+- name: create icons folder
+  file:
+    path: /home/eric/.icons
+    state: directory
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--   
+
+- name: create gtk3 folder
+  file:
+    path: /home/eric/.config/gtk-3.0
+    state: directory
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--   
+
+- name: create gtk4 folder
+  file:
+    path: /home/eric/.config/gtk-4.0
+    state: directory
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--   
+
+- name: install Nordic theme 
+  aur:
+    use: yay
+    name:
+      - nordic-theme
+  become: yes
+  become_user: eric
+
+- name: Tweaks shell theme
+  become_user: eric
+  dconf: key="/org/gnome/shell/extensions/user-theme/name" value="'Nordic'"
+- name: Tweaks windows
+  become_user: eric
+  dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'Nordic'"
+
+- name: Copy files for gtk4 (see https://github.com/odziom91/libadwaita-theme-changer)
+  copy:
+    src: /usr/share/themes/Nordic/gtk-4.0
+    dest: /home/eric/.config/
+    owner: "eric"
+    group: "eric"
+
+- name: Copy assets for gtk4  (see https://github.com/odziom91/libadwaita-theme-changer)
+  copy:
+    src: /usr/share/themes/Nordic/assets
+    dest: /home/eric/.config/
+    owner: "eric"
+    group: "eric"
+
+#- name: install adw-gtk-theme
+#  aur:
+#    use: yay
+#    name:
+#      - adw-gtk-theme
+#  become: yes
+#  become_user: eric
+
+#- name: Tweaks windows
+#  become_user: eric
+#  dconf: key="/org/gnome/desktop/interface/gtk-theme" value="'adw-gtk3'"
+
+#- name: Clone adw-colors to get gtk.css for gtk 4
+#  git:
+#    repo: "https://github.com/lassekongo83/adw-colors.git"
+#    dest: "/home/eric/temp/adw-colors"
+#  become_user: eric
+
+#- name: Copy gtk4
+#  copy:
+#    src: /home/eric/temp/adw-colors/themes/nord/gtk.css
+#    dest: /home/eric/.config/gtk-4.0/gtk.css
+#    owner: "eric"
+#    group: "eric"
+#    mode: u+rw,g+r,o--          
+
+- name: Clone Nordic GTK theme to get cursors and folders icons
+  git:
+    repo: "https://github.com/EliverLara/Nordic.git"
+    dest: "/home/eric/temp/Nordic"
+  become_user: eric
+
+- name: Copy icons
+  copy:
+    src: /home/eric/temp/Nordic/kde/folders/Nordic-darker
+    dest: /home/eric/.icons/
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--          
+
+- name: set icons as theme
+  become_user: eric
+  dconf: key="/org/gnome/desktop/interface/icon-theme" value="'Nordic-darker'"
+
+- name: Copy cursors
+  copy:
+    src: /home/eric/temp/Nordic/kde/cursors/Nordic-cursors
+    dest: /home/eric/.icons/
+    owner: "eric"
+    group: "eric"
+    mode: u+rw,g+r,o--          
+
+- name: set cursors as theme
+  become_user: eric
+  dconf: key="/org/gnome/desktop/interface/cursor-theme" value="'Nordic-cursors'"
+
+#- name: Copy theme
+#  copy:
+#    src: /home/eric/temp/Nordic
+#    dest: /home/eric/.themes/
+#    owner: "eric"
+#    group: "eric"
+#    mode: u+rw,g+r,o--          
+#- name: Copy gtk4
+#  copy:
+#    src: /home/eric/.themes/Nordic/gtk-4.0
+#    dest: /home/eric/.config/
+#    owner: "eric"
+#    group: "eric"
+#    mode: u+rw,g+r,o--          
+
+- name: Wallpaper
+  block:
+  - name: copy Wallpaper
+    copy:
+      src: personal/nord.jpg
+      dest: /usr/share/backgrounds/nord.jpg
+      mode: '0777'          
+#  - name: download wallpaper
+#    ansible.builtin.get_url:
+#      url: https://vsthemes.org/uploads/posts/2020-04/1586853771_daniel-leone-v7datklzzaw-unsplash-modded.jpg
+#      dest: /usr/share/backgrounds/1586853771_daniel-leone-v7datklzzaw-unsplash-modded.jpg
+#      mode: '0777'
+#      validate_certs: no
+#      timeout: 60
+  - name: light wallpaper
+    become_user: eric
+    dconf: key="/org/gnome/desktop/background/picture-uri" value="'file:///usr/share/backgrounds/nord.jpg'"
+  - name: dark wallpaper
+    become_user: eric
+    dconf: key="/org/gnome/desktop/background/picture-uri-dark" value="'file:///usr/share/backgrounds/nord.jpg'"
+  - name: screensaver wallpaper
+    become_user: eric
+    dconf: key="/org/gnome/desktop/screensaver/picture-uri" value="'file:///usr/share/backgrounds/nord.jpg'"
+
+#- name: Gnome terminal palette
+#  block:
+#  - name: get theme on git
+#    git:
+#      repo: "https://github.com/arcticicestudio/nord-gnome-terminal.git"
+#      dest: "/home/eric/temp/nord-gnome-terminal"
+#    become_user: eric
+#  - name: apply theme to gnome terminal profile "Eric"
+#    become_user: eric
+#    ansible.builtin.shell: /home/eric/temp/nord-gnome-terminal/src/nord.sh -p "Eric"
+
+- name: Gnome terminal palette
+  block:
+  - name: background-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color" value="'#2E3440'"
+  - name: bold-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/bold-color" value="'#D8DEE9'"
+  - name: bold-color-same-as-fg
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/bold-color-same-as-fg" value="true"
+  - name: cursor-background-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/cursor-background-color" value="'rgb(216,222,233)'"
+  - name: cursor-colors-set
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/cursor-colors-set" value="true"
+  - name: cursor-foreground-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/cursor-foreground-color" value="'rgb(59,66,82)'"
+  - name: foreground-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/foreground-color" value="'#D8DEE9'"
+  - name: highlight-background-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/highlight-background-color" value="'rgb(136,192,208)'"
+  - name: highlight-colors-set
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/highlight-colors-set" value="true"
+  - name: highlight-foreground-color
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/highlight-foreground-color" value="'rgb(46,52,64)'"
+  - name: nord-gnome-terminal-version
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/nord-gnome-terminal-version" value="'0.1.0'"
+  - name: palette
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/palette" value="['#3B4252', '#BF616A', '#A3BE8C', '#EBCB8B', '#81A1C1', '#B48EAD', '#88C0D0', '#E5E9F0', '#4C566A', '#BF616A', '#A3BE8C', '#EBCB8B', '#81A1C1', '#B48EAD', '#8FBCBB', '#ECEFF4']"
+  - name: use-theme-background
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-theme-background" value="false"
+  - name: use-theme-colors
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-theme-colors" value="false"
+  - name: use-theme-transparency
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-theme-transparency" value="false"
+  - name: use-transparent-background
+    become_user: eric
+    dconf: key="/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-transparent-background" value="false"
+
+- name: Gedit theme
+  block:
+  - name: create gedit styles folder
+    file:
+      path: /home/eric/.local/share/gedit/styles
+      state: directory
+      owner: "eric"
+      group: "eric"
+      mode: u+rw,g+r,o--   
+  - name: get theme on git
+    git:
+      repo: "https://github.com/arcticicestudio/nord-gedit.git"
+      dest: "/home/eric/temp/nord-gedit"
+    become_user: eric
+  - name: Copy XML config
+    copy:
+      src: /home/eric/temp/nord-gedit/src/xml/nord.xml
+      dest: /home/eric/.local/share/gedit/styles/nord.xml
+      owner: "eric"
+      group: "eric"
+      mode: u+rw,g+r,o--
+  - name: apply dconf
+    become_user: eric
+    dconf: key="/org/gnome/gedit/preferences/editor/scheme" value="'nord-gedit'"
+
+#- name: Icon theme
+#  block:
+#  - name: install papirus-folders
+#    aur:
+#      use: yay
+#      name:
+#        - papirus-folders
+#    become: yes
+#    become_user: eric
+#  - name: apply nordic color to folders
+#    ansible.builtin.shell: papirus-folders -C nordic -t Papirus
+#    become: yes
+#    become_user: eric
+
+#- name: Cursor theme
+#  block:
+#  - name: create capitaine-cursor folder
+#    file:
+#      path: /home/eric/temp/capitaine-cursor
+#      state: directory
+#      owner: "eric"
+#      group: "eric"
+#      mode: u+rw,g+r,o--   
+#  - name: download theme
+#    ansible.builtin.get_url:
+#      url: https://github.com/sainnhe/capitaine-cursors/releases/download/r5/Linux.zip
+#      dest: /home/eric/temp/Linux.zip
+#      mode: '0777'
+#  - name: Unarchive file
+#    ansible.builtin.unarchive:
+#      src: /home/eric/temp/Linux.zip
+#      dest: /usr/share/icons
+#      remote_src: yes
+#      mode: '0777'
+#- name: set them as theme
+#  become_user: eric
+#  dconf: key="/org/gnome/desktop/interface/cursor-theme" value="'Capitaine Cursors (Nord)'"
+
+  
+

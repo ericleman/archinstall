@@ -1,0 +1,7 @@
+- name: install papirus
+  pacman:
+    name: papirus-icon-theme
+    state: present
+- name: set them as theme
+  become_user: eric
+  dconf: key="/org/gnome/desktop/interface/icon-theme" value="'Papirus'"
