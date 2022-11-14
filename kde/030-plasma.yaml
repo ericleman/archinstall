@@ -14,7 +14,7 @@
     name: sddm
     enabled: yes
 
-- name: auto login
+- name: sddm settings
   copy:
     src: personal/etc/sddm.conf.d
     dest: /etc/
@@ -80,6 +80,7 @@
     - kglobalshortcutsrc
     - khotkeysrc
     - kscreenlockerrc
+    - ksplashrc
     - kwinrc
     - kwinrulesrc
     - mimeapps.list
@@ -89,7 +90,7 @@
     - systemsettingsrc
     - Trolltech.conf
 
-# cp breezerc dolphinrc filetypesrc kcmfonts kcminputrc kdeglobals kglobalshortcutsrc khotkeysrc kscreenlockerrc kwinrc kwinrulesrc mimeapps.list plasma-org.kde.plasma.desktop-appletsrc plasmarc plasmashellrc systemsettingsrc Trolltech.conf /home/eric/Laptop/archinstall/archinstall/kde/personal/home/.config
+# cp breezerc dolphinrc filetypesrc kcmfonts kcminputrc kdeglobals kglobalshortcutsrc khotkeysrc kscreenlockerrc ksplashrc kwinrc kwinrulesrc mimeapps.list plasma-org.kde.plasma.desktop-appletsrc plasmarc plasmashellrc systemsettingsrc Trolltech.conf /home/eric/Laptop/archinstall/archinstall/kde/personal/home/.config
 
 # 3 items below are an attempt to create a custom theme. But I can remove it for now
 # - name: Copy Kvantum
