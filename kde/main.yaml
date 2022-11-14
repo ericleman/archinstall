@@ -5,114 +5,44 @@
   - name: ERIC (sudo nopasswd, home directories...)
     include_tasks: 010-eric-setup.yaml
 
-  - name: log
-    ansible.builtin.file:
-      path: /var/log/archinstall/010.log
-      state: touch
-
   - name: Virtualmachine stuff
     include_tasks: 010-vm.yaml
-
-  - name: log
-    ansible.builtin.file:
-      path: /var/log/archinstall/010vm.log
-      state: touch
 
   - name: Developper Apps Install 
     include_tasks: 020-core-apps.yaml
 
-  - name: log
-    ansible.builtin.file:
-      path: /var/log/archinstall/020.log
-      state: touch
-
   - name: Plasma
     include_tasks: 030-plasma.yaml
-
-  - name: log
-    ansible.builtin.file:
-      path: /var/log/archinstall/030.log
-      state: touch
 
   - name: Kitty Apps Install 
     include_tasks: 090-kitty.yaml
 
-  - name: log
-    ansible.builtin.file:
-      path: /var/log/archinstall/090.log
-      state: touch
-
   - name: Ranger Install 
     include_tasks: 100-ranger.yaml
-
-  - name: log
-    ansible.builtin.file:
-      path: /var/log/archinstall/100.log
-      state: touch
 
   - name: Zsh Apps Install ## DONE
     include_tasks: 120-zsh.yaml
 
-  - name: log
-    ansible.builtin.file:
-      path: /var/log/archinstall/120.log
-      state: touch
-
   - name: VS Code
     include_tasks: 160-code.yaml
-
-  - name: log
-    ansible.builtin.file:
-      path: /var/log/archinstall/160.log
-      state: touch
 
   - name: Neovim
     include_tasks: 170-nvim.yaml
 
-  - name: log
-    ansible.builtin.file:
-      path: /var/log/archinstall/170.log
-      state: touch
-
   - name: btop
     include_tasks: 190-btop.yaml
-
-  - name: log
-    ansible.builtin.file:
-      path: /var/log/archinstall/190.log
-      state: touch
 
   - name: papirus
     include_tasks: 210-papirus.yaml
 
-  - name: log
-    ansible.builtin.file:
-      path: /var/log/archinstall/210.log
-      state: touch
-
   - name: Chrome
     include_tasks: 300-chrome.yaml
-
-  - name: log
-    ansible.builtin.file:
-      path: /var/log/archinstall/300.log
-      state: touch
 
   - name: HP Printer
     include_tasks: 310-hp-printer.yaml
 
-  - name: log
-    ansible.builtin.file:
-      path: /var/log/archinstall/310.log
-      state: touch
-
   - name: Wifi dongle
     include_tasks: 320-wifi-dongle.yaml
-
-  - name: log
-    ansible.builtin.file:
-      path: /var/log/archinstall/320.log
-      state: touch
 
   - name: LibreOffice
     include_tasks: 330-libreoffice.yaml
