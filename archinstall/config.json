@@ -8,7 +8,7 @@
         "git clone https://github.com/ericleman/archinstall.git",
         "cp -a /archinstall/DUMMY_VIRTUAL_MACHINE/. /archinstall/DUMMY_DESKTOP/",
         "echo \"log_path=/var/log/ansible.log\" > /etc/ansible/ansible.cfg",
-        "cd /archinstall/DUMMY_DESKTOP; ansible-playbook -vvv main.yaml --extra-vars \"vm=DUMMY_VIRTUAL_MACHINE\""
+        "cd /archinstall/DUMMY_DESKTOP; LC_ALL=en_DK.UTF-8 ansible-playbook -vvv main.yaml --extra-vars \"vm=DUMMY_VIRTUAL_MACHINE\""
     ],    
     "gfx_driver": "All open-source (default)",
     "harddrives": [
