@@ -51,12 +51,18 @@ immutability=1
 plugin=org.kde.plasma.kickoff
 
 [Containments][2][Applets][3][Configuration]
-PreloadWeight=92
+PreloadWeight=56
 popupHeight=612
 popupWidth=779
 
+[Containments][2][Applets][3][Configuration][ConfigDialog]
+DialogHeight=720
+DialogWidth=960
+
 [Containments][2][Applets][3][Configuration][General]
 favoritesPortedToKAstats=true
+icon=start-here-archlinux
+systemFavorites=suspend\\,hibernate\\,reboot\\,shutdown
 
 [Containments][2][Applets][3][Configuration][Shortcuts]
 global=Alt+F1
@@ -64,19 +70,16 @@ global=Alt+F1
 [Containments][2][Applets][3][Shortcuts]
 global=Alt+F1
 
-[Containments][2][Applets][31]
+[Containments][2][Applets][34]
 immutability=1
-plugin=com.github.zren.commandoutput
+plugin=com.ericleman
 
-[Containments][2][Applets][31][Configuration][ConfigDialog]
-DialogHeight=1492
-DialogWidth=1699
+[Containments][2][Applets][34][Configuration]
+PreloadWeight=2
 
-[Containments][2][Applets][31][Configuration][General]
-clickCommand=kitty yay
-command=yay -Sy &> /dev/null && (n_up=$(yay -Qu | wc -l);(([ "$n_up" -eq 0 ] && echo "  ") || echo "  $n_up ")) || echo " yay N/A "
-interval=600000
-waitForCompletion=true
+[Containments][2][Applets][34][Configuration][ConfigDialog]
+DialogHeight=720
+DialogWidth=960
 
 [Containments][2][Applets][4]
 immutability=1
@@ -119,7 +122,7 @@ immutability=1
 plugin=org.kde.plasma.systemtray
 
 [Containments][2][Applets][7][Configuration]
-PreloadWeight=31
+PreloadWeight=0
 SystrayContainmentId=8
 
 [Containments][2][ConfigDialog]
@@ -130,13 +133,13 @@ DialogWidth=3840
 PreloadWeight=0
 
 [Containments][2][General]
-AppletOrder=3;4;5;23;25;6;31;7;18;19
+AppletOrder=3;4;5;23;25;6;34;7;18;19
 
-[Containments][29]
+[Containments][32]
 ItemGeometries-3840x2269=
 ItemGeometries-800x600=
 ItemGeometriesHorizontal=
-activityId=a48cea76-1c53-4fb5-894e-bfe0d8079230
+activityId=dd1d68d4-a106-4af9-9d36-89f7241de721
 formfactor=0
 immutability=1
 lastScreen=0
@@ -144,19 +147,19 @@ location=0
 plugin=org.kde.plasma.folder
 wallpaperplugin=org.kde.image
 
-[Containments][29][ConfigDialog]
+[Containments][32][ConfigDialog]
 DialogHeight=720
 DialogWidth=960
 
-[Containments][29][Configuration]
-PreloadWeight=34
+[Containments][32][Configuration]
+PreloadWeight=2
 
-[Containments][29][General]
+[Containments][32][General]
 ToolBoxButtonState=topcenter
-ToolBoxButtonX=1437
+ToolBoxButtonX=1418
 ToolBoxButtonY=48
 
-[Containments][29][Wallpaper][org.kde.image][General]
+[Containments][32][Wallpaper][org.kde.image][General]
 Image=/home/eric/.local/share/wallpapers/sunset-rock-formations-twilight-mountains-clouds-landscape-7087x4724-9041.jpg
 SlidePaths=/home/eric/.local/share/wallpapers/,/usr/share/wallpapers/
 
