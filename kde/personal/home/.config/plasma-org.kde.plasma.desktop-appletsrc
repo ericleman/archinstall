@@ -51,7 +51,7 @@ immutability=1
 plugin=org.kde.plasma.kickoff
 
 [Containments][2][Applets][3][Configuration]
-PreloadWeight=56
+PreloadWeight=49
 popupHeight=612
 popupWidth=779
 
@@ -75,7 +75,7 @@ immutability=1
 plugin=com.ericleman
 
 [Containments][2][Applets][34][Configuration]
-PreloadWeight=2
+PreloadWeight=0
 
 [Containments][2][Applets][34][Configuration][ConfigDialog]
 DialogHeight=720
@@ -94,6 +94,33 @@ DialogWidth=960
 
 [Containments][2][Applets][4][Configuration][General]
 showWindowIcons=true
+
+[Containments][2][Applets][43]
+immutability=1
+plugin=panon
+
+[Containments][2][Applets][43][Configuration][Backend]
+backendIndex=1
+bassResolutionLevel=2
+pulseaudioDevice=allspeakers
+
+[Containments][2][Applets][43][Configuration][Colors]
+hslSaturation=0
+hsluvHueFrom=174
+hsluvHueTo=-72
+hsluvLightness=65
+hsluvSaturation=99
+
+[Containments][2][Applets][43][Configuration][ConfigDialog]
+DialogHeight=720
+DialogWidth=960
+
+[Containments][2][Applets][43][Configuration][Effect]
+effectArgValues=5,2,0.003
+visualEffect=2.bar1ch
+
+[Containments][2][Applets][43][Configuration][General]
+preferredWidth=150
 
 [Containments][2][Applets][5]
 immutability=1
@@ -122,7 +149,7 @@ immutability=1
 plugin=org.kde.plasma.systemtray
 
 [Containments][2][Applets][7][Configuration]
-PreloadWeight=0
+PreloadWeight=56
 SystrayContainmentId=8
 
 [Containments][2][ConfigDialog]
@@ -133,13 +160,14 @@ DialogWidth=3840
 PreloadWeight=0
 
 [Containments][2][General]
-AppletOrder=3;4;5;23;25;6;34;7;18;19
+AppletOrder=3;4;5;23;25;6;43;34;7;18;19
 
-[Containments][32]
-ItemGeometries-3840x2269=
-ItemGeometries-800x600=
-ItemGeometriesHorizontal=
-activityId=dd1d68d4-a106-4af9-9d36-89f7241de721
+[Containments][35]
+ItemGeometries-3840x2269=Applet-42:2976,2412.06,800,176,0;
+ItemGeometries-3840x2400=Applet-42:2976,2096,800,192,0;
+ItemGeometries-800x600=Applet-42:0,416,800,176,0;
+ItemGeometriesHorizontal=Applet-42:2976,2096,800,192,0;
+activityId=7e893dd6-1a64-4e72-9a96-2dd95f8baf5d
 formfactor=0
 immutability=1
 lastScreen=0
@@ -147,20 +175,51 @@ location=0
 plugin=org.kde.plasma.folder
 wallpaperplugin=org.kde.image
 
-[Containments][32][ConfigDialog]
+[Containments][35][Applets][42]
+immutability=1
+plugin=panon
+
+[Containments][35][Applets][42][Configuration]
+PreloadWeight=34
+UserBackgroundHints=ShadowBackground
+
+[Containments][35][Applets][42][Configuration][Backend]
+backendIndex=1
+bassResolutionLevel=3
+pulseaudioDevice=allspeakers
+
+[Containments][35][Applets][42][Configuration][Colors]
+hsluvHueFrom=203
+hsluvHueTo=243
+hsluvLightness=62
+hsluvSaturation=85
+
+[Containments][35][Applets][42][Configuration][ConfigDialog]
 DialogHeight=720
 DialogWidth=960
 
-[Containments][32][Configuration]
-PreloadWeight=2
+[Containments][35][Applets][42][Configuration][Effect]
+effectArgTrigger=true
+effectArgValues=5,2,0.003,,
+visualEffect=2.bar1ch
 
-[Containments][32][General]
+[Containments][35][Applets][42][Configuration][General]
+fps=15
+
+[Containments][35][ConfigDialog]
+DialogHeight=965
+DialogWidth=1103
+
+[Containments][35][Configuration]
+PreloadWeight=34
+
+[Containments][35][General]
 ToolBoxButtonState=topcenter
-ToolBoxButtonX=1418
+ToolBoxButtonX=1437
 ToolBoxButtonY=48
 
-[Containments][32][Wallpaper][org.kde.image][General]
-Image=/home/eric/.local/share/wallpapers/dj-turntable.jpg
+[Containments][35][Wallpaper][org.kde.image][General]
+Image=/home/eric/.local/share/wallpapers/dj-turntable.jpg.jpg
 SlidePaths=/home/eric/.local/share/wallpapers/,/usr/share/wallpapers/
 
 [Containments][8]
@@ -214,7 +273,11 @@ immutability=1
 plugin=org.kde.plasma.volume
 
 [Containments][8][Applets][15][Configuration]
-PreloadWeight=0
+PreloadWeight=5
+
+[Containments][8][Applets][15][Configuration][ConfigDialog]
+DialogHeight=720
+DialogWidth=960
 
 [Containments][8][Applets][16]
 immutability=1
@@ -256,6 +319,13 @@ immutability=1
 plugin=org.kde.plasma.mediacontroller
 
 [Containments][8][Applets][31][Configuration]
+PreloadWeight=62
+
+[Containments][8][Applets][31][Configuration][ConfigDialog]
+DialogHeight=720
+DialogWidth=960
+
+[Containments][8][Applets][36][Configuration]
 PreloadWeight=42
 
 [Containments][8][Applets][9]
@@ -265,12 +335,16 @@ plugin=org.kde.plasma.vault
 [Containments][8][Applets][9][Configuration]
 PreloadWeight=0
 
+[Containments][8][ConfigDialog]
+DialogHeight=720
+DialogWidth=960
+
 [Containments][8][Configuration]
 PreloadWeight=0
 
 [Containments][8][General]
 extraItems=org.kde.plasma.vault,org.kde.plasma.nightcolorcontrol,org.kde.plasma.networkmanagement,org.kde.plasma.keyboardlayout,org.kde.plasma.bluetooth,org.kde.plasma.mediacontroller,org.kde.plasma.devicenotifier,org.kde.plasma.manage-inputmethod,org.kde.plasma.notifications,org.kde.plasma.volume,org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.plasma.keyboardindicator,org.kde.plasma.printmanager
-knownItems=org.kde.plasma.vault,org.kde.plasma.nightcolorcontrol,org.kde.plasma.networkmanagement,org.kde.plasma.keyboardlayout,org.kde.plasma.bluetooth,org.kde.plasma.mediacontroller,org.kde.plasma.devicenotifier,org.kde.plasma.manage-inputmethod,org.kde.plasma.notifications,org.kde.plasma.volume,org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.plasma.keyboardindicator,org.kde.plasma.printmanager
+knownItems=org.kde.plasma.vault,org.kde.plasma.nightcolorcontrol,org.kde.plasma.networkmanagement,org.kde.plasma.keyboardlayout,org.kde.plasma.bluetooth,org.kde.plasma.mediacontroller,org.kde.plasma.devicenotifier,org.kde.plasma.manage-inputmethod,org.kde.plasma.notifications,org.kde.plasma.volume,org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.plasma.keyboardindicator,org.kde.plasma.printmanager,org.kde.plasma.mediacontroller_plus
 
 [ScreenMapping]
 itemsOnDisabledScreens=

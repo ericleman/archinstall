@@ -45,6 +45,14 @@
     group: "eric"
     mode: u+rwx,g+r,o--          
 
+- name: install panon
+  aur:
+    use: yay
+    name:
+      - plasma5-applets-panon
+  become: yes
+  become_user: eric
+
 - name: Copy Wallpapers
   copy:
     src: personal/home/.local/share/wallpapers
