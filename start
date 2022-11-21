@@ -12,7 +12,7 @@ fi
 
 if [ -z "$2" ]
   then
-    DE=kde
+    DE=qtile
     echo "Default DE=$DE"
 fi
 
