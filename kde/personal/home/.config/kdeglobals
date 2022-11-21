@@ -145,7 +145,7 @@ TerminalService=kitty.desktop
 accentColorFromWallpaper=true
 
 [Icons]
-Theme=Papirus
+Theme=candy-icons
 
 [KDE]
 LookAndFeelPackage=org.kde.breezedark.desktop

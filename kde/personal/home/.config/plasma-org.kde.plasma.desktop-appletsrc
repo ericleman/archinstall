@@ -21,6 +21,10 @@ plugin=org.kde.plasma.digitalclock
 [Containments][2][Applets][18][Configuration]
 PreloadWeight=0
 
+[Containments][2][Applets][18][Configuration][Appearance]
+showSeconds=true
+
+
 [Containments][2][Applets][19]
 immutability=1
 plugin=org.kde.plasma.showdesktop

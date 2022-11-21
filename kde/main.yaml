@@ -32,8 +32,11 @@
   - name: btop
     include_tasks: 190-btop.yaml
 
-  - name: papirus
-    include_tasks: 210-papirus.yaml
+#  - name: papirus
+#    include_tasks: 210-papirus.yaml
+
+  - name: candy icons
+    include_tasks: 210-candy.yaml
 
   - name: Chrome
     include_tasks: 300-chrome.yaml
