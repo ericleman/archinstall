@@ -1,0 +1,12 @@
+- name: install Sway related packages
+  pacman:
+    name:
+      - sway
+      - swaylock
+      - swayidle
+      - swaybg
+      - foot
+      - dmenu
+      - polkit
+    state: present
+

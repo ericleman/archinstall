@@ -12,7 +12,7 @@ fi
 
 if [ -z "$2" ]
   then
-    DE=qtile
+    DE=sway
     echo "Default DE=$DE"
 fi
 

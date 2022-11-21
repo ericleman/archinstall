@@ -1,0 +1,24 @@
+- name: install packages
+  pacman:
+    name:
+      - kitty
+    state: present
+
+- name: Copy theme
+  copy:
+    src: personal/home/.config/kitty
+    dest: /home/eric/.config
+    owner: "eric"
+    group: "eric"
+    mode: u+rwx,g+r,o--          
+
+## Below lines commented as kdeglobals copied in step 030-plasma.yaml
+# - name: kitty config 1
+#   ansible.builtin.command: kwriteconfig5 --file ~/.config/kdeglobals --group General --key TerminalService kitty.desktop
+#   become: yes
+#   become_user: eric
+
+# - name: kitty config 2
+#   ansible.builtin.command: kwriteconfig5 --file ~/.config/kdeglobals --group General --key TerminalApplication kitty 
+#   become: yes
+#   become_user: eric
