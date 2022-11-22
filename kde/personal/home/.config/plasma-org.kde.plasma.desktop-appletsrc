@@ -54,7 +54,7 @@ immutability=1
 plugin=org.kde.plasma.kickoff
 
 [Containments][2][Applets][3][Configuration]
-PreloadWeight=45
+PreloadWeight=41
 popupHeight=612
 popupWidth=779
 
@@ -111,18 +111,18 @@ pulseaudioDevice=allspeakers
 colorSpaceHSL=false
 colorSpaceHSLuv=true
 hslSaturation=0
-hsluvHueFrom=77
-hsluvHueTo=-277
-hsluvLightness=64
-hsluvSaturation=95
+hsluvHueFrom=0
+hsluvHueTo=360
+hsluvLightness=63
+hsluvSaturation=92
 
 [Containments][2][Applets][43][Configuration][ConfigDialog]
 DialogHeight=720
 DialogWidth=960
 
 [Containments][2][Applets][43][Configuration][Effect]
-effectArgValues=5,2,0.003
-visualEffect=2.bar1ch
+effectArgValues=,,
+visualEffect=2.blur1ch.frag
 
 [Containments][2][Applets][43][Configuration][General]
 autoExtend=false
@@ -174,7 +174,7 @@ immutability=1
 plugin=org.kde.plasma.systemtray
 
 [Containments][2][Applets][7][Configuration]
-PreloadWeight=61
+PreloadWeight=71
 SystrayContainmentId=8
 
 [Containments][2][ConfigDialog]
@@ -265,7 +265,7 @@ immutability=1
 plugin=org.kde.plasma.volume
 
 [Containments][8][Applets][15][Configuration]
-PreloadWeight=5
+PreloadWeight=10
 
 [Containments][8][Applets][15][Configuration][ConfigDialog]
 DialogHeight=720
@@ -311,7 +311,7 @@ immutability=1
 plugin=org.kde.plasma.mediacontroller
 
 [Containments][8][Applets][31][Configuration]
-PreloadWeight=46
+PreloadWeight=51
 
 [Containments][8][Applets][31][Configuration][ConfigDialog]
 DialogHeight=720

@@ -8,10 +8,15 @@ ViewPropsTimestamp=2022,11,7,11,28,37.922
 [KFileDialog Settings]
 Places Icons Auto-resize=false
 Places Icons Static Size=22
+Recent Files[$e]=javaws,file:///usr/java/jre1.8.0_351/bin/javaws
+Recent URLs[$e]=file:///usr/java/jre1.8.0_351/bin/
+detailViewIconSize=16
 
 [KPropertiesDialog]
 Virtual1 Height 3840x2269 Virtual1=525
+Virtual1 Height 3840x2400 Virtual1=525
 Virtual1 Width 3840x2269 Virtual1=455
+Virtual1 Width 3840x2400 Virtual1=464
 
 [MainWindow]
 MenuBar=Disabled
@@ -19,4 +24,4 @@ ToolBarsMovable=Disabled
 
 [Open-with settings]
 CompletionMode=1
-History=code
+History=/usr/java/jre1.8.0_351/bin/javaws,code

@@ -1,5 +1,9 @@
+[$Version]
+update_info=bismuth_shortcuts_category.upd:bismuth-shortcuts-category,bismuth_shortcuts_from_kwin.upd:bismuth-shortcuts-from-kwin
+
 [ActivityManager]
 _k_friendly_name=Activity Manager
+switch-to-activity-1fe89265-d49b-4049-a298-e61f70686b76=none,none,Switch to activity "Default"
 switch-to-activity-33bccca3-fdf5-4050-9fae-d58fed1f9b8a=none,none,Switch to activity "Default"
 switch-to-activity-dd1d68d4-a106-4af9-9d36-89f7241de721=none,none,Switch to activity "Default"
 switch-to-activity-e33b43db-5c27-425c-9cd3-a83bc0b49772=none,none,Switch to activity "Default"
@@ -8,6 +12,44 @@ switch-to-activity-ee4c788d-9e9d-4bdc-887e-2a9c623f381d=none,none,Switch to acti
 [KDE Keyboard Layout Switcher]
 Switch to Next Keyboard Layout=Meta+Alt+K,none,Switch to Next Keyboard Layout
 _k_friendly_name=Keyboard Layout Switcher
+
+[bismuth]
+_k_friendly_name=Window Tiling
+decrease_master_size=none,,Decrease Master Area Size
+decrease_master_win_count=none,Meta+[,Decrease Master Area Window Count
+decrease_window_height=none,Meta+Ctrl+K,Decrease Window Height
+decrease_window_width=none,Meta+Ctrl+H,Decrease Window Width
+focus_bottom_window=none,Meta+J,Focus Bottom Window
+focus_left_window=none,Meta+H,Focus Left Window
+focus_next_window=none,,Focus Next Window
+focus_prev_window=none,,Focus Previous Window
+focus_right_window=none,Meta+L,Focus Right Window
+focus_upper_window=none,Meta+K,Focus Upper Window
+increase_master_size=none,,Increase Master Area Size
+increase_master_win_count=none,Meta+],Increase Master Area Window Count
+increase_window_height=none,Meta+Ctrl+J,Increase Window Height
+increase_window_width=none,Meta+Ctrl+L,Increase Window Width
+move_window_to_bottom_pos=none,Meta+Shift+J,Move Window Down
+move_window_to_left_pos=none,Meta+Shift+H,Move Window Left
+move_window_to_next_pos=none,,Move Window to the Next Position
+move_window_to_prev_pos=none,,Move Window to the Previous Position
+move_window_to_right_pos=none,Meta+Shift+L,Move Window Right
+move_window_to_upper_pos=none,Meta+Shift+K,Move Window Up
+next_layout=none,Meta+\\\\,Switch to the Next Layout
+prev_layout=none,Meta+|,Switch to the Previous Layout
+push_window_to_master=none,Meta+Return,Push Active Window to Master Area
+rotate=none,Meta+R,Rotate
+rotate_part=none,Meta+Shift+R,Rotate Part
+rotate_reverse=none,,Rotate (Reverse)
+toggle_float_layout=Meta+F,Meta+Shift+F,Toggle Floating Layout
+toggle_monocle_layout=none,Meta+M,Toggle Monocle Layout
+toggle_quarter_layout=none,,Toggle Quarter Layout
+toggle_spiral_layout=Meta+Shift+T,,Toggle Spiral Layout
+toggle_spread_layout=none,,Toggle Spread Layout
+toggle_stair_layout=none,,Toggle Stair Layout
+toggle_three_column_layout=none,,Toggle Three Column Layout
+toggle_tile_layout=none,Meta+T,Toggle Tile Layout
+toggle_window_floating=Meta+Shift+F,Meta+F,Toggle Active Window Floating
 
 [kaccess]
 Toggle Screen Reader On and Off=Meta+Alt+S,Meta+Alt+S,Toggle Screen Reader On and Off
@@ -197,11 +239,11 @@ view_zoom_out=Meta+-,Meta+-,Zoom Out
 
 [mediacontrol]
 _k_friendly_name=Media Controller
-mediavolumedown=none,none,Media volume down
-mediavolumeup=none,none,Media volume up
+mediavolumedown=none,,Media volume down
+mediavolumeup=none,,Media volume up
 nextmedia=Media Next,Media Next,Media playback next
 pausemedia=Media Pause,Media Pause,Pause media playback
-playmedia=none,none,Play media playback
+playmedia=none,,Play media playback
 playpausemedia=Media Play,Media Play,Play/Pause media playback
 previousmedia=Media Previous,Media Previous,Media playback previous
 stopmedia=Media Stop,Media Stop,Stop media playback
@@ -245,6 +287,7 @@ activate task manager entry 7=Meta+7,Meta+7,Activate Task Manager Entry 7
 activate task manager entry 8=Meta+8,Meta+8,Activate Task Manager Entry 8
 activate task manager entry 9=Meta+9,Meta+9,Activate Task Manager Entry 9
 activate widget 3=Alt+F1,none,Activate Application Launcher Widget
+activate widget 45=none,none,Activate Weather Report Widget
 clear-history=none,,Clear Clipboard History
 clipboard_action=Meta+Ctrl+X,Meta+Ctrl+X,Automatic Action Popup Menu
 cycle-panels=Meta+Alt+P,Meta+Alt+P,Move keyboard focus between panels

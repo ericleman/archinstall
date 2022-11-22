@@ -1,8 +1,13 @@
 [Added Associations]
+application/x-java-jnlp-file=javaws-2.desktop;javaws.desktop;visual-studio-code.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;libreoffice-writer.desktop;google-chrome.desktop;vim.desktop;nvim.desktop;
 text/plain=visual-studio-code.desktop;
 
 [Default Applications]
+application/x-java-jnlp-file=javaws-2.desktop;
+text/html=google-chrome.desktop
 text/plain=visual-studio-code.desktop;
 x-scheme-handler/http=google-chrome.desktop
 x-scheme-handler/https=google-chrome.desktop
-text/html=google-chrome.desktop
+
+[Removed Associations]
+application/x-java-jnlp-file=javaws.desktop;

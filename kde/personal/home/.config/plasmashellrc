@@ -1,5 +1,7 @@
-[PlasmaTransientsConfig]
-PreloadWeight=42
+[KFileDialog Settings]
+Recent Files[$e]=pexels-dmitry-demidov-3784221.jpg,file:$HOME/Downloads/pexels-dmitry-demidov-3784221.jpg
+Recent URLs[$e]=file:$HOME/Downloads/
+detailViewIconSize=16
 
 [PlasmaViews][Panel 2][Defaults]
 thickness=48

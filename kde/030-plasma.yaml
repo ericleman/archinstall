@@ -53,6 +53,14 @@
   become: yes
   become_user: eric
 
+- name: install Bismuth
+  aur:
+    use: yay
+    name:
+      - kwin-bismuth
+  become: yes
+  become_user: eric
+
 - name: Copy Wallpapers
   copy:
     src: personal/home/.local/share/wallpapers

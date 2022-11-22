@@ -1,9 +1,10 @@
 [$Version]
-update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-effect-to-js,kwin.upd:port-scale-effect-to-js,kwin.upd:port-dimscreen-effect-to-js,kwin.upd:auto-bordersize,kwin.upd:animation-speed,kwin.upd:desktop-grid-click-behavior,kwin.upd:no-swap-encourage,kwin.upd:make-translucency-effect-disabled-by-default,kwin.upd:remove-flip-switch-effect,kwin.upd:remove-cover-switch-effect,kwin.upd:remove-cubeslide-effect,kwin.upd:remove-xrender-backend,kwin.upd:enable-scale-effect-by-default,kwin.upd:overview-group-plugin-id,kwin.upd:animation-speed-cleanup
+update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-effect-to-js,kwin.upd:port-scale-effect-to-js,kwin.upd:port-dimscreen-effect-to-js,kwin.upd:auto-bordersize,kwin.upd:animation-speed,kwin.upd:desktop-grid-click-behavior,kwin.upd:no-swap-encourage,kwin.upd:make-translucency-effect-disabled-by-default,kwin.upd:remove-flip-switch-effect,kwin.upd:remove-cover-switch-effect,kwin.upd:remove-cubeslide-effect,kwin.upd:remove-xrender-backend,kwin.upd:enable-scale-effect-by-default,kwin.upd:overview-group-plugin-id,kwin.upd:animation-speed-cleanup,bismuth_new_logger.upd:bismuth-new-logger
 
 [Desktops]
 Id_1=c324c1f0-445d-4684-8436-0e1ceb268f46
-Number=1
+Id_2=abbe5bce-d914-43cd-8d84-e0dbf1347917
+Number=2
 Rows=1
 
 [Effect-blur]
@@ -18,13 +19,36 @@ Menus=81
 Meta=org.kde.kglobalaccel,/component/kwin,,invokeShortcut,Overview
 
 [Plugins]
+bismuthEnabled=true
 blurEnabled=true
 forceblurEnabled=true
+sticky-window-snappingEnabled=false
+tilegapsEnabled=false
+
+[Script-bismuth]
+enableFloatingLayout=true
+enableMonocleLayout=false
+enableSpreadLayout=false
+enableStairLayout=false
+enableThreeColumnLayout=false
+enableTileLayout=false
+ignoreClass=yakuake,spectacle,Conky,zoom,com-sun-javaws-main
+keepFloatAbove=false
+screenGapBottom=8
+screenGapLeft=8
+screenGapRight=8
+screenGapTop=8
+tileLayoutGap=8
 
 [Script-forceblur]
 blurExceptMatching=true
 blurMatching=false
 patterns=urxvt
+
+[Script-sticky-window-snapping]
+ignoreBorderOfClientArea=false
+ignoreShaded=false
+threshold=24
 
 [org.kde.kdecoration2]
 BorderSize=None
