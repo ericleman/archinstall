@@ -1,3 +1,17 @@
+- name: Pacman ParallelDownloads
+  replace:
+    path: /etc/pacman.conf
+    regexp: '#ParallelDownloads'
+    replace: 'ParallelDownloads'
+
+- name: Pacman color config
+  replace:
+    path: /etc/pacman.conf
+    regexp: '#Color'
+    replace: 'Color'
+
+
+
 - name: install core applications packages
   pacman:
     name:
