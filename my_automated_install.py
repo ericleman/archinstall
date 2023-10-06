@@ -161,7 +161,8 @@ installation.activate_time_syncronization()
 print_section('User')
 user = User('eric', PASSWORD, True)
 installation.create_users(user)
-archinstall.run_custom_user_commands('echo "eric ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers', installation)
+installation.arch_chroot('echo "eric ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers')
+#archinstall.run_custom_user_commands('echo "eric ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers', installation)
 
 # QtileProfile config
 #print_section('QtileProfile Config')
@@ -183,8 +184,10 @@ installation.genfstab()
 
 # PARU
 print_section('Paru')
-archinstall.run_custom_user_commands('pacman -S cargo --noconfirm', installation)
-archinstall.run_custom_user_commands('su - eric -c "cd /home/eric && git -c http.sslVerify=false clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si --noconfirm --skippgpcheck"', installation)
+installation.add_additional_packages(["cargo"])
+installation.arch_chroot('cd /home/eric && git -c http.sslVerify=false clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si --noconfirm --skippgpcheck', run_as='eric')
+#archinstall.run_custom_user_commands('pacman -S cargo --noconfirm', installation)
+#archinstall.run_custom_user_commands('su - eric -c "cd /home/eric && git -c http.sslVerify=false clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si --noconfirm --skippgpcheck"', installation)
 
 # LightDM
 print_section('LightDM')
