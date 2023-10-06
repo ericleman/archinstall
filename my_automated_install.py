@@ -1,14 +1,16 @@
 from pathlib import Path
-import sys
+import sys, os
+from urllib.request import urlretrieve
+import zipfile
 
 from archinstall import disk
 from archinstall.lib import locale
 from archinstall import Installer
 from archinstall import profile
-#from archinstall.default_profiles.minimal import MinimalProfile
-from archinstall.default_profiles.desktops.qtile import QtileProfile
-from archinstall.default_profiles.profile import GreeterType
-from archinstall.lib.hardware import GfxDriver, SysInfo
+from archinstall.default_profiles.minimal import MinimalProfile
+#from archinstall.default_profiles.desktops.qtile import QtileProfile
+f#rom archinstall.default_profiles.profile import GreeterType
+from archinstall.lib.hardware import GfxDriver
 from archinstall.lib.models import User
 from archinstall.lib.models.bootloader import Bootloader 
 from archinstall.lib.models.audio_configuration import Audio, AudioConfiguration
@@ -27,6 +29,12 @@ print_section('Retrieving Password from Arguments')
 if len(sys.argv) > 1:
     PASSWORD = sys.argv[1]
 print("Password to use is: " + PASSWORD)
+
+# Download Repo
+print_section('Download Repo')
+urlretrieve('https://github.com/ericleman/archinstall/archive/main.zip', 'main.zip')
+zipfile.ZipFile('main.zip', 'r').extractall() # folder name is archinstall-main
+os.remove('main.zip')
 
 # Pacman parallel download
 print_section('Config Pacman on live OS')
@@ -150,12 +158,17 @@ installation.activate_time_syncronization()
 
 # User
 print_section('User')
-user = User('eric', 'DUMMYPASSWORD', True)
+user = User('eric', PASSWORD, True)
 installation.create_users(user)
 
 # QtileProfile config
-print_section('QtileProfile Config')
-profile_config = profile.ProfileConfiguration(QtileProfile(), GfxDriver.AllOpenSource, GreeterType.Lightdm) 
+#print_section('QtileProfile Config')
+#profile_config = profile.ProfileConfiguration(QtileProfile(), GfxDriver.AllOpenSource, GreeterType.Lightdm) 
+#profile.profile_handler.install_profile_config(installation, profile_config)
+
+# MinimalProfile config
+print_section('MinimalProfile Config')
+profile_config = profile.ProfileConfiguration(MinimalProfile(), GfxDriver.AllOpenSource) 
 profile.profile_handler.install_profile_config(installation, profile_config)
 
 # Keyboard layout (is not done in installation.minimal_installation)
