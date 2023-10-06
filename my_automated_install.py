@@ -9,7 +9,7 @@ from archinstall import Installer
 from archinstall import profile
 from archinstall.default_profiles.minimal import MinimalProfile
 #from archinstall.default_profiles.desktops.qtile import QtileProfile
-f#rom archinstall.default_profiles.profile import GreeterType
+#from archinstall.default_profiles.profile import GreeterType
 from archinstall.lib.hardware import GfxDriver
 from archinstall.lib.models import User
 from archinstall.lib.models.bootloader import Bootloader 
