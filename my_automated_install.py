@@ -163,12 +163,7 @@ user = User('eric', PASSWORD, True)
 installation.create_users(user)
 installation.arch_chroot('echo "eric ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers')
 #archinstall.run_custom_user_commands('echo "eric ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers', installation)
-
-# QtileProfile config
-#print_section('QtileProfile Config')
-#profile_config = profile.ProfileConfiguration(QtileProfile(), GfxDriver.AllOpenSource, GreeterType.Lightdm) 
-#profile.profile_handler.install_profile_config(installation, profile_config)
-
+'''
 # MinimalProfile config
 print_section('MinimalProfile Config')
 profile_config = profile.ProfileConfiguration(MinimalProfile(), GfxDriver.AllOpenSource) 
@@ -202,3 +197,4 @@ installation.add_additional_packages('qtile', 'xf86-video-vmware', 'xf86-input-v
 # Alacritty
 print_section('Alacritty')
 installation.add_additional_packages('alacritty')
+'''
