@@ -3,6 +3,7 @@ import sys, os
 from urllib.request import urlretrieve
 import zipfile
 
+import archinstall
 from archinstall import disk
 from archinstall.lib import locale
 from archinstall import Installer
@@ -124,7 +125,7 @@ print_section('minimal_installation')
 locale_config = locale.LocaleConfiguration('fr', 'en_DK', 'UTF-8')
 installation.minimal_installation(multilib=True, hostname='archlinux', locale_config=locale_config)
 print_section('base-devel, wget and git')
-installation.add_additional_packages(['base-devel', 'wget', 'git'])
+installation.add_additional_packages(['base-devel', 'wget', 'git', 'vim'])
 
 # Swap
 print_section('Swap memory')
@@ -160,6 +161,7 @@ installation.activate_time_syncronization()
 print_section('User')
 user = User('eric', PASSWORD, True)
 installation.create_users(user)
+archinstall.run_custom_user_commands('sed -i "s!# %wheel ALL=(ALL:ALL) NOPASSWD: ALL!%wheel ALL=(ALL:ALL) NOPASSWD: ALL!g" /etc/sudoers', installation)
 
 # QtileProfile config
 #print_section('QtileProfile Config')
@@ -178,6 +180,11 @@ installation.set_keyboard_language(locale_config.kb_layout)
 # Fstab
 print_section('Fstab')
 installation.genfstab()
+
+# PARU
+print_section('Paru')
+archinstall.run_custom_user_commands('pacman -S cargo --noconfirm', installation)
+archinstall.run_custom_user_commands('su - eric -c "cd /home/eric && git -c http.sslVerify=false clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si"', installation)
 
 #print_section('Gnome')
 # gnome
