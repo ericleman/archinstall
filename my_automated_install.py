@@ -25,6 +25,7 @@ def print_section(section: str):
 print_section('Retrieving Password from Arguments')
 if len(sys.argv) > 1:
     PASSWORD = sys.argv[1]
+print("Password to use is: " + PASSWORD)
 
 
 # Partition
@@ -95,17 +96,22 @@ with pacman_conf_path.open("w") as fwrite:
 
 # Installer creation
 print_section('Start Installer')
-mountpoint = Path('/tmp')
+mountpoint = Path('/mnt')
 installation = Installer(mountpoint, disk_config, kernels=['linux'])
+print_section('mount_ordered_layout')
 installation.mount_ordered_layout()
+print_section('minimal_installation')
 locale_config = locale.LocaleConfiguration('fr', 'en_DK', 'UTF-8')
 installation.minimal_installation(multilib=True, hostname='archlinux', locale_config=locale_config)
+print_section('base-devel, wget and git')
 installation.add_additional_packages(['base-devel', 'wget', 'git'])
 
 # Swap
+print_section('Swap memory')
 installation.setup_swap('zram')
 
 # Grub
+print_section('Grub')
 installation.add_bootloader(Bootloader.Grub)
 
 # Network
