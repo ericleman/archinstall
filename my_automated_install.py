@@ -1,4 +1,5 @@
 from pathlib import Path
+import sys
 
 from archinstall import disk
 from archinstall.lib import locale
@@ -11,10 +12,20 @@ from archinstall.lib.hardware import GfxDriver, SysInfo
 from archinstall.lib.models import User
 from archinstall.lib.models.bootloader import Bootloader 
 
+# Constant
+PASSWORD = 'DUMMYPASSWORD'
+
+
 # Helper Print
 def print_section(section: str):
     white_len = (68 - len(section)) // 2
     print(70*'#'+'\n'+70*'#'+'\n#'+white_len*' '+section+(68-white_len-len(section))*' '+'#\n'+70*'#'+'\n'+70*'#')
+
+# Retrieving Password from Arguments
+print_section('Retrieving Password from Arguments')
+if len(sys.argv) > 1:
+    PASSWORD = sys.argv[1]
+
 
 # Partition
 print_section('Create Partitions')
