@@ -18,15 +18,15 @@ On local machine where the repo is:
 On Arch:
 ### get script
 
-`curl -k -L https://raw.githubusercontent.com/ericleman/archinstall/main/start --output start`  
+`curl -k -L https://raw.githubusercontent.com/ericleman/archinstall/main/my_automated_install.py --output i.py`  
 
 or (this one below does not work, needs to change the tiny url):
 
-`curl -k -L https://t.ly/FYHk -o start`  
+`curl -k -L https://bit.ly/3ZLPn7w -o i.py`  
 
 ### then:
 
-`python my_automated_install.py [PASSWORD]`
+`python i.py [PASSWORD]`
 
 
 # Old tips
