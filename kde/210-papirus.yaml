@@ -1,4 +1,0 @@
-- name: install papirus
-  pacman:
-    name: papirus-icon-theme
-    state: present

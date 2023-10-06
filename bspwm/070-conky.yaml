@@ -1,3 +1,0 @@
-- name: dummy
-  ansible.builtin.pause:
-    seconds: 1

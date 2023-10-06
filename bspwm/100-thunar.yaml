@@ -1,6 +1,0 @@
-- name: install packages
-  pacman:
-    name:
-      - thunar
-      - xfce4-settings # to have "Open terminal here" working
-    state: present

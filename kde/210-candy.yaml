@@ -1,7 +1,0 @@
-- name: install panon
-  aur:
-    use: yay
-    name:
-      - candy-icons-git
-  become: yes
-  become_user: eric
