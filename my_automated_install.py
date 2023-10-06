@@ -161,7 +161,10 @@ installation.activate_time_syncronization()
 print_section('User')
 user = User('eric', PASSWORD, True)
 installation.create_users(user)
-installation.arch_chroot('echo "eric ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers')
+
+installation.arch_chroot('echo "eric ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/00_eric')
+
+#installation.arch_chroot('echo "eric ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers')
 #archinstall.run_custom_user_commands('echo "eric ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers', installation)
 '''
 # MinimalProfile config
