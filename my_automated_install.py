@@ -27,6 +27,18 @@ if len(sys.argv) > 1:
     PASSWORD = sys.argv[1]
 print("Password to use is: " + PASSWORD)
 
+# Pacman parallel download
+print_section('Config Pacman on live OS')
+pacman_conf_path = Path("/etc/pacman.conf")
+with pacman_conf_path.open() as f:
+    pacman_conf = f.read().split("\n")
+
+with pacman_conf_path.open("w") as fwrite:
+    for line in pacman_conf:
+        if "ParallelDownloads" in line:
+            fwrite.write(f"ParallelDownloads = 5\n")
+        else:
+            fwrite.write(f"{line}\n")
 
 # Partition
 print_section('Create Partitions')
@@ -55,20 +67,32 @@ boot_partition = disk.PartitionModification(
 )
 device_modification.add_partition(boot_partition)
 
-start_root_partition = boot_partition.length
-length_root_partition = device.device_info.total_size - start_root_partition
-
 # create a root partition
 root_partition = disk.PartitionModification(
 	status=disk.ModificationStatus.Create,
 	type=disk.PartitionType.Primary,
-	start=start_root_partition,
-	length=length_root_partition,
+	start=disk.Size(513, disk.Unit.MiB, device.device_info.sector_size),
+	length=disk.Size(20, disk.Unit.GiB, device.device_info.sector_size),
 	mountpoint=None,
 	fs_type=fs_type,
 	mount_options=[],
 )
 device_modification.add_partition(root_partition)
+
+start_home = root_partition.length
+length_home = device.device_info.total_size - start_home
+
+# create a new home partition
+home_partition = disk.PartitionModification(
+	status=disk.ModificationStatus.Create,
+	type=disk.PartitionType.Primary,
+	start=start_home,
+	length=length_home,
+	mountpoint=Path('/home'),
+	fs_type=fs_type,
+	mount_options=[]
+)
+device_modification.add_partition(home_partition)
 
 disk_config = disk.DiskLayoutConfiguration(
 	config_type=disk.DiskLayoutType.Default,
@@ -80,19 +104,6 @@ fs_handler = disk.FilesystemHandler(disk_config)
 # perform all file operations
 # WARNING: this will potentially format the filesystem and delete all data
 fs_handler.perform_filesystem_operations(show_countdown=False)
-
-# Pacman parallel download
-print_section('Config Pacman on live OS')
-pacman_conf_path = Path("/etc/pacman.conf")
-with pacman_conf_path.open() as f:
-    pacman_conf = f.read().split("\n")
-
-with pacman_conf_path.open("w") as fwrite:
-    for line in pacman_conf:
-        if "ParallelDownloads" in line:
-            fwrite.write(f"ParallelDownloads = 5\n")
-        else:
-            fwrite.write(f"{line}\n")
 
 # Installer creation
 print_section('Start Installer')
