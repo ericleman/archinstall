@@ -161,7 +161,7 @@ installation.activate_time_syncronization()
 print_section('User')
 user = User('eric', PASSWORD, True)
 installation.create_users(user)
-archinstall.run_custom_user_commands('sed -i "s!# %wheel ALL=(ALL:ALL) NOPASSWD: ALL!%wheel ALL=(ALL:ALL) NOPASSWD: ALL!g" /etc/sudoers', installation)
+archinstall.run_custom_user_commands('echo "eric ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers', installation)
 
 # QtileProfile config
 #print_section('QtileProfile Config')
@@ -184,9 +184,18 @@ installation.genfstab()
 # PARU
 print_section('Paru')
 archinstall.run_custom_user_commands('pacman -S cargo --noconfirm', installation)
-archinstall.run_custom_user_commands('su - eric -c "cd /home/eric && git -c http.sslVerify=false clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si"', installation)
+archinstall.run_custom_user_commands('su - eric -c "cd /home/eric && git -c http.sslVerify=false clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si --noconfirm --skippgpcheck"', installation)
 
-#print_section('Gnome')
-# gnome
-#installation.add_additional_packages('gnome', 'xf86-video-vmware', 'xf86-input-vmmouse')
+# LightDM
+print_section('LightDM')
+installation.add_additional_packages('lightdm', 'lightdm-gtk-greeter')
+installation.enable_service('lightdm.service')
+
+# Qtile
+print_section('Qtile')
+installation.add_additional_packages('qtile', 'xf86-video-vmware', 'xf86-input-vmmouse', 'xorg-server', 'xorg-xinit')
 #installation.enable_service('gdm.service')
+
+# Alacritty
+print_section('Alacritty')
+installation.add_additional_packages('alacritty')
