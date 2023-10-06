@@ -144,7 +144,9 @@ audio_config.install_audio_config(installation)
 # Time
 print_section('Time')
 installation.set_timezone("Europe/Paris")
-installation.activate_time_synchronization()
+installation.activate_time_syncronization()
+# typo has been fixed in Sep'23. So in Oct ISO, should use the below: 
+#installation.activate_time_synchronization()
 
 # User
 print_section('User')
