@@ -11,6 +11,7 @@ from archinstall.default_profiles.profile import GreeterType
 from archinstall.lib.hardware import GfxDriver, SysInfo
 from archinstall.lib.models import User
 from archinstall.lib.models.bootloader import Bootloader 
+from archinstall.lib.models.audio_configuration import Audio, AudioConfiguration
 
 # Constant
 PASSWORD = 'DUMMYPASSWORD'
@@ -107,7 +108,7 @@ fs_handler.perform_filesystem_operations(show_countdown=False)
 
 # Installer creation
 print_section('Start Installer')
-mountpoint = Path('/mnt')
+mountpoint = Path('/mnt/archinstall')
 installation = Installer(mountpoint, disk_config, kernels=['linux'])
 print_section('mount_ordered_layout')
 installation.mount_ordered_layout()
@@ -126,16 +127,19 @@ print_section('Grub')
 installation.add_bootloader(Bootloader.Grub)
 
 # Network
-print_section('Network and Audio')
+print_section('Network')
 installation.add_additional_packages(["networkmanager", "network-manager-applet"])
 installation.enable_service('NetworkManager.service')
 
 # Audio
-installation.add_additional_packages("pulseaudio")
-if SysInfo.requires_sof_fw():
-    installation.add_additional_packages('sof-firmware')
-if SysInfo.requires_alsa_fw():
-    installation.add_additional_packages('alsa-firmware')
+print_section('Audio')
+audio_config = AudioConfiguration(Audio.Pulseaudio)
+audio_config.install_audio_config(installation)
+#installation.add_additional_packages("pulseaudio")
+#if SysInfo.requires_sof_fw():
+#    installation.add_additional_packages('sof-firmware')
+#if SysInfo.requires_alsa_fw():
+#    installation.add_additional_packages('alsa-firmware')
 
 # Time
 print_section('Time')
