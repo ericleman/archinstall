@@ -162,8 +162,8 @@ print_section('User')
 user = User('eric', PASSWORD, True)
 installation.create_users(user)
 
-installation.arch_chroot('echo "eric ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/00_eric')
-
+#installation.arch_chroot('echo "eric ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/00_eric')
+archinstall.run_custom_user_commands(['echo "eric ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/00_eric'], installation)
 #installation.arch_chroot('echo "eric ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers')
 #archinstall.run_custom_user_commands('echo "eric ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers', installation)
 '''
