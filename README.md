@@ -3,7 +3,7 @@
  Boot machine with Arch linux ISO in CDROM Drive (on VMWare: VM > Power > Power on to firmware)  
 `loadkeys fr-pc` # i.e.: loqdkeys fr)pc as I am on French keyboard
 
-## via SSH:
+## SSH (optional):
 on Arch (if used on VM, use NAT, not Bridged): 
 `passwd`
 
@@ -12,19 +12,23 @@ Note the IP adress with:
 
 On local machine where the repo is:
 
-`cat .\my_automated_install.py | ssh root@[ip address] python - [PASSWORD]`
+`ssh root@[ip address]`
 
-## via curl
+~~`cat .\my_automated_install.py | ssh root@[ip address] python - [PASSWORD]`~~
+
+## curl
 On Arch:
 ### get script
 
-`curl -k -L https://raw.githubusercontent.com/ericleman/archinstall/main/my_automated_install.py --output i.py`  
+~~`curl -k -L https://raw.githubusercontent.com/ericleman/archinstall/main/my_automated_install.py --output i.py`~~  
 
 or (this one below does not work, needs to change the tiny url):
 
-`curl -k -L https://bit.ly/3ZLPn7w -o i.py`  
+~~`curl -k -L https://bit.ly/3ZLPn7w -o i.py`~~
 
 `curl -k -L https://bit.ly/3RRpr8K -o i.sh`  
+
+or `curl -H 'Cache-Control: no-cache, no-store' -k -L https://bit.ly/3RRpr8K -o i.sh` if we want to ignore cache
 
 ### then:
 
