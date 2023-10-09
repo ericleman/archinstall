@@ -28,11 +28,22 @@ or (this one below does not work, needs to change the tiny url):
 
 `curl -k -L https://bit.ly/3RRpr8K -o i.sh`  
 
-or `curl -H 'Cache-Control: no-cache, no-store' -k -L https://bit.ly/3RRpr8K -o i.sh` if we want to ignore cache
+or 
+
+`curl -H 'Cache-Control: no-cache, no-store' -k -L https://bit.ly/3RRpr8K -o i.sh` 
+
+if we want to ignore cache
 
 ### then:
 
 `sh i.sh [PASSWORD]`
+
+# VMWare:
+Need to add:
+
+`firmware="efi"`
+
+https://www.fosstools.net/how-to-enable-uefi-in-vmware-workstation-player
 
 
 # Old tips

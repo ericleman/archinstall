@@ -119,6 +119,7 @@ echo -e "\n\n################################################################"
 echo "# User"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" useradd -m -s /bin/bash -G wheel,games,network,video,audio,storage,power,input -c "Eric" eric
+printf "%s\n%s" "$PASSWD" "$PASSWD" | arch-chroot "${MOUNTPOINT}" passwd "eric"
 echo "eric ALL=(ALL) NOPASSWD:ALL" > $MOUNTPOINT/etc/sudoers.d/00_eric
 
 echo -e "\n\n################################################################"
@@ -148,7 +149,7 @@ arch-chroot "${MOUNTPOINT}" systemctl enable lightdm.service
 echo -e "\n\n################################################################"
 echo "# X11 and QTile"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm qtile xf86-video-vmware xf86-input-vmmouse xorg-server xorg-xinit
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm qtile xf86-video-vmware xf86-input-vmmouse xorg-server xorg-xinit mesa
 
 echo -e "\n\n################################################################"
 echo "# Alacritty"
