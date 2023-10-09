@@ -34,6 +34,8 @@ echo "# Parallel download and mirrors"
 echo "################################################################"
 reflector --country France --latest 5 --sort rate --save /etc/pacman.d/mirrorlist
 sed -i 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
+sed -i 's%#Color%Color\nILoveCandy%g' /etc/pacman.conf
+
 
 echo -e "\n\n################################################################"
 echo "# Create Partitions"
@@ -52,7 +54,7 @@ mount /dev/sda1 $MOUNTPOINT/boot
 echo -e "\n\n################################################################"
 echo "# Pacstrap"
 echo "################################################################"
-pacstrap $MOUNTPOINT base base-devel linux linux-firmware vim git grub zram-generator
+pacstrap $MOUNTPOINT base base-devel linux linux-firmware vim git grub efibootmgr zram-generator
 
 echo -e "\n\n################################################################"
 echo "# Gen fstab"
@@ -76,7 +78,7 @@ echo 'LANG=en_US.UTF-8' >> $MOUNTPOINT/etc/locale.conf
 echo 'LC_TIME=en_DK.UTF-8' >> $MOUNTPOINT/etc/locale.conf
 echo 'KEYMAP="fr-pc"' >> $MOUNTPOINT/etc/vconsole.conf
 echo 'CONSOLEFONT="lat9w-16"' >> $MOUNTPOINT/etc/vconsole.conf
-arch-chroot "${MOUNTPOINT}"localectl set-keymap fr-pc
+arch-chroot "${MOUNTPOINT}" localectl set-keymap fr-pc
 
 echo -e "\n\n################################################################"
 echo "# PACMAN: Parallel download and mirrors on Chroot"
@@ -87,9 +89,6 @@ sed -i 's%#Color%Color\nILoveCandy%g' $MOUNTPOINT/etc/pacman.conf
 echo '[multilib]' >> $MOUNTPOINT/etc/pacman.conf
 echo 'Include = /etc/pacman.d/mirrorlist' >> $MOUNTPOINT/etc/pacman.conf
 echo '' >> $MOUNTPOINT/etc/pacman.conf
-
-
-
 
 echo -e "\n\n################################################################"
 echo "# Zram"
