@@ -122,12 +122,19 @@ arch-chroot "${MOUNTPOINT}" useradd -m -s /bin/bash -G wheel,games,network,video
 printf "%s\n%s" "$PASSWD" "$PASSWD" | arch-chroot "${MOUNTPOINT}" passwd "eric"
 echo "eric ALL=(ALL) NOPASSWD:ALL" > $MOUNTPOINT/etc/sudoers.d/00_eric
 
+#echo -e "\n\n################################################################"
+#echo "# Paru"
+#echo "################################################################"
+#arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm cargo
+#arch-chroot "${MOUNTPOINT}" su - eric -c 'cd /home/eric && git -c http.sslVerify=false clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si --noconfirm --skippgpcheck'
+#arch-chroot "${MOUNTPOINT}" rm -rf /home/eric/paru
+
 echo -e "\n\n################################################################"
-echo "# Paru"
+echo "# Yay"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm cargo
-arch-chroot "${MOUNTPOINT}" su - eric -c 'cd /home/eric && git -c http.sslVerify=false clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si --noconfirm --skippgpcheck'
-arch-chroot "${MOUNTPOINT}" rm -rf /home/eric/trizen
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm go
+arch-chroot "${MOUNTPOINT}" su - eric -c 'cd /home/eric && git -c http.sslVerify=false https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm --skippgpcheck'
+arch-chroot "${MOUNTPOINT}" rm -rf /home/eric/yay
 
 echo -e "\n\n################################################################"
 echo "# VMWare Specificities"
