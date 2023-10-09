@@ -6,7 +6,7 @@ import zipfile
 import archinstall
 from archinstall import disk
 from archinstall.lib import locale
-from archinstall import Installer
+from archinstall import Installer, SysCommand
 from archinstall import profile
 from archinstall.default_profiles.minimal import MinimalProfile
 #from archinstall.default_profiles.desktops.qtile import QtileProfile
@@ -15,9 +15,24 @@ from archinstall.lib.hardware import GfxDriver
 from archinstall.lib.models import User
 from archinstall.lib.models.bootloader import Bootloader 
 from archinstall.lib.models.audio_configuration import Audio, AudioConfiguration
+from archinstall.lib.mirrors import use_mirrors, list_mirrors, MirrorConfiguration
 
 # Constant
 PASSWORD = 'DUMMYPASSWORD'
+
+# TEMPORARY AS WAITING OCT'23 FIX OF archinstall.run_custom_user_commands
+def my_run_custom_user_commands(commands, installation):
+	for index, command in enumerate(commands):
+		script_path = f"/var/tmp/user-command.{index}.sh"
+		chroot_path = f"{installation.target}/{script_path}"
+
+		with open(chroot_path, "w") as user_script:
+			user_script.write(command)
+
+		SysCommand(f"arch-chroot {installation.target} bash {script_path}")
+
+		os.unlink(chroot_path)
+
 
 
 # Helper Print
@@ -115,6 +130,12 @@ fs_handler = disk.FilesystemHandler(disk_config)
 # WARNING: this will potentially format the filesystem and delete all data
 fs_handler.perform_filesystem_operations(show_countdown=False)
 
+# Mirrors
+print_section('Get Miirors')
+my_mirrors = list_mirrors()
+my_mirrors = {'France': my_mirrors['France']}
+my_mirrors_config = MirrorConfiguration(mirror_regions=my_mirrors)
+
 # Installer creation
 print_section('Start Installer')
 mountpoint = Path('/mnt/archinstall')
@@ -122,8 +143,10 @@ installation = Installer(mountpoint, disk_config, kernels=['linux'])
 print_section('mount_ordered_layout')
 installation.mount_ordered_layout()
 print_section('minimal_installation')
+use_mirrors(my_mirrors)
 locale_config = locale.LocaleConfiguration('fr', 'en_DK', 'UTF-8')
 installation.minimal_installation(multilib=True, hostname='archlinux', locale_config=locale_config)
+installation.set_mirrors(my_mirrors_config)
 print_section('base-devel, wget and git')
 installation.add_additional_packages(['base-devel', 'wget', 'git', 'vim'])
 
@@ -162,11 +185,10 @@ print_section('User')
 user = User('eric', PASSWORD, True)
 installation.create_users(user)
 
-#installation.arch_chroot('echo "eric ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/00_eric')
-archinstall.run_custom_user_commands(['echo "eric ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/00_eric'], installation)
-#installation.arch_chroot('echo "eric ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers')
-#archinstall.run_custom_user_commands('echo "eric ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers', installation)
-'''
+print_section('Sudoers')
+my_run_custom_user_commands(['echo "eric ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/00_eric'], installation)
+#archinstall.run_custom_user_commands(['echo "eric ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/00_eric'], installation)
+
 # MinimalProfile config
 print_section('MinimalProfile Config')
 profile_config = profile.ProfileConfiguration(MinimalProfile(), GfxDriver.AllOpenSource) 
@@ -189,15 +211,14 @@ installation.arch_chroot('cd /home/eric && git -c http.sslVerify=false clone htt
 
 # LightDM
 print_section('LightDM')
-installation.add_additional_packages('lightdm', 'lightdm-gtk-greeter')
+installation.add_additional_packages(['lightdm', 'lightdm-gtk-greeter'])
 installation.enable_service('lightdm.service')
 
 # Qtile
 print_section('Qtile')
-installation.add_additional_packages('qtile', 'xf86-video-vmware', 'xf86-input-vmmouse', 'xorg-server', 'xorg-xinit')
+installation.add_additional_packages(['qtile', 'xf86-video-vmware', 'xf86-input-vmmouse', 'xorg-server', 'xorg-xinit'])
 #installation.enable_service('gdm.service')
 
 # Alacritty
 print_section('Alacritty')
-installation.add_additional_packages('alacritty')
-'''
+installation.add_additional_packages(['alacritty'])
