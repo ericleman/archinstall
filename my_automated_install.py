@@ -52,6 +52,9 @@ urlretrieve('https://github.com/ericleman/archinstall/archive/main.zip', 'main.z
 zipfile.ZipFile('main.zip', 'r').extractall() # folder name is archinstall-main
 os.remove('main.zip')
 
+# Update Certificate
+
+
 # Pacman parallel download
 print_section('Config Pacman on live OS')
 pacman_conf_path = Path("/etc/pacman.conf")
