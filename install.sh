@@ -57,7 +57,7 @@ pacstrap $MOUNTPOINT base base-devel linux linux-firmware vim git grub zram-gene
 echo -e "\n\n################################################################"
 echo "# Gen fstab"
 echo "################################################################"
-genfstab -U -p /mnt >> /mnt/etc/fstab
+genfstab -U -p $MOUNTPOINT >> $MOUNTPOINT/etc/fstab
 
 echo -e "\n\n################################################################"
 echo "# Time and clock"
@@ -76,7 +76,7 @@ echo 'LANG=en_US.UTF-8' >> $MOUNTPOINT/etc/locale.conf
 echo 'LC_TIME=en_DK.UTF-8' >> $MOUNTPOINT/etc/locale.conf
 echo 'KEYMAP="fr-pc"' >> $MOUNTPOINT/etc/vconsole.conf
 echo 'CONSOLEFONT="lat9w-16"' >> $MOUNTPOINT/etc/vconsole.conf
-arch-chroot localectl set-keymap fr-pc
+arch-chroot "${MOUNTPOINT}"localectl set-keymap fr-pc
 
 echo -e "\n\n################################################################"
 echo "# Parallel download and mirrors on Chroot"
