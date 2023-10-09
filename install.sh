@@ -129,6 +129,17 @@ arch-chroot "${MOUNTPOINT}" su - eric -c 'cd /home/eric && git -c http.sslVerify
 arch-chroot "${MOUNTPOINT}" rm -rf /home/eric/trizen
 
 echo -e "\n\n################################################################"
+echo "# VMWare Specificities"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm open-vm-tools gtkmm3 
+# gtkmm3 required to copy paste
+cp /root/archinstall-main/config/etc/systemd/system/share-vmware-folder.service $MOUNTPOINT/etc/systemd/system/share-vmware-folder.service
+arch-chroot "${MOUNTPOINT}" systemctl enable vmtoolsd.service
+arch-chroot "${MOUNTPOINT}" systemctl enable vmware-vmblock-fuse.service
+arch-chroot "${MOUNTPOINT}" systemctl enable share-vmware-folder.service
+arch-chroot "${MOUNTPOINT}" su - eric -c 'mkdir -m u=rw,g=r /home/eric/Laptop'
+
+echo -e "\n\n################################################################"
 echo "# LightDM"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm lightdm lightdm-gtk-greeter
