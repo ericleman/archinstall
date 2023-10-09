@@ -24,9 +24,11 @@ or (this one below does not work, needs to change the tiny url):
 
 `curl -k -L https://bit.ly/3ZLPn7w -o i.py`  
 
+`curl -k -L https://bit.ly/3RRpr8K -o i.sh`  
+
 ### then:
 
-`python i.py [PASSWORD]`
+`sh i.sh [PASSWORD]`
 
 
 # Old tips

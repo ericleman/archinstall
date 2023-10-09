@@ -2,8 +2,13 @@
 echo "################################################################"
 echo "###########################    START      ######################"
 echo "################################################################"
-read PASSWD
-read -s 'Password: ' passvar
-sleep 2
-PASSWD=abc
+
+PASSWD=$1
+
+if [ -z "$1" ]
+  then
+    echo "Please provide password"
+    read PASSWD
+fi
+
 echo "Password is $PASSWD"
