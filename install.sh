@@ -43,7 +43,7 @@ parted -s /dev/sda mklabel gpt \
     mkpart primary ext4 512M  100% \
     set 1 boot on
 mkfs.fat -F32 /dev/sda1
-mkfs.ext4 /dev/sda2
+mkfs.ext4 -F /dev/sda2
 mkdir $MOUNTPOINT
 mount /dev/sda2 $MOUNTPOINT
 mkdir $MOUNTPOINT/boot
