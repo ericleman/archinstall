@@ -150,6 +150,8 @@ use_mirrors(my_mirrors)
 locale_config = locale.LocaleConfiguration('fr', 'en_DK', 'UTF-8')
 installation.minimal_installation(multilib=True, hostname='archlinux', locale_config=locale_config)
 installation.set_mirrors(my_mirrors_config)
+print_section('installation.base_packages')
+print(installation.base_packages)
 print_section('base-devel, wget and git')
 installation.add_additional_packages(['base-devel', 'wget', 'git', 'vim'])
 

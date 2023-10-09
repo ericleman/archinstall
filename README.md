@@ -63,3 +63,7 @@ On IG site, launch Prorealtime in java mode, to get /home/eric/Downloads/itchart
 Or change KDE Dolphin settings so *.jnlp open with /usr/java/jre1.8.0_351/bin/javaws
 
 
+# Good scripts to consider:
+https://github.com/MatMoul/archfi/blob/master/archfi
+https://github.com/picodotdev/alis/blob/master/alis.sh
+https://github.com/tom5760/arch-install/blob/master/arch_install.sh
