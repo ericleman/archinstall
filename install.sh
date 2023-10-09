@@ -79,10 +79,17 @@ echo 'CONSOLEFONT="lat9w-16"' >> $MOUNTPOINT/etc/vconsole.conf
 arch-chroot "${MOUNTPOINT}"localectl set-keymap fr-pc
 
 echo -e "\n\n################################################################"
-echo "# Parallel download and mirrors on Chroot"
+echo "# PACMAN: Parallel download and mirrors on Chroot"
 echo "################################################################"
 cp /etc/pacman.d/mirrorlist $MOUNTPOINT/etc/pacman.d/mirrorlist
 sed -i 's/#ParallelDownloads/ParallelDownloads/' $MOUNTPOINT/etc/pacman.conf
+sed -i 's%#Color%Color\nILoveCandy%g' $MOUNTPOINT/etc/pacman.conf
+echo '[multilib]' >> $MOUNTPOINT/etc/pacman.conf
+echo 'Include = /etc/pacman.d/mirrorlist' >> $MOUNTPOINT/etc/pacman.conf
+echo '' >> $MOUNTPOINT/etc/pacman.conf
+
+
+
 
 echo -e "\n\n################################################################"
 echo "# Zram"
@@ -120,6 +127,7 @@ echo "# Paru"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm cargo
 arch-chroot "${MOUNTPOINT}" su - eric -c 'cd /home/eric && git -c http.sslVerify=false clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si --noconfirm --skippgpcheck'
+arch-chroot "${MOUNTPOINT}" rm -rf /home/eric/trizen
 
 echo -e "\n\n################################################################"
 echo "# LightDM"
