@@ -80,7 +80,7 @@ echo 'KEYMAP="fr-pc"' >> $MOUNTPOINT/etc/vconsole.conf
 echo 'CONSOLEFONT="lat9w-16"' >> $MOUNTPOINT/etc/vconsole.conf
 #arch-chroot "${MOUNTPOINT}" localectl set-keymap ""
 arch-chroot "${MOUNTPOINT}" localectl set-keymap "fr-pc"
-arch-chroot "${MOUNTPOINT}" localectl set-x11-keymap fr pc
+#arch-chroot "${MOUNTPOINT}" localectl set-x11-keymap fr pc # to be done after X11 installation
 
 echo -e "\n\n################################################################"
 echo "# PACMAN: Parallel download and mirrors on Chroot"
@@ -168,7 +168,9 @@ echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm qtile xf86-video-vmware xf86-input-vmmouse xorg-server xorg-xinit mesa
 arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.config/qtile'
 cp -r /root/archinstall-main/config/home/.config/qtile $MOUNTPOINT/home/eric/.config/
-
+arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
+arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
+arch-chroot "${MOUNTPOINT}" localectl set-x11-keymap fr pc
 
 echo -e "\n\n################################################################"
 echo "# Alacritty"
