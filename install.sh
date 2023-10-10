@@ -185,6 +185,11 @@ cp /root/archinstall-main/config/home/.Xresources $MOUNTPOINT/home/eric/ # set d
 arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.config/.Xresources
 arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.config/.Xresources
 
+echo -e "\n\n################################################################"
+echo "# Picom"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm picom-allusive'
+
 
 echo -e "\n\n################################################################"
 echo "# Alacritty"
