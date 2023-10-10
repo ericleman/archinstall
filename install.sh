@@ -140,6 +140,11 @@ arch-chroot "${MOUNTPOINT}" su - eric -c 'cd /home/eric && git -c http.sslVerify
 arch-chroot "${MOUNTPOINT}" rm -rf /home/eric/yay-bin
 
 echo -e "\n\n################################################################"
+echo "# Fonts nerd-fonts-noto-sans-mono-extended"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S nerd-fonts-noto-sans-mono-extended'
+
+echo -e "\n\n################################################################"
 echo "# VMWare Specificities"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm open-vm-tools gtkmm3 
@@ -157,6 +162,10 @@ echo "# LightDM"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm lightdm lightdm-gtk-greeter
 arch-chroot "${MOUNTPOINT}" systemctl enable lightdm.service
+sed -i 's/#autologin-user=/autologin-user=eric/' $MOUNTPOINT/etc/lightdm/lightdm.conf
+arch-chroot "${MOUNTPOINT}" groupadd -r autologin
+arch-chroot "${MOUNTPOINT}" gpasswd -a eric autologin
+
 
 echo -e "\n\n################################################################"
 echo "# X11 and QTile"
@@ -172,7 +181,14 @@ echo -e "\n\n################################################################"
 echo "# Alacritty"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm alacritty
+cp -r /root/archinstall-main/config/home/.config/alacritty $MOUNTPOINT/home/eric/.config/
+arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
+arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
 
+echo -e "\n\n################################################################"
+echo "# NeoFetch"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm neofetch
 
 
 echo -e "\n\n################################################################"
