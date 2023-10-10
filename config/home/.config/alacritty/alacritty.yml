@@ -879,19 +879,19 @@
 
 font:
   normal:
-    family: NotoSansMono Nerd Font
+    family: NotoSansMNerdFontMono
     style: Regular
 
   bold:
-    family: NotoSansMono Nerd Font
+    family: NotoSansMNerdFontMono
     style: Bold
 
   italic:
-    family: NotoSansMono Nerd Font
+    family: NotoSansMNerdFontMono
     style: Italic
 
   bold_italic:
-    family: NotoSansMono Nerd Font
+    family: NotoSansMNerdFontMono
     style: Bold Italic
 
   size: 18
