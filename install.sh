@@ -78,7 +78,8 @@ echo 'LANG=en_US.UTF-8' >> $MOUNTPOINT/etc/locale.conf
 echo 'LC_TIME=en_DK.UTF-8' >> $MOUNTPOINT/etc/locale.conf
 echo 'KEYMAP="fr-pc"' >> $MOUNTPOINT/etc/vconsole.conf
 echo 'CONSOLEFONT="lat9w-16"' >> $MOUNTPOINT/etc/vconsole.conf
-arch-chroot "${MOUNTPOINT}" localectl set-keymap fr-pc
+arch-chroot "${MOUNTPOINT}" localectl set-keymap ""
+arch-chroot "${MOUNTPOINT}" localectl set-keymap "fr-pc"
 
 echo -e "\n\n################################################################"
 echo "# PACMAN: Parallel download and mirrors on Chroot"
