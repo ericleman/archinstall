@@ -192,6 +192,16 @@ arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
 
 echo -e "\n\n################################################################"
+echo "# Nemo"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm nemo
+
+echo -e "\n\n################################################################"
+echo "# Nemo"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm nnn
+
+echo -e "\n\n################################################################"
 echo "# NeoFetch"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm neofetch
