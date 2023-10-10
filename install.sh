@@ -171,7 +171,7 @@ arch-chroot "${MOUNTPOINT}" usermod -a -G autologin eric
 echo -e "\n\n################################################################"
 echo "# X11 and QTile"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm qtile xf86-video-vmware xf86-input-vmmouse xorg-server xorg-xinit mesa
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm qtile xf86-video-vmware xf86-input-vmmouse xorg-server xorg-xinit mesa xorg-xrandr xorg-xdpyinfo
 arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.config/qtile'
 cp -r /root/archinstall-main/config/home/.config/qtile $MOUNTPOINT/home/eric/.config/
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
