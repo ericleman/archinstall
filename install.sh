@@ -57,6 +57,12 @@ echo "################################################################"
 pacstrap $MOUNTPOINT base base-devel linux linux-firmware vim git grub efibootmgr zram-generator
 
 echo -e "\n\n################################################################"
+echo "# Update Certificates on Chroot"
+echo "################################################################"
+cp /root/archinstall-main/certificate/ma-trust.cer $MOUNTPOINT/etc/ca-certificates/trust-source/anchors
+arch-chroot "${MOUNTPOINT}" update-ca-trust
+
+echo -e "\n\n################################################################"
 echo "# Gen fstab"
 echo "################################################################"
 genfstab -U -p $MOUNTPOINT >> $MOUNTPOINT/etc/fstab
@@ -126,21 +132,12 @@ echo "eric ALL=(ALL) NOPASSWD:ALL" > $MOUNTPOINT/etc/sudoers.d/00_eric
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm xdg-user-dirs
 arch-chroot "${MOUNTPOINT}" su - eric -c 'xdg-user-dirs-update'
 
-
-
-#echo -e "\n\n################################################################"
-#echo "# Paru"
-#echo "################################################################"
-#arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm cargo
-#arch-chroot "${MOUNTPOINT}" su - eric -c 'cd /home/eric && git -c http.sslVerify=false clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si --noconfirm --skippgpcheck'
-#arch-chroot "${MOUNTPOINT}" rm -rf /home/eric/paru
-
 echo -e "\n\n################################################################"
 echo "# Yay"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm go
-arch-chroot "${MOUNTPOINT}" su - eric -c 'cd /home/eric && git -c http.sslVerify=false clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm --skippgpcheck'
-arch-chroot "${MOUNTPOINT}" rm -rf /home/eric/yay
+arch-chroot "${MOUNTPOINT}" su - eric -c 'cd /home/eric && git -c http.sslVerify=false clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si --noconfirm --skippgpcheck'
+arch-chroot "${MOUNTPOINT}" rm -rf /home/eric/yay-bin
 
 echo -e "\n\n################################################################"
 echo "# VMWare Specificities"
@@ -154,7 +151,6 @@ arch-chroot "${MOUNTPOINT}" systemctl enable share-vmware-folder.service
 arch-chroot "${MOUNTPOINT}" mkdir /home/eric/Laptop
 arch-chroot "${MOUNTPOINT}" chown eric /home/eric/Laptop
 arch-chroot "${MOUNTPOINT}" chmod 755 /home/eric/Laptop
-
 
 echo -e "\n\n################################################################"
 echo "# LightDM"
@@ -176,6 +172,7 @@ echo -e "\n\n################################################################"
 echo "# Alacritty"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm alacritty
+
 
 
 echo -e "\n\n################################################################"
