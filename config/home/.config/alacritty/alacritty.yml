@@ -895,3 +895,6 @@ font:
     style: Bold Italic
 
   size: 16
+
+import:
+  - /home/eric/.config/alacritty/nord.yaml
