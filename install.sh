@@ -165,7 +165,7 @@ arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm lightdm lightdm-gtk-greeter
 arch-chroot "${MOUNTPOINT}" systemctl enable lightdm.service
 sed -i 's/#autologin-user=/autologin-user=eric/' $MOUNTPOINT/etc/lightdm/lightdm.conf
 arch-chroot "${MOUNTPOINT}" groupadd -r autologin
-arch-chroot "${MOUNTPOINT}" gpasswd -a eric autologin
+arch-chroot "${MOUNTPOINT}" usermod -a -G autologin eric
 
 
 echo -e "\n\n################################################################"
