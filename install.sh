@@ -142,6 +142,7 @@ arch-chroot "${MOUNTPOINT}" rm -rf /home/eric/yay-bin
 echo -e "\n\n################################################################"
 echo "# Fonts nerd-fonts-noto-sans-mono-extended"
 echo "################################################################"
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm subversion #svn command is used during the install
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm nerd-fonts-noto-sans-mono-extended'
 
 echo -e "\n\n################################################################"
@@ -175,7 +176,9 @@ arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.config/qtile'
 cp -r /root/archinstall-main/config/home/.config/qtile $MOUNTPOINT/home/eric/.config/
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
-arch-chroot "${MOUNTPOINT}" localectl set-x11-keymap fr pc
+#arch-chroot "${MOUNTPOINT}" localectl set-x11-keymap fr pc #I think `localectl set-x11-keymap` does not work during install in chroot. SO I copy the config directly (see below)
+cp -r /root/archinstall-main/config/etc/X11/xorg.conf.d $MOUNTPOINT/etc/X11/
+
 
 echo -e "\n\n################################################################"
 echo "# Alacritty"
