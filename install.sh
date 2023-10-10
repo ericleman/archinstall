@@ -123,6 +123,10 @@ echo "################################################################"
 arch-chroot "${MOUNTPOINT}" useradd -m -s /bin/bash -G wheel,games,network,video,audio,storage,power,input -c "Eric" eric
 printf "%s\n%s" "$PASSWD" "$PASSWD" | arch-chroot "${MOUNTPOINT}" passwd "eric"
 echo "eric ALL=(ALL) NOPASSWD:ALL" > $MOUNTPOINT/etc/sudoers.d/00_eric
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm xdg-user-dirs
+arch-chroot "${MOUNTPOINT}" su - eric -c 'xdg-user-dirs-update'
+
+
 
 #echo -e "\n\n################################################################"
 #echo "# Paru"
