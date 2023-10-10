@@ -78,8 +78,9 @@ echo 'LANG=en_US.UTF-8' >> $MOUNTPOINT/etc/locale.conf
 echo 'LC_TIME=en_DK.UTF-8' >> $MOUNTPOINT/etc/locale.conf
 echo 'KEYMAP="fr-pc"' >> $MOUNTPOINT/etc/vconsole.conf
 echo 'CONSOLEFONT="lat9w-16"' >> $MOUNTPOINT/etc/vconsole.conf
-arch-chroot "${MOUNTPOINT}" localectl set-keymap ""
+#arch-chroot "${MOUNTPOINT}" localectl set-keymap ""
 arch-chroot "${MOUNTPOINT}" localectl set-keymap "fr-pc"
+arch-chroot "${MOUNTPOINT}" localectl set-x11-keymap fr pc
 
 echo -e "\n\n################################################################"
 echo "# PACMAN: Parallel download and mirrors on Chroot"
@@ -134,7 +135,7 @@ echo -e "\n\n################################################################"
 echo "# Yay"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm go
-arch-chroot "${MOUNTPOINT}" su - eric -c 'cd /home/eric && git -c http.sslVerify=false https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm --skippgpcheck'
+arch-chroot "${MOUNTPOINT}" su - eric -c 'cd /home/eric && git -c http.sslVerify=false clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm --skippgpcheck'
 arch-chroot "${MOUNTPOINT}" rm -rf /home/eric/yay
 
 echo -e "\n\n################################################################"
@@ -146,7 +147,10 @@ cp /root/archinstall-main/config/etc/systemd/system/share-vmware-folder.service 
 arch-chroot "${MOUNTPOINT}" systemctl enable vmtoolsd.service
 arch-chroot "${MOUNTPOINT}" systemctl enable vmware-vmblock-fuse.service
 arch-chroot "${MOUNTPOINT}" systemctl enable share-vmware-folder.service
-arch-chroot "${MOUNTPOINT}" su - eric -c 'mkdir -m u=rw,g=r /home/eric/Laptop'
+arch-chroot "${MOUNTPOINT}" mkdir /home/eric/Laptop
+arch-chroot "${MOUNTPOINT}" chown eric /home/eric/Laptop
+arch-chroot "${MOUNTPOINT}" chmod 755 /home/eric/Laptop
+
 
 echo -e "\n\n################################################################"
 echo "# LightDM"
@@ -158,6 +162,9 @@ echo -e "\n\n################################################################"
 echo "# X11 and QTile"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm qtile xf86-video-vmware xf86-input-vmmouse xorg-server xorg-xinit mesa
+arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.config/qtile'
+cp -r /root/archinstall-main/config/home/.config/qtile $MOUNTPOINT/home/eric/.config/
+
 
 echo -e "\n\n################################################################"
 echo "# Alacritty"
