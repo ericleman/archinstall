@@ -894,7 +894,7 @@ font:
     family: NotoSansMono Nerd Font
     style: Bold Italic
 
-  size: 12
+  size: 18
 
 import:
   - /home/eric/.config/alacritty/nord.yaml

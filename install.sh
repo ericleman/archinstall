@@ -131,6 +131,14 @@ printf "%s\n%s" "$PASSWD" "$PASSWD" | arch-chroot "${MOUNTPOINT}" passwd "eric"
 echo "eric ALL=(ALL) NOPASSWD:ALL" > $MOUNTPOINT/etc/sudoers.d/00_eric
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm xdg-user-dirs
 arch-chroot "${MOUNTPOINT}" su - eric -c 'xdg-user-dirs-update'
+cp /root/archinstall-main/config/home/.bashrc $MOUNTPOINT/home/eric/
+arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.config/.bashrc
+arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.config/.bashrc
+# dir_colors to have Nord theme in ls...
+cp /root/archinstall-main/config/home/.dir_colors $MOUNTPOINT/home/eric/
+arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.config/.dir_colors
+arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.config/.dir_colors
+
 
 echo -e "\n\n################################################################"
 echo "# Yay"
@@ -142,7 +150,7 @@ arch-chroot "${MOUNTPOINT}" rm -rf /home/eric/yay-bin
 echo -e "\n\n################################################################"
 echo "# Fonts nerd-fonts-noto-sans-mono-extended"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm subversion #svn command is used during the install
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm noto-fonts subversion #svn command is used during the install
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm nerd-fonts-noto-sans-mono-extended'
 
 echo -e "\n\n################################################################"
@@ -197,7 +205,7 @@ echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm nemo
 
 echo -e "\n\n################################################################"
-echo "# Nemo"
+echo "# NNN"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm nnn
 
@@ -206,6 +214,15 @@ echo "# NeoFetch"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm neofetch
 
+echo -e "\n\n################################################################"
+echo "# Chrome"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm google-chrome'
+
+echo -e "\n\n################################################################"
+echo "# VS Code"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm visual-studio-code-bin'
 
 echo -e "\n\n################################################################"
 echo "# end of CHROOT, rebooting"

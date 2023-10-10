@@ -52,26 +52,26 @@ When 3D acceleration is activated on VMWare, then deactivate it on Google Chrome
 ![image](https://user-images.githubusercontent.com/26767717/177496730-38f3be75-ae3c-4329-a49e-0002abfc595a.png)
 
 
-## Prorealtime on KDE
-From KDE guest, go to : https://www.java.com/fr/download/.
+## Prorealtime workaround
+From Arch guest, go to : https://www.java.com/fr/download/ and get Linux 64 file.
 
-That creates /home/eric/Downloads/jre-8u351-linux-x64.tar.gz
+That creates a file like /home/eric/Downloads/jre-8u381-linux-x64.tar.gz
 
 ```
 sudo su
 mkdir /usr/java
-mv jre-8u351-linux-x64.tar.gz /usr/java/
+mv jre-8u381-linux-x64.tar.gz /usr/java/
 cd /usr/java
-tar zxvf jre-8u351-linux-x64.tar.gz
+tar zxvf jre-8u381-linux-x64.tar.gz
 ```
 
-Now we have /usr/java/jre1.8.0_351/bin/javaws
+Now we have /usr/java/jre1.8.0_381/bin/javaws
 
 On IG site, launch Prorealtime in java mode, to get /home/eric/Downloads/itcharts.jnlp
 
-`/usr/java/jre1.8.0_351/bin/javaws /home/eric/Downloads/itcharts.jnlp`
+`/usr/java/jre1.8.0_381/bin/javaws /home/eric/Downloads/itcharts.jnlp`
 
-Or change KDE Dolphin settings so *.jnlp open with /usr/java/jre1.8.0_351/bin/javaws
+TODO: Try to change settings so *.jnlp open with /usr/java/jre1.8.0_381/bin/javaws
 
 
 # Good scripts to consider:
