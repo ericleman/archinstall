@@ -4,7 +4,6 @@ echo "###########################    START      ######################"
 echo "################################################################"
 MOUNTPOINT=/mnt/archinstall
 
-
 echo -e "\n\n################################################################"
 echo "# Get Password"
 echo "################################################################"
@@ -35,7 +34,6 @@ echo "################################################################"
 reflector --country France --latest 5 --sort rate --save /etc/pacman.d/mirrorlist
 sed -i 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
 sed -i 's%#Color%Color\nILoveCandy%g' /etc/pacman.conf
-
 
 echo -e "\n\n################################################################"
 echo "# Create Partitions"
@@ -122,7 +120,6 @@ echo "# Audio"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm pulseaudio
 
-
 echo -e "\n\n################################################################"
 echo "# User"
 echo "################################################################"
@@ -138,7 +135,6 @@ arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.config/.bashrc
 cp /root/archinstall-main/config/home/.dir_colors $MOUNTPOINT/home/eric/
 arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.config/.dir_colors
 arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.config/.dir_colors
-
 
 echo -e "\n\n################################################################"
 echo "# Yay"
@@ -174,7 +170,6 @@ arch-chroot "${MOUNTPOINT}" systemctl enable lightdm.service
 sed -i 's/#autologin-user=/autologin-user=eric/' $MOUNTPOINT/etc/lightdm/lightdm.conf
 arch-chroot "${MOUNTPOINT}" groupadd -r autologin
 arch-chroot "${MOUNTPOINT}" usermod -a -G autologin eric
-
 
 echo -e "\n\n################################################################"
 echo "# X11 and QTile"
