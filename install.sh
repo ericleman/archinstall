@@ -190,6 +190,12 @@ echo "# Picom"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm picom-allusive'
 
+echo -e "\n\n################################################################"
+echo "# Wallpaper"
+echo "################################################################"
+cp -r /root/archinstall-main/config/home/Pictures/Wallpapers $MOUNTPOINT/home/eric/Pictures/
+arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/Pictures/Wallpapers
+arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/Pictures/Wallpapers
 
 echo -e "\n\n################################################################"
 echo "# Alacritty"

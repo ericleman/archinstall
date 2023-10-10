@@ -34,6 +34,13 @@ from libqtile.utils import guess_terminal
 mod = "mod4"
 terminal = guess_terminal()
 
+@hook.subscribe.startup_once
+def autostart():
+    home = os.path.expanduser('~/.config/qtile/autostart.sh')
+    subprocess.run([home])
+
+wallpaper_path = os.path.expanduser("~/Pictures/Wallpapers/dj-nord.jpg")
+
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -133,6 +140,8 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
+        wallpaper=wallpaper_path,
+        wallpaper_mode="fill",
         bottom=bar.Bar(
             [
                 widget.CurrentLayout(),
@@ -210,7 +219,3 @@ wl_input_rules = None
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
 
-@hook.subscribe.startup_once
-def autostart():
-    home = os.path.expanduser('~/.config/qtile/autostart.sh')
-    subprocess.run([home])
