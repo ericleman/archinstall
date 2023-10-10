@@ -142,7 +142,7 @@ arch-chroot "${MOUNTPOINT}" rm -rf /home/eric/yay-bin
 echo -e "\n\n################################################################"
 echo "# Fonts nerd-fonts-noto-sans-mono-extended"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S nerd-fonts-noto-sans-mono-extended'
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm nerd-fonts-noto-sans-mono-extended'
 
 echo -e "\n\n################################################################"
 echo "# VMWare Specificities"
