@@ -160,14 +160,14 @@ def window_to_prev_group(qtile):
     i = qtile.groups.index(qtile.current_group)
     prev_grp = qtile.groups[-1] if i==0 else qtile.groups[i-1]
     qtile.current_window.togroup(prev_grp.name)
-    qtile.current_screen.toggle_group(prev_grp)
+    qtile.current_screen.toggle_group(prev_grp.name)
 
 @lazy.function
 def window_to_next_group(qtile):
     i = qtile.groups.index(qtile.current_group)
     next_grp = qtile.groups[0] if i==len(qtile.groups-1) else qtile.groups[i + 1]
     qtile.current_window.togroup(next_grp.name)
-    qtile.current_screen.toggle_group(next_grp)
+    qtile.current_screen.toggle_group(next_grp.name)
 
 # Drag floating layouts.
 mouse = [
