@@ -31,6 +31,26 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
+COLORS={"nord0": "#2e3440", #black
+    "nord1": "#3b4252", #black
+    "nord2": "#434c5e", #black
+    "nord3": "#4c566a", #black
+    "nord4": "#d8dee9", #white
+    "nord5": "#e5e9f0", #white
+    "nord6": "#eceff4", #white
+    "nord7": "#8fbcbb", #green
+    "nord8": "#88c0d0", #cyan
+    "nord9": "#81a1c1", #blue
+    "nord10": "#5e81ac", #blue
+    "nord11": "#bf616a", #red
+    "nord12": "#d08770", #orange
+    "nord13": "#ebcb8b", #yellow
+    "nord14": "#a3be8c", #green
+    "nord15": "#b48ead"} #purple
+
+WINDOW_MARGIN=8
+WALLPAPER_PATH = os.path.expanduser("~/Pictures/Wallpapers/dj-nord.jpg")
+
 mod = "mod4"
 terminal = guess_terminal()
 
@@ -40,7 +60,6 @@ def autostart():
     home = os.path.expanduser('~/.config/qtile/autostart.sh')
     subprocess.run([home])
 
-wallpaper_path = os.path.expanduser("~/Pictures/Wallpapers/dj-nord.jpg")
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -50,86 +69,54 @@ keys = [
     Key([mod], "Right", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "Down", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "Up", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack. 
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "Left", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, "shift"], "Right", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key([mod, "shift"], "Left", lazy.layout.shuffle_left()),
+    Key([mod, "shift"], "Right", lazy.layout.shuffle_right()),
     Key([mod, "shift"], "Down", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "Up", lazy.layout.shuffle_up(), desc="Move window up"),
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
-    Key([mod, "control"], "Left", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "Right", lazy.layout.grow_right(), desc="Grow window to the right"),
-    Key([mod, "control"], "Down", lazy.layout.grow_down(), desc="Grow window down"),
-    Key([mod, "control"], "Up", lazy.layout.grow_up(), desc="Grow window up"),
+    Key([mod, "control"], "Left", lazy.layout.grow_left().when(layout='columns'),lazy.layout.flip().when(layout='monadtall')),
+    Key([mod, "control"], "Right", lazy.layout.grow_right().when(layout='columns'),lazy.layout.flip().when(layout='monadtall')),
+    Key([mod, "control"], "Down", lazy.layout.grow_down().when(layout='columns'),lazy.layout.shrink().when(layout='monadtall')),
+    Key([mod, "control"], "Up", lazy.layout.grow_up().when(layout='columns'),lazy.layout.grow().when(layout='monadtall')),
+    Key([mod, "shift", "control"], "Left", lazy.layout.swap_column_left().when(layout='columns'),lazy.layout.swap_left().when(layout='monadtall')),
+    Key([mod, "shift", "control"], "Right", lazy.layout.swap_column_right().when(layout='columns'),lazy.layout.swap_right().when(layout='monadtall')),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-    # Toggle between split and unsplit sides of stack.
-    # Split = all windows displayed
-    # Unsplit = 1 window displayed, like Max layout, but still with
-    # multiple stack panes
-    #Key(
-    #    [mod, "shift"],
-    #    "Return",
-    #    lazy.layout.toggle_split(),
-    #    desc="Toggle between split and unsplit sides of stack",
-    #),
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "f", lazy.window.toggle_fullscreen(),desc="Toggle fullscreen on the focused window",),
+    Key([mod, "shift"], "f", lazy.window.toggle_floating(),desc="Toggle floating on the focused window",),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
-    Key(
-        [mod],
-        "f",
-        lazy.window.toggle_fullscreen(),
-        desc="Toggle fullscreen on the focused window",
-    ),
-    Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
+    # Spawn applications
+    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod, "shift"], "Return", lazy.spawn("nemo"), desc="Launch File Manager"),
+    Key([mod, "control"], "Return", lazy.spawn("google-chrome-stable"), desc="Launch Chrome"),
+    # Controls
+    Key([mod, "shift"], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    # Mouse controls
+    #Key([mod], "Button4", lazy.group['3'].toscreen()),
 ]
 
+#groups = [Group("Home", position=1, label=""),]
 groups = [Group(i) for i in "123456789"]
 
 for i in groups:
     keys.extend(
         [
-            # mod1 + letter of group = switch to group
-            Key(
-                [mod],
-                i.name,
-                lazy.group[i.name].toscreen(),
-                desc="Switch to group {}".format(i.name),
-            ),
-            # mod1 + shift + letter of group = switch to & move focused window to group
-            Key(
-                [mod, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc="Switch to & move focused window to group {}".format(i.name),
-            ),
-            # Or, use below if you prefer not to switch to that group.
-            # # mod1 + shift + letter of group = move focused window to group
-            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-            #     desc="move focused window to group {}".format(i.name)),
+            Key([mod], "F"+i.name, lazy.group[i.name].toscreen()),
+            Key([mod, "shift"], "F"+i.name, lazy.window.togroup(i.name, switch_group=True)),
+            Key([mod, "control"], "F"+i.name, lazy.window.togroup(i.name))
         ]
     )
 
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(),
-    # Try more layouts by unleashing below layouts.
-    #layout.Stack(num_stacks=2),
-    #layout.Bsp(),
-    #layout.Matrix(),
-    layout.MonadTall(),
-    #layout.MonadWide(),
-    #layout.RatioTile(),
-    #layout.Tile(),
-    #layout.TreeTab(),
-    #layout.VerticalTile(),
-    #layout.Zoomy(),
+    layout.MonadTall(border_focus=[COLORS['nord11']], margin=WINDOW_MARGIN),
+    layout.Columns(border_focus_stack=[COLORS['nord11']], margin=WINDOW_MARGIN, fair=True),
+    layout.Max(margin=WINDOW_MARGIN)
 ]
 
 widget_defaults = dict(
@@ -142,29 +129,22 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        wallpaper=wallpaper_path,
+        wallpaper=WALLPAPER_PATH,
         wallpaper_mode="fill",
         bottom=bar.Bar(
             [
-                widget.CurrentLayout(),
+                widget.CurrentLayoutIcon(foreground=COLORS["nord7"], scale=0.8),
                 widget.GroupBox(),
                 widget.Prompt(),
                 widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.Systray(),
                 widget.Clock(format="%Y-%m-%d %a %H:%M:%S %p"),
-                widget.QuickExit(),
+                widget.QuickExit(countdown_start=3),
             ],
             50,
+            background= COLORS["nord0"]
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
@@ -175,11 +155,29 @@ screens = [
     ),
 ]
 
+@lazy.function
+def window_to_prev_group(qtile):
+    i = qtile.groups.index(qtile.current_group)
+    prev_grp = qtile.groups[-1] if i==0 else qtile.groups[i-1]
+    qtile.current_window.togroup(prev_grp.name)
+    qtile.current_screen.toggle_group(prev_grp)
+
+@lazy.function
+def window_to_next_group(qtile):
+    i = qtile.groups.index(qtile.current_group)
+    next_grp = qtile.groups[0] if i==len(qtile.groups-1) else qtile.groups[i + 1]
+    qtile.current_window.togroup(next_grp.name)
+    qtile.current_screen.toggle_group(next_grp)
+
 # Drag floating layouts.
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
     Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
     Click([mod], "Button2", lazy.window.bring_to_front()),
+    Click([mod], "Button4", lazy.screen.prev_group()),
+    Click([mod], "Button5", lazy.screen.next_group()),
+    Click([mod, "shift"], "Button4", window_to_prev_group()),
+    Click([mod, "shift"], "Button5", window_to_next_group())
 ]
 
 dgroups_key_binder = None
@@ -210,13 +208,5 @@ auto_minimize = True
 
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
-
-# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
-# string besides java UI toolkits; you can see several discussions on the
-# mailing lists, GitHub issues, and other WM documentation that suggest setting
-# this string if your java app doesn't work correctly. We may as well just lie
-# and say that we're a working one by default.
-#
-# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
-# java that happens to be on java's whitelist.
 wmname = "LG3D"
+
