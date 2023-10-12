@@ -206,9 +206,9 @@ arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
 
 echo -e "\n\n################################################################"
-echo "# Nemo"
+echo "# Thunar"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm nemo
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm thunar
 
 echo -e "\n\n################################################################"
 echo "# NNN"
@@ -219,6 +219,12 @@ echo -e "\n\n################################################################"
 echo "# NeoFetch"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm neofetch
+
+echo -e "\n\n################################################################"
+echo "# BTOP"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm btop
+cp -r /root/archinstall-main/config/home/.config/btop $MOUNTPOINT/home/eric/.config/
 
 echo -e "\n\n################################################################"
 echo "# Chrome"

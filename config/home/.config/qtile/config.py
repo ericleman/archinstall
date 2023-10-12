@@ -90,7 +90,7 @@ keys = [
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     # Spawn applications
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod, "shift"], "Return", lazy.spawn("nemo"), desc="Launch File Manager"),
+    Key([mod, "shift"], "Return", lazy.spawn("thunar"), desc="Launch File Manager"),
     Key([mod, "control"], "Return", lazy.spawn("google-chrome-stable"), desc="Launch Chrome"),
     # Controls
     Key([mod, "shift"], "q", lazy.window.kill(), desc="Kill focused window"),
