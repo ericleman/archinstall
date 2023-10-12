@@ -29,11 +29,12 @@ cp /root/archinstall-main/certificate/ma-trust.cer /etc/ca-certificates/trust-so
 update-ca-trust
 
 echo -e "\n\n################################################################"
-echo "# Parallel download and mirrors"
+echo "# PACMAN: Parallel download and mirrors, key"
 echo "################################################################"
 reflector --country France --latest 5 --sort rate --save /etc/pacman.d/mirrorlist
 sed -i 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
 sed -i 's%#Color%Color\nILoveCandy%g' /etc/pacman.conf
+pacman-key --init
 
 echo -e "\n\n################################################################"
 echo "# Create Partitions"
