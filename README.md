@@ -39,7 +39,7 @@ if we want to ignore cache
 `sh i.sh [PASSWORD]`
 
 # VMWare:
-Need to add:
+Need to add in vmx file:
 
 `firmware="efi"`
 

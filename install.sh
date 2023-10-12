@@ -130,12 +130,12 @@ echo "eric ALL=(ALL) NOPASSWD:ALL" > $MOUNTPOINT/etc/sudoers.d/00_eric
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm xdg-user-dirs
 arch-chroot "${MOUNTPOINT}" su - eric -c 'xdg-user-dirs-update'
 cp /root/archinstall-main/config/home/.bashrc $MOUNTPOINT/home/eric/
-arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.config/.bashrc
-arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.config/.bashrc
+arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.bashrc
+arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.bashrc
 # dir_colors to have Nord theme in ls...
 cp /root/archinstall-main/config/home/.dir_colors $MOUNTPOINT/home/eric/
-arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.config/.dir_colors
-arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.config/.dir_colors
+arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.dir_colors
+arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.dir_colors
 
 echo -e "\n\n################################################################"
 echo "# Yay"
@@ -163,7 +163,7 @@ arch-chroot "${MOUNTPOINT}" mkdir /home/eric/Laptop
 arch-chroot "${MOUNTPOINT}" chown eric /home/eric/Laptop
 arch-chroot "${MOUNTPOINT}" chmod 755 /home/eric/Laptop
 
-<<pause-for-gnome
+
 echo -e "\n\n################################################################"
 echo "# LightDM"
 echo "################################################################"
@@ -191,13 +191,15 @@ echo -e "\n\n################################################################"
 echo "# Picom"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm picom-allusive'
-pause-for-gnome
 
+
+<<pause-for-gnome
 echo -e "\n\n################################################################"
 echo "# Gnome"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm gnome gnome-tweaks dconf-editor xf86-video-vmware xf86-input-vmmouse xorg-server xorg-xinit mesa xorg-xrandr xorg-xdpyinfo
 arch-chroot "${MOUNTPOINT}" systemctl enable gdm.service
+pause-for-gnome
 
 echo -e "\n\n################################################################"
 echo "# Wallpaper"
@@ -209,9 +211,16 @@ arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/Pictures/Wallpape
 echo -e "\n\n################################################################"
 echo "# GTK Nord Themes"
 echo "################################################################"
-cp -r /root/archinstall-main/config/home/.config/gtk-2.0 $MOUNTPOINT/home/eric/.config/
-cp -r /root/archinstall-main/config/home/.config/gtk-3.0 $MOUNTPOINT/home/eric/.config/
-cp -r /root/archinstall-main/config/home/.config/gtk-4.0 $MOUNTPOINT/home/eric/.config/
+#cp -r /root/archinstall-main/config/home/.config/gtk-2.0 $MOUNTPOINT/home/eric/.config/
+#cp -r /root/archinstall-main/config/home/.config/gtk-3.0 $MOUNTPOINT/home/eric/.config/
+#cp -r /root/archinstall-main/config/home/.config/gtk-4.0 $MOUNTPOINT/home/eric/.config/
+curl -L https://github.com/EliverLara/Nordic/archive/master.zip --output master.zip
+bsdtar -x -f master.zip
+# this is now in /root/Nordic-master
+arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.themes'
+cp -r /root/Nordic-master $MOUNTPOINT/home/eric/.themes/
+arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.themes
+arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.themes
 
 echo -e "\n\n################################################################"
 echo "# Alacritty"
