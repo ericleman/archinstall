@@ -211,16 +211,20 @@ arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/Pictures/Wallpape
 echo -e "\n\n################################################################"
 echo "# GTK Nord Themes"
 echo "################################################################"
-#cp -r /root/archinstall-main/config/home/.config/gtk-2.0 $MOUNTPOINT/home/eric/.config/
-#cp -r /root/archinstall-main/config/home/.config/gtk-3.0 $MOUNTPOINT/home/eric/.config/
-#cp -r /root/archinstall-main/config/home/.config/gtk-4.0 $MOUNTPOINT/home/eric/.config/
 curl -L https://github.com/EliverLara/Nordic/archive/master.zip --output master.zip
 bsdtar -x -f master.zip
 # this is now in /root/Nordic-master
 arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.themes'
-cp -r /root/Nordic-master $MOUNTPOINT/home/eric/.themes/
-arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.themes
-arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.themes
+cp -r /root/Nordic-master $MOUNTPOINT/home/eric/.themes/Nord/
+arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.themes
+arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.themes
+cp -r /root/archinstall-main/config/home/.config/gtk-3.0 $MOUNTPOINT/home/eric/.config/
+cp /root/archinstall-main/config/home/.gtkrc-2.0 $MOUNTPOINT/home/eric/
+arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config/gtk-3.0
+arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config/gtk-3.0
+arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.gtkrc-2.0
+arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.gtkrc-2.0
+
 
 echo -e "\n\n################################################################"
 echo "# Alacritty"
