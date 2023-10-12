@@ -198,6 +198,13 @@ arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/Pictures/Wallpapers
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/Pictures/Wallpapers
 
 echo -e "\n\n################################################################"
+echo "# GTK Nord Themes"
+echo "################################################################"
+cp -r /root/archinstall-main/config/home/.config/gtk-2.0 $MOUNTPOINT/home/eric/.config/
+cp -r /root/archinstall-main/config/home/.config/gtk-3.0 $MOUNTPOINT/home/eric/.config/
+cp -r /root/archinstall-main/config/home/.config/gtk-4.0 $MOUNTPOINT/home/eric/.config/
+
+echo -e "\n\n################################################################"
 echo "# Alacritty"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm alacritty
