@@ -34,7 +34,7 @@ echo "################################################################"
 reflector --country France --latest 5 --sort rate --save /etc/pacman.d/mirrorlist
 sed -i 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
 sed -i 's%#Color%Color\nILoveCandy%g' /etc/pacman.conf
-pacman-key --init
+#pacman-key --init
 
 echo -e "\n\n################################################################"
 echo "# Create Partitions"
