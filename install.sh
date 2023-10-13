@@ -161,8 +161,6 @@ arch-chroot "${MOUNTPOINT}" mkdir /home/eric/Laptop
 arch-chroot "${MOUNTPOINT}" chown eric /home/eric/Laptop
 arch-chroot "${MOUNTPOINT}" chmod 755 /home/eric/Laptop
 
-<<pause-for-gnome
-
 echo -e "\n\n################################################################"
 echo "# LightDM"
 echo "################################################################"
@@ -191,7 +189,7 @@ echo "# Picom"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm picom-allusive'
 
-pause-for-gnome
+<<pause-for-gnome
 
 echo -e "\n\n################################################################"
 echo "# Gnome"
@@ -200,7 +198,8 @@ arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm gnome gnome-tweaks dconf-edi
 arch-chroot "${MOUNTPOINT}" systemctl enable gdm.service
 sed -i 's/#WaylandEnable=false/WaylandEnable=false/' $MOUNTPOINT/etc/gdm/custom.conf
 
-<<pause-for-theme
+pause-for-gnome
+#<<pause-for-theme
 
 echo -e "\n\n################################################################"
 echo "# Fonts nerd-fonts-noto-sans-mono-extended"
@@ -231,7 +230,7 @@ arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config/gtk-3.0
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config/gtk-3.0
 arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.gtkrc-2.0
 arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.gtkrc-2.0
-pause-for-theme
+#pause-for-theme
 
 echo -e "\n\n################################################################"
 echo "# Alacritty"
@@ -262,7 +261,7 @@ echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm btop
 cp -r /root/archinstall-main/config/home/.config/btop $MOUNTPOINT/home/eric/.config/
 
-<<pause-for-apps
+#<<pause-for-apps
 
 echo -e "\n\n################################################################"
 echo "# Chrome"
@@ -274,7 +273,7 @@ echo "# VS Code"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm visual-studio-code-bin'
 
-pause-for-apps
+#pause-for-apps
 
 echo -e "\n\n################################################################"
 echo "# end of CHROOT, rebooting"
