@@ -84,7 +84,7 @@ echo 'LC_TIME=en_DK.UTF-8' >> $MOUNTPOINT/etc/locale.conf
 echo 'KEYMAP="fr-pc"' >> $MOUNTPOINT/etc/vconsole.conf
 echo 'CONSOLEFONT="lat9w-16"' >> $MOUNTPOINT/etc/vconsole.conf
 #arch-chroot "${MOUNTPOINT}" localectl set-keymap ""
-arch-chroot "${MOUNTPOINT}" localectl set-keymap "fr-pc"
+######## Oct 13th: I remove this I this localectl does not work during install: https://bbs.archlinux.org/viewtopic.php?id=241969 #arch-chroot "${MOUNTPOINT}" localectl set-keymap "fr-pc"
 #arch-chroot "${MOUNTPOINT}" localectl set-x11-keymap fr pc # to be done after X11 installation
 
 echo -e "\n\n################################################################"
