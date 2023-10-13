@@ -108,9 +108,9 @@ echo "# Grub and mkinitcpio"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" mkinitcpio -p linux
 # UEFI:
-#arch-chroot "${MOUNTPOINT}" grub-install --target=x86_64-efi --efi-directory=/boot
+arch-chroot "${MOUNTPOINT}" grub-install --target=x86_64-efi --efi-directory=/boot
 # BIOS:
-arch-chroot "${MOUNTPOINT}" grub-install --target=i386-pc /dev/sda
+#arch-chroot "${MOUNTPOINT}" grub-install --target=i386-pc /dev/sda
 
 arch-chroot "${MOUNTPOINT}" grub-mkconfig -o /boot/grub/grub.cfg
 
