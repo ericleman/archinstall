@@ -163,6 +163,7 @@ arch-chroot "${MOUNTPOINT}" mkdir /home/eric/Laptop
 arch-chroot "${MOUNTPOINT}" chown eric /home/eric/Laptop
 arch-chroot "${MOUNTPOINT}" chmod 755 /home/eric/Laptop
 
+<<pause-for-gnome
 
 echo -e "\n\n################################################################"
 echo "# LightDM"
@@ -192,14 +193,14 @@ echo "# Picom"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm picom-allusive'
 
+pause-for-gnome
 
-<<pause-for-gnome
 echo -e "\n\n################################################################"
 echo "# Gnome"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm gnome gnome-tweaks dconf-editor xf86-video-vmware xf86-input-vmmouse xorg-server xorg-xinit mesa xorg-xrandr xorg-xdpyinfo
 arch-chroot "${MOUNTPOINT}" systemctl enable gdm.service
-pause-for-gnome
+
 
 echo -e "\n\n################################################################"
 echo "# Wallpaper"
