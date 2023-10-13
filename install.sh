@@ -107,7 +107,8 @@ echo -e "\n\n################################################################"
 echo "# Grub and mkinitcpio"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" mkinitcpio -p linux
-arch-chroot "${MOUNTPOINT}" grub-install --target=x86_64-efi --efi-directory=/boot
+#arch-chroot "${MOUNTPOINT}" grub-install --target=x86_64-efi --efi-directory=/boot
+arch-chroot "${MOUNTPOINT}" grub-install --target=i386-pc /dev/sda
 arch-chroot "${MOUNTPOINT}" grub-mkconfig -o /boot/grub/grub.cfg
 
 echo -e "\n\n################################################################"
@@ -145,12 +146,6 @@ arch-chroot "${MOUNTPOINT}" su - eric -c 'cd /home/eric && git -c http.sslVerify
 arch-chroot "${MOUNTPOINT}" rm -rf /home/eric/yay-bin
 
 echo -e "\n\n################################################################"
-echo "# Fonts nerd-fonts-noto-sans-mono-extended"
-echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm noto-fonts subversion #svn command is used during the install
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm nerd-fonts-noto-sans-mono-extended'
-
-echo -e "\n\n################################################################"
 echo "# VMWare Specificities"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm open-vm-tools gtkmm3 
@@ -162,6 +157,8 @@ arch-chroot "${MOUNTPOINT}" systemctl enable share-vmware-folder.service
 arch-chroot "${MOUNTPOINT}" mkdir /home/eric/Laptop
 arch-chroot "${MOUNTPOINT}" chown eric /home/eric/Laptop
 arch-chroot "${MOUNTPOINT}" chmod 755 /home/eric/Laptop
+
+<<pause-for-gnome
 
 echo -e "\n\n################################################################"
 echo "# LightDM"
@@ -191,7 +188,7 @@ echo "# Picom"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm picom-allusive'
 
-<<pause-for-gnome
+pause-for-gnome
 
 echo -e "\n\n################################################################"
 echo "# Gnome"
@@ -200,7 +197,13 @@ arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm gnome gnome-tweaks dconf-edi
 arch-chroot "${MOUNTPOINT}" systemctl enable gdm.service
 sed -i 's/#WaylandEnable=false/WaylandEnable=false/' $MOUNTPOINT/etc/gdm/custom.conf
 
-pause-for-gnome
+<<pause-for-theme
+
+echo -e "\n\n################################################################"
+echo "# Fonts nerd-fonts-noto-sans-mono-extended"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm noto-fonts subversion #svn command is used during the install
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm nerd-fonts-noto-sans-mono-extended'
 
 echo -e "\n\n################################################################"
 echo "# Wallpaper"
@@ -225,7 +228,7 @@ arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config/gtk-3.0
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config/gtk-3.0
 arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.gtkrc-2.0
 arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.gtkrc-2.0
-
+pause-for-theme
 
 echo -e "\n\n################################################################"
 echo "# Alacritty"
@@ -256,6 +259,8 @@ echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm btop
 cp -r /root/archinstall-main/config/home/.config/btop $MOUNTPOINT/home/eric/.config/
 
+<<pause-for-apps
+
 echo -e "\n\n################################################################"
 echo "# Chrome"
 echo "################################################################"
@@ -265,6 +270,8 @@ echo -e "\n\n################################################################"
 echo "# VS Code"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm visual-studio-code-bin'
+
+pause-for-apps
 
 echo -e "\n\n################################################################"
 echo "# end of CHROOT, rebooting"
