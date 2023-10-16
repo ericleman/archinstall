@@ -173,7 +173,8 @@ arch-chroot "${MOUNTPOINT}" usermod -a -G autologin eric
 echo -e "\n\n################################################################"
 echo "# X11 and QTile"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm qtile xf86-video-vmware xf86-input-vmmouse xorg-server xorg-xinit mesa xorg-xrandr xorg-xdpyinfo
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm qtile xf86-video-vmware xf86-input-vmmouse xorg-server xorg-xinit mesa xorg-xrandr xorg-xdpyinfo xcb-util-cursor
+# xcb-util-cursor is requried to have cursor theme applied.
 arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.config/qtile'
 cp -r /root/archinstall-main/config/home/.config/qtile $MOUNTPOINT/home/eric/.config/
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
@@ -202,10 +203,9 @@ pause-for-gnome
 #<<pause-for-theme
 
 echo -e "\n\n################################################################"
-echo "# Fonts nerd-fonts-noto-sans-mono-extended"
+echo "# Fonts ttf-noto-nerd"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm noto-fonts subversion #svn command is used during the install
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm nerd-fonts-noto-sans-mono-extended'
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ttf-noto-nerd
 
 echo -e "\n\n################################################################"
 echo "# Wallpaper"
@@ -231,6 +231,13 @@ arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config/gtk-3.0
 arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.gtkrc-2.0
 arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.gtkrc-2.0
 #pause-for-theme
+
+echo -e "\n\n################################################################"
+echo "# Cursor Theme"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm bibata-cursor-theme-bin' # this is installed in /usr/share/icons
+# the theme Bibata-Modern-Classic is defined in ~/.gtkrc-2.0, ~/.Xresources and ~/.config/gtk-3.0/settings.ini
+# the package xcb-util-cursor is required for Qtile.
 
 echo -e "\n\n################################################################"
 echo "# Alacritty"
