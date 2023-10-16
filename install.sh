@@ -240,6 +240,13 @@ arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm nordzy-cursors' # t
 # the package xcb-util-cursor is required for Qtile.
 
 echo -e "\n\n################################################################"
+echo "# Icons Theme"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm nordzy-icon-theme' # this is installed in /usr/share/icons
+# the theme Nordzy theme is defined in ~/.gtkrc-2.0 and ~/.config/gtk-3.0/settings.ini
+
+
+echo -e "\n\n################################################################"
 echo "# Alacritty"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm alacritty
