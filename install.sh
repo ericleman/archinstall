@@ -235,8 +235,8 @@ arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.gtkrc-2.0
 echo -e "\n\n################################################################"
 echo "# Cursor Theme"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm bibata-cursor-theme-bin' # this is installed in /usr/share/icons
-# the theme Bibata-Modern-Classic is defined in ~/.gtkrc-2.0, ~/.Xresources and ~/.config/gtk-3.0/settings.ini
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm nordzy-cursors' # this is installed in /usr/share/icons
+# the theme Nordzy-cursors is defined in ~/.gtkrc-2.0, ~/.Xresources and ~/.config/gtk-3.0/settings.ini
 # the package xcb-util-cursor is required for Qtile.
 
 echo -e "\n\n################################################################"
