@@ -242,7 +242,11 @@ arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm nordzy-cursors' # t
 echo -e "\n\n################################################################"
 echo "# Icons Theme"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm nordzy-icon-theme' # this is installed in /usr/share/icons
+#arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm nordzy-icon-theme' # this is installed in /usr/share/icons
+curl -L https://github.com/alvatip/Nordzy-icon/releases/download/1.8.5/Nordzy.tar.gz --output Nordzy.tar.gz
+tar -xf Nordzy.tar.gz
+# this is now in /root/Nordzy
+cp -r /root/Nordzy $MOUNTPOINT/usr/share/icons/
 # the theme Nordzy theme is defined in ~/.gtkrc-2.0 and ~/.config/gtk-3.0/settings.ini
 
 
