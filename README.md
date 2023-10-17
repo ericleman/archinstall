@@ -74,6 +74,21 @@ On IG site, launch Prorealtime in java mode, to get /home/eric/Downloads/itchart
 TODO: Try to change settings so *.jnlp open with /usr/java/jre1.8.0_381/bin/javaws
 
 
+~~cp /home/eric/IT-Finance/IGProRealTime/IGProRealTime /home/eric/IT-Finance/IGProRealTime/app/~~
+~~sed -i 's|Exec=/home/eric/IT-Finance/IGProRealTime/IGProRealTime|Exec=/home/eric/IT-Finance/IGProRealTime/app/IGProRealTime|' /home/eric/.local/share/applications/IGProRealTime.desktop~~
+~~sed -i 's|../runtime|/home/eric/IT-Finance/IGProRealTime/runtime|' /home/eric/IT-Finance/IGProRealTime/app/IGProRealTime~~
+~~sed -i 's|PlatformLauncher.jar|/home/eric/IT-Finance/IGProRealTime/app/PlatformLauncher.jar|' /home/eric/IT-Finance/IGProRealTime/app/IGProRealTime~~
+
+in /home/eric/IT-Finance/IGProRealTime/app, run:
+
+`../IGProRealTime igprorealtime://AAAAwDE+FzlDmo6Auxn/9js/SOdyVsbiBH3b2Tv0a44GGpGbV6TfwDBFl1Qv1VfbDNmA9sHObrepSkVi7BTMY3OzT++2i5HwPDkhCqCar62LOebA9K+/uF85f6VHZMLO5iZMm99vA9ewewXRy5IDeGXaRiyl04tmH/QgrJrc456JHqnXZYTz5qzFJatdaivmqejbIvMl0/AwnAmmL7quBB4Nin71cp4xjbMdCd6phtazd7EDyRCFIVYhhuUOUvKfrL8SFg==`
+
+or
+
+`xdg-open igprorealtime://AAAAwDE+FzlDmo6Auxn/9js/SOdyVsbiBH3b2Tv0a44GGpGbV6TfwDBFl1Qv1VfbDNmA9sHObrepSkVi7BTMY3OzT++2i5HwPDkhCqCar62LOebA9K+/uF85f6VHZMLO5iZMm99vA9ewewXRy5IDeGXaRiyl04tmH/QgrJrc456JHqnXZYTz5qzFJatdaivmqejbIvMl0/AwnAmmL7quBB4Nin71cp4xjbMdCd6phtazd7EDyRCFIVYhhuUOUvKfrL8SFg==`
+
+
+
 # Good scripts to consider:
 https://github.com/MatMoul/archfi/blob/master/archfi
 https://github.com/picodotdev/alis/blob/master/alis.sh
