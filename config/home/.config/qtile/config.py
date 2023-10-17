@@ -60,6 +60,32 @@ def autostart():
     home = os.path.expanduser('~/.config/qtile/autostart.sh')
     subprocess.run([home])
 
+@lazy.function
+def window_to_prev_group(qtile):
+    i = qtile.groups.index(qtile.current_group)
+    prev_grp = qtile.groups[-1] if i==0 else qtile.groups[i-1]
+    qtile.current_window.togroup(prev_grp.name)
+    qtile.current_screen.toggle_group(prev_grp.name)
+
+@lazy.function
+def window_to_next_group(qtile):
+    i = qtile.groups.index(qtile.current_group)
+    next_grp = qtile.groups[0] if i==len(qtile.groups)-1 else qtile.groups[i + 1]
+    qtile.current_window.togroup(next_grp.name)
+    qtile.current_screen.toggle_group(next_grp.name)
+
+@lazy.function
+def window_to_new_group(qtile,switch=False):
+    wm_class=qtile.current_window.info()['wm_class']
+    grp_icon = ''
+    if wm_class == 'Alacritty':
+        grp_icon = ''
+    nb_groups = len(qtile.groups)
+    groups.extend(Group(f"{nb_groups+1}", position=nb_groups+1, label=grp_icon))
+    qtile.current_window.togroup(f"{nb_groups+1}")
+    if switch:
+        qtile.current_screen.toggle_group(f"{nb_groups+1}")
+    
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -88,6 +114,13 @@ keys = [
     Key([mod, "shift"], "f", lazy.window.toggle_floating(),desc="Toggle floating on the focused window",),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    # Moving Groups
+    Key([mod], ";", lazy.screen.prev_group()),
+    Key([mod], ":", lazy.screen.next_group()),
+    Key([mod, "shift"], ";", window_to_prev_group()),
+    Key([mod, "shift"], ":", window_to_next_group()),
+    Key([mod], "!", window_to_new_group()),
+    Key([mod, "shift"], "!", window_to_new_group(switch=True)),
     # Spawn applications
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod, "shift"], "Return", lazy.spawn("thunar"), desc="Launch File Manager"),
@@ -96,22 +129,20 @@ keys = [
     Key([mod, "shift"], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    # Mouse controls
-    #Key([mod], "Button4", lazy.group['3'].toscreen()),
+    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget")
 ]
 
-#groups = [Group("Home", position=1, label=""),]
-groups = [Group(i) for i in "123456789"]
+groups = [Group("Home", position=1, label=""),]
 
-for i in groups:
-    keys.extend(
-        [
-            Key([mod], "F"+i.name, lazy.group[i.name].toscreen()),
-            Key([mod, "shift"], "F"+i.name, lazy.window.togroup(i.name, switch_group=True)),
-            Key([mod, "control"], "F"+i.name, lazy.window.togroup(i.name))
-        ]
-    )
+
+#for i in groups:
+#    keys.extend(
+#        [
+#            Key([mod], "F"+i.name, lazy.group[i.name].toscreen()),
+#            Key([mod, "shift"], "F"+i.name, lazy.window.togroup(i.name, switch_group=True)),
+#            Key([mod, "control"], "F"+i.name, lazy.window.togroup(i.name))
+#        ]
+#    )
 
 layouts = [
     layout.MonadTall(border_focus=[COLORS['nord11']], margin=WINDOW_MARGIN),
@@ -154,20 +185,6 @@ screens = [
         # x11_drag_polling_rate = 60,
     ),
 ]
-
-@lazy.function
-def window_to_prev_group(qtile):
-    i = qtile.groups.index(qtile.current_group)
-    prev_grp = qtile.groups[-1] if i==0 else qtile.groups[i-1]
-    qtile.current_window.togroup(prev_grp.name)
-    qtile.current_screen.toggle_group(prev_grp.name)
-
-@lazy.function
-def window_to_next_group(qtile):
-    i = qtile.groups.index(qtile.current_group)
-    next_grp = qtile.groups[0] if i==len(qtile.groups)-1 else qtile.groups[i + 1]
-    qtile.current_window.togroup(next_grp.name)
-    qtile.current_screen.toggle_group(next_grp.name)
 
 # Drag floating layouts.
 mouse = [
