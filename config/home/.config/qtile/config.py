@@ -93,6 +93,8 @@ def window_to_new_group(qtile,switch=False):
         grp_icon = ''
     if wm_class == 'Code':
         grp_icon = ''
+    if wm_class == 'com-itfinance-core-Starter':
+        grp_icon = ''
     logger.warning("in window_to_new_group function " + grp_icon)
     logger.warning("in window_to_new_group function " + wm_class)
     new_grp = str(time.time())
