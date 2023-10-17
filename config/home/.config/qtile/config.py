@@ -25,11 +25,14 @@
 # SOFTWARE.
 import os
 import subprocess
+import time
 
-from libqtile import bar, layout, widget, hook
+from libqtile import bar, layout, widget, hook, qtile
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from libqtile.log_utils import logger
+#from libqtile.core.manager import Qtile
 
 COLORS={"nord0": "#2e3440", #black
     "nord1": "#3b4252", #black
@@ -54,12 +57,50 @@ WALLPAPER_PATH = os.path.expanduser("~/Pictures/Wallpapers/dj-nord.jpg")
 mod = "mod4"
 terminal = guess_terminal()
 
+#logger.warning(Qtile().status())
 
 @hook.subscribe.startup_once
 def autostart():
     home = os.path.expanduser('~/.config/qtile/autostart.sh')
     subprocess.run([home])
 
+
+@hook.subscribe.setgroup
+def remove_empty_groups():
+    logger.warning("remove_empty_groups")
+    i = qtile.groups.index(qtile.current_group)
+    #logger.warning("remove_empty_groups | current group index: " + str(i))
+    for group in qtile.groups:
+        j = qtile.groups.index(group)
+        #logger.warning("remove_empty_groups | group name+index: " + group.name + "+" + str(j))
+        if i != j:
+            #logger.warning("remove_empty_groups | i,j: " + str(i)+","+str(j))
+            if j != 0:
+                if not group.windows:
+                    w = len(group.windows)
+                    #logger.warning("remove_empty_groups | w: " + str(w))
+                    qtile.delete_group(group.name)
+
+@lazy.function
+def window_to_new_group(qtile,switch=False):
+    wm_class=qtile.current_window.info()['wm_class'][1]
+    grp_icon = ''
+    if wm_class == 'Alacritty':
+        grp_icon = ''
+    if wm_class == 'Google-chrome':
+        grp_icon = ''
+    if wm_class == 'Thunar':
+        grp_icon = ''
+    if wm_class == 'Code':
+        grp_icon = ''
+    logger.warning("in window_to_new_group function " + grp_icon)
+    logger.warning("in window_to_new_group function " + wm_class)
+    new_grp = str(time.time())
+    qtile.addgroup(new_grp, label=grp_icon)
+    qtile.current_window.togroup(new_grp)
+    if switch:
+        qtile.current_screen.toggle_group(new_grp)
+    
 @lazy.function
 def window_to_prev_group(qtile):
     i = qtile.groups.index(qtile.current_group)
@@ -74,18 +115,6 @@ def window_to_next_group(qtile):
     qtile.current_window.togroup(next_grp.name)
     qtile.current_screen.toggle_group(next_grp.name)
 
-@lazy.function
-def window_to_new_group(qtile,switch=False):
-    wm_class=qtile.current_window.info()['wm_class']
-    grp_icon = ''
-    if wm_class == 'Alacritty':
-        grp_icon = ''
-    nb_groups = len(qtile.groups)
-    groups.extend(Group(f"{nb_groups+1}", position=nb_groups+1, label=grp_icon))
-    qtile.current_window.togroup(f"{nb_groups+1}")
-    if switch:
-        qtile.current_screen.toggle_group(f"{nb_groups+1}")
-    
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -115,12 +144,12 @@ keys = [
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     # Moving Groups
-    Key([mod], ";", lazy.screen.prev_group()),
-    Key([mod], ":", lazy.screen.next_group()),
-    Key([mod, "shift"], ";", window_to_prev_group()),
-    Key([mod, "shift"], ":", window_to_next_group()),
-    Key([mod], "!", window_to_new_group()),
-    Key([mod, "shift"], "!", window_to_new_group(switch=True)),
+    Key([mod], "semicolon", lazy.screen.prev_group()),
+    Key([mod], "colon", lazy.screen.next_group()),
+    Key([mod, "shift"], "semicolon", window_to_prev_group()),
+    Key([mod, "shift"], "colon", window_to_next_group()),
+    Key([mod], "exclam", window_to_new_group()),
+    Key([mod, "shift"], "exclam", window_to_new_group(switch=True)),
     # Spawn applications
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod, "shift"], "Return", lazy.spawn("thunar"), desc="Launch File Manager"),
@@ -132,7 +161,7 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget")
 ]
 
-groups = [Group("Home", position=1, label=""),]
+groups = [Group("Home", position=1, label="")]
 
 
 #for i in groups:
