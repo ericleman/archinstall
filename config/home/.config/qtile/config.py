@@ -63,7 +63,8 @@ terminal = guess_terminal()
 def autostart():
     home = os.path.expanduser('~/.config/qtile/autostart.sh')
     subprocess.run([home])
-
+    time.sleep(2)
+    subprocess.call(["picom", "--config", "~/.config/picom/picom.conf", "--experimental-backends", "-b"])
 
 @hook.subscribe.setgroup
 def remove_empty_groups():

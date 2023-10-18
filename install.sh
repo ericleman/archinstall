@@ -190,7 +190,12 @@ arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.config/.Xresources
 echo -e "\n\n################################################################"
 echo "# Picom"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm picom-allusive'
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm picom
+arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.config/picom'
+cp -r /root/archinstall-main/config/home/.config/picom $MOUNTPOINT/home/eric/.config/
+arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
+arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
+
 
 <<pause-for-gnome
 
