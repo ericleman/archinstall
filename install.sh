@@ -121,11 +121,6 @@ arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm networkmanager network-manag
 arch-chroot "${MOUNTPOINT}" systemctl enable NetworkManager.service
 
 echo -e "\n\n################################################################"
-echo "# Audio"
-echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm pulseaudio
-
-echo -e "\n\n################################################################"
 echo "# User"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" useradd -m -s /bin/bash -G wheel,games,network,video,audio,storage,power,input -c "Eric" eric
@@ -147,6 +142,13 @@ echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm go
 arch-chroot "${MOUNTPOINT}" su - eric -c 'cd /home/eric && git -c http.sslVerify=false clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si --noconfirm --skippgpcheck'
 arch-chroot "${MOUNTPOINT}" rm -rf /home/eric/yay-bin
+
+echo -e "\n\n################################################################"
+echo "# Audio"
+echo "################################################################"
+#arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm pulseaudio
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm pipewire pipewire-alsa pipewire-jack pipewire-pulse gst-plugin-pipewire libpulse wireplumber
+arch-chroot "${MOUNTPOINT}" su - eric -c 'systemctl enable --user pipewire-pulse.service'
 
 echo -e "\n\n################################################################"
 echo "# VMWare Specificities"
