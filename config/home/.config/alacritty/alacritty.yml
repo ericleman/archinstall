@@ -879,22 +879,22 @@
 
 font:
   normal:
-    family: NotoSansM Nerd Font Mono
+    family: UbuntuMono Nerd Font Mono
     style: Regular
 
   bold:
-    family: NotoSansM Nerd Font Mono
+    family: UbuntuMono Nerd Font Mono
     style: Bold
 
   italic:
-    family: NotoSansM Nerd Font Mono
+    family: UbuntuMono Nerd Font Mono
     style: Italic
 
   bold_italic:
-    family: NotoSansM Nerd Font Mono
+    family: UbuntuMono Nerd Font Mono
     style: Bold Italic
 
-  size: 18
+  size: 22
 
 import:
   - /home/eric/.config/alacritty/nord.yaml

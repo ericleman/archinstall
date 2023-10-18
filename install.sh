@@ -203,9 +203,10 @@ pause-for-gnome
 #<<pause-for-theme
 
 echo -e "\n\n################################################################"
-echo "# Fonts ttf-noto-nerd"
+echo "# Fonts"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ttf-noto-nerd
+#arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ttf-noto-nerd
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ttf-ubuntu-mono-nerd ttf-ubuntu-nerd
 
 echo -e "\n\n################################################################"
 echo "# Wallpaper"
@@ -285,6 +286,11 @@ echo -e "\n\n################################################################"
 echo "# Chrome"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm google-chrome'
+
+echo -e "\n\n################################################################"
+echo "# Firefox"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm firefox
 
 echo -e "\n\n################################################################"
 echo "# VS Code"

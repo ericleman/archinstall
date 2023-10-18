@@ -46,13 +46,14 @@ Need to add in vmx file:
 https://www.fosstools.net/how-to-enable-uefi-in-vmware-workstation-player
 
 
-# Old tips
+# Tips
 ## Some Notes
 When 3D acceleration is activated on VMWare, then deactivate it on Google Chrome (or it does not work: https://communities.vmware.com/t5/VMware-Workstation-Pro/Guest-Display-Broken-With-Accelerate-3D-Graphics-Enabled/td-p/2898816)
 ![image](https://user-images.githubusercontent.com/26767717/177496730-38f3be75-ae3c-4329-a49e-0002abfc595a.png)
 
 
 ## Prorealtime workaround
+### ~~This one does not work with PRT12 has it uses newer version of java class~~
 From Arch guest, go to : https://www.java.com/fr/download/ and get Linux 64 file.
 
 That creates a file like /home/eric/Downloads/jre-8u381-linux-x64.tar.gz
@@ -71,22 +72,28 @@ On IG site, launch Prorealtime in java mode, to get /home/eric/Downloads/itchart
 
 `/usr/java/jre1.8.0_381/bin/javaws /home/eric/Downloads/itcharts.jnlp`
 
-TODO: Try to change settings so *.jnlp open with /usr/java/jre1.8.0_381/bin/javaws
+### From PRT12
+Install the app given by PRT (it installs IGProRealTime.desktop). 
+There are then 2 options:
+#### With Chrome
+Chrome uses xdg-open. This one does not take into account the `Path` key in IGProRealTime.desktop so we get the error:
+```
+> xdg-open igprorealtime://AAAAwF1jdPl3....
+/home/eric/IT-Finance/IGProRealTime/IGProRealTime: line 2: ../runtime/bin/java: No such file or directory
+```
+This is the workaround:
+- in ~/.local/share/applications/IGProRealTime.desktop change the Exec= key with:
+`Exec=/home/eric/Desktop/exec_PRT.sh %u`
+- Create /home/eric/Desktop/exec_PRT.sh:
+```
+#!/bin/bash
+cd /home/eric/IT-Finance/IGProRealTime/app
+../IGProRealTime $1
+```
+- and `chmod 777 /home/eric/Desktop/exec_PRT.sh`
 
-
-~~cp /home/eric/IT-Finance/IGProRealTime/IGProRealTime /home/eric/IT-Finance/IGProRealTime/app/~~
-~~sed -i 's|Exec=/home/eric/IT-Finance/IGProRealTime/IGProRealTime|Exec=/home/eric/IT-Finance/IGProRealTime/app/IGProRealTime|' /home/eric/.local/share/applications/IGProRealTime.desktop~~
-~~sed -i 's|../runtime|/home/eric/IT-Finance/IGProRealTime/runtime|' /home/eric/IT-Finance/IGProRealTime/app/IGProRealTime~~
-~~sed -i 's|PlatformLauncher.jar|/home/eric/IT-Finance/IGProRealTime/app/PlatformLauncher.jar|' /home/eric/IT-Finance/IGProRealTime/app/IGProRealTime~~
-
-in /home/eric/IT-Finance/IGProRealTime/app, run:
-
-`../IGProRealTime igprorealtime://AAAAwDE+FzlDmo6Auxn/9js/SOdyVsbiBH3b2Tv0a44GGpGbV6TfwDBFl1Qv1VfbDNmA9sHObrepSkVi7BTMY3OzT++2i5HwPDkhCqCar62LOebA9K+/uF85f6VHZMLO5iZMm99vA9ewewXRy5IDeGXaRiyl04tmH/QgrJrc456JHqnXZYTz5qzFJatdaivmqejbIvMl0/AwnAmmL7quBB4Nin71cp4xjbMdCd6phtazd7EDyRCFIVYhhuUOUvKfrL8SFg==`
-
-or
-
-`xdg-open igprorealtime://AAAAwDE+FzlDmo6Auxn/9js/SOdyVsbiBH3b2Tv0a44GGpGbV6TfwDBFl1Qv1VfbDNmA9sHObrepSkVi7BTMY3OzT++2i5HwPDkhCqCar62LOebA9K+/uF85f6VHZMLO5iZMm99vA9ewewXRy5IDeGXaRiyl04tmH/QgrJrc456JHqnXZYTz5qzFJatdaivmqejbIvMl0/AwnAmmL7quBB4Nin71cp4xjbMdCd6phtazd7EDyRCFIVYhhuUOUvKfrL8SFg==`
-
+#### With Firefox
+It does not use xdg-open but its own default-app opener. So works out of the box
 
 
 # Good scripts to consider:

@@ -182,7 +182,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="NotoSansM Nerd Font Mono",
+    font="UbuntuMono Nerd Font Propo",
     #font="sans",
     fontsize=18,
     padding=3,
