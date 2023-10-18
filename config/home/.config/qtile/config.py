@@ -75,7 +75,7 @@ def remove_empty_groups():
         #logger.warning("remove_empty_groups | group name+index: " + group.name + "+" + str(j))
         if i != j:
             #logger.warning("remove_empty_groups | i,j: " + str(i)+","+str(j))
-            if j != 0:
+            if group.name not in ['Home', 'PRT']:
                 if not group.windows:
                     w = len(group.windows)
                     #logger.warning("remove_empty_groups | w: " + str(w))
@@ -163,7 +163,8 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget")
 ]
 
-groups = [Group("Home", position=1, label="")]
+groups = [Group("Home", position=1, label=""),
+          Group("PRT", layout="floating", init=False, persist=False,label="", matches=[Match(wm_class=["com-itfinance-core-Starter"]), Match(wm_class="com-itfinance-launcher-CommonLauncher")])]
 
 
 #for i in groups:

@@ -83,14 +83,14 @@ Chrome uses xdg-open. This one does not take into account the `Path` key in IGPr
 ```
 This is the workaround:
 - in ~/.local/share/applications/IGProRealTime.desktop change the Exec= key with:
-`Exec=/home/eric/Desktop/exec_PRT.sh %u`
-- Create /home/eric/Desktop/exec_PRT.sh:
+`Exec=/home/eric/IT-Finance/IGProRealTime/exec_PRT.sh %u`
+- Create /home/eric/IT-Finance/IGProRealTime/exec_PRT.sh:
 ```
 #!/bin/bash
 cd /home/eric/IT-Finance/IGProRealTime/app
 ../IGProRealTime $1
 ```
-- and `chmod 777 /home/eric/Desktop/exec_PRT.sh`
+- and `chmod 777 /home/eric/IT-Finance/IGProRealTime/exec_PRT.sh`
 
 #### With Firefox
 It does not use xdg-open but its own default-app opener. So works out of the box
