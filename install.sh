@@ -214,6 +214,9 @@ echo "# Fonts"
 echo "################################################################"
 #arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ttf-noto-nerd
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ttf-ubuntu-mono-nerd ttf-ubuntu-nerd
+# braille fonts for Btop
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm ttf-ubraille'
+
 
 echo -e "\n\n################################################################"
 echo "# Wallpaper"
