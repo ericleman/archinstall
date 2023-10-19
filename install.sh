@@ -147,7 +147,7 @@ echo -e "\n\n################################################################"
 echo "# Audio"
 echo "################################################################"
 #arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm pulseaudio
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm pipewire pipewire-alsa pipewire-jack pipewire-pulse gst-plugin-pipewire libpulse wireplumber
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm pipewire pipewire-alsa pipewire-jack pipewire-pulse gst-plugin-pipewire libpulse wireplumber alsa-utils
 arch-chroot "${MOUNTPOINT}" su - eric -c 'systemctl enable --user pipewire-pulse.service'
 
 echo -e "\n\n################################################################"
@@ -175,7 +175,7 @@ arch-chroot "${MOUNTPOINT}" usermod -a -G autologin eric
 echo -e "\n\n################################################################"
 echo "# X11 and QTile"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm qtile xf86-video-vmware xf86-input-vmmouse xorg-server xorg-xinit mesa xorg-xrandr xorg-xdpyinfo xcb-util-cursor
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm qtile xf86-video-vmware xf86-input-vmmouse xorg-server xorg-xinit mesa xorg-xrandr xorg-xdpyinfo xcb-util-cursor python-psutil python-dbus-next
 # xcb-util-cursor is requried to have cursor theme applied.
 arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.config/qtile'
 cp -r /root/archinstall-main/config/home/.config/qtile $MOUNTPOINT/home/eric/.config/

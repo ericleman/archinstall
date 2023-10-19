@@ -27,12 +27,13 @@ import os
 import subprocess
 import time
 
-from libqtile import bar, layout, widget, hook, qtile
+from libqtile import bar, layout, hook, qtile
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile.log_utils import logger
-#from libqtile.core.manager import Qtile
+from qtile_extras import widget
+from qtile_extras.widget.decorations import RectDecoration, BorderDecoration
 
 COLORS={"polar0": "#2e3440", #black
     "polar1": "#3b4252", #black
@@ -50,6 +51,7 @@ COLORS={"polar0": "#2e3440", #black
     "yellow": "#ebcb8b", #yellow
     "green": "#a3be8c", #green
     "purple": "#b48ead"} #purple
+
 
 WINDOW_MARGIN=8
 WALLPAPER_PATH = os.path.expanduser("~/Pictures/Wallpapers/dj-nord.jpg")
@@ -191,8 +193,9 @@ layouts = [
 widget_defaults = dict(
     font="UbuntuMono Nerd Font Propo",
     #font="sans",
-    fontsize=22,
+    fontsize=30,
     padding=3,
+    foreground = COLORS["snow2"]
 )
 extension_defaults = widget_defaults.copy()
 
@@ -204,31 +207,84 @@ screens = [
             [
                 widget.TextBox(
                     text=' 󰣇 ',
-                    fontsize=22,
+                    fontsize=30,
                     foreground=COLORS["frost0"],
                     #mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(launcher)},
                 ),
-
-                widget.CurrentLayoutIcon(foreground=COLORS["yellow"], scale=0.5),
-                widget.GroupBox(),
+                widget.CurrentLayoutIcon(foreground=COLORS["yellow"], scale=0.7, use_mask=True),
+                widget.Sep(linewidth=0, padding=15, size_percent=40),
+                widget.GroupBox(highlight_method='line', background='#00000000', block_highlight_text_color=COLORS["orange"], 
+                                active=COLORS["green"], inactive=COLORS["snow2"], highlight_color=['#00000000', '#00000000'], 
+                                this_current_screen_border=COLORS["orange"], padding=10,
+                                decorations=[RectDecoration(colour=COLORS["polar2"], radius=10, filled=True)]),
                 widget.Prompt(),
                 widget.Spacer(),
-                widget.WindowName(),
+                widget.WindowName(empty_group_string='',width=bar.CALCULATED, padding=10, decorations=[RectDecoration(colour=COLORS["polar2"]+"AA", radius=10, filled=True)]),
+                #widget.WindowName(width=bar.CALCULATED,decorations=[BorderDecoration(colour = COLORS["snow2"],border_width = [0, 0, 2, 0])]),
+                widget.Spacer(),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
+                widget.CheckUpdates(
+                    distro='Arch_yay',
+                    background='#00000000',
+                    colour_have_updates=COLORS["red"],
+                    colour_no_updates=COLORS["green"],
+                    no_update_string='󰅢',
+                    display_format='󰅢 {updates}',
+                    update_interval=1800,
+                    #custom_command='checkupdates',
+                    execute="alacritty -e yay -Syu",
+                    #mouse_callbacks={"Button1": lazy.spawn("alacritty -e yay -Syu")},
+                ),
+                widget.Volume(
+                    fmt="  {}",
+                    foreground=COLORS["yellow"],
+                ),
+                widget.Net(
+                    interface='ens33',
+                    prefix='M',
+                    format=' {total:6.2f}{total_suffix}', #to have the up and down separed put this {down}  {up}
+                    foreground=COLORS["yellow"],
+                ),
+                widget.Memory(
+                    fmt="  {}",
+                    foreground=COLORS["purple"],
+                    measure_mem='M',
+                    format='{MemUsed: .0f}{mm}',
+                    mouse_callbacks={"Button1": lazy.spawn("alacritty -e btop")}
+                ),
+                widget.CPU(
+                    fmt=' 󰍛 {:04}%',
+                    format='{load_percent}',
+                    foreground=COLORS["purple"],
+                    mouse_callbacks={"Button1": lazy.spawn("alacritty -e btop")}
+                ),
+                #widget.UPowerWidget(fill_charge=COLORS["orange"]),
+                widget.Battery(
+        			format='{char} {percent:2.0%} {hour:d}:{min:02d}',
+                    full_char='󰁹',
+                    charge_char='󰂄',
+                    discharge_char='󱟞',
+                    empty_char='󱉝',
+                    not_charging_char='󱟨',
+                    foreground=COLORS["orange"]
+                    ),
+                widget.Sep(linewidth=0, padding=15, size_percent=40),
+                widget.Clock(format="%Y-%m-%d %a %H:%M:%S",fontsize=24,decorations=[RectDecoration(colour=COLORS["polar2"], radius=10, filled=True)],padding=10),
+                widget.Sep(linewidth=0, padding=15, size_percent=40),
                 widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %H:%M:%S %p"),
                 widget.QuickExit(countdown_start=3),
                 widget.TextBox(
                     text='   ',
-                    fontsize=22,
+                    fontsize=30,
                     foreground=COLORS["red"],
                     #mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(power_menu)},
                 ),
 
             ],
             40,
-            background= '#00000000'#COLORS["polat0"]
+            margin=4,
+            background= '#00000000'#COLORS["polar0"]
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
