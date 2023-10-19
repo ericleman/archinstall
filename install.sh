@@ -302,7 +302,7 @@ arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm google-chrome'
 echo -e "\n\n################################################################"
 echo "# Firefox"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm firefox
+#arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm firefox
 
 echo -e "\n\n################################################################"
 echo "# VS Code"

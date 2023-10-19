@@ -168,7 +168,14 @@ keys = [
     Key([mod, "shift"], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget")
+    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    # Media hotkeys
+    Key("XF86AudioRaiseVolume", lazy.spawn('pactl set-sink-volume 0 +5%'), desc="Raise Volume"),
+    Key("XF86AudioLowerVolume", lazy.spawn('pactl set-sink-volume 0 -5%'), desc="Lower Volume"),
+    Key("XF86AudioMute", lazy.spawn('pactl set-sink-volume 0 +toggle'), desc="Mute Volume"),
+    #Key("XF86AudioNext", lazy.spawn('playerctl next'), desc="Play Next"),
+    #Key("XF86AudioPrev", lazy.spawn('playerctl previous'), desc="Play Previous"),
+    #Key("XF86AudioPlay", lazy.spawn('playerctl play-pause'), desc="Play / Pause Media"),
 ]
 
 groups = [Group("Home", position=1, label=""),
@@ -261,13 +268,16 @@ screens = [
                 ),
                 #widget.UPowerWidget(fill_charge=COLORS["orange"]),
                 widget.Battery(
-        			format='{char} {percent:2.0%} {hour:d}:{min:02d}',
-                    full_char='󰁹',
-                    charge_char='󰂄',
-                    discharge_char='󱟞',
-                    empty_char='󱉝',
-                    not_charging_char='󱟨',
-                    foreground=COLORS["orange"]
+        			format='{char} {percent:2.0%}',
+                    full_char=' 󰁹',
+                    charge_char=' 󰂄',
+                    discharge_char=' 󱟞',
+                    empty_char=' 󱉝',
+                    not_charging_char=' 󱟨',
+                    unknown_char='󰂑',
+                    foreground=COLORS["orange"],
+                    low_foreground=COLORS["red"],
+                    show_short_text=False
                     ),
                 widget.Sep(linewidth=0, padding=15, size_percent=40),
                 widget.Clock(format="%Y-%m-%d %a %H:%M:%S",fontsize=24,decorations=[RectDecoration(colour=COLORS["polar2"], radius=10, filled=True)],padding=10),
@@ -275,7 +285,7 @@ screens = [
                 widget.Systray(),
                 widget.QuickExit(countdown_start=3),
                 widget.TextBox(
-                    text='   ',
+                    text='  ',
                     fontsize=30,
                     foreground=COLORS["red"],
                     #mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(power_menu)},
