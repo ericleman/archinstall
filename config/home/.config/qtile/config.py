@@ -1,3 +1,28 @@
+# Copyright (c) 2010 Aldo Cortesi
+# Copyright (c) 2010, 2014 dequis
+# Copyright (c) 2012 Randall Ma
+# Copyright (c) 2012-2014 Tycho Andersen
+# Copyright (c) 2012 Craig Barnes
+# Copyright (c) 2013 horsik
+# Copyright (c) 2013 Tao Sauvage
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 import os
 import subprocess
 import time
@@ -9,22 +34,22 @@ from libqtile.utils import guess_terminal
 from libqtile.log_utils import logger
 #from libqtile.core.manager import Qtile
 
-COLORS={"nord0": "#2e3440", #black
-    "nord1": "#3b4252", #black
-    "nord2": "#434c5e", #black
-    "nord3": "#4c566a", #black
-    "nord4": "#d8dee9", #white
-    "nord5": "#e5e9f0", #white
-    "nord6": "#eceff4", #white
-    "nord7": "#8fbcbb", #green
-    "nord8": "#88c0d0", #cyan
-    "nord9": "#81a1c1", #blue
-    "nord10": "#5e81ac", #blue
-    "nord11": "#bf616a", #red
-    "nord12": "#d08770", #orange
-    "nord13": "#ebcb8b", #yellow
-    "nord14": "#a3be8c", #green
-    "nord15": "#b48ead"} #purple
+COLORS={"polar0": "#2e3440", #black
+    "polar1": "#3b4252", #black
+    "polar2": "#434c5e", #black
+    "polar3": "#4c566a", #black
+    "snow0": "#d8dee9", #white
+    "snow1": "#e5e9f0", #white
+    "snow2": "#eceff4", #white
+    "frost0": "#8fbcbb", #green
+    "frost1": "#88c0d0", #cyan
+    "frost2": "#81a1c1", #blue
+    "frost3": "#5e81ac", #blue
+    "red": "#bf616a", #red
+    "orange": "#d08770", #orange
+    "yellow": "#ebcb8b", #yellow
+    "green": "#a3be8c", #green
+    "purple": "#b48ead"} #purple
 
 WINDOW_MARGIN=8
 WALLPAPER_PATH = os.path.expanduser("~/Pictures/Wallpapers/dj-nord.jpg")
@@ -144,7 +169,7 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget")
 ]
 
-groups = [Group("Home", position=1, label=""),
+groups = [Group("Home", position=1, label=""),
           Group("PRT", layout="floating", init=False, persist=False,label="", matches=[Match(wm_class=["com-itfinance-core-Starter"]), Match(wm_class="com-itfinance-launcher-CommonLauncher")])]
 
 
@@ -158,15 +183,15 @@ groups = [Group("Home", position=1, label=""),
 #    )
 
 layouts = [
-    layout.MonadTall(border_focus=[COLORS['nord11']], margin=WINDOW_MARGIN),
-    layout.Columns(border_focus_stack=[COLORS['nord11']], margin=WINDOW_MARGIN, fair=True),
+    layout.MonadTall(border_focus=[COLORS['red']], margin=WINDOW_MARGIN),
+    layout.Columns(border_focus_stack=[COLORS['red']], margin=WINDOW_MARGIN, fair=True),
     layout.Max(margin=WINDOW_MARGIN)
 ]
 
 widget_defaults = dict(
     font="UbuntuMono Nerd Font Propo",
     #font="sans",
-    fontsize=18,
+    fontsize=22,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
@@ -175,20 +200,35 @@ screens = [
     Screen(
         wallpaper=WALLPAPER_PATH,
         wallpaper_mode="fill",
-        bottom=bar.Bar(
+        top=bar.Bar(
             [
-                widget.CurrentLayoutIcon(foreground=COLORS["nord7"], scale=0.8),
+                widget.TextBox(
+                    text=' 󰣇 ',
+                    fontsize=22,
+                    foreground=COLORS["frost0"],
+                    #mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(launcher)},
+                ),
+
+                widget.CurrentLayoutIcon(foreground=COLORS["yellow"], scale=0.5),
                 widget.GroupBox(),
                 widget.Prompt(),
+                widget.Spacer(),
                 widget.WindowName(),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.Systray(),
                 widget.Clock(format="%Y-%m-%d %a %H:%M:%S %p"),
                 widget.QuickExit(countdown_start=3),
+                widget.TextBox(
+                    text='   ',
+                    fontsize=22,
+                    foreground=COLORS["red"],
+                    #mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(power_menu)},
+                ),
+
             ],
-            50,
-            background= COLORS["nord0"]
+            40,
+            background= '#00000000'#COLORS["polat0"]
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
