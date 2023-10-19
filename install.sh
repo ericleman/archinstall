@@ -186,6 +186,8 @@ cp -r /root/archinstall-main/config/etc/X11/xorg.conf.d $MOUNTPOINT/etc/X11/
 cp /root/archinstall-main/config/home/.Xresources $MOUNTPOINT/home/eric/ # set dpi for 4K screens
 arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.config/.Xresources
 arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.config/.Xresources
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm qtile-extras'
+
 
 echo -e "\n\n################################################################"
 echo "# Picom"
