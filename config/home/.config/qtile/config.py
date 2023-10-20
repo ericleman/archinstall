@@ -170,9 +170,9 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     # Media hotkeys
-    Key("XF86AudioRaiseVolume", lazy.spawn('pactl set-sink-volume 0 +5%'), desc="Raise Volume"),
-    Key("XF86AudioLowerVolume", lazy.spawn('pactl set-sink-volume 0 -5%'), desc="Lower Volume"),
-    Key("XF86AudioMute", lazy.spawn('pactl set-sink-volume 0 +toggle'), desc="Mute Volume"),
+    Key([],"XF86AudioRaiseVolume", lazy.spawn('pactl set-sink-volume 0 +5%'), desc="Raise Volume"),
+    Key([],"XF86AudioLowerVolume", lazy.spawn('pactl set-sink-volume 0 -5%'), desc="Lower Volume"),
+    Key([],"XF86AudioMute", lazy.spawn('pactl set-sink-mute 0 toggle'), desc="Mute Volume"),
     #Key("XF86AudioNext", lazy.spawn('playerctl next'), desc="Play Next"),
     #Key("XF86AudioPrev", lazy.spawn('playerctl previous'), desc="Play Previous"),
     #Key("XF86AudioPlay", lazy.spawn('playerctl play-pause'), desc="Play / Pause Media"),
@@ -246,6 +246,8 @@ screens = [
                 widget.Volume(
                     fmt="  {}",
                     foreground=COLORS["yellow"],
+                    #emoji_list=['󰝟','󰕿','󰖀','󰕾'],
+                    #emoji=True
                 ),
                 widget.Net(
                     interface='ens33',
