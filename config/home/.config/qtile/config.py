@@ -161,7 +161,8 @@ keys = [
     Key([mod], "exclam", window_to_new_group()),
     Key([mod, "shift"], "exclam", window_to_new_group(switch=True)),
     # Spawn applications
-    Key([mod], "Space", lazy.spawn('/home/eric/.config/rofi/launcher.sh'), desc="Launch Rofi"),
+    #Key([mod], "Space", lazy.spawn('/home/eric/.config/rofi/launcher.sh'), desc="Launch Rofi"),
+    Key(["mod1"], "F1", lazy.spawn('/home/eric/.config/rofi/launcher.sh'), desc="Launch Rofi"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod, "shift"], "Return", lazy.spawn("thunar"), desc="Launch File Manager"),
     Key([mod, "control"], "Return", lazy.spawn("google-chrome-stable"), desc="Launch Chrome"),
@@ -220,8 +221,7 @@ screens = [
                     text=' 󰣇 ',
                     fontsize=30,
                     foreground=COLORS["frost0"],
-                    #mouse_callbacks={"Button1": lazy.spawn("rofi -show drun"), "Button3": lazy.spawn("sh .config/qtile/scripts/rofi/powermenu.sh")}
-                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('/home/eric/.config/rofi/launcher.sh'), "Button3": qtile.cmd_spawn("/home/eric/.config/rofi/powermenu.sh")},
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('/home/eric/.config/rofi/launcher.sh'), "Button3": lazy.spawn("/home/eric/.config/rofi/powermenu.sh")},
                 ),
                 widget.CurrentLayoutIcon(foreground=COLORS["yellow"], scale=0.7, use_mask=True),
                 widget.Sep(linewidth=0, padding=15, size_percent=40),

@@ -304,6 +304,11 @@ arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
 
 echo -e "\n\n################################################################"
+echo "# KSuperkey. Use it to launch Rofi. Launch ksuperkey w/ Qtile autostart"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm ksuperkey'
+
+echo -e "\n\n################################################################"
 echo "# Rofi"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm rofi

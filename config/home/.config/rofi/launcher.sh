@@ -1,5 +1,10 @@
 #!/bin/bash
-#rofi -show drun -theme $HOME/.config/rofi/themes/launcher.rasi
+
+# make sure we are in AZERTY as if this script is called by
+# ksuperkey, it messes keyboard layout
+setxkbmap -model pc104 -layout fr
+
+
 rofi \
 	-show drun \
 	-modi run,drun,window,:~/.config/rofi/root.sh \

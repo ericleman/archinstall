@@ -17,3 +17,5 @@ volumeicon &
 cbatticon &
 udiskie -t &
 nm-applet &
+
+ksuperkey -e 'Super_L=Alt_L|F1' &
