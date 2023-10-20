@@ -146,9 +146,9 @@ arch-chroot "${MOUNTPOINT}" rm -rf /home/eric/yay-bin
 echo -e "\n\n################################################################"
 echo "# Audio"
 echo "################################################################"
-#arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm pulseaudio
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm pipewire pipewire-alsa pipewire-jack pipewire-pulse gst-plugin-pipewire libpulse wireplumber alsa-utils
-arch-chroot "${MOUNTPOINT}" su - eric -c 'systemctl enable --user pipewire-pulse.service'
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm pulseaudio alsa-utils pulseaudio-alsa pavucontrol pamixer
+#arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm pipewire pipewire-alsa pipewire-jack pipewire-pulse gst-plugin-pipewire libpulse wireplumber alsa-utils
+#arch-chroot "${MOUNTPOINT}" su - eric -c 'systemctl enable --user pipewire-pulse.service'
 
 echo -e "\n\n################################################################"
 echo "# VMWare Specificities"
