@@ -12,3 +12,8 @@ vmware-user & #required to enable copy paste on VMWare
 #while pgrep -u $UID -x picom >/dev/null; do sleep 1; done
 # Launch picom
 #picom --config ~/.config/picom/picom.conf --log-file ~/.local/share/picom.log & # --experimental-backends &
+
+volumeicon &
+cbatticon &
+udiskie -t &
+nm-applet &

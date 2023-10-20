@@ -189,9 +189,29 @@ arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.config/.Xresources
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm qtile-extras'
 
 echo -e "\n\n################################################################"
+echo "# udiskie ntfs-3g"
+echo "################################################################"
+# basic utility we might need for automounting external hard drives or USBs
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm udiskie ntfs-3g
+
+echo -e "\n\n################################################################"
 echo "# brightnessctl"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm brightnessctl
+
+echo -e "\n\n################################################################"
+echo "# volumeicon "
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm volumeicon 
+arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.config/volumeicon'
+cp -r /root/archinstall-main/config/home/.config/volumeicon $MOUNTPOINT/home/eric/.config/
+arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
+arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
+
+echo -e "\n\n################################################################"
+echo "# cbatticon"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm cbatticon
 
 echo -e "\n\n################################################################"
 echo "# Picom"
