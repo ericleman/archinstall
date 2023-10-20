@@ -1,4 +1,4 @@
-gtk-theme-name = Nord
-gtk-font-name = Ubuntu Nerd Font
-gtk-cursor-theme-name = Nordzy-cursors
+gtk-theme-name=Nord
+gtk-font-name="Ubuntu Nerd Font"
+gtk-cursor-theme-name=Nordzy-cursors
 gtk-icon-theme-name=Nordzy
