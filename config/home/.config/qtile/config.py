@@ -161,14 +161,15 @@ keys = [
     Key([mod], "exclam", window_to_new_group()),
     Key([mod, "shift"], "exclam", window_to_new_group(switch=True)),
     # Spawn applications
+    Key([mod], "Space", lazy.spawn('/home/eric/.config/rofi/launcher.sh'), desc="Launch Rofi"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod, "shift"], "Return", lazy.spawn("thunar"), desc="Launch File Manager"),
     Key([mod, "control"], "Return", lazy.spawn("google-chrome-stable"), desc="Launch Chrome"),
     # Controls
     Key([mod, "shift"], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([mod, "control"], "q", lazy.spawn('/home/eric/.config/rofi/powermenu.sh'), desc="Shutdown Qtile"),
+    #Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     # Media hotkeys
     Key([],"XF86AudioRaiseVolume", lazy.spawn('pamixer --increase 5'), desc="Raise Volume"),
     Key([],"XF86AudioLowerVolume", lazy.spawn('pamixer --decrease 5'), desc="Lower Volume"),
@@ -219,7 +220,8 @@ screens = [
                     text=' 󰣇 ',
                     fontsize=30,
                     foreground=COLORS["frost0"],
-                    #mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(launcher)},
+                    #mouse_callbacks={"Button1": lazy.spawn("rofi -show drun"), "Button3": lazy.spawn("sh .config/qtile/scripts/rofi/powermenu.sh")}
+                    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('/home/eric/.config/rofi/launcher.sh'), "Button3": qtile.cmd_spawn("/home/eric/.config/rofi/powermenu.sh")},
                 ),
                 widget.CurrentLayoutIcon(foreground=COLORS["yellow"], scale=0.7, use_mask=True),
                 widget.Sep(linewidth=0, padding=15, size_percent=40),
@@ -231,7 +233,7 @@ screens = [
                 widget.Spacer(),
                 widget.WindowName(empty_group_string='',width=bar.CALCULATED, padding=10, decorations=[RectDecoration(colour=COLORS["polar2"]+"AA", radius=10, filled=True)]),
                 #widget.WindowName(width=bar.CALCULATED,decorations=[BorderDecoration(colour = COLORS["snow2"],border_width = [0, 0, 2, 0])]),
-                widget.Spacer(),
+                widget.Spacer(background="#00000000"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.CheckUpdates(
@@ -287,21 +289,14 @@ screens = [
                 widget.Sep(linewidth=0, padding=15, size_percent=40),
                 widget.Clock(format="%Y-%m-%d %a %H:%M:%S",fontsize=24,decorations=[RectDecoration(colour=COLORS["polar2"], radius=10, filled=True)],padding=10),
                 widget.Sep(linewidth=0, padding=15, size_percent=40),
-                widget.Systray(background=COLORS["purple"]),
+                widget.Systray(icon_size=30),
                 widget.QuickExit(countdown_start=3),
-                widget.TextBox(
-                    text='  ',
-                    fontsize=30,
-                    foreground=COLORS["red"],
-                    #mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(power_menu)},
-                ),
 
             ],
             40,
             margin=4,
+            #opacity=0.92,
             background= '#00000000'#COLORS["polar0"]
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
