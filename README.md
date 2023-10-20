@@ -95,13 +95,13 @@ cd /home/eric/IT-Finance/IGProRealTime/app
 Here is the script:
 ```
 sed -i 's/Exec=/#Exec=/' ~/.local/share/applications/IGProRealTime.desktop
-echo "Exec=/home/eric/IT-Finance/IGProRealTime/exec_PRT.sh %u" >> ~/.local/share/applications/IGProRealTime.desktop
+sed -i -e '$aExec=/home/eric/IT-Finance/IGProRealTime/exec_PRT.sh %u' ~/.local/share/applications/IGProRealTime.desktop
 cat > /home/eric/IT-Finance/IGProRealTime/exec_PRT.sh <<EOF
 #!/bin/bash
 cd /home/eric/IT-Finance/IGProRealTime/app
 ../IGProRealTime $1
 EOF
-
+chmod 777 /home/eric/IT-Finance/IGProRealTime/exec_PRT.sh
 ```
 
 #### With Firefox
