@@ -176,6 +176,9 @@ keys = [
     #Key("XF86AudioNext", lazy.spawn('playerctl next'), desc="Play Next"),
     #Key("XF86AudioPrev", lazy.spawn('playerctl previous'), desc="Play Previous"),
     #Key("XF86AudioPlay", lazy.spawn('playerctl play-pause'), desc="Play / Pause Media"),
+    # Brightness
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +10%")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-")),
 ]
 
 groups = [Group("Home", position=1, label=""),

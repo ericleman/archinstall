@@ -188,6 +188,10 @@ arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.config/.Xresources
 arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.config/.Xresources
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm qtile-extras'
 
+echo -e "\n\n################################################################"
+echo "# brightnessctl"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm brightnessctl
 
 echo -e "\n\n################################################################"
 echo "# Picom"
