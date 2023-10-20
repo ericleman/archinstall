@@ -173,9 +173,9 @@ keys = [
     Key([],"XF86AudioRaiseVolume", lazy.spawn('pactl set-sink-volume 0 +5%'), desc="Raise Volume"),
     Key([],"XF86AudioLowerVolume", lazy.spawn('pactl set-sink-volume 0 -5%'), desc="Lower Volume"),
     Key([],"XF86AudioMute", lazy.spawn('pactl set-sink-mute 0 toggle'), desc="Mute Volume"),
-    #Key("XF86AudioNext", lazy.spawn('playerctl next'), desc="Play Next"),
-    #Key("XF86AudioPrev", lazy.spawn('playerctl previous'), desc="Play Previous"),
-    #Key("XF86AudioPlay", lazy.spawn('playerctl play-pause'), desc="Play / Pause Media"),
+    #Key([],"XF86AudioNext", lazy.spawn('playerctl next'), desc="Play Next"),
+    #Key([],"XF86AudioPrev", lazy.spawn('playerctl previous'), desc="Play Previous"),
+    #Key([],"XF86AudioPlay", lazy.spawn('playerctl play-pause'), desc="Play / Pause Media"),
 ]
 
 groups = [Group("Home", position=1, label=""),
