@@ -166,11 +166,13 @@ arch-chroot "${MOUNTPOINT}" chmod 755 /home/eric/Laptop
 echo -e "\n\n################################################################"
 echo "# LightDM"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm lightdm lightdm-gtk-greeter
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm lightdm lightdm-gtk-greeter lightdm-webkit-theme-litarvan lightdm-webkit2-greeter
 arch-chroot "${MOUNTPOINT}" systemctl enable lightdm.service
 sed -i 's/#autologin-user=/autologin-user=eric/' $MOUNTPOINT/etc/lightdm/lightdm.conf
 arch-chroot "${MOUNTPOINT}" groupadd -r autologin
 arch-chroot "${MOUNTPOINT}" usermod -a -G autologin eric
+cp /root/archinstall-main/config/etc/lightdm/lightdm-gtk-greeter.conf $MOUNTPOINT/etc/lightdm/lightdm-gtk-greeter.conf
+
 
 echo -e "\n\n################################################################"
 echo "# X11 and QTile"
@@ -250,6 +252,9 @@ echo "################################################################"
 cp -r /root/archinstall-main/config/home/Pictures/Wallpapers $MOUNTPOINT/home/eric/Pictures/
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/Pictures/Wallpapers
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/Pictures/Wallpapers
+cp /root/archinstall-main/config/home/Pictures/Wallpapers/* $MOUNTPOINT/usr/share/backgrounds/
+arch-chroot "${MOUNTPOINT}" chmod -R 777 /usr/share/backgrounds/
+
 
 echo -e "\n\n################################################################"
 echo "# GTK Nord Themes"
@@ -257,10 +262,11 @@ echo "################################################################"
 curl -L https://github.com/EliverLara/Nordic/archive/master.zip --output master.zip
 bsdtar -x -f master.zip
 # this is now in /root/Nordic-master
-arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.themes'
-cp -r /root/Nordic-master $MOUNTPOINT/home/eric/.themes/Nord/
-arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.themes
-arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.themes
+#arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.themes'
+#cp -r /root/Nordic-master $MOUNTPOINT/home/eric/.themes/Nord/
+#arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.themes
+#arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.themes
+cp -r /root/Nordic-master $MOUNTPOINT/usr/share/themes/Nord/
 cp -r /root/archinstall-main/config/home/.config/gtk-3.0 $MOUNTPOINT/home/eric/.config/
 cp /root/archinstall-main/config/home/.gtkrc-2.0 $MOUNTPOINT/home/eric/
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config/gtk-3.0
@@ -298,7 +304,8 @@ arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
 echo -e "\n\n################################################################"
 echo "# Thunar"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm thunar
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm thunar gvfs
+# gvfs is to have a trash
 
 echo -e "\n\n################################################################"
 echo "# NNN"
