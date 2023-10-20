@@ -290,7 +290,6 @@ screens = [
                 widget.Clock(format="%Y-%m-%d %a %H:%M:%S",fontsize=24,decorations=[RectDecoration(colour=COLORS["polar2"], radius=10, filled=True)],padding=10),
                 widget.Sep(linewidth=0, padding=15, size_percent=40),
                 widget.Systray(icon_size=30),
-                widget.QuickExit(countdown_start=3),
 
             ],
             40,
