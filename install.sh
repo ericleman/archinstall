@@ -210,10 +210,10 @@ cp -r /root/archinstall-main/config/home/.config/volumeicon $MOUNTPOINT/home/eri
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
 
-echo -e "\n\n################################################################"
-echo "# cbatticon"
-echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm cbatticon
+#echo -e "\n\n################################################################"
+#echo "# cbatticon"
+#echo "################################################################"
+#arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm cbatticon
 
 echo -e "\n\n################################################################"
 echo "# Picom"

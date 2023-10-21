@@ -14,7 +14,7 @@ vmware-user & #required to enable copy paste on VMWare
 #picom --config ~/.config/picom/picom.conf --log-file ~/.local/share/picom.log & # --experimental-backends &
 
 volumeicon &
-cbatticon &
+#cbatticon &
 udiskie -t &
 nm-applet &
 
