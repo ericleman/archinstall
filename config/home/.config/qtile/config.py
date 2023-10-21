@@ -251,6 +251,7 @@ screens = [
                 widget.Volume(
                     fmt="  {}",
                     foreground=COLORS["yellow"],
+                    mouse_callbacks={"Button2": lazy.spawn("alacritty -e alsamixer"),"Button3": lazy.spawn("pavucontrol")}
                     #emoji_list=['󰝟','󰕿','󰖀','󰕾'],
                     #emoji=True
                 ),
@@ -259,6 +260,7 @@ screens = [
                     prefix='M',
                     format=' {total:6.2f}{total_suffix}', #to have the up and down separed put this {down}  {up}
                     foreground=COLORS["yellow"],
+                    mouse_callbacks={"Button1": lazy.spawn("nm-connection-editor")}
                 ),
                 widget.Memory(
                     fmt="  {}",

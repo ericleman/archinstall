@@ -201,14 +201,14 @@ echo "# brightnessctl"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm brightnessctl
 
-echo -e "\n\n################################################################"
-echo "# volumeicon "
-echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm volumeicon 
-arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.config/volumeicon'
-cp -r /root/archinstall-main/config/home/.config/volumeicon $MOUNTPOINT/home/eric/.config/
-arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
-arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
+#echo -e "\n\n################################################################"
+#echo "# volumeicon "
+#echo "################################################################"
+#arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm volumeicon 
+#arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.config/volumeicon'
+#cp -r /root/archinstall-main/config/home/.config/volumeicon $MOUNTPOINT/home/eric/.config/
+#arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
+#arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
 
 #echo -e "\n\n################################################################"
 #echo "# cbatticon"

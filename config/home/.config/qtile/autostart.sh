@@ -13,9 +13,9 @@ vmware-user & #required to enable copy paste on VMWare
 # Launch picom
 #picom --config ~/.config/picom/picom.conf --log-file ~/.local/share/picom.log & # --experimental-backends &
 
-volumeicon &
+#volumeicon &
 #cbatticon &
 udiskie -t &
-nm-applet &
+#nm-applet &
 
 ksuperkey -e 'Super_L=Alt_L|F1' &
