@@ -112,3 +112,17 @@ It does not use xdg-open but its own default-app opener. So works out of the box
 - https://github.com/MatMoul/archfi/blob/master/archfi
 - https://github.com/picodotdev/alis/blob/master/alis.sh
 - https://github.com/tom5760/arch-install/blob/master/arch_install.sh
+
+# Gnome Todo
+- [ ] Nord theme
+- [ ] Ubuntu font
+- [ ] Mouse theme
+- [ ] Icon theme
+- [ ] default terminal = alacritty
+- [ ] default Alacritty window size
+- [ ] blur my shell
+- [x] test IG
+- [ ] display size (scaling)
+- [ ] tweaks
+- [ ] keyboard shortcut to move windows
+- [ ] undecorate windows?
