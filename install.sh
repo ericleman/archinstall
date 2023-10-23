@@ -375,27 +375,27 @@ add_value_in_dconf_list() {
 }
 
 arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/clock-show-seconds true'
-echo "# Dconf setup"
+echo "# Dconf setup1"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/cursor-theme "'Nordzy-cursors'"'
-echo "# Dconf setup"
+echo "# Dconf setup2"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/document-font-name "'Ubuntu Nerd Font 11'"'
-echo "# Dconf setup"
+echo "# Dconf setup3"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/font-name "'Ubuntu Nerd Font 11'"'
-echo "# Dconf setup"
+echo "# Dconf setup4"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/gtk-theme "'Nord'"'
-echo "# Dconf setup"
+echo "# Dconf setup5"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/icon-theme "'Papirus'"'
-echo "# Dconf setup"
+echo "# Dconf setup6"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/monospace-font-name "'UbuntuMono Nerd Font Mono 10'"'
-echo "# Dconf setup"
+echo "# Dconf setup7"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/text-scaling-factor 1.25'
-echo "# Dconf setup"
+echo "# Dconf setup8"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Ubuntu Nerd Font 11'"'
-echo "# Dconf setup"
+echo "# Dconf setup9"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/clock-show-weekday true'
-echo "# Dconf setup"
+echo "# Dconf setup10"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"'
-echo "# Dconf setup"
+echo "# Dconf setup11"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/session/idle-delay "unit32 0"'
 # Show hidden files
 arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gtk/settings/file-chooser/show-hidden true'
@@ -406,7 +406,7 @@ arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/set
 arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name "'Alacritty'"'
 arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command "'alacritty'"'
 add_value_in_dconf_list '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings' '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/'
-echo "# Dconf setup"
+echo "# Dconf setup12"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/background/picture-uri "'file:///home/eric/.local/share/backgrounds/2023-10-23-12-39-17-dj-nord.jpg'"'
 arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/background/picture-uri-dark "'file:///home/eric/.local/share/backgrounds/2023-10-23-12-39-17-dj-nord.jpg'"'
 

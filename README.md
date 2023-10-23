@@ -53,27 +53,10 @@ When 3D acceleration is activated on VMWare, then deactivate it on Google Chrome
 
 
 ## Prorealtime workaround
-### ~~This one does not work with PRT12 has it uses newer version of java class~~
-From Arch guest, go to : https://www.java.com/fr/download/ and get Linux 64 file.
-
-That creates a file like /home/eric/Downloads/jre-8u381-linux-x64.tar.gz
-
-```
-sudo su
-mkdir /usr/java
-mv jre-8u381-linux-x64.tar.gz /usr/java/
-cd /usr/java
-tar zxvf jre-8u381-linux-x64.tar.gz
-```
-
-Now we have /usr/java/jre1.8.0_381/bin/javaws
-
-On IG site, launch Prorealtime in java mode, to get /home/eric/Downloads/itcharts.jnlp
-
-`/usr/java/jre1.8.0_381/bin/javaws /home/eric/Downloads/itcharts.jnlp`
-
 ### From PRT12
 Install the app given by PRT (it installs IGProRealTime.desktop). 
+On Gnome, it should work off the shelves. Otherwise:
+
 There are then 2 options:
 #### With Chrome
 Chrome uses xdg-open. This one does not take into account the `Path` key in IGProRealTime.desktop so we get the error:
@@ -127,3 +110,25 @@ It does not use xdg-open but its own default-app opener. So works out of the box
 - [ ] keyboard shortcut to move windows
 - [ ] undecorate windows?
 - [ ] autologin
+
+# Obsolete tips
+## Prorealtime workaround
+### ~~This one does not work with PRT12 has it uses newer version of java class~~
+From Arch guest, go to : https://www.java.com/fr/download/ and get Linux 64 file.
+
+That creates a file like /home/eric/Downloads/jre-8u381-linux-x64.tar.gz
+
+```
+sudo su
+mkdir /usr/java
+mv jre-8u381-linux-x64.tar.gz /usr/java/
+cd /usr/java
+tar zxvf jre-8u381-linux-x64.tar.gz
+```
+
+Now we have /usr/java/jre1.8.0_381/bin/javaws
+
+On IG site, launch Prorealtime in java mode, to get /home/eric/Downloads/itcharts.jnlp
+
+`/usr/java/jre1.8.0_381/bin/javaws /home/eric/Downloads/itcharts.jnlp`
+
