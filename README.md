@@ -111,6 +111,9 @@ It does not use xdg-open but its own default-app opener. So works out of the box
 - [ ] undecorate windows?
 - [ ] autologin
 - [ ] default app on dock
+- [ ] yay update indicator in panel
+- [ ] adw-gtk3
+- [ ] zsh
 
 # Obsolete tips
 ## Prorealtime workaround
