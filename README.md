@@ -103,7 +103,7 @@ It does not use xdg-open but its own default-app opener. So works out of the box
 - [x] Icon theme
 - [x] default terminal = alacritty
 - [x] default Alacritty window size
-- [ ] blur my shell
+- [x] blur my shell
 - [x] test IG
 - [x] display size (scaling)
 - [x] tweaks
