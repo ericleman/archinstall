@@ -126,3 +126,4 @@ It does not use xdg-open but its own default-app opener. So works out of the box
 - [ ] tweaks
 - [ ] keyboard shortcut to move windows
 - [ ] undecorate windows?
+- [ ] autologin

@@ -877,6 +877,11 @@
   # Print all received window events.
   #print_events: false
 
+window:
+   dimensions:
+     columns: 120
+     lines: 40
+
 font:
   normal:
     family: UbuntuMono Nerd Font Mono
@@ -894,7 +899,7 @@ font:
     family: UbuntuMono Nerd Font Mono
     style: Bold Italic
 
-  size: 22
+  size: 18
 
 import:
   - /home/eric/.config/alacritty/nord.yaml

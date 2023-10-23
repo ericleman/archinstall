@@ -244,9 +244,10 @@ arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm ttf-ubraille'
 echo -e "\n\n################################################################"
 echo "# Wallpaper"
 echo "################################################################"
-cp -r /root/archinstall-main/config/home/Pictures/Wallpapers $MOUNTPOINT/home/eric/Pictures/
-arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/Pictures/Wallpapers
-arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/Pictures/Wallpapers
+arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.local/share/backgrounds'
+cp -r /root/archinstall-main/config/home/Pictures/Wallpapers/* $MOUNTPOINT/home/eric/.local/share/backgrounds/
+arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.local/share/backgrounds
+arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.local/share/backgrounds
 cp /root/archinstall-main/config/home/Pictures/Wallpapers/* $MOUNTPOINT/usr/share/backgrounds/
 arch-chroot "${MOUNTPOINT}" chmod -R 777 /usr/share/backgrounds/
 
@@ -296,6 +297,10 @@ arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm alacritty
 cp -r /root/archinstall-main/config/home/.config/alacritty $MOUNTPOINT/home/eric/.config/
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
+# remove gnome-console and make alacritty default terminal: see https://www.reddit.com/r/Alacritty/comments/hecdqv/changing_default_terminal_to_alacritty_in_gnome/
+arch-chroot "${MOUNTPOINT}" pacman -Rs --noconfirm gnome-console
+arch-chroot "${MOUNTPOINT}" ln -s /usr/bin/alacritty /usr/bin/xterm
+
 
 <<pause-for-gnome
 
@@ -354,6 +359,58 @@ echo "################################################################"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm visual-studio-code-bin'
 
 #pause-for-apps
+
+echo -e "\n\n################################################################"
+echo "# Dconf setup"
+echo "################################################################"
+add_value_in_dconf_list() {
+  list=$(arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf read $1")
+  echo list=$list
+  if [[ $list == *"'$2'"* ]]; then
+    echo "value is already in the list!"
+  else
+    arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"${list%]*}, '$2']\""
+    echo "Added value to the list."
+  fi
+}
+
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/clock-show-seconds true'
+echo "# Dconf setup"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/cursor-theme "'Nordzy-cursors'"'
+echo "# Dconf setup"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/document-font-name "'Ubuntu Nerd Font 11'"'
+echo "# Dconf setup"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/font-name "'Ubuntu Nerd Font 11'"'
+echo "# Dconf setup"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/gtk-theme "'Nord'"'
+echo "# Dconf setup"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/icon-theme "'Papirus'"'
+echo "# Dconf setup"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/monospace-font-name "'UbuntuMono Nerd Font Mono 10'"'
+echo "# Dconf setup"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/text-scaling-factor 1.25'
+echo "# Dconf setup"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Ubuntu Nerd Font 11'"'
+echo "# Dconf setup"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/clock-show-weekday true'
+echo "# Dconf setup"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"'
+echo "# Dconf setup"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/session/idle-delay "unit32 0"'
+# Show hidden files
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gtk/settings/file-chooser/show-hidden true'
+# Mouse cursor size from 24 to 32
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/interface/cursor-size 32'
+# Super+Return for alacritty
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding "'<Super>Return'"'
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name "'Alacritty'"'
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command "'alacritty'"'
+add_value_in_dconf_list '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings' '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/'
+echo "# Dconf setup"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/background/picture-uri "'file:///home/eric/.local/share/backgrounds/2023-10-23-12-39-17-dj-nord.jpg'"'
+arch-chroot "${MOUNTPOINT}" su - eric -c 'dbus-launch dconf write /org/gnome/desktop/background/picture-uri-dark "'file:///home/eric/.local/share/backgrounds/2023-10-23-12-39-17-dj-nord.jpg'"'
+
+
 
 echo -e "\n\n################################################################"
 echo "# end of CHROOT, rebooting"
