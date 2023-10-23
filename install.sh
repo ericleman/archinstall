@@ -53,7 +53,7 @@ mount /dev/sda1 $MOUNTPOINT/boot
 echo -e "\n\n################################################################"
 echo "# Pacstrap"
 echo "################################################################"
-pacstrap $MOUNTPOINT base base-devel linux linux-firmware vim git grub efibootmgr zram-generator
+pacstrap $MOUNTPOINT base base-devel linux linux-firmware vim git grub efibootmgr zram-generator meld
 
 echo -e "\n\n################################################################"
 echo "# Update Certificates on Chroot"
@@ -163,6 +163,8 @@ arch-chroot "${MOUNTPOINT}" mkdir /home/eric/Laptop
 arch-chroot "${MOUNTPOINT}" chown eric /home/eric/Laptop
 arch-chroot "${MOUNTPOINT}" chmod 755 /home/eric/Laptop
 
+<<pause-for-gnome
+
 echo -e "\n\n################################################################"
 echo "# LightDM"
 echo "################################################################"
@@ -172,7 +174,6 @@ sed -i 's/#autologin-user=/autologin-user=eric/' $MOUNTPOINT/etc/lightdm/lightdm
 arch-chroot "${MOUNTPOINT}" groupadd -r autologin
 arch-chroot "${MOUNTPOINT}" usermod -a -G autologin eric
 cp /root/archinstall-main/config/etc/lightdm/lightdm-gtk-greeter.conf $MOUNTPOINT/etc/lightdm/lightdm-gtk-greeter.conf
-
 
 echo -e "\n\n################################################################"
 echo "# X11 and QTile"
@@ -201,20 +202,6 @@ echo "# brightnessctl"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm brightnessctl
 
-#echo -e "\n\n################################################################"
-#echo "# volumeicon "
-#echo "################################################################"
-#arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm volumeicon 
-#arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.config/volumeicon'
-#cp -r /root/archinstall-main/config/home/.config/volumeicon $MOUNTPOINT/home/eric/.config/
-#arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
-#arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
-
-#echo -e "\n\n################################################################"
-#echo "# cbatticon"
-#echo "################################################################"
-#arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm cbatticon
-
 echo -e "\n\n################################################################"
 echo "# Picom"
 echo "################################################################"
@@ -224,17 +211,26 @@ cp -r /root/archinstall-main/config/home/.config/picom $MOUNTPOINT/home/eric/.co
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
 
-
-<<pause-for-gnome
+pause-for-gnome
 
 echo -e "\n\n################################################################"
 echo "# Gnome"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm gnome gnome-tweaks dconf-editor xf86-video-vmware xf86-input-vmmouse xorg-server xorg-xinit mesa xorg-xrandr xorg-xdpyinfo
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm gnome gnome-tweaks dconf-editor
 arch-chroot "${MOUNTPOINT}" systemctl enable gdm.service
 sed -i 's/#WaylandEnable=false/WaylandEnable=false/' $MOUNTPOINT/etc/gdm/custom.conf
 
-pause-for-gnome
+echo -e "\n\n################################################################"
+echo "# X11"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm xf86-video-vmware xf86-input-vmmouse xorg-server xorg-xinit mesa xorg-xrandr xorg-xdpyinfo
+#arch-chroot "${MOUNTPOINT}" localectl set-x11-keymap fr pc #I think `localectl set-x11-keymap` does not work during install in chroot. SO I copy the config directly (see below)
+cp -r /root/archinstall-main/config/etc/X11/xorg.conf.d $MOUNTPOINT/etc/X11/
+cp /root/archinstall-main/config/home/.Xresources $MOUNTPOINT/home/eric/ # set dpi for 4K screens
+arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.config/.Xresources
+arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.config/.Xresources
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm qtile-extras'
+
 #<<pause-for-theme
 
 echo -e "\n\n################################################################"
@@ -273,7 +269,6 @@ arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config/gtk-3.0
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config/gtk-3.0
 arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.gtkrc-2.0
 arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.gtkrc-2.0
-#pause-for-theme
 
 echo -e "\n\n################################################################"
 echo "# Cursor Theme"
@@ -303,6 +298,8 @@ cp -r /root/archinstall-main/config/home/.config/alacritty $MOUNTPOINT/home/eric
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
 
+<<pause-for-gnome
+
 echo -e "\n\n################################################################"
 echo "# KSuperkey. Use it to launch Rofi. Launch ksuperkey w/ Qtile autostart"
 echo "################################################################"
@@ -321,6 +318,8 @@ echo "# Thunar"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm thunar gvfs
 # gvfs is to have a trash
+
+pause-for-gnome
 
 echo -e "\n\n################################################################"
 echo "# NNN"
