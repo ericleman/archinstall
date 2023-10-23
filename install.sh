@@ -257,16 +257,17 @@ echo "# GTK Nord Themes"
 echo "################################################################"
 curl -L https://github.com/EliverLara/Nordic/archive/master.zip --output master.zip
 bsdtar -x -f master.zip
-# this is now in /root/Nordic-master
-#arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.themes'
-#cp -r /root/Nordic-master $MOUNTPOINT/home/eric/.themes/Nord/
-#arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.themes
-#arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.themes
+
 cp -r /root/Nordic-master $MOUNTPOINT/usr/share/themes/Nord/
 cp -r /root/archinstall-main/config/home/.config/gtk-3.0 $MOUNTPOINT/home/eric/.config/
+cp -r /root/archinstall-main/config/home/.config/gtk-4.0 $MOUNTPOINT/home/eric/.config/
 cp /root/archinstall-main/config/home/.gtkrc-2.0 $MOUNTPOINT/home/eric/
+# Adw-GTK3 will enable libadwaita theme using Nord colors
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm adw-gtk3'
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config/gtk-3.0
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config/gtk-3.0
+arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config/gtk-4.0
+arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config/gtk-4.0
 arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.gtkrc-2.0
 arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.gtkrc-2.0
 
@@ -375,17 +376,59 @@ arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm visual-studio-code-
 echo -e "\n\n################################################################"
 echo "# Dconf setup"
 echo "################################################################"
+add_dconf_value() {
+  echo Running DCONF for key $1 and value $2
+  if [ -z "$3" ]; then
+    arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"'$2'\""
+  else
+    arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 '$2'"
+  fi
+}
+
 add_value_in_dconf_list() {
   list=$(arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf read $1")
   echo list=$list
   if [[ $list == *"'$2'"* ]]; then
     echo "value is already in the list!"
   else
-    arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"${list%]*}, '$2']\""
+    add_dconf_value $1 $2
+    #arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"${list%]*}, '$2']\""
     echo "Added value to the list."
   fi
 }
 
+# Show Seconds and weekday
+add_dconf_value '/org/gnome/desktop/interface/clock-show-seconds' 'true' 'noquote'
+add_dconf_value '/org/gnome/desktop/interface/clock-show-weekday' 'true' 'noquote'
+# Fonts and Themes and Wallpaper
+add_dconf_value "/org/gnome/desktop/interface/document-font-name" "Ubuntu Nerd Font 11"
+add_dconf_value "/org/gnome/desktop/interface/font-name" "Ubuntu Nerd Font 11"
+add_dconf_value "/org/gnome/desktop/interface/monospace-font-name" "UbuntuMono Nerd Font Mono 10"
+add_dconf_value "/org/gnome/desktop/wm/preferences/titlebar-font" "Ubuntu Nerd Font 11"
+add_dconf_value "/org/gnome/desktop/interface/cursor-theme" "Nordzy-cursors"
+add_dconf_value "/org/gnome/desktop/interface/gtk-theme" "adw-gtk3-dark"
+add_dconf_value "/org/gnome/desktop/interface/icon-theme" "Papirus"
+add_dconf_value "/org/gnome/desktop/interface/color-scheme" "prefer-dark"
+add_dconf_value "/org/gnome/desktop/background/picture-uri" "file:///home/eric/.local/share/backgrounds/dj-nord.jpg"
+add_dconf_value "/org/gnome/desktop/background/picture-uri-dark" "file:///home/eric/.local/share/backgrounds/dj-nord.jpg"
+add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'user-theme@gnome-shell-extensions.gcampax.github.com'
+add_dconf_value "/org/gnome/shell/extensions/user-theme/name" "Nord"
+
+# Font Scaling factor (4K screen)
+add_dconf_value "/org/gnome/desktop/interface/text-scaling-factor" "1.5" "noquote"
+# Mouse cursor size from 24 to 32 (4K screen)
+add_dconf_value "/org/gnome/desktop/interface/cursor-size" "32" "noquote"
+# Nerver Dim Screen
+add_dconf_value "/org/gnome/desktop/session/idle-delay" "unit32 0"
+# Show hidden files
+add_dconf_value "/org/gtk/settings/file-chooser/show-hidden" "true" "noquote"
+# Super+Return for alacritty
+add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding" "<Super>Return"
+add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name" "Alacritty"
+add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command" "alacritty"
+add_value_in_dconf_list '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings' '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/'
+
+<< test
 # Show Seconds and weekday
 arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/clock-show-seconds true"
 arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/clock-show-weekday true"
@@ -395,11 +438,14 @@ arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/des
 arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/monospace-font-name \"'UbuntuMono Nerd Font Mono 10'\""
 arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/wm/preferences/titlebar-font \"'Ubuntu Nerd Font 11'\""
 arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/cursor-theme \"'Nordzy-cursors'\""
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/gtk-theme \"'Nord'\""
+arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/gtk-theme \"'adw-gtk3-dark'\""
 arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/icon-theme \"'Papirus'\""
 arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/color-scheme \"'prefer-dark'\""
 arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/background/picture-uri \"'file:///home/eric/.local/share/backgrounds/dj-nord.jpg'\""
 arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/background/picture-uri-dark \"'file:///home/eric/.local/share/backgrounds/dj-nord.jpg'\""
+add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'user-theme@gnome-shell-extensions.gcampax.github.com'
+arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/shell/extensions/user-theme/name \"'Nord'\""
+
 # Font Scaling factor (4K screen)
 arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/text-scaling-factor 1.5"
 # Mouse cursor size from 24 to 32 (4K screen)
@@ -413,7 +459,7 @@ arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/set
 arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name \"'Alacritty'\""
 arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command \"'alacritty'\""
 add_value_in_dconf_list '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings' '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/'
-
+test
 
 
 

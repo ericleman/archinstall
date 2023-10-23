@@ -113,7 +113,7 @@ It does not use xdg-open but its own default-app opener. So works out of the box
 - [ ] default app on dock
 - [ ] yay update indicator in panel
 - [ ] adw-gtk3
-- [ ] zsh
+- [x] zsh
 
 # Obsolete tips
 ## Prorealtime workaround
