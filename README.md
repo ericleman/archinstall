@@ -110,6 +110,7 @@ It does not use xdg-open but its own default-app opener. So works out of the box
 - [ ] keyboard shortcut to move windows
 - [ ] undecorate windows?
 - [ ] autologin
+- [ ] default app on dock
 
 # Obsolete tips
 ## Prorealtime workaround
