@@ -18,7 +18,7 @@ echo "Password is $PASSWD"
 echo -e "\n\n################################################################"
 echo "# Download repo"
 echo "################################################################"
-curl -L https://github.com/ericleman/archinstall/archive/main.zip --output main.zip
+curl -L https://github.com/ericleman/archinstall/archive/qtile-2023.zip --output main.zip
 bsdtar -x -f main.zip
 # this is now in /root/archinstall-main
 
