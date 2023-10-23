@@ -218,7 +218,7 @@ echo "# Gnome"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm gnome gnome-tweaks dconf-editor
 arch-chroot "${MOUNTPOINT}" systemctl enable gdm.service
-sed -i 's/#WaylandEnable=false/WaylandEnable=false/' $MOUNTPOINT/etc/gdm/custom.conf
+sed -i 's/#WaylandEnable=false/WaylandEnable=false\nAutomaticLogin=eric\nAutomaticLoginEnable=True/' $MOUNTPOINT/etc/gdm/custom.conf
 
 echo -e "\n\n################################################################"
 echo "# X11"
@@ -390,13 +390,14 @@ add_value_in_dconf_list() {
   echo list=$list
   if [[ $list == *"'$2'"* ]]; then
     echo "value is already in the list!"
+  elif [ -z "$list"]; then
+    arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"['$2']\""
+    echo "Added value to the list which was empty."
   else
-    add_dconf_value $1 $2
-    #arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"${list%]*}, '$2']\""
+    arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"${list%]*}, '$2']\""
     echo "Added value to the list."
   fi
 }
-
 # Show Seconds and weekday
 add_dconf_value '/org/gnome/desktop/interface/clock-show-seconds' 'true' 'noquote'
 add_dconf_value '/org/gnome/desktop/interface/clock-show-weekday' 'true' 'noquote'
@@ -413,6 +414,12 @@ add_dconf_value "/org/gnome/desktop/background/picture-uri" "file:///home/eric/.
 add_dconf_value "/org/gnome/desktop/background/picture-uri-dark" "file:///home/eric/.local/share/backgrounds/dj-nord.jpg"
 add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'user-theme@gnome-shell-extensions.gcampax.github.com'
 add_dconf_value "/org/gnome/shell/extensions/user-theme/name" "Nord"
+
+# Favorites Apps on Dock
+add_dconf_value "/org/gnome/shell/favorite-apps" "['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'nnn.desktop', 'btop.desktop', 'code.desktop']"
+# Window Buttons
+add_dconf_value "/org/gnome/desktop/wm/preferences/button-layout" "'appmenu:minimize,maximize,close'"
+add_dconf_value "/org/gnome/desktop/wm/preferences/resize-with-right-button" "true" "noquote"
 
 # Font Scaling factor (4K screen)
 add_dconf_value "/org/gnome/desktop/interface/text-scaling-factor" "1.5" "noquote"

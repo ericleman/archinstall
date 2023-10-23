@@ -106,13 +106,14 @@ It does not use xdg-open but its own default-app opener. So works out of the box
 - [ ] blur my shell
 - [x] test IG
 - [x] display size (scaling)
-- [ ] tweaks
+- [x] tweaks
+- [ ] autologin
+- [x] default app on dock
+- [ ] yay update indicator in panel
+- [ ] other custom panel through extension
 - [ ] keyboard shortcut to move windows
 - [ ] undecorate windows?
-- [ ] autologin
-- [ ] default app on dock
-- [ ] yay update indicator in panel
-- [ ] adw-gtk3
+- [x] adw-gtk3
 - [x] zsh
 
 # Obsolete tips
