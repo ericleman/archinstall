@@ -108,14 +108,18 @@ It does not use xdg-open but its own default-app opener. So works out of the box
 - [x] display size (scaling)
 - [x] tweaks
 - [x] autologin
+- [x] adw-gtk3
+- [x] zsh
 - [x] default app on dock
-- [ ] automove window
+- [x] automove window
+- [ ] nnn Nord theme
 - [ ] yay update indicator in panel
 - [ ] other custom panel through extension
 - [ ] keyboard shortcut to move windows
 - [ ] undecorate windows?
-- [x] adw-gtk3
-- [x] zsh
+- [ ] GSNap
+- [ ] Musoc plug in ? Cava...
+- [?] Super plus mouse does not move windows, it crashes
 
 # Obsolete tips
 ## Prorealtime workaround

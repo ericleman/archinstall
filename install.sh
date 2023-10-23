@@ -440,10 +440,16 @@ echo "# Blur my shell"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-blur-my-shell'
 add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'blur-my-shell@aunetx'
+add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/hacks-level" "3" "noquote"
 add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/blur" "true" "noquote"
 add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/opacity" "156" "noquote"
 add_value_in_dconf_list '/org/gnome/shell/extensions/blur-my-shell/applications/whitelist' 'Alacritty'
 
+echo -e "\n\n################################################################"
+echo "# Dash to Dock"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-dash-to-dock'
+add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'dash-to-dock@micxgx.gmail.com'
 
 
 
