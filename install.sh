@@ -336,6 +336,18 @@ echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm neofetch
 
 echo -e "\n\n################################################################"
+echo "# Zsh"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-theme-powerlevel10k
+arch-chroot "${MOUNTPOINT}" su - eric -c "echo $PASSWD | chsh -s /bin/zsh"
+cp /root/archinstall-main/config/home/.zshrc $MOUNTPOINT/home/eric/
+arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.zshrc
+arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.zshrc
+cp /root/archinstall-main/config/home/.p10k.zsh $MOUNTPOINT/home/eric/
+arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.p10k.zsh
+arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.p10k.zsh
+
+echo -e "\n\n################################################################"
 echo "# BTOP"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm btop
@@ -386,10 +398,10 @@ arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/des
 arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/gtk-theme \"'Nord'\""
 arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/icon-theme \"'Papirus'\""
 arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/color-scheme \"'prefer-dark'\""
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/background/picture-uri \"'file:///home/eric/.local/share/backgrounds/2023-10-23-12-39-17-dj-nord.jpg'\""
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/background/picture-uri-dark \"'file:///home/eric/.local/share/backgrounds/2023-10-23-12-39-17-dj-nord.jpg'\""
+arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/background/picture-uri \"'file:///home/eric/.local/share/backgrounds/dj-nord.jpg'\""
+arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/background/picture-uri-dark \"'file:///home/eric/.local/share/backgrounds/dj-nord.jpg'\""
 # Font Scaling factor (4K screen)
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/text-scaling-factor 1.25"
+arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/text-scaling-factor 1.5"
 # Mouse cursor size from 24 to 32 (4K screen)
 arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/cursor-size 32"
 # Nerver Dim Screen

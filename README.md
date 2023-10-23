@@ -97,15 +97,15 @@ It does not use xdg-open but its own default-app opener. So works out of the box
 - https://github.com/tom5760/arch-install/blob/master/arch_install.sh
 
 # Gnome Todo
-- [ ] Nord theme
-- [ ] Ubuntu font
-- [ ] Mouse theme
-- [ ] Icon theme
-- [ ] default terminal = alacritty
-- [ ] default Alacritty window size
+- [x] Nord theme
+- [x] Ubuntu font
+- [x] Mouse theme
+- [x] Icon theme
+- [x] default terminal = alacritty
+- [x] default Alacritty window size
 - [ ] blur my shell
 - [x] test IG
-- [ ] display size (scaling)
+- [x] display size (scaling)
 - [ ] tweaks
 - [ ] keyboard shortcut to move windows
 - [ ] undecorate windows?

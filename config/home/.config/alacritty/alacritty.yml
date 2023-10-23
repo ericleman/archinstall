@@ -899,7 +899,7 @@ font:
     family: UbuntuMono Nerd Font Mono
     style: Bold Italic
 
-  size: 18
+  size: 14
 
 import:
   - /home/eric/.config/alacritty/nord.yaml
