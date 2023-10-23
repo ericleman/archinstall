@@ -109,6 +109,6 @@ It does not use xdg-open but its own default-app opener. So works out of the box
 
 
 # Good scripts to consider:
-https://github.com/MatMoul/archfi/blob/master/archfi
-https://github.com/picodotdev/alis/blob/master/alis.sh
-https://github.com/tom5760/arch-install/blob/master/arch_install.sh
+- https://github.com/MatMoul/archfi/blob/master/archfi
+- https://github.com/picodotdev/alis/blob/master/alis.sh
+- https://github.com/tom5760/arch-install/blob/master/arch_install.sh
