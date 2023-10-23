@@ -426,7 +426,7 @@ add_dconf_value "/org/gnome/desktop/interface/text-scaling-factor" "1.5" "noquot
 # Mouse cursor size from 24 to 32 (4K screen)
 add_dconf_value "/org/gnome/desktop/interface/cursor-size" "32" "noquote"
 # Nerver Dim Screen
-add_dconf_value "/org/gnome/desktop/session/idle-delay" "unit32 0"
+add_dconf_value "/org/gnome/desktop/session/idle-delay" "unit32 0" "noquote"
 # Show hidden files
 add_dconf_value "/org/gtk/settings/file-chooser/show-hidden" "true" "noquote"
 # Super+Return for alacritty
@@ -435,38 +435,17 @@ add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybinding
 add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command" "alacritty"
 add_value_in_dconf_list '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings' '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/'
 
-<< test
-# Show Seconds and weekday
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/clock-show-seconds true"
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/clock-show-weekday true"
-# Fonts and Themes and Wallpaper
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/document-font-name \"'Ubuntu Nerd Font 11'\""
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/font-name \"'Ubuntu Nerd Font 11'\""
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/monospace-font-name \"'UbuntuMono Nerd Font Mono 10'\""
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/wm/preferences/titlebar-font \"'Ubuntu Nerd Font 11'\""
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/cursor-theme \"'Nordzy-cursors'\""
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/gtk-theme \"'adw-gtk3-dark'\""
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/icon-theme \"'Papirus'\""
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/color-scheme \"'prefer-dark'\""
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/background/picture-uri \"'file:///home/eric/.local/share/backgrounds/dj-nord.jpg'\""
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/background/picture-uri-dark \"'file:///home/eric/.local/share/backgrounds/dj-nord.jpg'\""
-add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'user-theme@gnome-shell-extensions.gcampax.github.com'
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/shell/extensions/user-theme/name \"'Nord'\""
+echo -e "\n\n################################################################"
+echo "# Blur my shell"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-blur-my-shell'
+add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'blur-my-shell@aunetx'
+add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/blur" "true" "noquote"
+add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/opacity" "156" "noquote"
+add_value_in_dconf_list '/org/gnome/shell/extensions/blur-my-shell/applications/whitelist' 'Alacritty'
 
-# Font Scaling factor (4K screen)
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/text-scaling-factor 1.5"
-# Mouse cursor size from 24 to 32 (4K screen)
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/interface/cursor-size 32"
-# Nerver Dim Screen
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/desktop/session/idle-delay \"unit32 0\""
-# Show hidden files
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gtk/settings/file-chooser/show-hidden true"
-# Super+Return for alacritty
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding \"'<Super>Return'\""
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name \"'Alacritty'\""
-arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command \"'alacritty'\""
-add_value_in_dconf_list '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings' '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/'
-test
+
+
 
 
 

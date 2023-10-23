@@ -107,8 +107,9 @@ It does not use xdg-open but its own default-app opener. So works out of the box
 - [x] test IG
 - [x] display size (scaling)
 - [x] tweaks
-- [ ] autologin
+- [x] autologin
 - [x] default app on dock
+- [ ] automove window
 - [ ] yay update indicator in panel
 - [ ] other custom panel through extension
 - [ ] keyboard shortcut to move windows
