@@ -381,7 +381,7 @@ add_dconf_value() {
   if [ -z "$3" ]; then
     arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"'$2'\""
   else
-    arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 '$2'"
+    arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"$2\""
   fi
 }
 
