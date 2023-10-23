@@ -416,9 +416,9 @@ add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'user-theme@gnome-
 add_dconf_value "/org/gnome/shell/extensions/user-theme/name" "Nord"
 
 # Favorites Apps on Dock
-add_dconf_value "/org/gnome/shell/favorite-apps" "['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'nnn.desktop', 'btop.desktop', 'code.desktop']"
+add_dconf_value "/org/gnome/shell/favorite-apps" "['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'nnn.desktop', 'btop.desktop', 'code.desktop']" "noquote"
 # Window Buttons
-add_dconf_value "/org/gnome/desktop/wm/preferences/button-layout" "'appmenu:minimize,maximize,close'"
+add_dconf_value "/org/gnome/desktop/wm/preferences/button-layout" "appmenu:minimize,maximize,close"
 add_dconf_value "/org/gnome/desktop/wm/preferences/resize-with-right-button" "true" "noquote"
 
 # Font Scaling factor (4K screen)
