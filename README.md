@@ -159,4 +159,10 @@ the following work:
 dconf write /org/gnome/shell/extensions/dash-to-panel/panel-positions "'{\"0\":\"TOP\"}'"
 
 su - eric -c "dbus-launch gsettings set org.gnome.shell.extensions.dash-to-panel panel-positions '{\"0\":\"TOP\"}'"
+
+
+add_dconf_value() {/bin/bash -c "dconf write $1 \"$2\""} 
+add_dconf_value "/org/gnome/desktop/interface/clock-show-seconds" "true"
+add_dconf_value "/org/gnome/desktop/interface/document-font-name" "'Ubuntu Nerd Font 11'"
+add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-positions" "'{\\\"0\\\":\\\"TOP\\\"}'"
 ```
