@@ -1,9 +1,11 @@
 #!/bin/bash
+
 echo "################################################################"
 echo "###########################    START      ######################"
 echo "################################################################"
 MOUNTPOINT=/mnt/archinstall
 
+{
 echo -e "\n\n################################################################"
 echo "# Get Password"
 echo "################################################################"
@@ -259,8 +261,7 @@ arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm gtk-engine-murrine
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm adw-gtk3'
 
 curl -L https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme/archive/master.zip --output master.zip
-#bsdtar -x -f master.zip
-unzip -q master.zip
+bsdtar -x -f master.zip
 cp -r /root/Gruvbox-GTK-Theme-master/themes/* $MOUNTPOINT/usr/share/themes/
 
 cp -r /root/archinstall-main/config/home/.config/gtk-3.0 $MOUNTPOINT/home/eric/.config/
@@ -424,8 +425,8 @@ add_value_in_dconf_list '/org/gnome/shell/extensions/blur-my-shell/applications/
 
 # Dash to Panel
 add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'dash-to-panel@jderose9.github.com'
-add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-positions" '{"0":"TOP"}'
-add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-element-positions" '{"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":true,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}]}'
+add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-positions" '{"0":"TOP"}' "noquote"
+add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-element-positions" '{"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":true,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}]}' "noquote"
 add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/trans-use-custom-opacity" "true" "noquote"
 
 # Show Seconds and weekday
@@ -464,10 +465,11 @@ add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybinding
 add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name" "Alacritty"
 add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command" "alacritty"
 add_value_in_dconf_list '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings' '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/'
+} | tee -a install.log
 
+cp install.log $MOUNTPOINT/home/eric/install.log
 
 echo -e "\n\n################################################################"
-echo "# end of CHROOT, rebooting"
+echo "# End"
 echo "################################################################"
-umount -R $MOUNTPOINT
 echo "Type: reboot now"
