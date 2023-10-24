@@ -1,11 +1,16 @@
 #!/bin/bash
-
 echo "################################################################"
 echo "###########################    START      ######################"
 echo "################################################################"
 MOUNTPOINT=/mnt/archinstall
 
-{
+if [ "$#" -ne 2 ]; then
+    script -c "sh $0 $1 dummy" install.log
+    cp install.log $MOUNTPOINT/home/eric/install.log
+    exit 0
+fi
+
+
 echo -e "\n\n################################################################"
 echo "# Get Password"
 echo "################################################################"
@@ -261,8 +266,9 @@ arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm gtk-engine-murrine
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm adw-gtk3'
 
 curl -L https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme/archive/master.zip --output master.zip
-bsdtar -x -f master.zip
-cp -r /root/Gruvbox-GTK-Theme-master/themes/* $MOUNTPOINT/usr/share/themes/
+mkdir -p $MOUNTPOINT/home/eric/tmp
+bsdtar -x -f master.zip -C $MOUNTPOINT/home/eric/tmp/
+cp -r $MOUNTPOINT/home/eric/tmp/Gruvbox-GTK-Theme-master/themes/* $MOUNTPOINT/usr/share/themes/
 
 cp -r /root/archinstall-main/config/home/.config/gtk-3.0 $MOUNTPOINT/home/eric/.config/
 cp -r /root/archinstall-main/config/home/.config/gtk-4.0 $MOUNTPOINT/home/eric/.config/
@@ -465,9 +471,7 @@ add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybinding
 add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name" "Alacritty"
 add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command" "alacritty"
 add_value_in_dconf_list '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings' '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/'
-} | tee -a install.log
 
-cp install.log $MOUNTPOINT/home/eric/install.log
 
 echo -e "\n\n################################################################"
 echo "# End"
