@@ -377,7 +377,7 @@ arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm visual-studio-code-
 #pause-for-apps
 
 echo -e "\n\n################################################################"
-echo "# Dconf setup"
+echo "# Dconf Helper"
 echo "################################################################"
 add_dconf_value() {
   echo Running DCONF for key $1 and value $2
@@ -393,7 +393,7 @@ add_value_in_dconf_list() {
   echo list=$list
   if [[ $list == *"'$2'"* ]]; then
     echo "value is already in the list!"
-  elif [ -z "$list"]; then
+  elif [ -z "$list" ]; then
     arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"['$2']\""
     echo "Added value to the list which was empty."
   else
@@ -401,6 +401,26 @@ add_value_in_dconf_list() {
     echo "Added value to the list."
   fi
 }
+
+echo -e "\n\n################################################################"
+echo "# Blur my shell"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-blur-my-shell'
+add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'blur-my-shell@aunetx'
+add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/hacks-level" "3" "noquote"
+add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/blur" "true" "noquote"
+add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/opacity" "156" "noquote"
+add_value_in_dconf_list '/org/gnome/shell/extensions/blur-my-shell/applications/whitelist' 'Alacritty'
+
+echo -e "\n\n################################################################"
+echo "# Dash to Dock"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-dash-to-dock'
+add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'dash-to-dock@micxgx.gmail.com'
+
+echo -e "\n\n################################################################"
+echo "# Dconf setup"
+echo "################################################################"
 # Show Seconds and weekday
 add_dconf_value '/org/gnome/desktop/interface/clock-show-seconds' 'true' 'noquote'
 add_dconf_value '/org/gnome/desktop/interface/clock-show-weekday' 'true' 'noquote'
@@ -429,7 +449,8 @@ add_dconf_value "/org/gnome/desktop/wm/preferences/resize-with-right-button" "tr
 add_dconf_value "/org/gnome/desktop/interface/text-scaling-factor" "1.5" "noquote"
 # Mouse cursor size from 24 to 32 (4K screen)
 add_dconf_value "/org/gnome/desktop/interface/cursor-size" "32" "noquote"
-# Nerver Dim Screen
+# Nerver Dim Screen 
+# /!\ this one does not work as key 'idle-delay' does not exist during install. I will have to change it manually in Gnome
 add_dconf_value "/org/gnome/desktop/session/idle-delay" "unit32 0" "noquote"
 # Show hidden files
 add_dconf_value "/org/gtk/settings/file-chooser/show-hidden" "true" "noquote"
@@ -439,28 +460,9 @@ add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybinding
 add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command" "alacritty"
 add_value_in_dconf_list '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings' '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/'
 
-echo -e "\n\n################################################################"
-echo "# Blur my shell"
-echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-blur-my-shell'
-add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'blur-my-shell@aunetx'
-add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/hacks-level" "3" "noquote"
-add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/blur" "true" "noquote"
-add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/opacity" "156" "noquote"
-add_value_in_dconf_list '/org/gnome/shell/extensions/blur-my-shell/applications/whitelist' 'Alacritty'
-
-echo -e "\n\n################################################################"
-echo "# Dash to Dock"
-echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-dash-to-dock'
-add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'dash-to-dock@micxgx.gmail.com'
-
-
-
-
 
 echo -e "\n\n################################################################"
 echo "# end of CHROOT, rebooting"
 echo "################################################################"
 umount -R $MOUNTPOINT
-echo "Type: systemctl reboot"
+echo "Type: reboot now"

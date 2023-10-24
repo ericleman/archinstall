@@ -116,7 +116,7 @@ It does not use xdg-open but its own default-app opener. So works out of the box
   - [x] ZSH
   - [x] alacritty
   - [x] adw, gtk
-  - [ ] shell
+  - [x] shell
   - [x] cursor
   - [x] icons
   - [ ] IG
