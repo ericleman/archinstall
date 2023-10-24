@@ -259,7 +259,8 @@ arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm gtk-engine-murrine
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm adw-gtk3'
 
 curl -L https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme/archive/master.zip --output master.zip
-bsdtar -x -f master.zip
+#bsdtar -x -f master.zip
+unzip -q master.zip
 cp -r /root/Gruvbox-GTK-Theme-master/themes/* $MOUNTPOINT/usr/share/themes/
 
 cp -r /root/archinstall-main/config/home/.config/gtk-3.0 $MOUNTPOINT/home/eric/.config/
@@ -289,8 +290,6 @@ arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm papirus-icon-theme
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm papirus-folders-git' 
 arch-chroot "${MOUNTPOINT}" papirus-folders -C black --theme Papirus
 # the theme Papirus theme is defined in ~/.gtkrc-2.0 and ~/.config/gtk-3.0/settings.ini
-
-
 
 echo -e "\n\n################################################################"
 echo "# Alacritty"
@@ -380,7 +379,7 @@ echo -e "\n\n################################################################"
 echo "# Dconf Helper"
 echo "################################################################"
 add_dconf_value() {
-  echo Running DCONF for key $1 and value $2
+  echo "### Running DCONF for key $1 and value $2"
   if [ -z "$3" ]; then
     arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"'$2'\""
   else
@@ -389,6 +388,7 @@ add_dconf_value() {
 }
 
 add_value_in_dconf_list() {
+  echo "### Adding DCONF value $2 into list $1"
   list=$(arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf read $1")
   echo list=$list
   if [[ $list == *"'$2'"* ]]; then
@@ -406,21 +406,28 @@ echo -e "\n\n################################################################"
 echo "# Blur my shell"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-blur-my-shell'
+
+echo -e "\n\n################################################################"
+echo "# Dash to Panel"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-dash-to-panel'
+
+echo -e "\n\n################################################################"
+echo "# Dconf setup"
+echo "################################################################"
+# Blur my shell
 add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'blur-my-shell@aunetx'
 add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/hacks-level" "3" "noquote"
 add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/blur" "true" "noquote"
 add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/opacity" "156" "noquote"
 add_value_in_dconf_list '/org/gnome/shell/extensions/blur-my-shell/applications/whitelist' 'Alacritty'
 
-echo -e "\n\n################################################################"
-echo "# Dash to Dock"
-echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-dash-to-dock'
-add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'dash-to-dock@micxgx.gmail.com'
+# Dash to Panel
+add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'dash-to-panel@jderose9.github.com'
+add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-positions" '{"0":"TOP"}'
+add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-element-positions" '{"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":true,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}]}'
+add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/trans-use-custom-opacity" "true" "noquote"
 
-echo -e "\n\n################################################################"
-echo "# Dconf setup"
-echo "################################################################"
 # Show Seconds and weekday
 add_dconf_value '/org/gnome/desktop/interface/clock-show-seconds' 'true' 'noquote'
 add_dconf_value '/org/gnome/desktop/interface/clock-show-weekday' 'true' 'noquote'
@@ -429,13 +436,11 @@ add_dconf_value "/org/gnome/desktop/interface/document-font-name" "Ubuntu Nerd F
 add_dconf_value "/org/gnome/desktop/interface/font-name" "Ubuntu Nerd Font 11"
 add_dconf_value "/org/gnome/desktop/interface/monospace-font-name" "UbuntuMono Nerd Font Mono 10"
 add_dconf_value "/org/gnome/desktop/wm/preferences/titlebar-font" "Ubuntu Nerd Font 11"
-# ----> I keep Adwaita Cursor for now:
-#add_dconf_value "/org/gnome/desktop/interface/cursor-theme" "Nordzy-cursors"
 add_dconf_value "/org/gnome/desktop/interface/gtk-theme" "adw-gtk3-dark"
 add_dconf_value "/org/gnome/desktop/interface/icon-theme" "Papirus"
 add_dconf_value "/org/gnome/desktop/interface/color-scheme" "prefer-dark"
-add_dconf_value "/org/gnome/desktop/background/picture-uri" "file:///home/eric/.local/share/backgrounds/dj-gruvbox.png"
-add_dconf_value "/org/gnome/desktop/background/picture-uri-dark" "file:///home/eric/.local/share/backgrounds/dj-gruvbox.png"
+add_dconf_value "/org/gnome/desktop/background/picture-uri" "file:///home/eric/.local/share/backgrounds/coffee.jpg"
+add_dconf_value "/org/gnome/desktop/background/picture-uri-dark" "file:///home/eric/.local/share/backgrounds/coffee.jpg"
 add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'user-theme@gnome-shell-extensions.gcampax.github.com'
 add_dconf_value "/org/gnome/shell/extensions/user-theme/name" "Gruvbox-Dark-BL"
 
@@ -451,7 +456,7 @@ add_dconf_value "/org/gnome/desktop/interface/text-scaling-factor" "1.5" "noquot
 add_dconf_value "/org/gnome/desktop/interface/cursor-size" "32" "noquote"
 # Nerver Dim Screen 
 # /!\ this one does not work as key 'idle-delay' does not exist during install. I will have to change it manually in Gnome
-add_dconf_value "/org/gnome/desktop/session/idle-delay" "unit32 0" "noquote"
+#add_dconf_value "/org/gnome/desktop/session/idle-delay" "unit32 0" "noquote"
 # Show hidden files
 add_dconf_value "/org/gtk/settings/file-chooser/show-hidden" "true" "noquote"
 # Super+Return for alacritty
