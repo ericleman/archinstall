@@ -152,3 +152,11 @@ On IG site, launch Prorealtime in java mode, to get /home/eric/Downloads/itchart
 
 `/usr/java/jre1.8.0_381/bin/javaws /home/eric/Downloads/itcharts.jnlp`
 
+# Note
+the following work:
+
+```
+dconf write /org/gnome/shell/extensions/dash-to-panel/panel-positions "'{\"0\":\"TOP\"}'"
+
+su - eric -c "dbus-launch gsettings set org.gnome.shell.extensions.dash-to-panel panel-positions '{\"0\":\"TOP\"}'"
+```
