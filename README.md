@@ -112,13 +112,23 @@ It does not use xdg-open but its own default-app opener. So works out of the box
 - [x] zsh
 - [x] default app on dock
 - [x] automove window
-- [ ] nnn Nord theme
+- [ ] Gruvbox
+  - [x] ZSH
+  - [x] alacritty
+  - [x] adw, gtk
+  - [ ] shell
+  - [x] cursor
+  - [x] icons
+  - [ ] IG
+  - [x] btop
+  - [x] wallpaper
+  - [ ] Ranger Gruvboxtheme
 - [ ] yay update indicator in panel
 - [ ] other custom panel through extension
 - [ ] keyboard shortcut to move windows
 - [ ] undecorate windows?
 - [ ] GSNap
-- [ ] Musoc plug in ? Cava...
+- [ ] Music plug in ? Cava...
 - [?] Super plus mouse does not move windows, it crashes
 
 # Obsolete tips

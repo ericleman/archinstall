@@ -253,28 +253,32 @@ arch-chroot "${MOUNTPOINT}" chmod -R 777 /usr/share/backgrounds/
 
 
 echo -e "\n\n################################################################"
-echo "# GTK Nord Themes"
+echo "# Gnome Gruvbox Themes"
 echo "################################################################"
-curl -L https://github.com/EliverLara/Nordic/archive/master.zip --output master.zip
-bsdtar -x -f master.zip
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm gtk-engine-murrine
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm adw-gtk3'
 
-cp -r /root/Nordic-master $MOUNTPOINT/usr/share/themes/Nord/
+curl -L https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme/archive/master.zip --output master.zip
+bsdtar -x -f master.zip
+cp -r /root/Gruvbox-GTK-Theme-master/themes/* $MOUNTPOINT/usr/share/themes/
+
 cp -r /root/archinstall-main/config/home/.config/gtk-3.0 $MOUNTPOINT/home/eric/.config/
 cp -r /root/archinstall-main/config/home/.config/gtk-4.0 $MOUNTPOINT/home/eric/.config/
 cp /root/archinstall-main/config/home/.gtkrc-2.0 $MOUNTPOINT/home/eric/
-# Adw-GTK3 will enable libadwaita theme using Nord colors
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm adw-gtk3'
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config/gtk-3.0
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config/gtk-3.0
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config/gtk-4.0
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config/gtk-4.0
 arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.gtkrc-2.0
 arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.gtkrc-2.0
+# Adw-GTK3 will enable libadwaita theme using Gruvbox colors if put in gtk.css files
+
 
 echo -e "\n\n################################################################"
 echo "# Cursor Theme"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm nordzy-cursors' # this is installed in /usr/share/icons
+# ----> I keep Adwaita for now
+#arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm nordzy-cursors' # this is installed in /usr/share/icons
 # the theme Nordzy-cursors is defined in ~/.gtkrc-2.0, ~/.Xresources and ~/.config/gtk-3.0/settings.ini
 # the package xcb-util-cursor is required for Qtile.
 
@@ -283,13 +287,10 @@ echo "# Icons Theme"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm papirus-icon-theme
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm papirus-folders-git' 
-arch-chroot "${MOUNTPOINT}" papirus-folders -C nordic --theme Papirus
+arch-chroot "${MOUNTPOINT}" papirus-folders -C black --theme Papirus
 # the theme Papirus theme is defined in ~/.gtkrc-2.0 and ~/.config/gtk-3.0/settings.ini
 
-#curl -L https://github.com/alvatip/Nordzy-icon/releases/download/1.8.5/Nordzy.tar.gz --output Nordzy.tar.gz
-#tar -xf Nordzy.tar.gz
-## this is now in /root/Nordzy
-#cp -r /root/Nordzy $MOUNTPOINT/usr/share/icons/
+
 
 echo -e "\n\n################################################################"
 echo "# Alacritty"
@@ -327,9 +328,9 @@ arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm thunar gvfs
 pause-for-gnome
 
 echo -e "\n\n################################################################"
-echo "# NNN"
+echo "# Ranger"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm nnn
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ranger
 
 echo -e "\n\n################################################################"
 echo "# NeoFetch"
@@ -353,6 +354,8 @@ echo "# BTOP"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm btop
 cp -r /root/archinstall-main/config/home/.config/btop $MOUNTPOINT/home/eric/.config/
+arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
+arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
 
 #<<pause-for-apps
 
@@ -406,17 +409,18 @@ add_dconf_value "/org/gnome/desktop/interface/document-font-name" "Ubuntu Nerd F
 add_dconf_value "/org/gnome/desktop/interface/font-name" "Ubuntu Nerd Font 11"
 add_dconf_value "/org/gnome/desktop/interface/monospace-font-name" "UbuntuMono Nerd Font Mono 10"
 add_dconf_value "/org/gnome/desktop/wm/preferences/titlebar-font" "Ubuntu Nerd Font 11"
-add_dconf_value "/org/gnome/desktop/interface/cursor-theme" "Nordzy-cursors"
+# ----> I keep Adwaita Cursor for now:
+#add_dconf_value "/org/gnome/desktop/interface/cursor-theme" "Nordzy-cursors"
 add_dconf_value "/org/gnome/desktop/interface/gtk-theme" "adw-gtk3-dark"
 add_dconf_value "/org/gnome/desktop/interface/icon-theme" "Papirus"
 add_dconf_value "/org/gnome/desktop/interface/color-scheme" "prefer-dark"
-add_dconf_value "/org/gnome/desktop/background/picture-uri" "file:///home/eric/.local/share/backgrounds/dj-nord.jpg"
-add_dconf_value "/org/gnome/desktop/background/picture-uri-dark" "file:///home/eric/.local/share/backgrounds/dj-nord.jpg"
+add_dconf_value "/org/gnome/desktop/background/picture-uri" "file:///home/eric/.local/share/backgrounds/dj-gruvbox.png"
+add_dconf_value "/org/gnome/desktop/background/picture-uri-dark" "file:///home/eric/.local/share/backgrounds/dj-gruvbox.png"
 add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'user-theme@gnome-shell-extensions.gcampax.github.com'
-add_dconf_value "/org/gnome/shell/extensions/user-theme/name" "Nord"
+add_dconf_value "/org/gnome/shell/extensions/user-theme/name" "Gruvbox-Dark-BL"
 
 # Favorites Apps on Dock
-add_dconf_value "/org/gnome/shell/favorite-apps" "['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'nnn.desktop', 'btop.desktop', 'code.desktop']" "noquote"
+add_dconf_value "/org/gnome/shell/favorite-apps" "['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'ranger.desktop', 'btop.desktop', 'code.desktop']" "noquote"
 # Window Buttons
 add_dconf_value "/org/gnome/desktop/wm/preferences/button-layout" "appmenu:minimize,maximize,close"
 add_dconf_value "/org/gnome/desktop/wm/preferences/resize-with-right-button" "true" "noquote"
