@@ -339,7 +339,11 @@ pause-for-gnome
 echo -e "\n\n################################################################"
 echo "# Ranger"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ranger
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ranger ueberzug less
+cp -r /root/archinstall-main/config/home/.config/ranger $MOUNTPOINT/home/eric/.config/
+arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
+arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
+
 
 echo -e "\n\n################################################################"
 echo "# NeoFetch"
@@ -465,6 +469,13 @@ add_dconf_value "/org/gnome/desktop/interface/cursor-size" "32"
 #add_dconf_value "/org/gnome/desktop/session/idle-delay" "unit32 0"
 # Show hidden files
 add_dconf_value "/org/gtk/settings/file-chooser/show-hidden" "true"
+
+# Key Bindings
+add_dconf_value "/org/gnome/desktop/wm/keybindings/switch-applications" "['<Super>Tab']"
+add_dconf_value "/org/gnome/desktop/wm/keybindings/switch-applications-backward" "['<Shift><Super>Tab']"
+add_dconf_value "/org/gnome/desktop/wm/keybindings/switch-windows" "['<Alt>Tab']"
+add_dconf_value "/org/gnome/desktop/wm/keybindings/switch-applications-backward" "['<Shift><Alt>Tab']"
+
 # Super+Return for alacritty
 add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding" "'<Super>Return'"
 add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name" "'Alacritty'"

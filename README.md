@@ -119,7 +119,7 @@ It does not use xdg-open but its own default-app opener. So works out of the box
   - [x] shell
   - [x] cursor
   - [x] icons
-  - [ ] IG
+  - [x] IG
   - [x] btop
   - [x] wallpaper
   - [ ] Ranger Gruvboxtheme
@@ -151,18 +151,3 @@ Now we have /usr/java/jre1.8.0_381/bin/javaws
 On IG site, launch Prorealtime in java mode, to get /home/eric/Downloads/itcharts.jnlp
 
 `/usr/java/jre1.8.0_381/bin/javaws /home/eric/Downloads/itcharts.jnlp`
-
-# Note
-the following work:
-
-```
-dconf write /org/gnome/shell/extensions/dash-to-panel/panel-positions "'{\"0\":\"TOP\"}'"
-
-su - eric -c "dbus-launch gsettings set org.gnome.shell.extensions.dash-to-panel panel-positions '{\"0\":\"TOP\"}'"
-
-
-add_dconf_value() {/bin/bash -c "dconf write $1 \"$2\""} 
-add_dconf_value "/org/gnome/desktop/interface/clock-show-seconds" "true"
-add_dconf_value "/org/gnome/desktop/interface/document-font-name" "'Ubuntu Nerd Font 11'"
-add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-positions" "'{\\\"0\\\":\\\"TOP\\\"}'"
-```
