@@ -4,6 +4,14 @@ echo "###########################    START      ######################"
 echo "################################################################"
 MOUNTPOINT=/mnt/archinstall
 
+if [ -z "$1" ]
+  then
+    echo "No password, No Script"
+    exit 0
+fi
+
+# script will call itself, saving outputs in install.log.
+# the "dummy" parameter is to avoid infinite loop
 if [ "$#" -ne 2 ]; then
     script -c "sh $0 $1 dummy" install.log
     cp install.log $MOUNTPOINT/home/eric/install.log
@@ -15,11 +23,6 @@ echo -e "\n\n################################################################"
 echo "# Get Password"
 echo "################################################################"
 PASSWD=$1
-if [ -z "$1" ]
-  then
-    echo "Please provide password"
-    read PASSWD
-fi
 echo "Password is $PASSWD"
 
 echo -e "\n\n################################################################"
