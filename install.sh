@@ -390,24 +390,20 @@ echo "# Dconf Helper"
 echo "################################################################"
 add_dconf_value() {
   echo "### Running DCONF for key $1 and value $2"
-  if [ -z "$3" ]; then
-    arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"'$2'\""
-  else
-    arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"$2\""
-  fi
+  arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"$2\""
 }
 
 add_value_in_dconf_list() {
   echo "### Adding DCONF value $2 into list $1"
   list=$(arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf read $1")
   echo list=$list
-  if [[ $list == *"'$2'"* ]]; then
+  if [[ $list == *"$2"* ]]; then
     echo "value is already in the list!"
   elif [ -z "$list" ]; then
-    arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"['$2']\""
+    arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"[$2]\""
     echo "Added value to the list which was empty."
   else
-    arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"${list%]*}, '$2']\""
+    arch-chroot "${MOUNTPOINT}" su - eric -c "dbus-launch dconf write $1 \"${list%]*}, $2]\""
     echo "Added value to the list."
   fi
 }
@@ -426,54 +422,54 @@ echo -e "\n\n################################################################"
 echo "# Dconf setup"
 echo "################################################################"
 # Blur my shell
-add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'blur-my-shell@aunetx'
-add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/hacks-level" "3" "noquote"
-add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/blur" "true" "noquote"
-add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/opacity" "156" "noquote"
-add_value_in_dconf_list '/org/gnome/shell/extensions/blur-my-shell/applications/whitelist' 'Alacritty'
+add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'blur-my-shell@aunetx'"
+add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/hacks-level" "3"
+add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/blur" "true"
+add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/opacity" "156"
+add_value_in_dconf_list "/org/gnome/shell/extensions/blur-my-shell/applications/whitelist" "'Alacritty'"
 
 # Dash to Panel
-add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'dash-to-panel@jderose9.github.com'
-add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-positions" '{"0":"TOP"}' "noquote"
-add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-element-positions" '{"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":true,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}]}' "noquote"
-add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/trans-use-custom-opacity" "true" "noquote"
+add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'dash-to-panel@jderose9.github.com'"
+add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-positions" "'{\\\"0\\\":\\\"TOP\\\"}'"
+add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-element-positions" "'{\\\"0\\\":[{\\\"element\\\":\\\"showAppsButton\\\",\\\"visible\\\":false,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"activitiesButton\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"leftBox\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"taskbar\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"centerBox\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"rightBox\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"dateMenu\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"systemMenu\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"desktopButton\\\",\\\"visible\\\":false,\\\"position\\\":\\\"stackedBR\\\"}]}'"
+add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/trans-use-custom-opacity" "true"
 
 # Show Seconds and weekday
-add_dconf_value '/org/gnome/desktop/interface/clock-show-seconds' 'true' 'noquote'
-add_dconf_value '/org/gnome/desktop/interface/clock-show-weekday' 'true' 'noquote'
+add_dconf_value "/org/gnome/desktop/interface/clock-show-seconds" "true"
+add_dconf_value "/org/gnome/desktop/interface/clock-show-weekday" "true"
 # Fonts and Themes and Wallpaper
-add_dconf_value "/org/gnome/desktop/interface/document-font-name" "Ubuntu Nerd Font 11"
-add_dconf_value "/org/gnome/desktop/interface/font-name" "Ubuntu Nerd Font 11"
-add_dconf_value "/org/gnome/desktop/interface/monospace-font-name" "UbuntuMono Nerd Font Mono 10"
-add_dconf_value "/org/gnome/desktop/wm/preferences/titlebar-font" "Ubuntu Nerd Font 11"
-add_dconf_value "/org/gnome/desktop/interface/gtk-theme" "adw-gtk3-dark"
-add_dconf_value "/org/gnome/desktop/interface/icon-theme" "Papirus"
-add_dconf_value "/org/gnome/desktop/interface/color-scheme" "prefer-dark"
-add_dconf_value "/org/gnome/desktop/background/picture-uri" "file:///home/eric/.local/share/backgrounds/coffee.jpg"
-add_dconf_value "/org/gnome/desktop/background/picture-uri-dark" "file:///home/eric/.local/share/backgrounds/coffee.jpg"
-add_value_in_dconf_list '/org/gnome/shell/enabled-extensions' 'user-theme@gnome-shell-extensions.gcampax.github.com'
-add_dconf_value "/org/gnome/shell/extensions/user-theme/name" "Gruvbox-Dark-BL"
+add_dconf_value "/org/gnome/desktop/interface/document-font-name" "'Ubuntu Nerd Font 11'"
+add_dconf_value "/org/gnome/desktop/interface/font-name" "'Ubuntu Nerd Font 11'"
+add_dconf_value "/org/gnome/desktop/interface/monospace-font-name" "'UbuntuMono Nerd Font Mono 10'"
+add_dconf_value "/org/gnome/desktop/wm/preferences/titlebar-font" "'Ubuntu Nerd Font 11'"
+add_dconf_value "/org/gnome/desktop/interface/gtk-theme" "'adw-gtk3-dark'"
+add_dconf_value "/org/gnome/desktop/interface/icon-theme" "'Papirus'"
+add_dconf_value "/org/gnome/desktop/interface/color-scheme" "'prefer-dark'"
+add_dconf_value "/org/gnome/desktop/background/picture-uri" "'file:///home/eric/.local/share/backgrounds/coffee.jpg'"
+add_dconf_value "/org/gnome/desktop/background/picture-uri-dark" "'file:///home/eric/.local/share/backgrounds/coffee.jpg'"
+add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'user-theme@gnome-shell-extensions.gcampax.github.com'"
+add_dconf_value "/org/gnome/shell/extensions/user-theme/name" "'Gruvbox-Dark-BL'"
 
 # Favorites Apps on Dock
-add_dconf_value "/org/gnome/shell/favorite-apps" "['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'ranger.desktop', 'btop.desktop', 'code.desktop']" "noquote"
+add_dconf_value "/org/gnome/shell/favorite-apps" "['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'ranger.desktop', 'btop.desktop', 'code.desktop']"
 # Window Buttons
-add_dconf_value "/org/gnome/desktop/wm/preferences/button-layout" "appmenu:minimize,maximize,close"
-add_dconf_value "/org/gnome/desktop/wm/preferences/resize-with-right-button" "true" "noquote"
+add_dconf_value "/org/gnome/desktop/wm/preferences/button-layout" "'appmenu:minimize,maximize,close'"
+add_dconf_value "/org/gnome/desktop/wm/preferences/resize-with-right-button" "true"
 
 # Font Scaling factor (4K screen)
-add_dconf_value "/org/gnome/desktop/interface/text-scaling-factor" "1.5" "noquote"
+add_dconf_value "/org/gnome/desktop/interface/text-scaling-factor" "1.5"
 # Mouse cursor size from 24 to 32 (4K screen)
-add_dconf_value "/org/gnome/desktop/interface/cursor-size" "32" "noquote"
+add_dconf_value "/org/gnome/desktop/interface/cursor-size" "32"
 # Nerver Dim Screen 
 # /!\ this one does not work as key 'idle-delay' does not exist during install. I will have to change it manually in Gnome
-#add_dconf_value "/org/gnome/desktop/session/idle-delay" "unit32 0" "noquote"
+#add_dconf_value "/org/gnome/desktop/session/idle-delay" "unit32 0"
 # Show hidden files
-add_dconf_value "/org/gtk/settings/file-chooser/show-hidden" "true" "noquote"
+add_dconf_value "/org/gtk/settings/file-chooser/show-hidden" "true"
 # Super+Return for alacritty
-add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding" "<Super>Return"
-add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name" "Alacritty"
-add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command" "alacritty"
-add_value_in_dconf_list '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings' '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/'
+add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding" "'<Super>Return'"
+add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name" "'Alacritty'"
+add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command" "'alacritty'"
+add_value_in_dconf_list "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings" "'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/'"
 
 
 echo -e "\n\n################################################################"
