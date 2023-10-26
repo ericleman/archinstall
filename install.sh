@@ -449,8 +449,8 @@ echo "################################################################"
 add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'blur-my-shell@aunetx'"
 add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/hacks-level" "3"
 add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/blur" "true"
-add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/opacity" "156"
-add_value_in_dconf_list "/org/gnome/shell/extensions/blur-my-shell/applications/whitelist" "'Alacritty'"
+add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/opacity" "230"
+add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/whitelist" "['Alacritty', 'Code']"
 
 # Dash to Panel
 add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'dash-to-panel@jderose9.github.com'"

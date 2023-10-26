@@ -18,11 +18,12 @@ function _log(msg) {
 }
 
 
-export const UpdateBar = GObject.registerClass({
+const UpdateBar = GObject.registerClass({
   GTypeName: 'UpdateBar',
 }, 
 class UpdateBar extends PanelMenu.Button {
-  load() {
+  constructor() {
+    super();
     this.bar = new St.BoxLayout({});
     this.bin = new St.Bin({visible: true, reactive: true, can_focus: true, track_hover: true});
     this.bin.label = new St.Label({y_align: Clutter.ActorAlign.CENTER});
@@ -42,7 +43,6 @@ class UpdateBar extends PanelMenu.Button {
 
   unload() {
     this.bar.destroy();
-
   }
 
   checkUpdates() {
@@ -92,3 +92,14 @@ class UpdateBar extends PanelMenu.Button {
   }
 
 });
+
+let updateBar;
+
+export function enable() {
+  updateBar = new UpdateBar();
+}
+export function disable() {
+  updateBar.unload();
+  updateBar.destroy();
+  updateBar = null;
+}

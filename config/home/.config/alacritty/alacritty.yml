@@ -878,9 +878,10 @@
   #print_events: false
 
 window:
-   dimensions:
-     columns: 120
-     lines: 40
+  dimensions:
+    columns: 120
+    lines: 40
+  opacity: 0.6
 
 font:
   normal:

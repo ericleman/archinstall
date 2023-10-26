@@ -1,5 +1,6 @@
 import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as UpdateBar from './updateIndicator.js';
+import * as AccessibilityButton from './accessibilityButton.js';
 
 
 function _log(msg) {
@@ -8,22 +9,14 @@ function _log(msg) {
 
 export default class MyIndicator extends Extension {
   enable(){
-    _log('STARTING UPDATE INDICATOR EXTENSION *************');
-    this.features = [
-      new UpdateBar.UpdateBar(),
-    ]
-
-    for (const feature of this.features) {
-      feature.load()
-    }
+    _log('************* STARTING CUSTOM PANEL EXTENSION *************');
+    UpdateBar.enable();
+    AccessibilityButton.enable();
   }
 
   disable(){
-    for (const feature of this.features) {
-      feature.unload()
-      feature.destroy()
-    }
-    this.features = null;
+    UpdateBar.disable();
+    AccessibilityButton.disable();
   }
   
 }
