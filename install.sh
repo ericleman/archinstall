@@ -341,9 +341,11 @@ echo "# Ranger"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ranger ueberzug less
 cp -r /root/archinstall-main/config/home/.config/ranger $MOUNTPOINT/home/eric/.config/
+arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.config/ranger/plugins/ranger_devicons/'
+git clone https://github.com/alexanderjeurissen/ranger_devicons $MOUNTPOINT/home/eric/.config/ranger/plugins/ranger_devicons
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
-git clone https://github.com/alexanderjeurissen/ranger_devicons $MOUNTPOINT/home/eric/.config/ranger/plugins/ranger_devicons
+
 
 echo -e "\n\n################################################################"
 echo "# NeoFetch"
@@ -438,7 +440,7 @@ cp -r /root/archinstall-main/config/home/.local/share/gnome-shell/extensions/* $
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.local
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.local
 
-add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'update-indicator@ericleman.com'"
+add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'custom-panel-indicator@ericleman.com'"
 
 echo -e "\n\n################################################################"
 echo "# Dconf setup"

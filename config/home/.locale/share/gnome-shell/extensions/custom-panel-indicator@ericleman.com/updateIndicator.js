@@ -1,5 +1,3 @@
-import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
-
 import Clutter from 'gi://Clutter';
 import GLib from 'gi://GLib';
 import St from 'gi://St';
@@ -14,17 +12,17 @@ const CHECK_SCRIPT = `yay -Qu | wc -l`;
 const COMMAND_CHECK = ['bash', '-c', CHECK_SCRIPT]
 const COMMAND_UPDATE = ['alacritty', '-e', 'yay']
 
-const DEBUG = true;
+
 function _log(msg) {
-  if (DEBUG) console.log('CUSTOM PANEL '+Date.now()+' *** ' + msg);
+  console.debug('CUSTOM PANEL '+Date.now()+' *** ' + msg);
 }
 
-var UpdateBar = GObject.registerClass({
+
+export const UpdateBar = GObject.registerClass({
   GTypeName: 'UpdateBar',
 }, 
 class UpdateBar extends PanelMenu.Button {
-  constructor() {
-    super();
+  load() {
     this.bar = new St.BoxLayout({});
     this.bin = new St.Bin({visible: true, reactive: true, can_focus: true, track_hover: true});
     this.bin.label = new St.Label({y_align: Clutter.ActorAlign.CENTER});
@@ -35,15 +33,16 @@ class UpdateBar extends PanelMenu.Button {
     this.bar.add_actor(this.bin);
 
     this.add_child(this.bar);
+    Main.panel.addToStatusArea('update-bar', this, 1, 'right');
     // run the command once now
     this.checkUpdates();
     // then run the command regularly (every 1800 seconds)
     GLib.timeout_add_seconds(0, 1800, () => {this.checkUpdates();return GLib.SOURCE_CONTINUE;});
   }
 
-  destroy() {
+  unload() {
     this.bar.destroy();
-    super.destroy();
+
   }
 
   checkUpdates() {
@@ -91,22 +90,5 @@ class UpdateBar extends PanelMenu.Button {
       }
     });
   }
- 
+
 });
-
-let updateBar;
-
-export default class MyIndicator extends Extension {
-  enable(){
-    _log('STARTING UPDATE INDICATOR EXTENSION *************');
-    updateBar = new UpdateBar(this);
-    Main.panel.addToStatusArea('update-bar', updateBar, 1, 'right');
-  }
-
-  disable(){
-    updateBar.destroy();
-    updateBar = null;
-  }
-  
-}
-

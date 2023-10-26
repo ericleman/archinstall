@@ -1,0 +1,11 @@
+{
+    "name" : "Custom Panel Indicator",
+    "description" : "Customize Indicators on the panel",
+    "shell-version" : [
+        "45"
+    ],
+    "url" : "",
+    "uuid" : "custom-panel-indicator@ericleman.com",
+    "version" : 1.0
+}
+
