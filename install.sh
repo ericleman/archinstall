@@ -421,16 +421,40 @@ echo -e "\n\n################################################################"
 echo "# Blur my shell"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-blur-my-shell'
+# Blur my shell
+add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'blur-my-shell@aunetx'"
+add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/hacks-level" "3"
+add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/blur" "true"
+add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/opacity" "230"
+add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/whitelist" "['Alacritty', 'Code']"
 
 echo -e "\n\n################################################################"
 echo "# Dash to Panel"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-dash-to-panel'
+# Dash to Panel
+add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'dash-to-panel@jderose9.github.com'"
+add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-positions" "'{\\\"0\\\":\\\"TOP\\\"}'"
+add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-element-positions" "'{\\\"0\\\":[{\\\"element\\\":\\\"showAppsButton\\\",\\\"visible\\\":false,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"activitiesButton\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"leftBox\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"taskbar\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"centerBox\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"rightBox\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"dateMenu\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"systemMenu\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"desktopButton\\\",\\\"visible\\\":false,\\\"position\\\":\\\"stackedBR\\\"}]}'"
+add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/trans-use-custom-opacity" "true"
+
+echo -e "\n\n################################################################"
+echo "# quick-settings-tweaks"
+echo "################################################################"
+# currently https://aur.archlinux.org/packages/gnome-shell-extension-quick-settings-tweaks-git is broken, not flagged compatible with gnome 45, so I clone the git repo
+git clone https://github.com/qwreey75/quick-settings-tweaks.git
+cp -r quick-settings-tweaks/src $MOUNTPOINT/home/eric/.local/share/gnome-shell/extensions/quick-settings-tweaks@qwreey
+add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'quick-settings-tweaks@qwreey'"
+add_dconf_value "/org/gnome/shell/extensions/quick-settings-tweaks/input-show-selected" "true"
+add_dconf_value "/org/gnome/shell/extensions/quick-settings-tweaks/output-show-selected" "true"
 
 echo -e "\n\n################################################################"
 echo "# Tray-Icons-Reloaded"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm '
+# currently https://aur.archlinux.org/packages/gnome-shell-extension-tray-icons-reloaded is broken, not flagged compatible with gnome 45, so I clone the git repo
+arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.local/share/gnome-shell/extensions/'
+git clone https://github.com/MartinPL/Tray-Icons-Reloaded.git $MOUNTPOINT/home/eric/.local/share/gnome-shell/extensions/trayIconsReloaded@selfmade.pl
+add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'trayIconsReloaded@selfmade.pl'"
 
 echo -e "\n\n################################################################"
 echo "# Custom Gnome Extensions"
@@ -445,19 +469,6 @@ add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'custom-panel-ind
 echo -e "\n\n################################################################"
 echo "# Dconf setup"
 echo "################################################################"
-# Blur my shell
-add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'blur-my-shell@aunetx'"
-add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/hacks-level" "3"
-add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/blur" "true"
-add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/opacity" "230"
-add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/whitelist" "['Alacritty', 'Code']"
-
-# Dash to Panel
-add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'dash-to-panel@jderose9.github.com'"
-add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-positions" "'{\\\"0\\\":\\\"TOP\\\"}'"
-add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-element-positions" "'{\\\"0\\\":[{\\\"element\\\":\\\"showAppsButton\\\",\\\"visible\\\":false,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"activitiesButton\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"leftBox\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"taskbar\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"centerBox\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"rightBox\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"dateMenu\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"systemMenu\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"desktopButton\\\",\\\"visible\\\":false,\\\"position\\\":\\\"stackedBR\\\"}]}'"
-add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/trans-use-custom-opacity" "true"
-
 # Show Seconds and weekday
 add_dconf_value "/org/gnome/desktop/interface/clock-show-seconds" "true"
 add_dconf_value "/org/gnome/desktop/interface/clock-show-weekday" "true"
@@ -481,7 +492,9 @@ add_dconf_value "/org/gnome/desktop/wm/preferences/button-layout" "'appmenu:mini
 add_dconf_value "/org/gnome/desktop/wm/preferences/resize-with-right-button" "true"
 # Focus follow the mouse
 add_dconf_value "/org/gnome/desktop/wm/preferences/focus-mode" "'sloppy'"
-
+# Weather app
+add_dconf_value "/org/gnome/shell/weather/automatic-location" "true"
+add_dconf_value "/org/gnome/shell/weather/locations" "[<(uint32 2, <('Paris', 'LFPB', true, [(0.85462956287765413, 0.042760566673861078)], [(0.8528842336256599, 0.040724343395436846)])>)>]"
 # Font Scaling factor (4K screen)
 add_dconf_value "/org/gnome/desktop/interface/text-scaling-factor" "1.5"
 # Mouse cursor size from 24 to 32 (4K screen)

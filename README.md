@@ -124,8 +124,8 @@ It does not use xdg-open but its own default-app opener. So works out of the box
   - [x] wallpaper
   - [x] Ranger Gruvboxtheme
 - [x] yay update indicator in panel
-- [ ] other custom panel through extension
 - [ ] https://github.com/MartinPL/Tray-Icons-Reloaded
+- [ ] create a Vitals widget (like https://github.com/corecoding/Vitals) but when we clic on it it opens btop
 - [ ] keyboard shortcut to move windows
 - [N] undecorate windows?
 - [ ] GSNap
