@@ -112,7 +112,7 @@ It does not use xdg-open but its own default-app opener. So works out of the box
 - [x] zsh
 - [x] default app on dock
 - [x] automove window
-- [ ] Gruvbox
+- [x] Gruvbox
   - [x] ZSH
   - [x] alacritty
   - [x] adw, gtk
@@ -122,11 +122,12 @@ It does not use xdg-open but its own default-app opener. So works out of the box
   - [x] IG
   - [x] btop
   - [x] wallpaper
-  - [ ] Ranger Gruvboxtheme
-- [ ] yay update indicator in panel
+  - [x] Ranger Gruvboxtheme
+- [x] yay update indicator in panel
 - [ ] other custom panel through extension
+- [ ] https://github.com/MartinPL/Tray-Icons-Reloaded
 - [ ] keyboard shortcut to move windows
-- [ ] undecorate windows?
+- [N] undecorate windows?
 - [ ] GSNap
 - [ ] Music plug in ? Cava...
 - [?] Super plus mouse does not move windows, it crashes

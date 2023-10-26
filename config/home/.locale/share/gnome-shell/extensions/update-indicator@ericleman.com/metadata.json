@@ -1,0 +1,11 @@
+{
+    "name" : "Update Indicator",
+    "description" : "Update Indicator on the panel",
+    "shell-version" : [
+        "45"
+    ],
+    "url" : "",
+    "uuid" : "update-indicator@ericleman.com",
+    "version" : 1.0
+}
+

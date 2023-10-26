@@ -343,7 +343,7 @@ arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ranger ueberzug less
 cp -r /root/archinstall-main/config/home/.config/ranger $MOUNTPOINT/home/eric/.config/
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
-
+git clone https://github.com/alexanderjeurissen/ranger_devicons $MOUNTPOINT/home/eric/.config/ranger/plugins/ranger_devicons
 
 echo -e "\n\n################################################################"
 echo "# NeoFetch"
@@ -413,6 +413,9 @@ add_value_in_dconf_list() {
 }
 
 echo -e "\n\n################################################################"
+echo "# Gnome Extensions"
+echo "################################################################"
+echo -e "\n\n################################################################"
 echo "# Blur my shell"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-blur-my-shell'
@@ -421,6 +424,21 @@ echo -e "\n\n################################################################"
 echo "# Dash to Panel"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-dash-to-panel'
+
+echo -e "\n\n################################################################"
+echo "# Tray-Icons-Reloaded"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm '
+
+echo -e "\n\n################################################################"
+echo "# Custom Gnome Extensions"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.local/share/gnome-shell/extensions/'
+cp -r /root/archinstall-main/config/home/.local/share/gnome-shell/extensions/* $MOUNTPOINT/home/eric/.local/share/gnome-shell/extensions/
+arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.local
+arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.local
+
+add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'update-indicator@ericleman.com'"
 
 echo -e "\n\n################################################################"
 echo "# Dconf setup"
@@ -459,6 +477,8 @@ add_dconf_value "/org/gnome/shell/favorite-apps" "['org.gnome.Nautilus.desktop',
 # Window Buttons
 add_dconf_value "/org/gnome/desktop/wm/preferences/button-layout" "'appmenu:minimize,maximize,close'"
 add_dconf_value "/org/gnome/desktop/wm/preferences/resize-with-right-button" "true"
+# Focus follow the mouse
+add_dconf_value "/org/gnome/desktop/wm/preferences/focus-mode" "'sloppy'"
 
 # Font Scaling factor (4K screen)
 add_dconf_value "/org/gnome/desktop/interface/text-scaling-factor" "1.5"
@@ -469,6 +489,8 @@ add_dconf_value "/org/gnome/desktop/interface/cursor-size" "32"
 #add_dconf_value "/org/gnome/desktop/session/idle-delay" "unit32 0"
 # Show hidden files
 add_dconf_value "/org/gtk/settings/file-chooser/show-hidden" "true"
+# System Locale
+add_dconf_value "/system/locale/region" "'en_DK.UTF-8'"
 
 # Key Bindings
 add_dconf_value "/org/gnome/desktop/wm/keybindings/switch-applications" "['<Super>Tab']"
