@@ -26,6 +26,11 @@ PASSWD=$1
 echo "Password is $PASSWD"
 
 echo -e "\n\n################################################################"
+echo "# Install git"
+echo "################################################################"
+pacman -S git
+
+echo -e "\n\n################################################################"
 echo "# Download repo"
 echo "################################################################"
 curl -L https://github.com/ericleman/archinstall/archive/main.zip --output main.zip
@@ -423,6 +428,7 @@ add_value_in_dconf_list() {
 echo -e "\n\n################################################################"
 echo "# Gnome Extensions"
 echo "################################################################"
+arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.local/share/gnome-shell/extensions/'
 echo -e "\n\n################################################################"
 echo "# Blur my shell"
 echo "################################################################"
@@ -458,14 +464,12 @@ echo -e "\n\n################################################################"
 echo "# Tray-Icons-Reloaded"
 echo "################################################################"
 # currently https://aur.archlinux.org/packages/gnome-shell-extension-tray-icons-reloaded is broken, not flagged compatible with gnome 45, so I clone the git repo
-arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.local/share/gnome-shell/extensions/'
 git clone https://github.com/MartinPL/Tray-Icons-Reloaded.git $MOUNTPOINT/home/eric/.local/share/gnome-shell/extensions/trayIconsReloaded@selfmade.pl
 add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'trayIconsReloaded@selfmade.pl'"
 
 echo -e "\n\n################################################################"
 echo "# Custom Gnome Extensions"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.local/share/gnome-shell/extensions/'
 cp -r /root/archinstall-main/config/home/.local/share/gnome-shell/extensions/* $MOUNTPOINT/home/eric/.local/share/gnome-shell/extensions/
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.local
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.local
