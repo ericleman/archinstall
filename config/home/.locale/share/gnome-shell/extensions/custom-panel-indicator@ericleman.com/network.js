@@ -24,15 +24,15 @@ class Network extends PanelMenu.Button {
     this.bar = new St.BoxLayout({});
     this.bin_dn = new St.Bin({visible: true, reactive: true, can_focus: true, track_hover: true});
     this.bin_dn.label = new St.Label({y_align: Clutter.ActorAlign.CENTER});
-    this.bin_dn.style_class = 'panel-button custom-color3';
-    this.bin_dn.label.style_class = 'ubuntu-mono-font';
+    //this.bin_dn.style_class = 'panel-button';
+    this.bin_dn.label.style_class = 'ubuntu-mono-font-cyan';
     this.bin_dn.set_child(this.bin_dn.label);
     this.bar.add_actor(this.bin_dn);
 
     this.bin_up = new St.Bin({visible: true, reactive: true, can_focus: true, track_hover: true});
     this.bin_up.label = new St.Label({y_align: Clutter.ActorAlign.CENTER});
-    this.bin_up.style_class = 'panel-button custom-color3';
-    this.bin_up.label.style_class = 'ubuntu-mono-font';
+    //this.bin_up.style_class = 'panel-button custom-color3';
+    this.bin_up.label.style_class = 'ubuntu-mono-font-cyan';
     this.bin_up.set_child(this.bin_up.label);
     this.bar.add_actor(this.bin_up);
 

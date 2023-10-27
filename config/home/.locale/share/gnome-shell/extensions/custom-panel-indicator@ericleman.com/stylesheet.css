@@ -1,11 +1,47 @@
 .ubuntu-mono-font {
   font-family: "Ubuntu Nerd Font Propo";
   font-size: 11pt;
-  color:#b8bb26;
+  color:#f8f8f2;
+}
+
+.ubuntu-mono-font-cyan {
+  font-family: "Ubuntu Nerd Font Propo";
+  font-size: 11pt;
+  color:#8be9fd;
+}
+
+.ubuntu-mono-font-green {
+  font-family: "Ubuntu Nerd Font Propo";
+  font-size: 11pt;
+  color:#50fa7b;
+}
+
+.ubuntu-mono-font-orange {
+  font-family: "Ubuntu Nerd Font Propo";
+  font-size: 11pt;
+  color:#ffb86c;
+}
+
+.ubuntu-mono-font-pink {
+  font-family: "Ubuntu Nerd Font Propo";
+  font-size: 11pt;
+  color:#ff79c6;
+}
+
+.ubuntu-mono-font-purple{
+  font-family: "Ubuntu Nerd Font Propo";
+  font-size: 11pt;
+  color:#bd93f9;
 }
 
 .ubuntu-mono-font-red {
   font-family: "Ubuntu Nerd Font Propo";
   font-size: 11pt;
-  color:#fb4934;
+  color:#ff5555;
+}
+
+.ubuntu-mono-font-yellow{
+  font-family: "Ubuntu Nerd Font Propo";
+  font-size: 11pt;
+  color:#f1fa8c;
 }

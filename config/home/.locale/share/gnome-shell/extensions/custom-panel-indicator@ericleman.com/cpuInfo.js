@@ -24,8 +24,8 @@ class CPUInfo extends PanelMenu.Button {
     this.bar = new St.BoxLayout({});
     this.bin = new St.Bin({visible: true, reactive: true, can_focus: true, track_hover: true});
     this.bin.label = new St.Label({y_align: Clutter.ActorAlign.CENTER});
-    this.bin.style_class = 'panel-button custom-color3';
-    this.bin.label.style_class = 'ubuntu-mono-font';
+    //this.bin.style_class = 'panel-button custom-color3';
+    this.bin.label.style_class = 'ubuntu-mono-font-pink';
     this.bin.set_child(this.bin.label);
     this.bin.connect('button-release-event', () => {
       let proc = Gio.Subprocess.new(['alacritty', '-e', 'btop'], Gio.SubprocessFlags.NONE);

@@ -27,8 +27,8 @@ class UpdateBar extends PanelMenu.Button {
     this.bar = new St.BoxLayout({});
     this.bin = new St.Bin({visible: true, reactive: true, can_focus: true, track_hover: true});
     this.bin.label = new St.Label({y_align: Clutter.ActorAlign.CENTER});
-    this.bin.style_class = 'panel-button custom-color3';
-    this.bin.label.style_class = 'ubuntu-mono-font';
+    //this.bin.style_class = 'panel-button custom-color3';
+    this.bin.label.style_class = 'ubuntu-mono-font-purple';
     this.bin.set_child(this.bin.label);
     this.bin.connect('button-release-event', () => this.runUpdates() );
     this.bar.add_actor(this.bin);
@@ -57,7 +57,7 @@ class UpdateBar extends PanelMenu.Button {
               this.bin.label.style_class = 'ubuntu-mono-font-red';
               text = ' '+n_upt;
             } else {
-              this.bin.label.style_class = 'ubuntu-mono-font';
+              this.bin.label.style_class = 'ubuntu-mono-font-purple';
               text = '';
             }
             this.bin.label.set_text(text);

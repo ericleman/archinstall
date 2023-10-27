@@ -263,25 +263,26 @@ arch-chroot "${MOUNTPOINT}" chmod -R 777 /usr/share/backgrounds/
 
 
 echo -e "\n\n################################################################"
-echo "# Gnome Gruvbox Themes"
+echo "# Gnome Dracula Themes"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm gtk-engine-murrine
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm adw-gtk3'
 
-curl -L https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme/archive/master.zip --output master.zip
-mkdir -p $MOUNTPOINT/home/eric/tmp
-bsdtar -x -f master.zip -C $MOUNTPOINT/home/eric/tmp/
-cp -r $MOUNTPOINT/home/eric/tmp/Gruvbox-GTK-Theme-master/themes/* $MOUNTPOINT/usr/share/themes/
+#curl -L https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme/archive/master.zip --output master.zip
+#mkdir -p $MOUNTPOINT/home/eric/tmp
+#bsdtar -x -f master.zip -C $MOUNTPOINT/home/eric/tmp/
+#cp -r $MOUNTPOINT/home/eric/tmp/Gruvbox-GTK-Theme-master/themes/* $MOUNTPOINT/usr/share/themes/
 
 cp -r /root/archinstall-main/config/home/.config/gtk-3.0 $MOUNTPOINT/home/eric/.config/
 cp -r /root/archinstall-main/config/home/.config/gtk-4.0 $MOUNTPOINT/home/eric/.config/
-cp /root/archinstall-main/config/home/.gtkrc-2.0 $MOUNTPOINT/home/eric/
+#cp /root/archinstall-main/config/home/.gtkrc-2.0 $MOUNTPOINT/home/eric/
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config/gtk-3.0
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config/gtk-3.0
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config/gtk-4.0
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config/gtk-4.0
-arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.gtkrc-2.0
-arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.gtkrc-2.0
+#arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.gtkrc-2.0
+#arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.gtkrc-2.0
+
 # Adw-GTK3 will enable libadwaita theme using Gruvbox colors if put in gtk.css files
 
 
@@ -299,7 +300,6 @@ echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm papirus-icon-theme
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm papirus-folders-git' 
 arch-chroot "${MOUNTPOINT}" papirus-folders -C black --theme Papirus
-# the theme Papirus theme is defined in ~/.gtkrc-2.0 and ~/.config/gtk-3.0/settings.ini
 
 echo -e "\n\n################################################################"
 echo "# Alacritty"
