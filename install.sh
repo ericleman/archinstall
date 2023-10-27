@@ -267,23 +267,24 @@ echo "# Gnome Dracula Themes"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm gtk-engine-murrine
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm adw-gtk3'
+# Adw-GTK3 will enable libadwaita theme using Dracula colors if put in gtk.css files
 
-#curl -L https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme/archive/master.zip --output master.zip
-#mkdir -p $MOUNTPOINT/home/eric/tmp
-#bsdtar -x -f master.zip -C $MOUNTPOINT/home/eric/tmp/
-#cp -r $MOUNTPOINT/home/eric/tmp/Gruvbox-GTK-Theme-master/themes/* $MOUNTPOINT/usr/share/themes/
+curl -L https://github.com/dracula/gtk/archive/master.zip --output master.zip
+mkdir -p $MOUNTPOINT/home/eric/tmp
+bsdtar -x -f master.zip -C $MOUNTPOINT/home/eric/tmp/
+mkdir -p $MOUNTPOINT/usr/share/themes/Dracula
+cp -r $MOUNTPOINT/home/eric/tmp/gtk-master/* $MOUNTPOINT/usr/share/themes/Dracula/
+rm -rf $MOUNTPOINT/home/eric/tmp
+# because of this issue: 'https://github.com/dracula/gtk/issues/124' I do:
+cp $MOUNTPOINT/usr/share/themes/Dracula/gnome-shell/v40/* $MOUNTPOINT/usr/share/themes/Dracula/gnome-shell 
 
 cp -r /root/archinstall-main/config/home/.config/gtk-3.0 $MOUNTPOINT/home/eric/.config/
 cp -r /root/archinstall-main/config/home/.config/gtk-4.0 $MOUNTPOINT/home/eric/.config/
-#cp /root/archinstall-main/config/home/.gtkrc-2.0 $MOUNTPOINT/home/eric/
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config/gtk-3.0
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config/gtk-3.0
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config/gtk-4.0
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config/gtk-4.0
-#arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.gtkrc-2.0
-#arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.gtkrc-2.0
 
-# Adw-GTK3 will enable libadwaita theme using Gruvbox colors if put in gtk.css files
 
 
 echo -e "\n\n################################################################"
