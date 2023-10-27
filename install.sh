@@ -365,6 +365,11 @@ arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.p10k.zsh
 arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.p10k.zsh
 
 echo -e "\n\n################################################################"
+echo "# NCDU (disk usage utility)"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ncdu
+
+echo -e "\n\n################################################################"
 echo "# BTOP"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm btop

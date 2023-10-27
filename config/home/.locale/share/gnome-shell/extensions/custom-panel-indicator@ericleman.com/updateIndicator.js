@@ -14,7 +14,7 @@ const COMMAND_UPDATE = ['alacritty', '-e', 'yay']
 
 
 function _log(msg) {
-  console.debug('CUSTOM PANEL '+Date.now()+' *** ' + msg);
+  console.log('CUSTOM PANEL '+Date.now()+' *** ' + msg);
 }
 
 
