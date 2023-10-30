@@ -75,7 +75,7 @@ class Network extends PanelMenu.Button {
           delta = parseFloat((delta / Math.pow(1024, exponent)));
         }
         let unit = this.binary[exponent];
-        let speed = (delta/dwell).toFixed(2) + ' ' + unit;
+        let speed = (delta/dwell).toFixed(1) + ' ' + unit;
         this.bin_dn.label.set_text(' ' + speed); 
 
       });
@@ -100,8 +100,8 @@ class Network extends PanelMenu.Button {
           delta = parseFloat((delta / Math.pow(1024, exponent)));
         }
         let unit = this.binary[exponent];
-        let speed = (delta/dwell).toFixed(2) + ' ' + unit;
-        this.bin_up.label.set_text(' ' + speed); 
+        let speed = (delta/dwell).toFixed(1) + ' ' + unit;
+        this.bin_up.label.set_text('  ' + speed); 
 
       });
     } catch (e) {
