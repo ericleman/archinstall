@@ -481,6 +481,11 @@ add_dconf_value "/org/gnome/desktop/wm/keybindings/switch-applications" "['<Supe
 add_dconf_value "/org/gnome/desktop/wm/keybindings/switch-applications-backward" "['<Shift><Super>Tab']"
 add_dconf_value "/org/gnome/desktop/wm/keybindings/switch-windows" "['<Alt>Tab']"
 add_dconf_value "/org/gnome/desktop/wm/keybindings/switch-applications-backward" "['<Shift><Alt>Tab']"
+add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/play" "['AudioPlay']"
+add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/volume-down" "['AudioLowerVolume']"
+add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/volume-mute" "['AudioMute']"
+add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/volume-up" "['AudioRaiseVolume']"
+
 
 # Super+Return for alacritty
 add_dconf_value "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding" "'<Super>Return'"
