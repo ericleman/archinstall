@@ -141,10 +141,11 @@ arch-chroot "${MOUNTPOINT}" su - eric -c 'xdg-user-dirs-update'
 cp /root/archinstall-main/config/home/.bashrc $MOUNTPOINT/home/eric/
 arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.bashrc
 arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.bashrc
-# dir_colors to have Nord theme in ls...
 cp /root/archinstall-main/config/home/.dir_colors $MOUNTPOINT/home/eric/
 arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.dir_colors
 arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.dir_colors
+cp /root/archinstall-main/config/var/lib/AccountsService/users/eric $MOUNTPOINT/var/lib/AccountsService/users/eric
+
 
 echo -e "\n\n################################################################"
 echo "# Yay"
@@ -173,56 +174,6 @@ arch-chroot "${MOUNTPOINT}" mkdir /home/eric/Laptop
 arch-chroot "${MOUNTPOINT}" chown eric /home/eric/Laptop
 arch-chroot "${MOUNTPOINT}" chmod 755 /home/eric/Laptop
 
-<<pause-for-gnome
-
-echo -e "\n\n################################################################"
-echo "# LightDM"
-echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm lightdm lightdm-gtk-greeter lightdm-webkit-theme-litarvan lightdm-webkit2-greeter
-arch-chroot "${MOUNTPOINT}" systemctl enable lightdm.service
-sed -i 's/#autologin-user=/autologin-user=eric/' $MOUNTPOINT/etc/lightdm/lightdm.conf
-arch-chroot "${MOUNTPOINT}" groupadd -r autologin
-arch-chroot "${MOUNTPOINT}" usermod -a -G autologin eric
-cp /root/archinstall-main/config/etc/lightdm/lightdm-gtk-greeter.conf $MOUNTPOINT/etc/lightdm/lightdm-gtk-greeter.conf
-
-echo -e "\n\n################################################################"
-echo "# X11 and QTile"
-echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm qtile xf86-video-vmware xf86-input-vmmouse xorg-server xorg-xinit mesa xorg-xrandr xorg-xdpyinfo xcb-util-cursor python-psutil python-dbus-next
-# xcb-util-cursor is requried to have cursor theme applied.
-arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.config/qtile'
-cp -r /root/archinstall-main/config/home/.config/qtile $MOUNTPOINT/home/eric/.config/
-arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
-arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
-#arch-chroot "${MOUNTPOINT}" localectl set-x11-keymap fr pc #I think `localectl set-x11-keymap` does not work during install in chroot. SO I copy the config directly (see below)
-cp -r /root/archinstall-main/config/etc/X11/xorg.conf.d $MOUNTPOINT/etc/X11/
-cp /root/archinstall-main/config/home/.Xresources $MOUNTPOINT/home/eric/ # set dpi for 4K screens
-arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.config/.Xresources
-arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.config/.Xresources
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm qtile-extras'
-
-echo -e "\n\n################################################################"
-echo "# udiskie ntfs-3g"
-echo "################################################################"
-# basic utility we might need for automounting external hard drives or USBs
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm udiskie ntfs-3g
-
-echo -e "\n\n################################################################"
-echo "# brightnessctl"
-echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm brightnessctl
-
-echo -e "\n\n################################################################"
-echo "# Picom"
-echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm picom
-arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.config/picom'
-cp -r /root/archinstall-main/config/home/.config/picom $MOUNTPOINT/home/eric/.config/
-arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
-arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
-
-pause-for-gnome
-
 echo -e "\n\n################################################################"
 echo "# Gnome"
 echo "################################################################"
@@ -239,8 +190,6 @@ cp -r /root/archinstall-main/config/etc/X11/xorg.conf.d $MOUNTPOINT/etc/X11/
 cp /root/archinstall-main/config/home/.Xresources $MOUNTPOINT/home/eric/ # set dpi for 4K screens
 arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.config/.Xresources
 arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.config/.Xresources
-
-#<<pause-for-theme
 
 echo -e "\n\n################################################################"
 echo "# Fonts"
