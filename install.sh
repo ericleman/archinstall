@@ -505,8 +505,8 @@ add_dconf_value "/org/gnome/desktop/wm/preferences/titlebar-font" "'Ubuntu Nerd 
 add_dconf_value "/org/gnome/desktop/interface/gtk-theme" "'adw-gtk3-dark'"
 add_dconf_value "/org/gnome/desktop/interface/icon-theme" "'Papirus'"
 add_dconf_value "/org/gnome/desktop/interface/color-scheme" "'prefer-dark'"
-add_dconf_value "/org/gnome/desktop/background/picture-uri" "'file:///home/eric/.local/share/backgrounds/coffee.jpg'"
-add_dconf_value "/org/gnome/desktop/background/picture-uri-dark" "'file:///home/eric/.local/share/backgrounds/coffee.jpg'"
+add_dconf_value "/org/gnome/desktop/background/picture-uri" "'file:///home/eric/.local/share/backgrounds/my-wallpaper.svg'"
+add_dconf_value "/org/gnome/desktop/background/picture-uri-dark" "'file:///home/eric/.local/share/backgrounds/my-wallpaper.svg'"
 add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'user-theme@gnome-shell-extensions.gcampax.github.com'"
 add_dconf_value "/org/gnome/shell/extensions/user-theme/name" "'Dracula'"
 
