@@ -96,41 +96,20 @@ It does not use xdg-open but its own default-app opener. So works out of the box
 - https://github.com/picodotdev/alis/blob/master/alis.sh
 - https://github.com/tom5760/arch-install/blob/master/arch_install.sh
 
-# Gnome Todo
-- [x] Nord theme
-- [x] Ubuntu font
-- [x] Mouse theme
-- [x] Icon theme
-- [x] default terminal = alacritty
-- [x] default Alacritty window size
-- [x] blur my shell
-- [x] test IG
-- [x] display size (scaling)
-- [x] tweaks
-- [x] autologin
-- [x] adw-gtk3
-- [x] zsh
-- [x] default app on dock
-- [x] automove window
-- [x] Gruvbox
-  - [x] ZSH
-  - [x] alacritty
-  - [x] adw, gtk
-  - [x] shell
-  - [x] cursor
-  - [x] icons
-  - [x] IG
-  - [x] btop
-  - [x] wallpaper
-  - [x] Ranger Gruvboxtheme
-- [x] yay update indicator in panel
-- [ ] https://github.com/MartinPL/Tray-Icons-Reloaded
-- [ ] create a Vitals widget (like https://github.com/corecoding/Vitals) but when we clic on it it opens btop
-- [ ] keyboard shortcut to move windows
-- [N] undecorate windows?
-- [ ] GSNap
-- [ ] Music plug in ? Cava...
-- [?] Super plus mouse does not move windows, it crashes
+# Theming
+Changing a theme means:
+- Dark reader
+- Slack
+- Obsidian
+- VS Code
+- Powershell
+- GTK3/GTK4 (either with adw-gtk3 which can be customized) or with custom GTK theme
+- Gnome Shell
+- Alacritty
+- BTOP
+- Ranger (or use Alacritty)
+- Gnome Extensions CSS
+- IG
 
 # Obsolete tips
 ## Prorealtime workaround
