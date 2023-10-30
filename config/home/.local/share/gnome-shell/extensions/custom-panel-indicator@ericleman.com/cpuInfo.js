@@ -65,7 +65,7 @@ class CPUInfo extends PanelMenu.Button {
         let stats = lines[0].split(/\s+/); // cpu user nice system idle...
         let total = parseInt(stats[1]) + parseInt(stats[2]) + parseInt(stats[3]);
         if (this.last_cpu > 0) {
-          utilized = ((total - this.last_cpu) / dwell / nb_cores).toFixed(0);;
+          utilized = ((total - this.last_cpu) / dwell / nb_cores).toFixed(0).padStart(2);
         }
         this.last_cpu = total;
         this.bin.label.set_text(' ' + utilized + '%');  

@@ -55,7 +55,7 @@ class MemInfo extends PanelMenu.Button {
         //if (values = lines.match(/Cached:(\s+)(\d+) kB/)) cached = values[2];
         //if (values = lines.match(/MemFree:(\s+)(\d+) kB/)) memFree = values[2];
         let used = total - avail
-        let utilized = (100 * used / total).toFixed(0);
+        let utilized = (100 * used / total).toFixed(0).padStart(2);
         this.bin.label.set_text(' ' + utilized + '%');    
       });
     } catch (e) {
