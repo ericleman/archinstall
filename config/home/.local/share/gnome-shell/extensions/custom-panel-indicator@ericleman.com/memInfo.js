@@ -7,6 +7,8 @@ import GObject from 'gi://GObject';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 
+import * as File from './file.js';
+
 function _log(msg) {
     console.log('CUSTOM PANEL '+Date.now()+' *** ' + msg);
 }
@@ -31,7 +33,6 @@ class MemInfo extends PanelMenu.Button {
     this.add_child(this.bar);
     Main.panel.addToStatusArea('mem-info', this, 1, 'right');
 
-    this.meminfo = Gio.File.new_for_path('/proc/meminfo');
     // run the command once now
     this.checkMem();
     // then run the command regularly (every 1800 seconds)
@@ -44,27 +45,18 @@ class MemInfo extends PanelMenu.Button {
   
   checkMem() {
     try {
-      this.meminfo.load_contents_async(null, (_file, res) => {
-        try {
-          let [length, contents] = this.meminfo.load_contents_finish(res);
-          let decoder = new TextDecoder('utf-8');
-          let lines = decoder.decode(contents);
-    
-          let values = '', total = 0, avail = 0, swapTotal = 0, swapFree = 0, cached = 0, memFree = 0;
-          if (values = lines.match(/MemTotal:(\s+)(\d+) kB/)) total = values[2];
-          if (values = lines.match(/MemAvailable:(\s+)(\d+) kB/)) avail = values[2];
-          //if (values = lines.match(/SwapTotal:(\s+)(\d+) kB/)) swapTotal = values[2];
-          //if (values = lines.match(/SwapFree:(\s+)(\d+) kB/)) swapFree = values[2];
-          //if (values = lines.match(/Cached:(\s+)(\d+) kB/)) cached = values[2];
-          //if (values = lines.match(/MemFree:(\s+)(\d+) kB/)) memFree = values[2];
-          let used = total - avail
-          let utilized = (100 * used / total).toFixed(0);
-          this.bin.label.set_text(' ' + utilized + '%');    
-    
-        } catch (e) {
-          _log(e);
-          logError(e);
-        }
+      File.Read('/proc/meminfo', (content) => {
+        let lines = content;
+        let values = '', total = 0, avail = 0, swapTotal = 0, swapFree = 0, cached = 0, memFree = 0;
+        if (values = lines.match(/MemTotal:(\s+)(\d+) kB/)) total = values[2];
+        if (values = lines.match(/MemAvailable:(\s+)(\d+) kB/)) avail = values[2];
+        //if (values = lines.match(/SwapTotal:(\s+)(\d+) kB/)) swapTotal = values[2];
+        //if (values = lines.match(/SwapFree:(\s+)(\d+) kB/)) swapFree = values[2];
+        //if (values = lines.match(/Cached:(\s+)(\d+) kB/)) cached = values[2];
+        //if (values = lines.match(/MemFree:(\s+)(\d+) kB/)) memFree = values[2];
+        let used = total - avail
+        let utilized = (100 * used / total).toFixed(0);
+        this.bin.label.set_text(' ' + utilized + '%');    
       });
     } catch (e) {
       _log(e);logError(e);

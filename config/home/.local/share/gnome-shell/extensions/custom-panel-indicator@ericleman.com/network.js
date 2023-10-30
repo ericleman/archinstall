@@ -11,6 +11,8 @@ import GObject from 'gi://GObject';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 
+import * as File from './file.js';
+
 function _log(msg) {
     console.log('CUSTOM PANEL '+Date.now()+' *** ' + msg);
 }
@@ -45,8 +47,6 @@ class Network extends PanelMenu.Button {
     this.last_up = 0;
 
     this.binary = [ 'B/s', 'KB/s', 'MB/s', 'GB/s', 'TB/s', 'PB/s', 'EB/s' ];
-    this.upload_file = Gio.File.new_for_path('/sys/class/net/ens33/statistics/tx_bytes');
-    this.download_file = Gio.File.new_for_path('/sys/class/net/ens33/statistics/rx_bytes');
     // run the command once now
     this.checkDown();
     GLib.timeout_add_seconds(0, 5, () => {this.checkDown();return GLib.SOURCE_CONTINUE;});
@@ -64,26 +64,20 @@ class Network extends PanelMenu.Button {
     let dwell = (now - this.last_query_dn) / 1000;
     this.last_query_dn = now;
     try {
-      this.download_file.load_contents_async(null, (_file, res) => {
-        try {
-          let [length, contents] = this.download_file.load_contents_finish(res);
-          let decoder = new TextDecoder('utf-8');
-          let bytes = decoder.decode(contents);
-          let delta = bytes - this.last_dn;
-          this.last_dn = bytes;
-          let exponent = 0;
-          if (delta > 0) {
-            exponent = Math.floor(Math.log(delta) / Math.log(1024));
-            if (delta >= Math.pow(1024, exponent) * (1024 - 0.05)) exponent++;
-            delta = parseFloat((delta / Math.pow(1024, exponent)));
-          }
-          let unit = this.binary[exponent];
-          let speed = (delta/dwell).toFixed(2) + ' ' + unit;
-          this.bin_dn.label.set_text(' ' + speed); 
-        } catch (e) {
-          _log(e);
-          logError(e);
+      File.Read('/sys/class/net/ens33/statistics/rx_bytes', (content) => {
+        let bytes = content;
+        let delta = bytes - this.last_dn;
+        this.last_dn = bytes;
+        let exponent = 0;
+        if (delta > 0) {
+          exponent = Math.floor(Math.log(delta) / Math.log(1024));
+          if (delta >= Math.pow(1024, exponent) * (1024 - 0.05)) exponent++;
+          delta = parseFloat((delta / Math.pow(1024, exponent)));
         }
+        let unit = this.binary[exponent];
+        let speed = (delta/dwell).toFixed(2) + ' ' + unit;
+        this.bin_dn.label.set_text(' ' + speed); 
+
       });
     } catch (e) {
       _log(e);logError(e);
@@ -95,26 +89,20 @@ class Network extends PanelMenu.Button {
     let dwell = (now - this.last_query_up) / 1000;
     this.last_query_up = now;
     try {
-      this.upload_file.load_contents_async(null, (_file, res) => {
-        try {
-          let [length, contents] = this.upload_file.load_contents_finish(res);
-          let decoder = new TextDecoder('utf-8');
-          let bytes = decoder.decode(contents);
-          let delta = bytes - this.last_up;
-          this.last_up = bytes;
-          let exponent = 0;
-          if (delta > 0) {
-            exponent = Math.floor(Math.log(delta) / Math.log(1024));
-            if (delta >= Math.pow(1024, exponent) * (1024 - 0.05)) exponent++;
-            delta = parseFloat((delta / Math.pow(1024, exponent)));
-          }
-          let unit = this.binary[exponent];
-          let speed = (delta/dwell).toFixed(2) + ' ' + unit;
-          this.bin_up.label.set_text(' ' + speed); 
-        } catch (e) {
-          _log(e);
-          logError(e);
+      File.Read('/sys/class/net/ens33/statistics/tx_bytes', (content) => {
+        let bytes = content;
+        let delta = bytes - this.last_up;
+        this.last_up = bytes;
+        let exponent = 0;
+        if (delta > 0) {
+          exponent = Math.floor(Math.log(delta) / Math.log(1024));
+          if (delta >= Math.pow(1024, exponent) * (1024 - 0.05)) exponent++;
+          delta = parseFloat((delta / Math.pow(1024, exponent)));
         }
+        let unit = this.binary[exponent];
+        let speed = (delta/dwell).toFixed(2) + ' ' + unit;
+        this.bin_up.label.set_text(' ' + speed); 
+
       });
     } catch (e) {
       _log(e);logError(e);

@@ -30,7 +30,18 @@ class UpdateBar extends PanelMenu.Button {
     //this.bin.style_class = 'panel-button custom-color3';
     this.bin.label.style_class = 'ubuntu-mono-font-purple';
     this.bin.set_child(this.bin.label);
-    this.bin.connect('button-release-event', () => this.runUpdates() );
+    this.bin.connect('button-release-event', (actor, e) => {
+      switch (e.get_button()) {
+        case 1: // Left click
+          this.runUpdates();
+          break;
+        case 3: // Right click
+          let proc;
+          proc = Gio.Subprocess.new(['pamac-manager'], Gio.SubprocessFlags.NONE);
+          break;
+      }
+    } );
+
     this.bar.add_actor(this.bin);
 
     this.add_child(this.bar);

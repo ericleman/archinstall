@@ -342,7 +342,7 @@ echo "# Ranger"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ranger ueberzug less
 cp -r /root/archinstall-main/config/home/.config/ranger $MOUNTPOINT/home/eric/.config/
-arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.config/ranger/plugins/ranger_devicons/'
+mkdir -p $MOUNTPOINT/home/eric/.config/ranger/plugins/ranger_devicons/
 curl -L https://github.com/alexanderjeurissen/ranger_devicons/archive/main.zip --output main.zip
 mkdir -p $MOUNTPOINT/home/eric/tmp
 bsdtar -x -f main.zip -C $MOUNTPOINT/home/eric/tmp/
@@ -356,6 +356,11 @@ echo -e "\n\n################################################################"
 echo "# NeoFetch"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm neofetch
+
+echo -e "\n\n################################################################"
+echo "# Pamac"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm pamac-aur'
 
 echo -e "\n\n################################################################"
 echo "# Zsh"
