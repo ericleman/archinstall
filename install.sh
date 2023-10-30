@@ -263,27 +263,45 @@ arch-chroot "${MOUNTPOINT}" chmod -R 777 /usr/share/backgrounds/
 
 
 echo -e "\n\n################################################################"
-echo "# Gnome Dracula Themes"
+echo "# Gnome Catppuccin Themes"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm gtk-engine-murrine
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm adw-gtk3'
-# Adw-GTK3 will enable libadwaita theme using Dracula colors if put in gtk.css files
-
-curl -L https://github.com/dracula/gtk/archive/master.zip --output master.zip
+curl -L https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme/archive/main.zip --output main.zip
 mkdir -p $MOUNTPOINT/home/eric/tmp
-bsdtar -x -f master.zip -C $MOUNTPOINT/home/eric/tmp/
-mkdir -p $MOUNTPOINT/usr/share/themes/Dracula
-cp -r $MOUNTPOINT/home/eric/tmp/gtk-master/* $MOUNTPOINT/usr/share/themes/Dracula/
+bsdtar -x -f main.zip -C $MOUNTPOINT/home/eric/tmp/
+cp -r $MOUNTPOINT/home/eric/tmp/Catppuccin-GTK-Theme-main/themes/* $MOUNTPOINT/usr/share/themes/
+cp -r $MOUNTPOINT/home/eric/tmp/Catppuccin-GTK-Theme-main/themes/Catppuccin-Macchiato-BL/gtk-4.0 $MOUNTPOINT/home/eric/.config/
 rm -rf $MOUNTPOINT/home/eric/tmp
-# because of this issue: 'https://github.com/dracula/gtk/issues/124' I do:
-cp $MOUNTPOINT/usr/share/themes/Dracula/gnome-shell/v40/* $MOUNTPOINT/usr/share/themes/Dracula/gnome-shell 
 
-cp -r /root/archinstall-main/config/home/.config/gtk-3.0 $MOUNTPOINT/home/eric/.config/
-cp -r /root/archinstall-main/config/home/.config/gtk-4.0 $MOUNTPOINT/home/eric/.config/
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config/gtk-3.0
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config/gtk-3.0
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config/gtk-4.0
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config/gtk-4.0
+
+
+
+# echo -e "\n\n################################################################"
+# echo "# Gnome Dracula Themes"
+# echo "################################################################"
+# arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm gtk-engine-murrine
+# arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm adw-gtk3'
+# # Adw-GTK3 will enable libadwaita theme using Dracula colors if put in gtk.css files
+
+# curl -L https://github.com/dracula/gtk/archive/master.zip --output master.zip
+# mkdir -p $MOUNTPOINT/home/eric/tmp
+# bsdtar -x -f master.zip -C $MOUNTPOINT/home/eric/tmp/
+# mkdir -p $MOUNTPOINT/usr/share/themes/Dracula
+# cp -r $MOUNTPOINT/home/eric/tmp/gtk-master/* $MOUNTPOINT/usr/share/themes/Dracula/
+# rm -rf $MOUNTPOINT/home/eric/tmp
+# # because of this issue: 'https://github.com/dracula/gtk/issues/124' I do:
+# cp $MOUNTPOINT/usr/share/themes/Dracula/gnome-shell/v40/* $MOUNTPOINT/usr/share/themes/Dracula/gnome-shell 
+
+# cp -r /root/archinstall-main/config/home/.config/gtk-3.0 $MOUNTPOINT/home/eric/.config/
+# cp -r /root/archinstall-main/config/home/.config/gtk-4.0 $MOUNTPOINT/home/eric/.config/
+# arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config/gtk-3.0
+# arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config/gtk-3.0
+# arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config/gtk-4.0
+# arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config/gtk-4.0
 
 
 
@@ -312,30 +330,6 @@ arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
 # remove gnome-console and make alacritty default terminal: see https://www.reddit.com/r/Alacritty/comments/hecdqv/changing_default_terminal_to_alacritty_in_gnome/
 arch-chroot "${MOUNTPOINT}" pacman -Rs --noconfirm gnome-console
 arch-chroot "${MOUNTPOINT}" ln -s /usr/bin/alacritty /usr/bin/xterm
-
-
-<<pause-for-gnome
-
-echo -e "\n\n################################################################"
-echo "# KSuperkey. Use it to launch Rofi. Launch ksuperkey w/ Qtile autostart"
-echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm ksuperkey'
-
-echo -e "\n\n################################################################"
-echo "# Rofi"
-echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm rofi
-cp -r /root/archinstall-main/config/home/.config/rofi $MOUNTPOINT/home/eric/.config/
-arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
-arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
-
-echo -e "\n\n################################################################"
-echo "# Thunar"
-echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm thunar gvfs
-# gvfs is to have a trash
-
-pause-for-gnome
 
 echo -e "\n\n################################################################"
 echo "# Ranger"
@@ -502,13 +496,13 @@ add_dconf_value "/org/gnome/desktop/interface/document-font-name" "'Ubuntu Nerd 
 add_dconf_value "/org/gnome/desktop/interface/font-name" "'Ubuntu Nerd Font 11'"
 add_dconf_value "/org/gnome/desktop/interface/monospace-font-name" "'UbuntuMono Nerd Font Mono 10'"
 add_dconf_value "/org/gnome/desktop/wm/preferences/titlebar-font" "'Ubuntu Nerd Font 11'"
-add_dconf_value "/org/gnome/desktop/interface/gtk-theme" "'adw-gtk3-dark'"
+add_dconf_value "/org/gnome/desktop/interface/gtk-theme" "'Catppuccin-Macchiato-BL'"
 add_dconf_value "/org/gnome/desktop/interface/icon-theme" "'Papirus'"
 add_dconf_value "/org/gnome/desktop/interface/color-scheme" "'prefer-dark'"
 add_dconf_value "/org/gnome/desktop/background/picture-uri" "'file:///home/eric/.local/share/backgrounds/my-wallpaper.svg'"
 add_dconf_value "/org/gnome/desktop/background/picture-uri-dark" "'file:///home/eric/.local/share/backgrounds/my-wallpaper.svg'"
 add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'user-theme@gnome-shell-extensions.gcampax.github.com'"
-add_dconf_value "/org/gnome/shell/extensions/user-theme/name" "'Dracula'"
+add_dconf_value "/org/gnome/shell/extensions/user-theme/name" "'Catppuccin-Macchiato-BL'"
 
 
 # Favorites Apps on Dock
