@@ -26,11 +26,6 @@ PASSWD=$1
 echo "Password is $PASSWD"
 
 echo -e "\n\n################################################################"
-echo "# Install git"
-echo "################################################################"
-# pacman -S git
-
-echo -e "\n\n################################################################"
 echo "# Download repo"
 echo "################################################################"
 curl -L https://github.com/ericleman/archinstall/archive/main.zip --output main.zip
@@ -348,7 +343,11 @@ echo "################################################################"
 arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ranger ueberzug less
 cp -r /root/archinstall-main/config/home/.config/ranger $MOUNTPOINT/home/eric/.config/
 arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.config/ranger/plugins/ranger_devicons/'
-git clone https://github.com/alexanderjeurissen/ranger_devicons $MOUNTPOINT/home/eric/.config/ranger/plugins/ranger_devicons
+curl -L https://github.com/alexanderjeurissen/ranger_devicons/archive/main.zip --output main.zip
+mkdir -p $MOUNTPOINT/home/eric/tmp
+bsdtar -x -f main.zip -C $MOUNTPOINT/home/eric/tmp/
+cp -r $MOUNTPOINT/home/eric/tmp/ranger_devicons-main/* $MOUNTPOINT/home/eric/.config/ranger/plugins/ranger_devicons/ 
+rm -rf $MOUNTPOINT/home/eric/tmp
 arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
 arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
 
@@ -454,8 +453,13 @@ echo -e "\n\n################################################################"
 echo "# quick-settings-tweaks"
 echo "################################################################"
 # currently https://aur.archlinux.org/packages/gnome-shell-extension-quick-settings-tweaks-git is broken, not flagged compatible with gnome 45, so I clone the git repo
-git clone https://github.com/qwreey75/quick-settings-tweaks.git
-cp -r quick-settings-tweaks/src $MOUNTPOINT/home/eric/.local/share/gnome-shell/extensions/quick-settings-tweaks@qwreey
+curl -L https://github.com/qwreey75/quick-settings-tweaks/archive/master.zip --output master.zip
+mkdir -p $MOUNTPOINT/home/eric/tmp
+bsdtar -x -f master.zip -C $MOUNTPOINT/home/eric/tmp/
+cp -r $MOUNTPOINT/home/eric/tmp/quick-settings-tweaks-master/src $MOUNTPOINT/home/eric/.local/share/gnome-shell/extensions/quick-settings-tweaks@qwreey
+rm -rf $MOUNTPOINT/home/eric/tmp
+arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.local
+arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.local
 add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'quick-settings-tweaks@qwreey'"
 add_dconf_value "/org/gnome/shell/extensions/quick-settings-tweaks/input-show-selected" "true"
 add_dconf_value "/org/gnome/shell/extensions/quick-settings-tweaks/output-show-selected" "true"
@@ -464,7 +468,13 @@ echo -e "\n\n################################################################"
 echo "# Tray-Icons-Reloaded"
 echo "################################################################"
 # currently https://aur.archlinux.org/packages/gnome-shell-extension-tray-icons-reloaded is broken, not flagged compatible with gnome 45, so I clone the git repo
-git clone https://github.com/MartinPL/Tray-Icons-Reloaded.git $MOUNTPOINT/home/eric/.local/share/gnome-shell/extensions/trayIconsReloaded@selfmade.pl
+curl -L https://github.com/MartinPL/Tray-Icons-Reloaded/archive/master.zip --output master.zip
+mkdir -p $MOUNTPOINT/home/eric/tmp
+bsdtar -x -f master.zip -C $MOUNTPOINT/home/eric/tmp/
+cp -r $MOUNTPOINT/home/eric/tmp/Tray-Icons-Reloaded-master $MOUNTPOINT/home/eric/.local/share/gnome-shell/extensions/trayIconsReloaded@selfmade.pl
+rm -rf $MOUNTPOINT/home/eric/tmp
+arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.local
+arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.local
 add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'trayIconsReloaded@selfmade.pl'"
 
 echo -e "\n\n################################################################"
