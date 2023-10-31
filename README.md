@@ -111,6 +111,10 @@ Changing a theme means:
 - Gnome Extensions CSS
 - IG
 
+# Tips
+## Webcam
+On VMWare, in order to have the webcam working, we need to switch the "Virtual Machine Settings" > "USB Controller" to USB 3.1
+
 # Obsolete tips
 ## Prorealtime workaround
 ### ~~This one does not work with PRT12 has it uses newer version of java class~~
