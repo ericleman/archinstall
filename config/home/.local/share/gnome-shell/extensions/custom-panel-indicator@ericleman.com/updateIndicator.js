@@ -7,7 +7,8 @@ import GObject from 'gi://GObject';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 
-const CHECK_SCRIPT = `yay -Qu | wc -l`;
+const CHECK_SCRIPT = `checkupdates -Qu | wc -l`;
+//const CHECK_SCRIPT = `yay -Qu | wc -l`;
 //const CHECK_SCRIPT = `yay -Sy &> /dev/null && (n_up=$(yay -Qu | wc -l);(([ "$n_up" -eq 0 ] && echo "󰅢  ") || echo " 󰅢 $n_up ")) || echo " yay N/A "`;
 const COMMAND_CHECK = ['bash', '-c', CHECK_SCRIPT]
 const COMMAND_UPDATE = ['alacritty', '-e', 'yay']
