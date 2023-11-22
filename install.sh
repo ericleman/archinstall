@@ -150,7 +150,7 @@ cp /root/archinstall-main/config/var/lib/AccountsService/users/eric $MOUNTPOINT/
 echo -e "\n\n################################################################"
 echo "# Yay"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm go
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm go checkupdates 
 arch-chroot "${MOUNTPOINT}" su - eric -c 'cd /home/eric && git -c http.sslVerify=false clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si --noconfirm --skippgpcheck'
 arch-chroot "${MOUNTPOINT}" rm -rf /home/eric/yay-bin
 
