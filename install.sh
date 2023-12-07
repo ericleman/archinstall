@@ -131,6 +131,13 @@ arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm networkmanager network-manag
 arch-chroot "${MOUNTPOINT}" systemctl enable NetworkManager.service
 
 echo -e "\n\n################################################################"
+echo "# Printer"
+echo "################################################################"
+arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm hplip cups
+arch-chroot "${MOUNTPOINT}" systemctl enable cups
+# once in Gnome, hp-setup to install printer
+
+echo -e "\n\n################################################################"
 echo "# User"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" useradd -m -s /bin/bash -G wheel,games,network,video,audio,storage,power,input -c "Eric" eric
