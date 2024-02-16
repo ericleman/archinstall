@@ -350,11 +350,6 @@ echo "################################################################"
 #arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm firefox
 
 echo -e "\n\n################################################################"
-echo "# Steam"
-echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm steam
-
-echo -e "\n\n################################################################"
 echo "# VS Code"
 echo "################################################################"
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm visual-studio-code-bin'
