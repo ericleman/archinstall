@@ -352,7 +352,7 @@ echo "################################################################"
 echo -e "\n\n################################################################"
 echo "# Steam"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm steam
+# arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm steam
 # then we need to activate Proton https://wiki.archlinux.org/title/steam
 
 echo -e "\n\n################################################################"
