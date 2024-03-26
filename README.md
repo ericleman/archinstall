@@ -51,6 +51,9 @@ https://www.fosstools.net/how-to-enable-uefi-in-vmware-workstation-player
 When 3D acceleration is activated on VMWare, then deactivate it on Google Chrome (or it does not work: https://communities.vmware.com/t5/VMware-Workstation-Pro/Guest-Display-Broken-With-Accelerate-3D-Graphics-Enabled/td-p/2898816)
 ![image](https://user-images.githubusercontent.com/26767717/177496730-38f3be75-ae3c-4329-a49e-0002abfc595a.png)
 
+### I think we should not activate 3D anyway: 
+https://wiki.archlinux.org/title/VMware/Install_Arch_Linux_as_a_guest#3D_Acceleration
+
 
 ## Prorealtime workaround
 ### From PRT12
