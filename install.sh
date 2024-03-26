@@ -207,15 +207,15 @@ arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ttf-ubuntu-mono-nerd ttf-ubu
 arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm ttf-ubraille'
 
 
-echo -e "\n\n################################################################"
-echo "# Wallpaper"
-echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.local/share/backgrounds'
-cp -r /root/archinstall-main/config/home/Pictures/Wallpapers/* $MOUNTPOINT/home/eric/.local/share/backgrounds/
-arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.local/share/backgrounds
-arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.local/share/backgrounds
-cp /root/archinstall-main/config/home/Pictures/Wallpapers/* $MOUNTPOINT/usr/share/backgrounds/
-arch-chroot "${MOUNTPOINT}" chmod -R 777 /usr/share/backgrounds/
+# echo -e "\n\n################################################################"
+# echo "# Wallpaper"
+# echo "################################################################"
+# arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.local/share/backgrounds'
+# cp -r /root/archinstall-main/config/home/Pictures/Wallpapers/* $MOUNTPOINT/home/eric/.local/share/backgrounds/
+# arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.local/share/backgrounds
+# arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.local/share/backgrounds
+# cp /root/archinstall-main/config/home/Pictures/Wallpapers/* $MOUNTPOINT/usr/share/backgrounds/
+# arch-chroot "${MOUNTPOINT}" chmod -R 777 /usr/share/backgrounds/
 
 
 # echo -e "\n\n################################################################"
@@ -272,9 +272,9 @@ echo "################################################################"
 echo -e "\n\n################################################################"
 echo "# Icons Theme"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm papirus-icon-theme
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm papirus-folders-git' 
-arch-chroot "${MOUNTPOINT}" papirus-folders -C black --theme Papirus
+# arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm papirus-icon-theme
+# arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm papirus-folders-git' 
+# arch-chroot "${MOUNTPOINT}" papirus-folders -C black --theme Papirus
 
 echo -e "\n\n################################################################"
 echo "# Alacritty"
@@ -290,16 +290,16 @@ arch-chroot "${MOUNTPOINT}" ln -s /usr/bin/alacritty /usr/bin/xterm
 echo -e "\n\n################################################################"
 echo "# Ranger"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ranger ueberzug less
-cp -r /root/archinstall-main/config/home/.config/ranger $MOUNTPOINT/home/eric/.config/
-mkdir -p $MOUNTPOINT/home/eric/.config/ranger/plugins/ranger_devicons/
-curl -L https://github.com/alexanderjeurissen/ranger_devicons/archive/main.zip --output main.zip
-mkdir -p $MOUNTPOINT/home/eric/tmp
-bsdtar -x -f main.zip -C $MOUNTPOINT/home/eric/tmp/
-cp -r $MOUNTPOINT/home/eric/tmp/ranger_devicons-main/* $MOUNTPOINT/home/eric/.config/ranger/plugins/ranger_devicons/ 
-rm -rf $MOUNTPOINT/home/eric/tmp
-arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
-arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
+# arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ranger ueberzug less
+# cp -r /root/archinstall-main/config/home/.config/ranger $MOUNTPOINT/home/eric/.config/
+# mkdir -p $MOUNTPOINT/home/eric/.config/ranger/plugins/ranger_devicons/
+# curl -L https://github.com/alexanderjeurissen/ranger_devicons/archive/main.zip --output main.zip
+# mkdir -p $MOUNTPOINT/home/eric/tmp
+# bsdtar -x -f main.zip -C $MOUNTPOINT/home/eric/tmp/
+# cp -r $MOUNTPOINT/home/eric/tmp/ranger_devicons-main/* $MOUNTPOINT/home/eric/.config/ranger/plugins/ranger_devicons/ 
+# rm -rf $MOUNTPOINT/home/eric/tmp
+# arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
+# arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
 
 
 echo -e "\n\n################################################################"
@@ -310,39 +310,39 @@ arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm neofetch
 echo -e "\n\n################################################################"
 echo "# Pamac"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm pamac-aur'
+# arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm pamac-aur'
 
 echo -e "\n\n################################################################"
 echo "# Zsh"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-theme-powerlevel10k
-arch-chroot "${MOUNTPOINT}" su - eric -c "echo $PASSWD | chsh -s /bin/zsh"
-cp /root/archinstall-main/config/home/.zshrc $MOUNTPOINT/home/eric/
-arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.zshrc
-arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.zshrc
-cp /root/archinstall-main/config/home/.p10k.zsh $MOUNTPOINT/home/eric/
-arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.p10k.zsh
-arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.p10k.zsh
+# arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-theme-powerlevel10k
+# arch-chroot "${MOUNTPOINT}" su - eric -c "echo $PASSWD | chsh -s /bin/zsh"
+# cp /root/archinstall-main/config/home/.zshrc $MOUNTPOINT/home/eric/
+# arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.zshrc
+# arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.zshrc
+# cp /root/archinstall-main/config/home/.p10k.zsh $MOUNTPOINT/home/eric/
+# arch-chroot "${MOUNTPOINT}" chown eric:eric /home/eric/.p10k.zsh
+# arch-chroot "${MOUNTPOINT}" chmod u=rwx,g=rx,o=x /home/eric/.p10k.zsh
 
 echo -e "\n\n################################################################"
 echo "# NCDU (disk usage utility)"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ncdu
+# arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm ncdu
 
 echo -e "\n\n################################################################"
 echo "# BTOP"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm btop
-cp -r /root/archinstall-main/config/home/.config/btop $MOUNTPOINT/home/eric/.config/
-arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
-arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
+# arch-chroot "${MOUNTPOINT}" pacman -Syu --noconfirm btop
+# cp -r /root/archinstall-main/config/home/.config/btop $MOUNTPOINT/home/eric/.config/
+# arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.config
+# arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.config
 
 #<<pause-for-apps
 
 echo -e "\n\n################################################################"
 echo "# Chrome"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm google-chrome'
+# arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm google-chrome'
 
 echo -e "\n\n################################################################"
 echo "# Firefox"
@@ -358,7 +358,7 @@ echo "################################################################"
 echo -e "\n\n################################################################"
 echo "# VS Code"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm visual-studio-code-bin'
+# arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm visual-studio-code-bin'
 
 #pause-for-apps
 
@@ -388,64 +388,65 @@ add_value_in_dconf_list() {
 echo -e "\n\n################################################################"
 echo "# Gnome Extensions"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.local/share/gnome-shell/extensions/'
+# arch-chroot "${MOUNTPOINT}" su eric -c 'mkdir -p /home/eric/.local/share/gnome-shell/extensions/'
+
 echo -e "\n\n################################################################"
 echo "# Blur my shell"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-blur-my-shell'
-# Blur my shell
-add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'blur-my-shell@aunetx'"
-add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/hacks-level" "3"
-add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/blur" "true"
-add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/opacity" "230"
-add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/whitelist" "['Alacritty', 'Code']"
+# arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-blur-my-shell'
+# # Blur my shell
+# add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'blur-my-shell@aunetx'"
+# add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/hacks-level" "3"
+# add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/blur" "true"
+# add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/opacity" "230"
+# add_dconf_value "/org/gnome/shell/extensions/blur-my-shell/applications/whitelist" "['Alacritty', 'Code']"
 
 echo -e "\n\n################################################################"
 echo "# Dash to Panel"
 echo "################################################################"
-arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-dash-to-panel'
-# Dash to Panel
-add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'dash-to-panel@jderose9.github.com'"
-add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-positions" "'{\\\"0\\\":\\\"TOP\\\"}'"
-add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-element-positions" "'{\\\"0\\\":[{\\\"element\\\":\\\"showAppsButton\\\",\\\"visible\\\":false,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"activitiesButton\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"leftBox\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"taskbar\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"centerBox\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"rightBox\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"dateMenu\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"systemMenu\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"desktopButton\\\",\\\"visible\\\":false,\\\"position\\\":\\\"stackedBR\\\"}]}'"
-add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/trans-use-custom-opacity" "true"
+# arch-chroot "${MOUNTPOINT}" su - eric -c 'yay -S --noconfirm gnome-shell-extension-dash-to-panel'
+# # Dash to Panel
+# add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'dash-to-panel@jderose9.github.com'"
+# add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-positions" "'{\\\"0\\\":\\\"TOP\\\"}'"
+# add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/panel-element-positions" "'{\\\"0\\\":[{\\\"element\\\":\\\"showAppsButton\\\",\\\"visible\\\":false,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"activitiesButton\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"leftBox\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"taskbar\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedTL\\\"},{\\\"element\\\":\\\"centerBox\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"rightBox\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"dateMenu\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"systemMenu\\\",\\\"visible\\\":true,\\\"position\\\":\\\"stackedBR\\\"},{\\\"element\\\":\\\"desktopButton\\\",\\\"visible\\\":false,\\\"position\\\":\\\"stackedBR\\\"}]}'"
+# add_dconf_value "/org/gnome/shell/extensions/dash-to-panel/trans-use-custom-opacity" "true"
 
 echo -e "\n\n################################################################"
 echo "# quick-settings-tweaks"
 echo "################################################################"
-# currently https://aur.archlinux.org/packages/gnome-shell-extension-quick-settings-tweaks-git is broken, not flagged compatible with gnome 45, so I clone the git repo
-curl -L https://github.com/qwreey75/quick-settings-tweaks/archive/master.zip --output master.zip
-mkdir -p $MOUNTPOINT/home/eric/tmp
-bsdtar -x -f master.zip -C $MOUNTPOINT/home/eric/tmp/
-cp -r $MOUNTPOINT/home/eric/tmp/quick-settings-tweaks-master/src $MOUNTPOINT/home/eric/.local/share/gnome-shell/extensions/quick-settings-tweaks@qwreey
-rm -rf $MOUNTPOINT/home/eric/tmp
-arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.local
-arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.local
-add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'quick-settings-tweaks@qwreey'"
-add_dconf_value "/org/gnome/shell/extensions/quick-settings-tweaks/input-show-selected" "true"
-add_dconf_value "/org/gnome/shell/extensions/quick-settings-tweaks/output-show-selected" "true"
+# # currently https://aur.archlinux.org/packages/gnome-shell-extension-quick-settings-tweaks-git is broken, not flagged compatible with gnome 45, so I clone the git repo
+# curl -L https://github.com/qwreey75/quick-settings-tweaks/archive/master.zip --output master.zip
+# mkdir -p $MOUNTPOINT/home/eric/tmp
+# bsdtar -x -f master.zip -C $MOUNTPOINT/home/eric/tmp/
+# cp -r $MOUNTPOINT/home/eric/tmp/quick-settings-tweaks-master/src $MOUNTPOINT/home/eric/.local/share/gnome-shell/extensions/quick-settings-tweaks@qwreey
+# rm -rf $MOUNTPOINT/home/eric/tmp
+# arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.local
+# arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.local
+# add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'quick-settings-tweaks@qwreey'"
+# add_dconf_value "/org/gnome/shell/extensions/quick-settings-tweaks/input-show-selected" "true"
+# add_dconf_value "/org/gnome/shell/extensions/quick-settings-tweaks/output-show-selected" "true"
 
 echo -e "\n\n################################################################"
 echo "# Tray-Icons-Reloaded"
 echo "################################################################"
-# currently https://aur.archlinux.org/packages/gnome-shell-extension-tray-icons-reloaded is broken, not flagged compatible with gnome 45, so I clone the git repo
-curl -L https://github.com/MartinPL/Tray-Icons-Reloaded/archive/master.zip --output master.zip
-mkdir -p $MOUNTPOINT/home/eric/tmp
-bsdtar -x -f master.zip -C $MOUNTPOINT/home/eric/tmp/
-cp -r $MOUNTPOINT/home/eric/tmp/Tray-Icons-Reloaded-master $MOUNTPOINT/home/eric/.local/share/gnome-shell/extensions/trayIconsReloaded@selfmade.pl
-rm -rf $MOUNTPOINT/home/eric/tmp
-arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.local
-arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.local
-add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'trayIconsReloaded@selfmade.pl'"
+# # currently https://aur.archlinux.org/packages/gnome-shell-extension-tray-icons-reloaded is broken, not flagged compatible with gnome 45, so I clone the git repo
+# curl -L https://github.com/MartinPL/Tray-Icons-Reloaded/archive/master.zip --output master.zip
+# mkdir -p $MOUNTPOINT/home/eric/tmp
+# bsdtar -x -f master.zip -C $MOUNTPOINT/home/eric/tmp/
+# cp -r $MOUNTPOINT/home/eric/tmp/Tray-Icons-Reloaded-master $MOUNTPOINT/home/eric/.local/share/gnome-shell/extensions/trayIconsReloaded@selfmade.pl
+# rm -rf $MOUNTPOINT/home/eric/tmp
+# arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.local
+# arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.local
+# add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'trayIconsReloaded@selfmade.pl'"
 
 echo -e "\n\n################################################################"
 echo "# Custom Gnome Extensions"
 echo "################################################################"
-cp -r /root/archinstall-main/config/home/.local/share/gnome-shell/extensions/* $MOUNTPOINT/home/eric/.local/share/gnome-shell/extensions/
-arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.local
-arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.local
+# cp -r /root/archinstall-main/config/home/.local/share/gnome-shell/extensions/* $MOUNTPOINT/home/eric/.local/share/gnome-shell/extensions/
+# arch-chroot "${MOUNTPOINT}" chown -R eric:eric /home/eric/.local
+# arch-chroot "${MOUNTPOINT}" chmod -R u=rwx,g=rx,o=x /home/eric/.local
 
-add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'custom-panel-indicator@ericleman.com'"
+# add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'custom-panel-indicator@ericleman.com'"
 
 echo -e "\n\n################################################################"
 echo "# Dconf setup"
@@ -459,16 +460,16 @@ add_dconf_value "/org/gnome/desktop/interface/font-name" "'Ubuntu Nerd Font 11'"
 add_dconf_value "/org/gnome/desktop/interface/monospace-font-name" "'UbuntuMono Nerd Font Mono 10'"
 add_dconf_value "/org/gnome/desktop/wm/preferences/titlebar-font" "'Ubuntu Nerd Font 11'"
 # add_dconf_value "/org/gnome/desktop/interface/gtk-theme" "'Catppuccin-Macchiato-BL'"
-add_dconf_value "/org/gnome/desktop/interface/icon-theme" "'Papirus'"
-add_dconf_value "/org/gnome/desktop/interface/color-scheme" "'prefer-dark'"
-add_dconf_value "/org/gnome/desktop/background/picture-uri" "'file:///home/eric/.local/share/backgrounds/my-wallpaper.svg'"
-add_dconf_value "/org/gnome/desktop/background/picture-uri-dark" "'file:///home/eric/.local/share/backgrounds/my-wallpaper.svg'"
-add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'user-theme@gnome-shell-extensions.gcampax.github.com'"
+# add_dconf_value "/org/gnome/desktop/interface/icon-theme" "'Papirus'"
+# add_dconf_value "/org/gnome/desktop/interface/color-scheme" "'prefer-dark'"
+# add_dconf_value "/org/gnome/desktop/background/picture-uri" "'file:///home/eric/.local/share/backgrounds/my-wallpaper.svg'"
+# add_dconf_value "/org/gnome/desktop/background/picture-uri-dark" "'file:///home/eric/.local/share/backgrounds/my-wallpaper.svg'"
+# add_value_in_dconf_list "/org/gnome/shell/enabled-extensions" "'user-theme@gnome-shell-extensions.gcampax.github.com'"
 # add_dconf_value "/org/gnome/shell/extensions/user-theme/name" "'Catppuccin-Macchiato-BL'"
 
 
 # Favorites Apps on Dock
-add_dconf_value "/org/gnome/shell/favorite-apps" "['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'ranger.desktop', 'btop.desktop', 'code.desktop']"
+# add_dconf_value "/org/gnome/shell/favorite-apps" "['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'ranger.desktop', 'btop.desktop', 'code.desktop']"
 # Window Buttons
 add_dconf_value "/org/gnome/desktop/wm/preferences/button-layout" "'appmenu:minimize,maximize,close'"
 add_dconf_value "/org/gnome/desktop/wm/preferences/resize-with-right-button" "true"
