@@ -25,7 +25,7 @@ class Uptime extends PanelMenu.Button {
     //this.bin.style_class = 'panel-button custom-color3';
     this.bin.label.style_class = 'ubuntu-mono-font-orange';
     this.bin.set_child(this.bin.label);
-    this.bar.add_actor(this.bin);
+    this.bar.add_child(this.bin);
 
     this.add_child(this.bar);
     Main.panel.addToStatusArea('uptime', this, 1, 'right');

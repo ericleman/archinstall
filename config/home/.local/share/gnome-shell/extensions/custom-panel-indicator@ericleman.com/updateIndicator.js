@@ -43,7 +43,7 @@ class UpdateBar extends PanelMenu.Button {
       }
     } );
 
-    this.bar.add_actor(this.bin);
+    this.bar.add_child(this.bin);
 
     this.add_child(this.bar);
     Main.panel.addToStatusArea('update-bar', this, 1, 'right');

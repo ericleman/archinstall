@@ -33,7 +33,7 @@ class CPUInfo extends PanelMenu.Button {
     this.bin.connect('button-release-event', () => {
       let proc = Gio.Subprocess.new(['alacritty', '-e', 'btop'], Gio.SubprocessFlags.NONE);
     } );
-    this.bar.add_actor(this.bin);
+    this.bar.add_child(this.bin);
 
     this.add_child(this.bar);
     Main.panel.addToStatusArea('cpu-info', this, 1, 'right');

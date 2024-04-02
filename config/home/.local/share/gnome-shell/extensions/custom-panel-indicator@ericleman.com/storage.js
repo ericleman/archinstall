@@ -35,7 +35,7 @@ class StorageInfo extends PanelMenu.Button {
           break;
       }
     } );
-    this.bar.add_actor(this.bin);
+    this.bar.add_child(this.bin);
 
     this.add_child(this.bar);
     Main.panel.addToStatusArea('storage-info', this, 1, 'right');
